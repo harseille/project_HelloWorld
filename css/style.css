@@ -351,6 +351,140 @@ legend {
   margin: -1px;
 }
 
+.login {
+  width: 500px;
+  margin: 153px auto 100px;
+}
+.login__title {
+  margin-bottom: 80px;
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: center;
+}
+.login .input__form {
+  position: relative;
+  width: 100%;
+  padding-top: 28px;
+  margin-top: 25px;
+}
+.login .input__form:first-child {
+  margin-top: 0;
+}
+.login .input__form label {
+  position: absolute;
+  left: 15px;
+  bottom: 16px;
+  color: #6a6a6a;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+.login .input__form label.on {
+  bottom: auto;
+  left: 0;
+  top: 0;
+}
+.login .input__form input {
+  width: 100%;
+  height: 54px;
+  padding: 15px;
+  border: 2px solid #d1b4ff;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.login__forget__pw {
+  display: inline-block;
+  margin-top: 15px;
+  color: #21bcff;
+  font-size: 14px;
+}
+.login .submit__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 100%;
+  height: 54px;
+  margin-top: 95px;
+  border-radius: 8px;
+  background: #9c5eff;
+  color: #ffffff;
+  font-size: 16px;
+}
+.login .submit__btn:disabled {
+  background: #d9d9d9;
+}
+.login__signup__btn {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 16px;
+}
+.login__signup__btn span {
+  color: #6a6a6a;
+}
+.login__signup__btn a {
+  color: #21bcff;
+}
+
+.signup__id__form {
+  position: relative;
+}
+.signup__id__form input {
+  padding-right: 67px;
+}
+.signup__id__form__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 67px;
+  height: 54px;
+  background: #9c5eff;
+  border-radius: 0 8px 8px 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+.signup .checkbox__form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.signup .checkbox__form input {
+  display: none;
+}
+.signup .checkbox__form input:checked + label {
+  background-image: url(/assets/images/checkbox_on.svg);
+}
+.signup .checkbox__form label {
+  padding-left: 30px;
+  font-size: 16px;
+  color: #252525;
+  background: url(/assets/images/checkbox_off.svg) no-repeat;
+  background-position: left center;
+}
+.signup .checkbox__form__link {
+  font-size: 14px;
+  color: #21bcff;
+}
+.signup__back__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 100%;
+  height: 54px;
+  margin-top: 15px;
+  border-radius: 8px;
+  background: #9a9a9a;
+  color: #ffffff;
+  font-size: 16px;
+}
+
 .header {
   position: absolute;
   top: 0%;

@@ -1,0 +1,83 @@
+.login {
+  width: 500px;
+  margin: 153px auto 100px;
+
+  &__title {
+    margin-bottom: 80px;
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  .input__form {
+    position: relative;
+    width: 100%;
+    padding-top: 28px;
+    margin-top: 25px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    label {
+      position: absolute;
+      left: 15px;
+      bottom: 16px;
+      color: $gray600;
+      font-size: 14px;
+      transition: 0.3s ease;
+
+      &.on {
+        bottom: auto;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    input {
+      width: 100%;
+      height: 54px;
+      padding: 15px;
+      border: 2px solid $lightPurple;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+  }
+
+  &__forget__pw {
+    display: inline-block;
+    margin-top: 15px;
+    color: $textBlue;
+    font-size: 14px;
+  }
+
+  .submit__btn {
+    @include buttonNone;
+    width: 100%;
+    height: 54px;
+    margin-top: 95px;
+    border-radius: 8px;
+    background: $mainPurple;
+    color: $white;
+    font-size: 16px;
+
+    &:disabled {
+      background: $gray300;
+    }
+  }
+
+  &__signup__btn {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+
+    span {
+      color: $gray600;
+    }
+
+    a {
+      color: $textBlue;
+    }
+  }
+}
