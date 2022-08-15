@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "run-p watch server",
-    "sass": "sass scss:css",
+    "sass": "sass assets/scss:css",
     "watch": "npm run sass -- --watch",
     "server": "live-server",
     "clean": "rimraf -r style",
