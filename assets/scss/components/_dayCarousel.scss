@@ -1,4 +1,4 @@
-.schedule__container {
+.itinerary__container {
   width: 1280px;
   margin: 0 auto;
 }
@@ -22,8 +22,8 @@
   &--btn {
     position: absolute;
     top: 50%;
-    font-size: 16px;
-    // color: green;
+    font-size: 20px;
+    font-weight: 700;
     border: none;
     background: none;
     color: $white;
@@ -49,8 +49,12 @@
     &--add {
       border: none;
       background: transparent;
-      color: $white;
+      border: 1px solid $mainPurple;
+      border-radius: 50%;
+      background: $white;
+      color: $mainPurple;
       cursor: pointer;
+      margin-right: 4px;
     }
   }
 }

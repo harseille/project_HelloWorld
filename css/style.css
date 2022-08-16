@@ -845,7 +845,7 @@ footer {
   margin: 0 auto;
 }
 
-.schedule__container {
+.itinerary__container {
   width: 1280px;
   margin: 0 auto;
 }
@@ -869,7 +869,8 @@ footer {
 .carousel--btn {
   position: absolute;
   top: 50%;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 700;
   border: none;
   background: none;
   color: #ffffff;
@@ -894,8 +895,12 @@ footer {
 .carousel__day-index--add {
   border: none;
   background: transparent;
-  color: #ffffff;
+  border: 1px solid #9c5eff;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #9c5eff;
   cursor: pointer;
+  margin-right: 4px;
 }
 
 .time-table {
@@ -943,28 +948,28 @@ footer {
   border-left: 1px solid #d9d9d9;
   background: none;
 }
-.time-table__day-index__blank .schedule-card {
+.time-table__day-index__blank .itinerary-card {
   padding-top: 10px;
   height: 52px;
 }
-.time-table__day-index__blank .schedule-card--check {
+.time-table__day-index__blank .itinerary-card--check {
   position: relative;
   margin-top: 25px;
   width: 405px;
   align-items: center;
   background: #fee5a5;
 }
-.time-table__day-index__blank .schedule-card--check__title {
+.time-table__day-index__blank .itinerary-card--check__title {
   color: #f6c257;
   padding-left: 25px;
   font-weight: 700;
 }
-.time-table__day-index__blank .schedule-card--check__memo {
+.time-table__day-index__blank .itinerary-card--check__memo {
   padding-left: 25px;
   color: #f6c257;
   font-size: 14px;
 }
-.time-table__day-index__blank .schedule-card__add {
+.time-table__day-index__blank .itinerary-card--add {
   position: absolute;
   left: 20%;
   border: 1px solid #9c5eff;
@@ -973,13 +978,36 @@ footer {
   color: #ffffff;
   cursor: pointer;
 }
-.time-table__day-index__blank .schedule-card-emph {
+.time-table__day-index__blank .itinerary-card-emph {
   position: absolute;
   left: 0;
   top: 0;
   width: 10px;
   height: 52px;
   background: #f6c257;
+}
+
+.itinerary-btns {
+  padding: 60px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.itinerary-btns--private {
+  border: none;
+  border-radius: 6px;
+  background: #9c5eff;
+  width: 630px;
+  height: 54px;
+  color: #ffffff;
+}
+
+.itinerary-btns--public {
+  background: none;
+  border: 2px solid #9c5eff;
+  border-radius: 6px;
+  width: 630px;
+  height: 54px;
 }
 
 .dimmed__layer {

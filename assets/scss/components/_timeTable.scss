@@ -46,7 +46,7 @@
       left: 65px;
       border-left: 1px solid $gray300;
       background: none;
-      .schedule-card {
+      .itinerary-card {
         padding-top: 10px;
         height: 52px;
         &--check {
@@ -66,7 +66,7 @@
             font-size: 14px;
           }
         }
-        &__add {
+        &--add {
           position: absolute;
           left: 20%;
           border: 1px solid $mainPurple;
@@ -76,7 +76,7 @@
           cursor: pointer;
         }
       }
-      .schedule-card-emph {
+      .itinerary-card-emph {
         position: absolute;
         left: 0;
         top: 0;
@@ -86,4 +86,26 @@
       }
     }
   }
+}
+
+.itinerary-btns {
+  padding: 60px 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+.itinerary-btns--private {
+  border: none;
+  border-radius: 6px;
+  background: $mainPurple;
+  width: 630px;
+  height: 54px;
+  color: $white;
+}
+.itinerary-btns--public {
+  background: none;
+  border: 2px solid $mainPurple;
+  border-radius: 6px;
+  width: 630px;
+  height: 54px;
 }
