@@ -30,28 +30,27 @@
     cursor: pointer;
     z-index: 99;
   }
+  .prev--btn {
+    left: 65px;
+    top: 21px;
+  }
+
+  .next--btn {
+    right: 65px;
+    top: 21px;
+  }
+
   &__day-index {
     width: 395px;
     color: $white;
     text-align: center;
     flex-shrink: 0;
     padding-top: 10px;
+    &--add {
+      border: none;
+      background: transparent;
+      color: $white;
+      cursor: pointer;
+    }
   }
-}
-
-.prev--btn {
-  left: 65px;
-  top: 21px;
-}
-
-.next--btn {
-  right: 65px;
-  top: 21px;
-}
-
-.modal--btn {
-  border: none;
-  background: transparent;
-  color: $white;
-  cursor: pointer;
 }
