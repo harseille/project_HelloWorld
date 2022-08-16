@@ -22,7 +22,7 @@
       <div id="root">
         <section class="hot-topic">
           <div class="hot-topic__header">
-            <h2 class="hot-topic__title">핫토픽</h2>
+            <h2 class="hot-topic__title">핫 토픽</h2>
             <ul class="hot-topic__hashtag__list">
               <li class="hot-topic__hashtag__item">#눈</li>
               <li class="hot-topic__hashtag__item">#축제</li>
@@ -37,12 +37,12 @@
             <ul class="hot-topic__list">
               <li class="hot-topic__item">
                 <div class="hot-topic__item__thumbnail">
-                  <!--TODO: video -->
-                  <video src=""></video>
+                  <!--TODO: video 축소-->
+                  <video class="hot-topic__item__thumbnail__video" src="/assets/videos/videothumbnail2.mp4"></video>
                 </div>
                 <div class="hot-topic__item__detail">
-                  <h3 class="hot-topic__item__title">인기여행지 1위</h3>
-                  <p class="hot-topic__item__desc">인기여행지 2위 설명 들어가면 된다아아아아아아아아아</p>
+                  <h3 class="hot-topic__item__detail__title">인기여행지 1위</h3>
+                  <p class="hot-topic__item__detail__desc">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>
                 </div>
               </li>
             </ul>
@@ -54,7 +54,6 @@
           </div>
           <form action="" class="travel-log__form">
             <!-- ? label 사용법 dropdown, input -->
-            <label for="travel-log__form__dropdown hidden">검색필터</label>
             <select class="travel-log__form__dropdown" name="travel-log__form__dropdown" id="cars">
               <option value="all">전체</option>
               <option value="country">국가</option>

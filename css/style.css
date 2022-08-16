@@ -351,6 +351,49 @@ legend {
   margin: -1px;
 }
 
+.hot-topic {
+  min-width: 1280px;
+  height: 100vh;
+  width: 1280px;
+  margin: 0 auto;
+  margin-top: 120px;
+}
+.hot-topic__header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.hot-topic__title {
+  font-size: 28px;
+  font-weight: 700;
+}
+.hot-topic__hashtag__list {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-items: center;
+  margin-left: 24px;
+}
+.hot-topic__hashtag__item {
+  padding-left: 16px;
+  color: #6a6a6a;
+}
+.hot-topic__body {
+  margin-top: 20px;
+}
+.hot-topic__list {
+  height: 400px;
+}
+.hot-topic__item {
+  width: 400px;
+  height: 240px;
+}
+.hot-topic__item__thumbnail__video {
+  width: 400px;
+  height: 240px;
+}
 .header {
   position: absolute;
   top: 0%;
