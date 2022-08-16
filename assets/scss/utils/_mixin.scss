@@ -59,6 +59,11 @@
   background: none;
 }
 
+@mixin boxSize($w: width, $h: height) {
+  width: $w;
+  height: $h;
+}
+
 //position 관련 믹스인
 @mixin pos($pos: absolute, $t: initial, $s: initial, $b: initial, $l: initial) {
   position: $pos;

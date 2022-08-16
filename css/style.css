@@ -791,38 +791,63 @@ footer {
 
 .hot-topic {
   min-width: 1280px;
-  height: 100vh;
   width: 1280px;
   margin: 0 auto;
   margin-top: 120px;
 }
 .hot-topic__header {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: center;
 }
 .hot-topic__title {
-  font-size: 28px;
   font-weight: 700;
+  font-size: 28px;
 }
 .hot-topic__hashtag__list {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  align-items: center;
   margin-left: 24px;
 }
 .hot-topic__hashtag__item {
   padding-left: 16px;
   color: #6a6a6a;
 }
+.hot-topic__nav {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  right: 0;
+}
+.hot-topic__nav__item {
+  margin: 0 auto;
+  max-width: 800px;
+}
+.hot-topic__nav__item__circle {
+  background-color: #d9d9d9;
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  border-radius: 100%;
+}
+.hot-topic__nav__item__circle.checked {
+  background-color: #6a6a6a;
+}
 .hot-topic__body {
   margin-top: 20px;
 }
 .hot-topic__list {
-  height: 400px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
 }
 .hot-topic__item {
   position: relative;
@@ -837,6 +862,7 @@ footer {
 .hot-topic__item__thumbnail__video {
   width: 400px;
   height: 240px;
+  object-fit: cover;
 }
 .hot-topic__item__detail {
   position: absolute;
@@ -855,159 +881,144 @@ footer {
   font-size: 14px;
 }
 
-.detail-main {
-  position: relative;
-  padding-top: 68px;
-}
-
-.cover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-  background: url("../../images/coverImg.jpg") no-repeat;
-  background-color: #ec5664;
-}
-.cover__content {
-  width: 458px;
-  background-color: yellow;
-  text-align: center;
-}
-.cover__content__title {
-  font-size: 48px;
-}
-
-.trip-planner {
-  position: relative;
+.travel-log {
+  min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  transform: translateY(-50px);
-  background-color: #ffffff;
-  padding: 25px;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
+  margin-top: 76px;
+  margin-bottom: 80px;
 }
-.trip-planner__title {
-  margin-bottom: 25px;
+.travel-log__header {
+  font-weight: 700;
+  font-size: 28px;
 }
-.trip-planner__content {
-  margin-bottom: 32px;
+.travel-log__form {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-top: 20px;
+  height: 48px;
 }
-.trip-planner__badge {
+.travel-log__form__dropdown {
+  width: 168px;
+}
+.travel-log__form__input {
   position: absolute;
-  top: 25px;
-  right: 25px;
-}
-
-.right-aside {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 500px;
-  left: 1150px;
-}
-
-.left-aside {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 500px;
-  right: 1150px;
-}
-
-.trip-story {
-  width: 1280px;
-  margin: 0 auto;
-}
-.trip-story__tab {
-  display: flex;
-  font-size: 18px;
-}
-.trip-story__tab__story {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 8px 0 0 0;
-  border: 1px solid #9c5eff;
-  color: #9c5eff;
-}
-.trip-story__tab__map {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 0 8px 0 0;
-  border: 1px solid #d9d9d9;
+  right: 160px;
+  width: 924px;
+  height: 48px;
+  text-indent: 16px;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px 0 0 8px;
   color: #9a9a9a;
 }
-.trip-story__day-list {
-  display: flex;
-  margin: 20px 0 10px 0;
-}
-.trip-story__day-list__title {
-  margin-right: 10px;
-}
-.trip-story .trip-article {
-  position: relative;
-  border: 1px solid red;
-  padding: 10px;
-}
-.trip-story .trip-article__header {
-  display: flex;
-}
-.trip-story .trip-article__header__badge {
+.travel-log__form__button--submit {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  background: #9c5eff;
+  border-radius: 0 8px 8px 0;
+  color: #ffffff;
+  font-size: 18px;
+  right: 0;
+  width: 160px;
+  height: 48px;
 }
-.trip-story .trip-article__profile {
-  background-color: #bde9f9;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  margin-right: 10px;
+.travel-log__body {
+  margin-top: 32px;
 }
-.trip-story .trip-article__main__img-container {
-  height: 240px;
-  margin: 15px 0;
-  background-color: #fee5a5;
+.travel-log__list {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
-
-.comment {
-  width: 1280px;
-  margin: 60px auto;
-}
-.comment__title {
-  font-size: 24px;
-  font-weight: 600;
-}
-.comment__container {
-  border: 1px solid #6a6a6a;
+.travel-log__item {
+  background: #d1b4ff;
+  width: 400px;
+  height: 488px;
+  box-shadow: 0px 4px 10px #d5d5d5;
   border-radius: 8px;
 }
-.comment__inputbox {
+.travel-log__item__top-section {
+  width: 400px;
+  height: 288px;
+  background-image: url(/assets/images/mainCardPic4.png);
+  border-radius: 8px;
+}
+.travel-log__item__user-info {
   display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
   align-items: center;
-  padding: 15px 25px;
-  border-bottom: 1px solid #d9d9d9;
+  height: 48px;
+  border-radius: 8px 8px 0 0;
 }
-.comment__inputbox__profile {
-  background-color: #bde9f9;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  margin-right: 10px;
+.travel-log__item__user-info__profile-pic {
+  width: 32px;
+  height: 32px;
+  margin: 0 16px;
+  border-radius: 50%;
 }
-.comment__inputbox__inputform {
-  width: 90%;
-  margin: 16px;
+.travel-log__item__user-info__nickname {
+  font-size: 16px;
+  color: #ffffff;
 }
-.comment__inputbox__inputform input {
-  width: 100%;
-  height: 30px;
+.travel-log__item__main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 256px;
+  text-align: center;
+}
+.travel-log__item__main__title {
+  font-size: 32px;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+.travel-log__item__main__detail {
+  font-size: 18px;
+  color: #ffffff;
+  padding: 8px;
+}
+.travel-log__item__bottom-section {
+  width: 400px;
+  height: 200px;
+  background: #ffffff;
+  border-radius: 0px 0px 8px 8px;
+}
+.travel-log__item__sub {
+  padding: 16px;
+}
+.travel-log__item__sub__title {
+  font-size: 18px;
+}
+.travel-log__item__sub__detail {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 22px;
+}
+.travel-log__item__social {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  bottom: 0;
+  padding: 10px;
+  color: #9a9a9a;
+}
+.travel-log__item__like, .travel-log__item__comment {
+  margin-right: 8px;
+}
+.travel-log__item__like__count {
+  margin-right: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */
