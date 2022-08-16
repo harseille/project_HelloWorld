@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/style.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
     <title>Hello World</title>
   </head>
   <body>
@@ -19,29 +23,28 @@
           </ul>
         </nav>
       </header>
-      <!-- container -->
-      <div class="schedule__container">
+      <!-- start of container -->
+      <div class="itinerary__container">
         <!-- google map -->
         <div class="map"></div>
         <!-- carousel -->
-
         <div class="carousel">
           <div class="carousel__days">
             <div class="carousel__day-index">
-              <button class="modal--btn">⦿</button>Day1.08.14 Sat
-              <div>일본</div>
+              <button class="carousel__day-index--add">+</button>Day1.08.14 Sat
+              <div>영국</div>
             </div>
             <div class="carousel__day-index">
-              <button class="modal--btn">⦿</button>Day2.08.15 Sun
-              <div>일본</div>
+              <button class="carousel__day-index--add">+</button>Day2.08.18 Sun
+              <div>프랑스</div>
             </div>
             <div class="carousel__day-index">
-              <button class="modal--btn">⦿</button>Day3.08.16 Mon
-              <div>일본</div>
+              <button class="carousel__day-index--add">+</button>Day3.08.25 Mon
+              <div>이탈리아</div>
             </div>
             <div class="carousel__day-index">
-              <button class="modal--btn">⦿</button>Day3.08.16 Mon
-              <div>일본</div>
+              <button class="carousel__day-index--add">+</button>Day3.08.30 Mon
+              <div>아이슬란드</div>
             </div>
           </div>
           <button class="prev--btn carousel--btn">〈</button>
@@ -153,7 +156,82 @@
             </li>
           </ul>
           <div class="time-table__day-index">
-            <ul class="time-table__blank">
+            <ul class="time-table__day-index__blank">
+              <li>
+                <div class="itinerary-card itinerary-card--check">
+                  <div class="itinerary-card-emph"></div>
+                  <div class="itinerary-card--check__content">
+                    <div class="itinerary-card--check__title">
+                      히드로 공항
+                    </div>
+                    <div class="itinerary-card--check__memo">
+                      공항 도착해서 유심칩 찾기
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="itinerary-card">
+                  <button class="itinerary-card--add">+</button>
+                </div>
+              </li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+              <li><div class="itinerary-card"></li>
+            </ul>
+            <ul class="time-table__day-index__blank">
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+            </ul>
+            <ul class="time-table__day-index__blank">
               <li>
                 <span class="time"></span>
                 <span class="line"></span>
@@ -201,10 +279,18 @@
             </ul>
           </div>
         </div>
+
+        <!-- private & public button -->
+        <div class="itinerary-btns">
+          <button class="itinerary-btns--private">나만의 일정</button>
+          <button class="itinerary-btns--public">다른 사람들에게도 공유하기</button>
+        </div>
+        
       </div>
-      <!-- <footer class="footer">
+      <!-- end of container -->
+      <footer class="footer">
         <small class="footer__copyright">&copy; HelloWorld. All rights reserved.</small>
-      </footer> -->
+      </footer>
     </div>
   </body>
 </html>
