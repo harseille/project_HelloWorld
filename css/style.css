@@ -861,20 +861,62 @@ footer {
 }
 
 .cover {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 400px;
-  background: url("../../images/coverImg.jpg") no-repeat;
-  background-color: #ec5664;
+  background: url("/assets/images/coverImg.jpg") no-repeat;
+  background-size: cover;
 }
-.cover__content {
-  width: 458px;
-  background-color: yellow;
+.cover__inner {
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
   text-align: center;
+  color: #ffffff;
 }
 .cover__content__title {
   font-size: 48px;
+}
+.cover__buttonbox {
+  position: absolute;
+  top: -130px;
+  right: 30px;
+}
+.cover__buttonbox .add-cover-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+}
+.cover__buttonbox .edit-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+}
+.cover__buttonbox .remove-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  border: none;
+}
+.cover__buttonbox .add-cover-btn img {
+  width: 22px;
+  height: 16px;
+}
+.cover__buttonbox .edit-btn img {
+  width: 15px;
+  height: 15px;
+}
+.cover__buttonbox .remove-btn img {
+  width: 12px;
+  height: 12px;
+  margin: 0 auto;
 }
 
 .trip-planner {
@@ -889,91 +931,216 @@ footer {
 }
 .trip-planner__title {
   margin-bottom: 25px;
+  font-size: 20px;
+  font-weight: 600;
 }
 .trip-planner__content {
   margin-bottom: 32px;
 }
+.trip-planner__info {
+  font-size: 14px;
+  color: #6a6a6a;
+}
 .trip-planner__badge {
   position: absolute;
+  display: flex;
   top: 25px;
   right: 25px;
 }
-
-.right-aside {
-  position: fixed;
+.trip-planner__badge span {
   display: flex;
-  flex-direction: column;
-  top: 500px;
-  left: 1150px;
+  align-self: center;
+  margin-right: 12px;
+}
+.trip-planner__badge span img {
+  margin-right: 4px;
 }
 
-.left-aside {
-  position: fixed;
+.trip-container {
   display: flex;
+  justify-content: center;
+}
+.trip-container .trip-main-container {
+  margin: 0px 30px 0px 20px;
+}
+.trip-container .left-aside {
+  position: sticky;
+  display: flex;
+  align-self: flex-start;
   flex-direction: column;
-  top: 500px;
-  right: 1150px;
+  margin-top: 20px;
+  top: 50px;
+  text-align: center;
+}
+.trip-container .nav-day {
+  position: sticky;
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  margin-top: 20px;
+  top: 50px;
+  font-size: 14px;
+  color: #6a6a6a;
+}
+.trip-container .nav-day__item::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background-color: #6a6a6a;
+  top: 0;
+  left: -10px;
+}
+
+.trip-itinerary {
+  width: 1280px;
+  margin: 0 auto;
+}
+.trip-itinerary__tab {
+  display: flex;
+  font-size: 18px;
+}
+.trip-itinerary__tab__chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 55px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px 0 0 0;
+  color: #9a9a9a;
+}
+.trip-itinerary__tab__story {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 55px;
+  border: 1px solid #9c5eff;
+  border-radius: 0 8px 0 0;
+  color: #9c5eff;
 }
 
 .trip-story {
   width: 1280px;
   margin: 0 auto;
 }
-.trip-story__tab {
-  display: flex;
-  font-size: 18px;
-}
-.trip-story__tab__story {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 8px 0 0 0;
-  border: 1px solid #9c5eff;
-  color: #9c5eff;
-}
-.trip-story__tab__map {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 0 8px 0 0;
-  border: 1px solid #d9d9d9;
-  color: #9a9a9a;
-}
 .trip-story__day-list {
   display: flex;
-  margin: 20px 0 10px 0;
+  flex-direction: column;
 }
-.trip-story__day-list__title {
+.trip-story__day-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 20px 20px;
+}
+.trip-story__day-item::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 1px;
+  height: calc(100% - 10px);
+  top: 10px;
+  left: 0px;
+  background-color: #d9d9d9;
+}
+.trip-story__day-item::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 9px;
+  height: 9px;
+  top: 10px;
+  left: -4px;
+  background-color: #000000;
+  border-radius: 50%;
+}
+.trip-story__day-content {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+.trip-story__day-content__title {
+  font-size: 18px;
+  font-weight: 600;
   margin-right: 10px;
+}
+.trip-story__day-content__summary {
+  font-size: 14px;
+  color: #9a9a9a;
 }
 .trip-story .trip-article {
   position: relative;
-  border: 1px solid red;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
   padding: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 .trip-story .trip-article__header {
   display: flex;
+  align-items: center;
 }
 .trip-story .trip-article__header__badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 18px;
+  right: 18px;
 }
-.trip-story .trip-article__profile {
+.trip-story .trip-article__header__badge .edit-btn {
+  width: 24px;
+  height: 24px;
+  margin-right: 2px;
+  background: url("/assets/images/post-edit.svg") no-repeat center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.trip-story .trip-article__header__badge .remove-btn {
+  width: 24px;
+  height: 24px;
+  background: url("/assets/images/cancel.svg") no-repeat center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.trip-story .trip-article__header__badge .add-btn {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: #6a6a6a;
+}
+.trip-story .trip-article__header__badge .add-btn .add-img {
+  margin-right: 4px;
+}
+.trip-story .trip-article__header__profile {
   background-color: #bde9f9;
   width: 30px;
   height: 30px;
   border-radius: 15px;
   margin-right: 10px;
 }
+.trip-story .trip-article__header__content__place {
+  font-size: 20px;
+  font-weight: 600;
+}
+.trip-story .trip-article__header__content__time {
+  font-size: 12px;
+  color: #9a9a9a;
+}
 .trip-story .trip-article__main__img-container {
   height: 240px;
-  margin: 15px 0;
+  margin: 30px 28px;
   background-color: #fee5a5;
+}
+.trip-story .trip-article__main__content {
+  margin: 30px 0;
 }
 
 .comment {
@@ -983,16 +1150,18 @@ footer {
 .comment__title {
   font-size: 24px;
   font-weight: 600;
+  margin-bottom: 15px;
 }
 .comment__container {
-  border: 1px solid #6a6a6a;
+  border: 1px solid #d9d9d9;
   border-radius: 8px;
 }
 .comment__inputbox {
   display: flex;
   align-items: center;
   padding: 15px 25px;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9;
+  height: 81px;
 }
 .comment__inputbox__profile {
   background-color: #bde9f9;
@@ -1007,7 +1176,80 @@ footer {
 }
 .comment__inputbox__inputform input {
   width: 100%;
+  height: 40px;
+  outline: none;
+  border: none;
+}
+.comment__inputbox__button {
+  width: 50px;
+  height: 50px;
+  background: url("/assets/images/comment-add.svg");
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.comment__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  border-bottom: 1px solid #f8f8f8;
+}
+.comment__box__contentbox {
+  display: flex;
+  align-items: center;
+}
+.comment__box__contentbox__profile {
+  background-color: #bde9f9;
+  width: 30px;
   height: 30px;
+  border-radius: 15px;
+  margin-right: 30px;
+}
+.comment__box__contentbox__content__username {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.comment__box__contentbox__content__add-time {
+  font-size: 12px;
+  color: #9a9a9a;
+  margin-left: 8px;
+}
+.comment__box__contentbox__content__main {
+  margin-top: 6px;
+}
+.comment__box__buttonbox .recomment-btn {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  background: url("/assets/images/recomment-add.svg") no-repeat center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.comment__box__buttonbox .remove-btn {
+  width: 24px;
+  height: 24px;
+  background: url("/assets/images/cancel.svg") no-repeat center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.recomment::before {
+  content: "";
+  text-align: center;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  background: url("/assets/images/recomment-arrow.svg") no-repeat center top;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
