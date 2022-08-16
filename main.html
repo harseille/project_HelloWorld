@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div id="root">
+      <header class="header">
+        <nav class="nav">
+          <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
+          <ul class="nav__list">
+            <li class="nav__item"><a href="" class="nav__item__link">여행일지</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">일정 만들기</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">로그인</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div id="root">
+        <section class="hot-topic">
+          <div class="hot-topic__header">
+            <h2 class="hot-topic__title">핫 토픽</h2>
+            <ul class="hot-topic__hashtag__list">
+              <li class="hot-topic__hashtag__item">#눈</li>
+              <li class="hot-topic__hashtag__item">#축제</li>
+            </ul>
+            <ul class="hot-topic__nav">
+              <li class="hot-topic__nav__item"></li>
+              <li class="hot-topic__nav__item"></li>
+              <li class="hot-topic__nav__item"></li>
+            </ul>
+          </div>
+          <div class="hot-topic__body">
+            <ul class="hot-topic__list">
+              <li class="hot-topic__item">
+                <div class="hot-topic__item__thumbnail">
+                  <!--TODO: video 축소-->
+                  <span class="hot-topic__item__thumbnail__icon">></span>
+                  <video class="hot-topic__item__thumbnail__video" src="/assets/videos/videothumbnail2.mp4"></video>
+                </div>
+                <div class="hot-topic__item__detail">
+                  <h3 class="hot-topic__item__detail__title">인기여행지 1위</h3>
+                  <p class="hot-topic__item__detail__desc">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="travel-log">
+          <div class="travel-log__header">
+            <h2 class="travel-log__title">여행 일지</h2>
+          </div>
+          <form action="" class="travel-log__form">
+            <!-- ? label 사용법 dropdown, input -->
+            <select class="travel-log__form__dropdown" name="travel-log__form__dropdown" id="cars">
+              <option value="all">전체</option>
+              <option value="country">국가</option>
+              <option value="city">도시</option>
+            </select>
+            <input class="travel-log__form__input" type="text" placeholder="검색어를 입력해주세요.">
+            <button class="travel-log__form__button--submit">검색</button>
+          </form>
+          <div class="travel-log__body">
+            <ul class="travel-log__list">
+              <li class="travel-log__item">
+                <div class="travel-log__item__top-section">
+                  <div class="travel-log__item__user-info">
+                    <img class="travel-log__item__user-info__profile-pic src="" alt="">
+                    <span class="travel-log__item__user-info__nickname">오똑똑 Author</span>
+                  </div>
+                  <div class="travel-log__item__main">
+                    <h3 class="travel-log__item__main__title">제주 핵심 명소 78곳 1분 요약</h3>
+                    <span class="travel-log__item__main__detail">한국 - 1일</span>
+                  </div>
+                </div>
+                <div class="travel-log__item__bottom-section">
+                  <div class="travel-log__item__sub">
+                    <h4 class="travel-log__item__sub__title">제주도 여행이 막막하다면!</h4>
+                    <p class="travel-log__item__sub__title__detail">여행 기간은 한정적인데 가고 싶은 곳은 너무 많
+                      아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면
+                      집중! 가고 싶은 제주 여행지들을 모두 모으고,...</p>
+                  </div>
+                  <div class="travel-log__item__social">
+                    <span class="travel-log__item__like">좋아요</span>
+                    <span class="travel-log__item__like__count">32</span>
+                    <span class="travel-log__item__comment">좋아요</span>
+                    <span class="travel-log__item__comment__count">12</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <footer class="footer">
+        <small class="footer__copyright">&copy; HelloWorld. All rights reserved.</small>
+      </footer>
+    </div>
+  </body>
+</html>
