@@ -495,13 +495,14 @@ footer {
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 .dimmed__layer .modal {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  overflow-y: auto;
   background: #ffffff;
-  transform: translate3d(-50%, -50%, 0);
 }
 .dimmed__layer .modal__header {
   position: relative;
@@ -598,6 +599,214 @@ footer {
   width: 100%;
   height: 52px;
   margin-top: 85px;
+  border-radius: 6px;
+  background: #9c5eff;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.newCard__popup {
+  width: 600px;
+}
+.newCard__popup__form {
+  padding: 25px;
+}
+.newCard__popup__form__container {
+  margin-bottom: 20px;
+}
+.newCard__popup__form__container:last-child {
+  margin-bottom: 0;
+}
+.newCard__popup__form__title {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.newCard__popup__form .type__list {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  padding: 15px;
+}
+.newCard__popup__form .type__item {
+  flex: 1;
+  margin-right: 10px;
+  text-align: center;
+}
+.newCard__popup__form .type__item:last-child {
+  margin-right: 0;
+}
+.newCard__popup__form .type__item:last-child label {
+  margin-right: 0;
+}
+.newCard__popup__form .type__item input {
+  display: none;
+}
+.newCard__popup__form .type__item label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #d9d9d9;
+  color: #ffffff;
+}
+.newCard__popup__form .type__item:first-child input:checked + label {
+  background: #bde9f9;
+}
+.newCard__popup__form .type__item:nth-child(2) input:checked + label {
+  background: #fee5a5;
+}
+.newCard__popup__form .type__item:nth-child(3) input:checked + label {
+  background: #d1ecb4;
+}
+.newCard__popup__form .type__item:last-child input:checked + label {
+  background: #fee5a5;
+}
+.newCard__popup__form .time__form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.newCard__popup__form .time__form__input, .newCard__popup__form .time__form__select {
+  position: relative;
+  overflow: hidden;
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+}
+.newCard__popup__form .time__form__input {
+  flex-basis: 200px;
+}
+.newCard__popup__form .time__form__select {
+  flex-basis: 160px;
+}
+.newCard__popup__form .time__form label {
+  position: absolute;
+  left: 45px;
+  top: 10px;
+  font-size: 11px;
+  color: #21bcff;
+}
+.newCard__popup__form .time__form input,
+.newCard__popup__form .time__form select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 25px 15px 11px 45px;
+}
+.newCard__popup__form .time__form input {
+  background: url(/assets/images/calendar.svg) no-repeat;
+  background-position: left 15px center;
+  background-size: 18px;
+}
+.newCard__popup__form .time__form select {
+  background-image: url(/assets/images/select_time.svg), url(/assets/images/select_arrow.svg);
+  background-repeat: no-repeat;
+  background-position: left 15px center, right 15px center;
+  background-size: 18px, 14px;
+}
+.newCard__popup__form .location input {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
+.newCard__popup__form .memo__container {
+  height: 150px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.newCard__popup__form .memo__title {
+  position: relative;
+  width: 100%;
+}
+.newCard__popup__form .memo__title::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  width: calc(100% - 40px);
+  height: 1px;
+  background: #d9d9d9;
+}
+.newCard__popup__form .memo__title input {
+  appearance: none;
+  width: 100%;
+  padding: 15px 50px 15px 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+.newCard__popup__form .memo__title__add__todo__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  transform: translate3d(0, -50%, 0);
+  background: url(/assets/images/add_todo.svg) no-repeat;
+  background-position: center;
+  background-size: 20px;
+}
+.newCard__popup__form .memo__todo__list {
+  height: calc(100% - 48px);
+  overflow-y: auto;
+  padding: 10px 20px;
+}
+.newCard__popup__form .memo__todo__item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f8f8f8;
+}
+.newCard__popup__form .memo__todo__item:last-child {
+  border-bottom: none;
+}
+.newCard__popup__form .memo__todo__item input {
+  display: none;
+}
+.newCard__popup__form .memo__todo__item label {
+  flex: 1;
+  margin-right: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 25px;
+  background: url(/assets/images/checkbox_off.svg) no-repeat;
+  background-position: left center;
+  background-size: 16px;
+}
+.newCard__popup__form .memo__delete__btn {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 24px;
+  height: 24px;
+  background: url(/assets/images/close.svg) no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+.newCard__popup__form__submit {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 100%;
+  height: 52px;
+  margin-top: 20px;
   border-radius: 6px;
   background: #9c5eff;
   font-size: 16px;

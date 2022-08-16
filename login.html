@@ -101,7 +101,7 @@
       </section>
     </div> -->
     <!-- 새 일정 만들기 모달 -->
-    <div class="dimmed__layer">
+    <!-- <div class="dimmed__layer">
       <div class="modal newTrip__popup">
         <div class="modal__header">
           <div class="modal__header__title">새 일정 만들기</div>
@@ -140,6 +140,145 @@
           <button class="newTrip__popup__form__submit">새 일정 만들기</button>
         </form>
       </div>
-    </div>
+    </div> -->
+    <!-- 새 일정 : 카드 생성 - 정보 입력 -->
+    <!-- <div class="dimmed__layer">
+      <div class="modal newCard__popup">
+        <div class="modal__header">
+          <div class="modal__header__title">새 스케쥴 추가</div>
+          <button class="modal__header__close__btn" aria-label="닫기"></button>
+        </div>
+        <form class="newCard__popup__form">
+          <div class="newCard__popup__form__container type">
+            <h3 class="newCard__popup__form__title">타입</h3>
+            <ul class="type__list">
+              <li class="type__item">
+                <input id="type__accomodation" name="newCard__type" type="radio" />
+                <label for="type__accomodation">숙박</label>
+              </li>
+              <li class="type__item">
+                <input id="type__sightseeing" name="newCard__type" type="radio" />
+                <label for="type__sightseeing">관광</label>
+              </li>
+              <li class="type__item">
+                <input id="type__transportation" name="newCard__type" type="radio" />
+                <label for="type__transportation">교통</label>
+              </li>
+              <li class="type__item">
+                <input id="type__etc" name="newCard__type" type="radio" />
+                <label for="type__etc">기타</label>
+              </li>
+            </ul>
+          </div>
+          <div class="newCard__popup__form__container time">
+            <h3 class="newCard__popup__form__title">시간</h3>
+            <div class="time__form">
+              <div class="time__form__input">
+                <label for="newCard__date">Select a day</label>
+                <input id="newCard__date" type="text" name="newCard__date" placeholder="yyyy.mm.dd" />
+              </div>
+              <div class="time__form__select">
+                <label for="newCard__startTime">Start with</label>
+                <select name="newCard__startTime" id="newCard__startTime">
+                  <optgroup>
+                    <option value="00:00 AM">00:00 AM</option>
+                    <option value="01:00 AM">01:00 AM</option>
+                    <option value="02:00 AM">02:00 AM</option>
+                    <option value="03:00 AM">03:00 AM</option>
+                    <option value="04:00 AM">04:00 AM</option>
+                    <option value="05:00 AM">05:00 AM</option>
+                    <option value="06:00 AM">06:00 AM</option>
+                    <option value="07:00 AM">07:00 AM</option>
+                    <option value="08:00 AM">08:00 AM</option>
+                    <option value="09:00 AM">09:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="01:00 PM">01:00 PM</option>
+                    <option value="02:00 PM">02:00 PM</option>
+                    <option value="03:00 PM">03:00 PM</option>
+                    <option value="04:00 PM">04:00 PM</option>
+                    <option value="05:00 PM">05:00 PM</option>
+                    <option value="06:00 PM">06:00 PM</option>
+                    <option value="07:00 PM">07:00 PM</option>
+                    <option value="08:00 PM">08:00 PM</option>
+                    <option value="09:00 PM">09:00 PM</option>
+                    <option value="10:00 PM">10:00 PM</option>
+                    <option value="11:00 PM">11:00 PM</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="time__form__select">
+                <label for="newCard__startTime">End with</label>
+                <select name="newCard__startTime" id="newCard__startTime">
+                  <optgroup>
+                    <option value="00:00 AM">00:00 AM</option>
+                    <option value="01:00 AM">01:00 AM</option>
+                    <option value="02:00 AM">02:00 AM</option>
+                    <option value="03:00 AM">03:00 AM</option>
+                    <option value="04:00 AM">04:00 AM</option>
+                    <option value="05:00 AM">05:00 AM</option>
+                    <option value="06:00 AM">06:00 AM</option>
+                    <option value="07:00 AM">07:00 AM</option>
+                    <option value="08:00 AM">08:00 AM</option>
+                    <option value="09:00 AM">09:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="01:00 PM">01:00 PM</option>
+                    <option value="02:00 PM">02:00 PM</option>
+                    <option value="03:00 PM">03:00 PM</option>
+                    <option value="04:00 PM">04:00 PM</option>
+                    <option value="05:00 PM">05:00 PM</option>
+                    <option value="06:00 PM">06:00 PM</option>
+                    <option value="07:00 PM">07:00 PM</option>
+                    <option value="08:00 PM">08:00 PM</option>
+                    <option value="09:00 PM">09:00 PM</option>
+                    <option value="10:00 PM">10:00 PM</option>
+                    <option value="11:00 PM">11:00 PM</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="newCard__popup__form__container location">
+            <h3 class="newCard__popup__form__title">위치</h3>
+            <input type="text" />
+          </div>
+          <div class="newCard__popup__form__container memo">
+            <h3 class="newCard__popup__form__title">메모</h3>
+            <div class="memo__container">
+              <div class="memo__title">
+                <input type="text" placeholder="메모를 입력해주세요." />
+                <button class="memo__title__add__todo__btn"></button>
+              </div>
+              <ul class="memo__todo__list">
+                <li class="memo__todo__item">
+                  <input type="checkbox" name="todo" id="todo1" />
+                  <label for="todo1">todo</label>
+                  <button class="memo__delete__btn" aria-label="닫기"></button>
+                </li>
+                <li class="memo__todo__item">
+                  <input type="checkbox" name="todo" id="todo1" />
+                  <label for="todo1">todo</label>
+                  <button class="memo__delete__btn" aria-label="닫기"></button>
+                </li>
+                <li class="memo__todo__item">
+                  <input type="checkbox" name="todo" id="todo1" />
+                  <label for="todo1">todo</label>
+                  <button class="memo__delete__btn" aria-label="닫기"></button>
+                </li>
+                <li class="memo__todo__item">
+                  <input type="checkbox" name="todo" id="todo1" />
+                  <label for="todo1">todo</label>
+                  <button class="memo__delete__btn" aria-label="닫기"></button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <button class="newCard__popup__form__submit">완료</button>
+        </form>
+      </div>
+    </div> -->
   </body>
 </html>

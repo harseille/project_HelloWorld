@@ -5,13 +5,11 @@
   bottom: 0;
   right: 0;
   background: $dimmed;
+  @include flexbox(column, center, center);
 
   .modal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    overflow-y: auto;
     background: $white;
-    transform: translate3d(-50%, -50%, 0);
 
     &__header {
       position: relative;
