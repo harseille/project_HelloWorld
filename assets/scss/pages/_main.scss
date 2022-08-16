@@ -1,28 +1,52 @@
+// hot-topic
 .hot-topic {
   min-width: 1280px;
-  height: 100vh;
   width: 1280px;
   margin: 0 auto;
   margin-top: 120px;
 
   &__header {
-    @include flexbox(row);
+    position: relative;
+    @include flexbox($direction: row, $items: center);
   }
-
+  
   &__title {
-    font-size: 28px;
     font-weight: 700;
+    font-size: 28px;
   }
-
+  
   &__hashtag__list {
-    @include flexbox(row);
-    align-items: center;
+    @include flexbox($direction: row);
     margin-left: 24px;
   }
-
+  
   &__hashtag__item {
     padding-left: 16px;
     color: $gray600;
+  }
+
+  &__nav {
+    position: absolute;
+    @include flexbox($direction: row);
+    right: 0;
+
+    &__item {
+      margin: 0 auto;
+      max-width: 800px;
+
+      &__circle {
+        background-color: $gray300;
+        margin: 0 auto;
+        width: 20px;
+        height: 20px;
+        margin-left: 12px;
+        border-radius: 100%;
+      }
+
+      &__circle.checked{
+        background-color: $gray600;
+      }
+    }
   }
 
   &__body {
@@ -30,13 +54,16 @@
   }
 
   &__list {
-    height: 400px;
+    @include flexbox($direction: row, $justify: space-between);
   }
 
   &__item {
     position: relative;
     width: 400px;
     height: 240px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
+
 
     &__thumbnail {
       // width: 100%;
@@ -50,6 +77,8 @@
       &__video {
         width: 400px;
         height: 240px;
+        object-fit: cover;
+        border-radius: 8px;
       }
     }
 
@@ -61,6 +90,7 @@
       color: $white;
       padding: 16px;
       background: $dimmed;
+      border-radius: 0 0 8px 8px;
 
       &__title {
         font-weight: 700;
@@ -73,4 +103,149 @@
 
     }
   }
+}
+// Travel-log
+
+.travel-log {
+  min-width: 1280px;
+  width: 1280px;
+  margin: 0 auto;
+  margin-top: 76px;
+  margin-bottom: 80px;
+
+  &__header {
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  &__form {
+    position: relative;
+    @include flexbox($direction: row);
+    margin-top: 20px;
+    height: 48px;
+    
+    // TODO: custom select
+    &__dropdown {
+      width: 168px;
+    }
+
+    &__input {
+      position: absolute;
+      right: 160px;
+      width: 924px;
+      height: 48px;
+      text-indent: 16px;
+      border: 1px solid #E5E5E5 ;
+      border-radius: 8px 0 0 8px;
+      color: $gray500;
+    }
+
+    &__button--submit {
+      @include buttonNone;
+      position: absolute;
+      background: $mainPurple;
+      border-radius: 0 8px 8px 0;
+      color: $white;
+      font-size: 18px;
+      right: 0;
+      width: 160px;
+      height: 48px;
+    }
+  }
+
+  &__body {
+    margin-top: 32px;
+  }
+
+  &__list {
+    position: relative;
+    @include flexbox($direction: row, $justify:space-between);
+  }
+
+  &__item {
+    background: $lightPurple;
+    width: 400px;
+    height: 488px;
+    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
+    border-radius: 8px;
+    
+    &__top-section{
+      @include boxSize($w: 400px, $h: 288px);
+      background-image: url(/assets/images/mainCardPic4.png);
+      border-radius: 8px;
+    }
+    
+    &__user-info{
+      @include flexbox($direction:row, $items: center);
+      height: 48px;
+      border-radius: 8px 8px 0 0;
+      
+      &__profile-pic {
+        @include boxSize($w: 32px, $h: 32px);
+        margin: 0 16px;
+        border-radius: 50%;
+      }
+      
+      &__nickname {
+        font-size: 16px;
+        color: $white;
+      }
+    }
+    
+    &__main {
+      @include flexbox($direction:column, $justify:center, $items:center);
+      height: 256px;
+      text-align: center;
+      
+      &__title {
+        font-size: 32px;
+        color: $white;
+        padding: 8px 16px
+      }
+      
+      &__detail {
+        font-size: 18px;
+        color: $white;
+        padding: 8px;
+      }
+    }
+    
+    &__bottom-section {
+      @include boxSize($w: 400px, $h: 200px);
+      background: $white;
+      border-radius: 0px 0px 8px 8px;
+    }
+    
+    &__sub{
+      padding: 16px;
+
+      &__title{
+        font-size: 18px;
+      }
+
+      &__detail {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    &__social {
+      position: absolute;
+      @include flexbox($direction: row, $items: center);
+      bottom: 0;
+      padding: 10px;
+      color: $gray500;
+    }
+
+    &__like, &__comment {
+      margin-right: 8px;
+    }
+
+    &__like__count {
+      margin-right: 16px;
+    }
+
+  }
+
 }
