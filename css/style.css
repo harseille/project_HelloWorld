@@ -387,13 +387,36 @@ legend {
   height: 400px;
 }
 .hot-topic__item {
+  position: relative;
   width: 400px;
   height: 240px;
+}
+.hot-topic__item__thumbnail__icon {
+  position: absolute;
+  top: 24px;
+  left: 24px;
 }
 .hot-topic__item__thumbnail__video {
   width: 400px;
   height: 240px;
 }
+.hot-topic__item__detail {
+  position: absolute;
+  bottom: 0;
+  width: 400px;
+  height: 72px;
+  color: #ffffff;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.hot-topic__item__detail__title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hot-topic__item__detail__desc {
+  font-size: 14px;
+}
+
 .header {
   position: absolute;
   top: 0%;
