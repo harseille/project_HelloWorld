@@ -169,8 +169,54 @@
   }
 }
 
-// .profile-info-edit__form {
-//   .input__form {
-//     width: 664px;
-//   }
-// }
+.profile-info-edit__form {
+  @include pos($pos: relative);
+  @include autoMargin;
+
+  .input__form {
+    @include flexbox($direction: column);
+    width: 664px;
+
+    label {
+      font-size: 18px;
+      color: $gray600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      padding: 12px 16px;
+      height: 54px;
+      border: 2px solid $gray300;
+      border-radius: 8px;
+
+    }
+  }
+  .profile-info-edit__form__button {
+    @include flexbox($direction: row, $justify: right);
+
+    button {
+      @include boxSize($w:120px, $h:48px);
+      @include buttonNone
+    }
+
+    button:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .profile-info-edit__form-cancel {
+      border: 1px solid $gray900;
+      border-radius: 8px;
+    }
+    
+    .profile-info-edit__form-edit {
+      background: $mainPurple;
+      border-radius: 8px;
+      color: $white;
+    }
+  }
+
+  .input__form:not(:last-child) {
+    margin-bottom: 16px;
+
+  }
+}
