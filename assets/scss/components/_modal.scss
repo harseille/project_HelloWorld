@@ -8,7 +8,6 @@
   @include flexbox(column, center, center);
 
   .modal {
-    overflow-y: auto;
     background: $white;
 
     &__header {

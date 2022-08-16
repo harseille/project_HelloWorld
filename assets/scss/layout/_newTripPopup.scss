@@ -1,4 +1,6 @@
 .newTrip__popup {
+  width: 530px;
+
   &__form {
     padding: 25px;
 
@@ -21,6 +23,7 @@
       }
 
       &.date__form {
+        position: relative;
         float: left;
         width: calc(50% - 8px);
         margin-right: 16px;
@@ -28,6 +31,10 @@
 
         &:nth-child(3) {
           margin-right: 0;
+        }
+
+        .datepicker {
+          top: 60px;
         }
 
         input {
