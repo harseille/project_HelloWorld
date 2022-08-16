@@ -528,34 +528,80 @@ footer {
   background-position: center;
   background-size: 16px;
 }
-.dimmed__layer .modal__form {
+
+.newTrip__popup__form {
   padding: 25px;
 }
-.dimmed__layer .modal__form__input {
-  width: 100%;
-  margin-top: 15px;
-}
-.dimmed__layer .modal__form__input:first-child {
-  margin-top: 0;
-}
-.dimmed__layer .modal__form__input input {
+.newTrip__popup__form__input {
   width: 100%;
   height: 52px;
+  margin-top: 15px;
+}
+.newTrip__popup__form__input:first-child {
+  margin-top: 0;
+}
+.newTrip__popup__form__input input {
+  width: 100%;
+  height: 100%;
   padding: 15px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   font-size: 16px;
 }
-.dimmed__layer .modal__form__input.date__form {
+.newTrip__popup__form__input.date__form {
   float: left;
   width: calc(50% - 8px);
   margin-right: 16px;
+  margin-bottom: 15px;
 }
-.dimmed__layer .modal__form__input.date__form:nth-child(3) {
+.newTrip__popup__form__input.date__form:nth-child(3) {
   margin-right: 0;
 }
-.dimmed__layer .modal .submit {
-  margin-top: 70px;
+.newTrip__popup__form__input.date__form input {
+  padding-right: 40px;
+  background: url(/assets/images/calendar.svg) no-repeat;
+  background-position: right 18px center;
+  background-size: 16px;
+}
+.newTrip__popup__form__select {
+  clear: both;
+  width: 100%;
+  height: 52px;
+}
+.newTrip__popup__form__select select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  font-size: 16px;
+  background: url(/assets/images/select_arrow.svg) no-repeat;
+  background-position: right 18px center;
+  background-size: 14px;
+}
+.newTrip__popup__form .self__input__form {
+  position: absolute;
+  left: 25px;
+  bottom: 95px;
+  width: calc(100% - 50px);
+}
+.newTrip__popup__form .self__input__form.hide {
+  display: none;
+}
+.newTrip__popup__form__submit {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 100%;
+  height: 52px;
+  margin-top: 85px;
+  border-radius: 6px;
+  background: #9c5eff;
+  font-size: 16px;
+  color: #ffffff;
 }
 
 .login {
@@ -853,161 +899,6 @@ footer {
 }
 .hot-topic__item__detail__desc {
   font-size: 14px;
-}
-
-.detail-main {
-  position: relative;
-  padding-top: 68px;
-}
-
-.cover {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-  background: url("../../images/coverImg.jpg") no-repeat;
-  background-color: #ec5664;
-}
-.cover__content {
-  width: 458px;
-  background-color: yellow;
-  text-align: center;
-}
-.cover__content__title {
-  font-size: 48px;
-}
-
-.trip-planner {
-  position: relative;
-  width: 1280px;
-  margin: 0 auto;
-  transform: translateY(-50px);
-  background-color: #ffffff;
-  padding: 25px;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-}
-.trip-planner__title {
-  margin-bottom: 25px;
-}
-.trip-planner__content {
-  margin-bottom: 32px;
-}
-.trip-planner__badge {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-}
-
-.right-aside {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 500px;
-  left: 1150px;
-}
-
-.left-aside {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  top: 500px;
-  right: 1150px;
-}
-
-.trip-story {
-  width: 1280px;
-  margin: 0 auto;
-}
-.trip-story__tab {
-  display: flex;
-  font-size: 18px;
-}
-.trip-story__tab__story {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 8px 0 0 0;
-  border: 1px solid #9c5eff;
-  color: #9c5eff;
-}
-.trip-story__tab__map {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 55px;
-  border-radius: 0 8px 0 0;
-  border: 1px solid #d9d9d9;
-  color: #9a9a9a;
-}
-.trip-story__day-list {
-  display: flex;
-  margin: 20px 0 10px 0;
-}
-.trip-story__day-list__title {
-  margin-right: 10px;
-}
-.trip-story .trip-article {
-  position: relative;
-  border: 1px solid red;
-  padding: 10px;
-}
-.trip-story .trip-article__header {
-  display: flex;
-}
-.trip-story .trip-article__header__badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-.trip-story .trip-article__profile {
-  background-color: #bde9f9;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  margin-right: 10px;
-}
-.trip-story .trip-article__main__img-container {
-  height: 240px;
-  margin: 15px 0;
-  background-color: #fee5a5;
-}
-
-.comment {
-  width: 1280px;
-  margin: 60px auto;
-}
-.comment__title {
-  font-size: 24px;
-  font-weight: 600;
-}
-.comment__container {
-  border: 1px solid #6a6a6a;
-  border-radius: 8px;
-}
-.comment__inputbox {
-  display: flex;
-  align-items: center;
-  padding: 15px 25px;
-  border-bottom: 1px solid #d9d9d9;
-}
-.comment__inputbox__profile {
-  background-color: #bde9f9;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  margin-right: 10px;
-}
-.comment__inputbox__inputform {
-  width: 90%;
-  margin: 16px;
-}
-.comment__inputbox__inputform input {
-  width: 100%;
-  height: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */
