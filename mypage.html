@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div id="root">
+      <header class="header">
+        <nav class="nav">
+          <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
+          <ul class="nav__list">
+            <li class="nav__item"><a href="" class="nav__item__link">여행일지</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">일정 만들기</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">로그인</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="profile">
+        <div class="profile--pic">
+          <img class="profile--pic__img" src="" alt="">
+        </div>
+        <h3 class="profile--nickname">Joonha</h3>
+        <h4 class="profile--id">joonhabaak@gmail.com</h4>
+        <div class="profile--social">
+          <div class="profile--social__post disable">내 여행일지</div><span>21</span></div>
+          <div class="profile--social__follower">팔로워<span>128</span></div>
+          <div class="profile--social__following">팔로잉<span>88</span></div>
+        </div>
+      </section>
+
+      <div class="mypage-main">
+        <aside class="side-nav">
+          <ul class="side-nav__list">
+            <li class="side-nav__item">내 여행일지</li>
+            <li class="side-nav__item">좋아요한 여행일지</li>
+            <li class="side-nav__item">개인정보 수정</li>
+          </ul>
+        </aside>
+        <section class="my-travel-log">
+          <!-- * profile card component -->
+          <ul class="my-travel-log__list">
+            <li class="my-travel-log__item">
+              <div class="my-travel-log__item-thumbnail"></div>
+              <div class="my-travel-log__item__main">
+                <h3 class="my-travel-log__item__main__title"></h3>
+                <h4 class="my-travel-log__item__main__subtitle"></h4>
+                <p class="my-travel-log__item__main__desc"></p>
+                <div class="my-travel-log__item__main__view"><span></span></div>
+                <div class="my-travel-log__item__main__like"><span></span></div>
+                <div class="my-travel-log__item__main__comment"></div>
+              </div>
+              <div class="my-travel-log__item__button">
+                <button class="my-travel-log__item__button-edit"></button>
+                <button class="my-travel-log__item__button-delete"></button>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <!-- <section class="liked-travel-log"></section>
+        <section class="profile-info-edit"></section> -->
+      </div>
+      <footer class="footer">
+        <small class="footer__copyright">&copy; HelloWorld. All rights reserved.</small>
+      </footer>
+    </div>
+  </body>
+</html>
