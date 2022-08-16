@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Hello World</title>
+  </head>
+  <body>
+    <div id="root">
+      <header class="header">
+        <nav class="nav">
+          <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
+          <ul class="nav__list">
+            <li class="nav__item"><a href="" class="nav__item__link">여행일지</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">일정 만들기</a></li>
+            <li class="nav__item"><a href="" class="nav__item__link">로그인</a></li>
+          </ul>
+        </nav>
+      </header>
+      <!-- container -->
+      <div class="schedule__container">
+        <!-- google map -->
+        <div class="map"></div>
+        <!-- carousel -->
+
+        <div class="carousel">
+          <div class="carousel__days">
+            <div class="carousel__day-index">
+              <button class="modal--btn">⦿</button>Day1.08.14 Sat
+              <div>일본</div>
+            </div>
+            <div class="carousel__day-index">
+              <button class="modal--btn">⦿</button>Day2.08.15 Sun
+              <div>일본</div>
+            </div>
+            <div class="carousel__day-index">
+              <button class="modal--btn">⦿</button>Day3.08.16 Mon
+              <div>일본</div>
+            </div>
+            <div class="carousel__day-index">
+              <button class="modal--btn">⦿</button>Day3.08.16 Mon
+              <div>일본</div>
+            </div>
+          </div>
+          <button class="prev--btn carousel--btn">〈</button>
+          <button class="next--btn carousel--btn">〉</button>
+        </div>
+
+        <!-- time table -->
+        <div class="time-table">
+          <ul class="time-table__times">
+            <li class="time-table__time-item">
+              <span class="time-table__time">00:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">01:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">02:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">03:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">04:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">05:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">06:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">07:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">08:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">09:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">10:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">11:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">12:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">13:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">14:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">15:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">16:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">17:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">18:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">19:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">20:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">21:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">22:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">23:00</span>
+              <span class="line"></span>
+            </li>
+            <li class="time-table__time-item">
+              <span class="time-table__time">24:00</span>
+              <span class="line"></span>
+            </li>
+          </ul>
+          <div class="time-table__day-index">
+            <ul class="time-table__blank">
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+              <li>
+                <span class="time"></span>
+                <span class="line"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- <footer class="footer">
+        <small class="footer__copyright">&copy; HelloWorld. All rights reserved.</small>
+      </footer> -->
+    </div>
+  </body>
+</html>
