@@ -1878,25 +1878,30 @@ footer {
   margin-top: 10px;
 }
 .profile--social {
-  margin-top: 24px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+  margin-top: 24px;
+  width: fit-content;
 }
 .profile--social__button {
   margin: 0 12px;
+}
+.profile--social__button.selected {
+  border-bottom: 1px solid #252525;
 }
 .profile--social span {
   margin: 0 4px;
 }
 
 .mypage-main {
-  border-top: 1px solid #252525;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  border-top: 1px solid #252525;
+  margin-top: 32px;
 }
 
 .side-nav {
@@ -1914,19 +1919,23 @@ footer {
   width: fit-content;
   font-size: 18px;
 }
-.side-nav__item.active {
+.side-nav__item.selected {
   border-bottom: 1px solid #252525;
 }
 .side-nav__item:not(:last-child) {
   margin-bottom: 32px;
 }
 
-.my-travel-log, .liked-travel-log, .profile-info-edit {
+.mypage-main__section section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
   margin: 32px 0;
+  width: 960px;
 }
 
 .my-travel-log {
-  width: 960px;
   height: 500px;
 }
 .my-travel-log__list {
@@ -2019,13 +2028,6 @@ footer {
   color: #ffffff;
 }
 
-.profile-info-edit {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: stretch;
-}
-
 .profile-info-edit__form {
   position: relative;
 }
@@ -2077,6 +2079,23 @@ footer {
 }
 .profile-info-edit__form .input__form:not(:last-child) {
   margin-bottom: 16px;
+}
+
+.social__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.social__item {
+  width: 240px;
+  margin: 32px 0;
+}
+.social__link {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */

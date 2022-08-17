@@ -26,11 +26,16 @@
   }
 
   &--social {
-    margin-top: 24px;
     @include flexbox($direction:row, $justify:space-between, $items:center);
+    margin-top: 24px;
+    width: fit-content;
 
     &__button {
       margin: 0 12px;
+    }
+
+    &__button.selected {
+      border-bottom: 1px solid #252525;
     }
 
     span {
@@ -40,8 +45,9 @@
 }
 
 .mypage-main {
-  border-top: 1px solid $gray900;
   @include flexbox($direction:row);
+  border-top: 1px solid $gray900;
+  margin-top: 32px;
 }
 
 .side-nav {
@@ -58,9 +64,8 @@
     font-size: 18px;
   }
   
-  &__item.active {
+  &__item.selected {
     border-bottom: 1px solid $gray900;
-    // text-decoration: underline 2px;
   }
 
   &__item:not(:last-child) {
@@ -69,14 +74,16 @@
 
 }
 
-.my-travel-log, .liked-travel-log, .profile-info-edit {
-  margin: 32px 0;
-  
+.mypage-main__section {
+  section {
+    @include flexbox($direction: row, $justify:center);
+    margin: 32px 0;
+    width: 960px;
+  }
 }
 
 
 .my-travel-log {
-  width: 960px;
   height: 500px;
 
   &__list {
@@ -132,7 +139,6 @@
       &__social {
         @include flexbox($direction: row, $items:flex-start);
         position: absolute;
-        // right: 0;
         margin-top: 12px;
         color: $gray500;
 
@@ -168,10 +174,6 @@
       }
     }
   }
-}
-
-.profile-info-edit {
-  @include flexbox($direction: row, $justify:center)
 }
 
 .profile-info-edit__form {
@@ -225,5 +227,21 @@
   .input__form:not(:last-child) {
     margin-bottom: 16px;
 
+  }
+}
+
+.social {
+
+  &__list {
+    @include flexbox($direction: row,$wrap: wrap);
+  }
+
+  &__item {
+    width: 240px;
+    margin: 32px 0;
+  }
+  
+  &__link {
+    @include flexbox($direction: column, $justify: center, $items: center);
   }
 }
