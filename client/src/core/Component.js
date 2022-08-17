@@ -1,6 +1,6 @@
 /* eslint-disable no-continue */
-import eventBuffer from '../dom/eventBuffer';
-import render from '../dom/render';
+import eventBuffer from '../dom/eventBuffer.js';
+import render from '../dom/render.js';
 
 class Component {
   constructor(props) {

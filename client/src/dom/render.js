@@ -13,6 +13,7 @@ const bindEventHandler = $root => {
 const render = (RootComponent, $container) => {
   if ($container) $root = $container;
   if (RootComponent) rootComponentInstance = new RootComponent();
+  console.log(rootComponentInstance);
 
   const $virtual = $root.cloneNode();
   const domString = rootComponentInstance.render();

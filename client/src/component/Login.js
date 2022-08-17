@@ -1,4 +1,5 @@
-import Component from '../core/Component';
+import Component from '../core/Component.js';
+import render from '../dom/render.js';
 
 class Login extends Component {
   render() {
@@ -22,10 +23,19 @@ class Login extends Component {
     <button class="submit__btn" disabled>로그인</button>
     <p class="login__signup__btn">
       <span>회원이 아니세요?</span>
-      <a href="#">회원가입하기</a>
+      <a href="#" class="link-signup">회원가입하기</a>
     </p>
   </form>
     `;
+  }
+
+  addEventListener() {
+    const go = e => {
+      e.preventDefault();
+      window.history.pushState({}, '/signup', window.location.origin + '/signup');
+      render();
+    };
+    return [{ type: 'click', selector: '.link-signup', handler: go }];
   }
 }
 

@@ -1,5 +1,6 @@
 import Component from './core/Component.js';
-import { Login } from './component/index.js';
+import { Login, Signup } from './component/index.js';
+import { route, routes } from './core/router.js';
 
 class App extends Component {
   constructor() {
@@ -7,7 +8,11 @@ class App extends Component {
     this.state = {};
   }
 
-  render() {}
+  render() {
+    route('/client/public/', Login);
+    route('/signup', Signup);
+    return routes();
+  }
 }
 
 export default App;
