@@ -1,0 +1,48 @@
+.hot-topic {
+  &__item {
+    position: relative;
+    width: 400px;
+    height: 240px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
+
+
+    &__thumbnail {
+      // width: 100%;
+
+      &__icon {
+        position: absolute;
+        top: 24px;
+        left: 24px;
+      }
+
+      &__video {
+        width: 400px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+
+    &__detail {
+      position: absolute;
+      bottom: 0;
+      width: 400px;
+      height: 72px;
+      color: $white;
+      padding: 16px;
+      background: $dimmed;
+      border-radius: 0 0 8px 8px;
+
+      &__title {
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      &__desc {
+        font-size: 14px;
+      }
+
+    }
+  }
+}

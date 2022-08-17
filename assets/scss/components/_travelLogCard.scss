@@ -1,0 +1,88 @@
+.travel-log {
+  &__item {
+    background: $lightPurple;
+    width: 400px;
+    height: 488px;
+    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
+    border-radius: 8px;
+    margin-bottom: 60px;
+    
+    &__top-section{
+      @include boxSize($w: 400px, $h: 288px);
+      background-image: url(/assets/images/mainCardPic4.png);
+      border-radius: 8px;
+    }
+    
+    &__user-info{
+      @include flexbox($direction:row, $items: center);
+      height: 48px;
+      border-radius: 8px 8px 0 0;
+      
+      &__profile-pic {
+        @include boxSize($w: 32px, $h: 32px);
+        margin: 0 16px;
+        border-radius: 50%;
+      }
+      
+      &__nickname {
+        font-size: 16px;
+        color: $white;
+      }
+    }
+    
+    &__main {
+      @include flexbox($direction:column, $justify:center, $items:center);
+      height: 256px;
+      text-align: center;
+      
+      &__title {
+        font-size: 32px;
+        color: $white;
+        padding: 8px 16px
+      }
+      
+      &__detail {
+        font-size: 18px;
+        color: $white;
+        padding: 8px;
+      }
+    }
+    
+    &__bottom-section {
+      @include boxSize($w: 400px, $h: 200px);
+      background: $white;
+      border-radius: 0px 0px 8px 8px;
+    }
+    
+    &__sub{
+      padding: 16px;
+
+      &__title{
+        font-size: 18px;
+      }
+
+      &__detail {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
+
+    &__social {
+      position: absolute;
+      @include flexbox($direction: row, $items: center);
+      bottom: 60px;
+      padding: 10px;
+      color: $gray500;
+    }
+
+    &__like, &__comment {
+      margin-right: 8px;
+    }
+
+    &__like__count {
+      margin-right: 16px;
+    }
+
+  }
+}

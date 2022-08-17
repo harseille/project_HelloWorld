@@ -2,62 +2,7 @@
   min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  margin-top: 70px;
-}
-
-.profile {
-  @include flexbox($direction:column, $justify:center, $items:center);
-  margin-top: 140px;
-
-  &--pic {
-    &__img{
-      @include boxSize($w: 104px, $h: 104px);
-      border-radius: 50%;
-    }
-  }
-
-  &--nickname {
-    margin-top: 40px;
-    font-size: 24px;
-  }
-
-  &--id {
-    margin-top: 10px;
-  }
-
-  &--social {
-    @include flexbox($direction:row, $justify:space-between, $items:center);
-    margin-top: 24px;
-    width: fit-content;
-
-    &__follow {
-      @include buttonNone;
-      @include boxSize($w:104px, $h: 40px);
-      border-radius: 8px;
-      margin-top: 24px;
-    }
-
-    &__follow.follow {
-      background: $mainPurple;
-      color: $white;
-    }
-    &__follow.following {
-      color: $gray900;
-      border: 1px solid $gray900;
-    }
-
-    &__button {
-      margin: 0 12px;
-    }
-
-    &__button.selected {
-      border-bottom: 1px solid #252525;
-    }
-
-    span {
-      margin: 0 4px;
-    }
-  }
+  margin-top: 180px;
 }
 
 .mypage-main, .profile-main {
@@ -107,89 +52,6 @@
     padding: 30px;
   }
 
-  &__item:not(:last-child) {
-    margin-bottom: 24px;
-  }
-
-
-  &__item{
-    @include flexbox($direction:row);
-    background: $white;
-    width: 900px;
-    height: 196px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
-
-    &-thumbnail {
-      display: flow-root;
-      @include boxSize($w: 240px, $h: 196px);
-
-      
-      &__img {
-        @include boxSize($w: 240px, $h: 196px);
-        border-radius: 8px 0px 0px 8px;
-      }
-    }
-
-    &__main {
-      position: relative;
-      padding: 20px 20px;
-
-      &__title {
-        text-indent: 4px;
-        font-weight: 700;
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-
-      &__subtitle {
-        font-size: 18px;
-        margin-bottom: 8px;
-        color: $gray500;
-      }
-
-      &__desc {
-        color: $gray900;
-      }
-
-      &__social {
-        @include flexbox($direction: row, $items:flex-start);
-        position: absolute;
-        margin-top: 12px;
-        color: $gray500;
-
-        .social-icon:not(:last-child) {
-          margin-right: 12px;
-        }
-
-        svg {
-          margin-right: 4px;
-        }
-      }
-    }
-
-    &__button {
-      @include flexbox($direction: column, $justify:center);
-      width: 240px;
-      
-      &-edit, &-delete, &-like {
-        @include buttonNone;
-        @include boxSize($w: 64px, $h:32px);
-        border-radius: 8px;
-        font-size: 14px;
-      }
-
-      &-edit, &-like {
-        border: 1px solid $mainPurple;
-        margin-bottom: 12px;
-      }
-
-      &-delete {
-        background-color: $mainPurple;
-        color: $white;
-      }
-    }
-  }
 }
 
 .profile-info-edit__form {
@@ -254,12 +116,4 @@
     @include flexbox($direction: row,$wrap: wrap);
   }
 
-  &__item {
-    width: 240px;
-    margin: 48px 0;
-  }
-  
-  &__link {
-    @include flexbox($direction: column, $justify: center, $items: center);
-  }
 }
