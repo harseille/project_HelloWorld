@@ -1079,11 +1079,20 @@ footer {
 }
 
 .login {
+  position: relative;
   width: 500px;
   margin: 153px auto 100px;
 }
+.login .error {
+  display: none;
+  font-size: 14px;
+  color: #ec5664;
+}
+.login .error.show {
+  display: block;
+}
 .login__title {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   font-size: 48px;
   font-weight: bold;
   text-transform: capitalize;
@@ -1092,38 +1101,33 @@ footer {
 .login .input__form {
   position: relative;
   width: 100%;
-  padding-top: 28px;
+  padding-top: 20px;
   margin-top: 25px;
 }
 .login .input__form:first-child {
   margin-top: 0;
 }
 .login .input__form label {
-  position: absolute;
-  left: 15px;
-  bottom: 16px;
   color: #6a6a6a;
   font-size: 14px;
-  transition: 0.3s ease;
-}
-.login .input__form label.on {
-  bottom: auto;
-  left: 0;
-  top: 0;
 }
 .login .input__form input {
+  outline: none;
   width: 100%;
-  height: 54px;
+  height: 52px;
   padding: 15px;
+  margin-top: 5px;
   border: 2px solid #d1b4ff;
   border-radius: 8px;
   font-size: 16px;
 }
-.login__forget__pw {
-  display: inline-block;
-  margin-top: 15px;
-  color: #21bcff;
-  font-size: 14px;
+.login .input__form input:focus {
+  border-color: #9c5eff;
+}
+.login .input__form__errorMsg {
+  position: absolute;
+  left: 0;
+  bottom: -28px;
 }
 .login .submit__btn {
   appearance: none;
@@ -1131,7 +1135,7 @@ footer {
   padding: 0;
   background: none;
   width: 100%;
-  height: 54px;
+  height: 52px;
   margin-top: 95px;
   border-radius: 8px;
   background: #9c5eff;
@@ -1140,6 +1144,13 @@ footer {
 }
 .login .submit__btn:disabled {
   background: #d9d9d9;
+}
+.login__errorMsg {
+  position: absolute;
+  left: 0;
+  bottom: 120px;
+  width: 100%;
+  text-align: center;
 }
 .login__signup__btn {
   margin-top: 15px;
@@ -1153,33 +1164,15 @@ footer {
   color: #21bcff;
 }
 
-.signup__id__form {
-  position: relative;
-}
-.signup__id__form input {
-  padding-right: 67px;
-}
-.signup__id__form__btn {
-  appearance: none;
-  border: 0;
-  padding: 0;
-  background: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 67px;
-  height: 54px;
-  background: #9c5eff;
-  border-radius: 0 8px 8px 0;
-  color: #ffffff;
-  font-size: 16px;
-}
 .signup .checkbox__form {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   margin-top: 15px;
+}
+.signup .checkbox__form:nth-last-child(5) {
+  margin-top: 50px;
 }
 .signup .checkbox__form input {
   display: none;
@@ -1197,6 +1190,10 @@ footer {
 .signup .checkbox__form__link {
   font-size: 14px;
   color: #21bcff;
+}
+.signup > .error {
+  text-align: left;
+  bottom: 190px;
 }
 .signup__back__btn {
   appearance: none;
