@@ -1,3 +1,4 @@
-import render from './dom/render';
+import render from './dom/render.js';
+import App from './App.js';
 
-render(app, document.querySelector('#root'));
+render(App, document.querySelector('#root'));
