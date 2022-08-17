@@ -108,6 +108,15 @@ input {
 button,
 select {
   text-transform: none;
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
 }
 
 button,
@@ -352,6 +361,10 @@ body {
   background-color: #fff;
 }
 
+button {
+  cursor: pointer;
+}
+
 .displayNone {
   display: none;
 }
@@ -417,28 +430,6 @@ footer {
   overflow: hidden;
   display: flex;
   justify-content: space-between;
-}
-.carousel__days__add--list {
-  position: absolute;
-  top: 40px;
-  left: 596px;
-  width: 108px;
-  height: auto;
-  border: 1px solid #9a9a9a;
-  border-radius: 3px;
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  z-index: 99;
-  text-align: center;
-}
-.carousel__days__add--list .first-item {
-  background: #d1b4ff;
-  border-radius: 3px 3px 0 0;
-}
-.carousel__days__add--item {
-  height: 30px;
-  padding-top: 7px;
-  font-size: 14px;
 }
 .carousel--btn {
   position: absolute;
@@ -588,12 +579,6 @@ footer {
   height: 54px;
 }
 
-.itinerary-btns--public:hover {
-  background: #9c5eff;
-  color: #ffffff;
-  transition: all 0.2s;
-}
-
 .dimmed__layer {
   position: fixed;
   left: 0;
@@ -726,6 +711,299 @@ footer {
   border-radius: 50%;
   background: #9c5eff;
   cursor: pointer;
+}
+
+.hot-topic__item {
+  position: relative;
+  width: 400px;
+  height: 240px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px #d5d5d5;
+}
+.hot-topic__item__thumbnail__icon {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+.hot-topic__item__thumbnail__video {
+  width: 400px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.hot-topic__item__detail {
+  position: absolute;
+  bottom: 0;
+  width: 400px;
+  height: 72px;
+  color: #ffffff;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 8px 8px;
+}
+.hot-topic__item__detail__title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hot-topic__item__detail__desc {
+  font-size: 14px;
+}
+.hot-topic__item:hover {
+  opacity: 0.75;
+}
+
+.travel-log__item {
+  background: #d1b4ff;
+  width: 400px;
+  height: 488px;
+  box-shadow: 0px 4px 10px #d5d5d5;
+  border-radius: 8px;
+  margin-bottom: 60px;
+}
+.travel-log__item__top-section {
+  width: 400px;
+  height: 288px;
+  background-image: url(/assets/images/mainCardPic4.png);
+  border-radius: 8px;
+}
+.travel-log__item__user-info {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 48px;
+  border-radius: 8px 8px 0 0;
+}
+.travel-log__item__user-info__profile-pic {
+  width: 32px;
+  height: 32px;
+  margin: 0 16px;
+  border-radius: 50%;
+}
+.travel-log__item__user-info__nickname {
+  font-size: 16px;
+  color: #ffffff;
+}
+.travel-log__item__main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 256px;
+  text-align: center;
+}
+.travel-log__item__main__title {
+  font-size: 32px;
+  color: #ffffff;
+  padding: 8px 16px;
+}
+.travel-log__item__main__detail {
+  font-size: 18px;
+  color: #ffffff;
+  padding: 8px;
+}
+.travel-log__item__bottom-section {
+  width: 400px;
+  height: 200px;
+  background: #ffffff;
+  border-radius: 0px 0px 8px 8px;
+}
+.travel-log__item__sub {
+  padding: 16px;
+}
+.travel-log__item__sub__title {
+  font-size: 18px;
+}
+.travel-log__item__sub__detail {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 22px;
+}
+.travel-log__item__social {
+  position: absolute;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  bottom: 60px;
+  padding: 10px;
+  color: #9a9a9a;
+}
+.travel-log__item__like, .travel-log__item__comment {
+  margin-right: 8px;
+}
+.travel-log__item__like__count {
+  margin-right: 16px;
+}
+.travel-log__item:hover {
+  opacity: 0.75;
+}
+
+.social__item {
+  width: 240px;
+  margin: 48px 0;
+}
+.social__item:hover {
+  opacity: 0.75;
+}
+.social__link {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 96px;
+}
+.profile--pic {
+  position: relative;
+}
+.profile--pic__img {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+}
+.profile--pic--edit {
+  position: absolute;
+  width: 104px;
+  height: 104px;
+  background: url(/assets/images/iconCamera.svg) no-repeat center center/50% rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.profile--nickname {
+  margin-top: 40px;
+  font-size: 24px;
+}
+.profile--id {
+  margin-top: 10px;
+}
+.profile--social {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  width: fit-content;
+}
+.profile--social__follow {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 104px;
+  height: 40px;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+.profile--social__follow.follow {
+  background: #9c5eff;
+  color: #ffffff;
+}
+.profile--social__follow.following {
+  color: #252525;
+  border: 1px solid #252525;
+}
+.profile--social__button {
+  margin: 0 12px;
+}
+.profile--social__button.selected {
+  border-bottom: 1px solid #252525;
+}
+.profile--social span {
+  margin: 0 4px;
+}
+
+.my-travel-log__link {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.my-travel-log__item {
+  background: #ffffff;
+  width: 900px;
+  height: 196px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px #d5d5d5;
+}
+.my-travel-log__item-thumbnail {
+  display: flow-root;
+  width: 240px;
+  height: 196px;
+}
+.my-travel-log__item-thumbnail__img {
+  width: 240px;
+  height: 196px;
+  border-radius: 8px 0px 0px 8px;
+}
+.my-travel-log__item__main {
+  position: relative;
+  padding: 20px 20px;
+}
+.my-travel-log__item__main__title {
+  text-indent: 4px;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.my-travel-log__item__main__subtitle {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #9a9a9a;
+}
+.my-travel-log__item__main__desc {
+  color: #252525;
+}
+.my-travel-log__item__main__social {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  margin-top: 12px;
+  color: #9a9a9a;
+}
+.my-travel-log__item__main__social .social-icon:not(:last-child) {
+  margin-right: 12px;
+}
+.my-travel-log__item__main__social svg {
+  margin-right: 4px;
+}
+.my-travel-log__item__button {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
+  width: 240px;
+}
+.my-travel-log__item__button-edit, .my-travel-log__item__button-delete, .my-travel-log__item__button-like {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 64px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.my-travel-log__item__button-edit, .my-travel-log__item__button-like {
+  border: 1px solid #9c5eff;
+  margin-bottom: 12px;
+}
+.my-travel-log__item__button-delete {
+  background-color: #9c5eff;
+  color: #ffffff;
+}
+.my-travel-log__item:not(:last-child) {
+  margin-bottom: 24px;
+}
+.my-travel-log__item:hover {
+  opacity: 0.75;
 }
 
 .newTrip__popup {
@@ -1254,7 +1532,7 @@ footer {
   min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  margin-top: 120px;
+  margin-top: 160px;
 }
 .hot-topic__header {
   position: relative;
@@ -1293,10 +1571,11 @@ footer {
 .hot-topic__nav__item__circle {
   background-color: #d9d9d9;
   margin: 0 auto;
-  width: 20px;
-  height: 20px;
-  margin-left: 12px;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
   border-radius: 100%;
+  cursor: pointer;
 }
 .hot-topic__nav__item__circle.checked {
   background-color: #6a6a6a;
@@ -1309,41 +1588,6 @@ footer {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: stretch;
-}
-.hot-topic__item {
-  position: relative;
-  width: 400px;
-  height: 240px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgb(213, 213, 213);
-}
-.hot-topic__item__thumbnail__icon {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-}
-.hot-topic__item__thumbnail__video {
-  width: 400px;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.hot-topic__item__detail {
-  position: absolute;
-  bottom: 0;
-  width: 400px;
-  height: 72px;
-  color: #ffffff;
-  padding: 16px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 0 0 8px 8px;
-}
-.hot-topic__item__detail__title {
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.hot-topic__item__detail__desc {
-  font-size: 14px;
 }
 
 .travel-log {
@@ -1367,7 +1611,17 @@ footer {
   height: 48px;
 }
 .travel-log__form__dropdown {
+  position: relative;
+  overflow: hidden;
   width: 168px;
+  border-radius: 8px;
+  border: 1px solid #E5E5E5;
+  background: url(/assets/images/select_arrow.svg) no-repeat;
+  background-position: right 18px center;
+  background-size: 14px;
+  text-indent: 16px;
+  color: #252525;
+  cursor: pointer;
 }
 .travel-log__form__input {
   position: absolute;
@@ -1399,91 +1653,9 @@ footer {
 .travel-log__list {
   position: relative;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: stretch;
-}
-.travel-log__item {
-  background: #d1b4ff;
-  width: 400px;
-  height: 488px;
-  box-shadow: 0px 4px 10px rgb(213, 213, 213);
-  border-radius: 8px;
-}
-.travel-log__item__top-section {
-  width: 400px;
-  height: 288px;
-  background-image: url(/assets/images/mainCardPic4.png);
-  border-radius: 8px;
-}
-.travel-log__item__user-info {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  height: 48px;
-  border-radius: 8px 8px 0 0;
-}
-.travel-log__item__user-info__profile-pic {
-  width: 32px;
-  height: 32px;
-  margin: 0 16px;
-  border-radius: 50%;
-}
-.travel-log__item__user-info__nickname {
-  font-size: 16px;
-  color: #ffffff;
-}
-.travel-log__item__main {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  height: 256px;
-  text-align: center;
-}
-.travel-log__item__main__title {
-  font-size: 32px;
-  color: #ffffff;
-  padding: 8px 16px;
-}
-.travel-log__item__main__detail {
-  font-size: 18px;
-  color: #ffffff;
-  padding: 8px;
-}
-.travel-log__item__bottom-section {
-  width: 400px;
-  height: 200px;
-  background: #ffffff;
-  border-radius: 0px 0px 8px 8px;
-}
-.travel-log__item__sub {
-  padding: 16px;
-}
-.travel-log__item__sub__title {
-  font-size: 18px;
-}
-.travel-log__item__sub__detail {
-  margin-top: 16px;
-  font-size: 16px;
-  line-height: 22px;
-}
-.travel-log__item__social {
-  position: absolute;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  bottom: 0;
-  padding: 10px;
-  color: #9a9a9a;
-}
-.travel-log__item__like, .travel-log__item__comment {
-  margin-right: 8px;
-}
-.travel-log__item__like__count {
-  margin-right: 16px;
 }
 
 .detail-main {
@@ -1887,51 +2059,15 @@ footer {
   min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 180px;
 }
 
-.profile {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 140px;
-}
-.profile--pic__img {
-  width: 104px;
-  height: 104px;
-  border-radius: 50%;
-}
-.profile--nickname {
-  margin-top: 40px;
-  font-size: 24px;
-}
-.profile--id {
-  margin-top: 10px;
-}
-.profile--social {
-  margin-top: 24px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.profile--social__button {
-  margin: 0 12px;
-}
-.profile--social span {
-  margin: 0 4px;
-}
-
-.mypage-main {
-  border-top: 1px solid #252525;
-}
-
-.mypage-main, .liked-travel-log, .profile-info-edit {
+.mypage-main, .profile-main {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  border-top: 1px solid #252525;
   margin-top: 32px;
 }
 
@@ -1950,15 +2086,23 @@ footer {
   width: fit-content;
   font-size: 18px;
 }
-.side-nav__item.active {
+.side-nav__item.selected {
   border-bottom: 1px solid #252525;
 }
 .side-nav__item:not(:last-child) {
   margin-bottom: 32px;
 }
 
-.my-travel-log {
+.mypage-main__section section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
+  margin: 32px 0;
   width: 960px;
+}
+
+.my-travel-log {
   height: 500px;
 }
 .my-travel-log__list {
@@ -1968,87 +2112,70 @@ footer {
   align-items: center;
   padding: 30px;
 }
-.my-travel-log__item:not(:last-child) {
-  margin-bottom: 24px;
-}
-.my-travel-log__item {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  background: #ffffff;
-  width: 900px;
-  height: 196px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgb(213, 213, 213);
-}
-.my-travel-log__item-thumbnail {
-  display: flow-root;
-  width: 240px;
-  height: 196px;
-}
-.my-travel-log__item-thumbnail__img {
-  width: 240px;
-  height: 196px;
-  border-radius: 8px 0px 0px 8px;
-}
-.my-travel-log__item__main {
+
+.profile-info-edit__form {
   position: relative;
-  padding: 20px 20px;
 }
-.my-travel-log__item__main__title {
-  text-indent: 4px;
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-.my-travel-log__item__main__subtitle {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: #9a9a9a;
-}
-.my-travel-log__item__main__desc {
-  color: #252525;
-}
-.my-travel-log__item__main__social {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  position: absolute;
-  margin-top: 12px;
-  color: #9a9a9a;
-}
-.my-travel-log__item__main__social .social-icon:not(:last-child) {
-  margin-right: 12px;
-}
-.my-travel-log__item__main__social svg {
-  margin-right: 4px;
-}
-.my-travel-log__item__button {
+.profile-info-edit__form__input {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
-  width: 240px;
+  width: 664px;
+  height: 120px;
 }
-.my-travel-log__item__button-edit, .my-travel-log__item__button-delete, .my-travel-log__item__button-like {
+.profile-info-edit__form__input label {
+  font-size: 18px;
+  color: #6a6a6a;
+  margin-bottom: 8px;
+}
+.profile-info-edit__form__input input {
+  padding: 12px 16px;
+  height: 54px;
+  border: 2px solid #d9d9d9;
+  border-radius: 8px;
+}
+.profile-info-edit__form .profile-info-edit__form__button {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+  align-items: stretch;
+  margin: 16px 0;
+}
+.profile-info-edit__form .profile-info-edit__form__button button {
+  width: 120px;
+  height: 48px;
   appearance: none;
   border: 0;
   padding: 0;
   background: none;
-  width: 64px;
-  height: 32px;
+}
+.profile-info-edit__form .profile-info-edit__form__button button:not(:last-child) {
+  margin-right: 20px;
+}
+.profile-info-edit__form .profile-info-edit__form__button .profile-info-edit__form-cancel {
+  border: 1px solid #252525;
   border-radius: 8px;
-  font-size: 14px;
 }
-.my-travel-log__item__button-edit, .my-travel-log__item__button-like {
-  border: 1px solid #9c5eff;
-  margin-bottom: 12px;
-}
-.my-travel-log__item__button-delete {
-  background-color: #9c5eff;
+.profile-info-edit__form .profile-info-edit__form__button .profile-info-edit__form-edit {
+  background: #9c5eff;
+  border-radius: 8px;
   color: #ffffff;
+}
+.profile-info-edit__form .input__form:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+.social {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+.social__list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 /*# sourceMappingURL=style.css.map */
