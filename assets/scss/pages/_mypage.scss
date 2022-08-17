@@ -41,12 +41,7 @@
 
 .mypage-main {
   border-top: 1px solid $gray900;
-
-}
-
-.mypage-main, .liked-travel-log, .profile-info-edit {
   @include flexbox($direction:row);
-  margin-top: 32px;
 }
 
 .side-nav {
@@ -73,6 +68,12 @@
   }
 
 }
+
+.my-travel-log, .liked-travel-log, .profile-info-edit {
+  margin: 32px 0;
+  
+}
+
 
 .my-travel-log {
   width: 960px;
@@ -169,13 +170,18 @@
   }
 }
 
+.profile-info-edit {
+  @include flexbox($direction: row, $justify:center)
+}
+
 .profile-info-edit__form {
   @include pos($pos: relative);
-  @include autoMargin;
+  // @include autoMargin;
 
-  .input__form {
+  &__input {
     @include flexbox($direction: column);
     width: 664px;
+    height: 120px;
 
     label {
       font-size: 18px;
@@ -193,6 +199,7 @@
   }
   .profile-info-edit__form__button {
     @include flexbox($direction: row, $justify: right);
+    margin: 16px 0;
 
     button {
       @include boxSize($w:120px, $h:48px);

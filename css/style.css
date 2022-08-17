@@ -1893,14 +1893,10 @@ footer {
 
 .mypage-main {
   border-top: 1px solid #252525;
-}
-
-.mypage-main, .liked-travel-log, .profile-info-edit {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  margin-top: 32px;
 }
 
 .side-nav {
@@ -1923,6 +1919,10 @@ footer {
 }
 .side-nav__item:not(:last-child) {
   margin-bottom: 32px;
+}
+
+.my-travel-log, .liked-travel-log, .profile-info-edit {
+  margin: 32px 0;
 }
 
 .my-travel-log {
@@ -2019,24 +2019,30 @@ footer {
   color: #ffffff;
 }
 
+.profile-info-edit {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .profile-info-edit__form {
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
 }
-.profile-info-edit__form .input__form {
+.profile-info-edit__form__input {
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
   width: 664px;
+  height: 120px;
 }
-.profile-info-edit__form .input__form label {
+.profile-info-edit__form__input label {
   font-size: 18px;
   color: #6a6a6a;
   margin-bottom: 8px;
 }
-.profile-info-edit__form .input__form input {
+.profile-info-edit__form__input input {
   padding: 12px 16px;
   height: 54px;
   border: 2px solid #d9d9d9;
@@ -2047,6 +2053,7 @@ footer {
   flex-flow: row nowrap;
   justify-content: right;
   align-items: stretch;
+  margin: 16px 0;
 }
 .profile-info-edit__form .profile-info-edit__form__button button {
   width: 120px;
