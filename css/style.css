@@ -1367,7 +1367,7 @@ footer {
 .travel-log__list {
   position: relative;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: stretch;
 }
@@ -1377,6 +1377,7 @@ footer {
   height: 488px;
   box-shadow: 0px 4px 10px #d5d5d5;
   border-radius: 8px;
+  margin-bottom: 60px;
 }
 .travel-log__item__top-section {
   width: 400px;
@@ -1885,6 +1886,24 @@ footer {
   margin-top: 24px;
   width: fit-content;
 }
+.profile--social__follow {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  width: 104px;
+  height: 40px;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+.profile--social__follow.follow {
+  background: #9c5eff;
+  color: #ffffff;
+}
+.profile--social__follow.following {
+  color: #252525;
+  border: 1px solid #252525;
+}
 .profile--social__button {
   margin: 0 12px;
 }
@@ -1895,7 +1914,7 @@ footer {
   margin: 0 4px;
 }
 
-.mypage-main {
+.mypage-main, .profile-main {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
@@ -2081,6 +2100,11 @@ footer {
   margin-bottom: 16px;
 }
 
+.social {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
 .social__list {
   display: flex;
   flex-flow: row wrap;
@@ -2089,7 +2113,7 @@ footer {
 }
 .social__item {
   width: 240px;
-  margin: 32px 0;
+  margin: 48px 0;
 }
 .social__link {
   display: flex;

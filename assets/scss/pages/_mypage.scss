@@ -30,6 +30,22 @@
     margin-top: 24px;
     width: fit-content;
 
+    &__follow {
+      @include buttonNone;
+      @include boxSize($w:104px, $h: 40px);
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    &__follow.follow {
+      background: $mainPurple;
+      color: $white;
+    }
+    &__follow.following {
+      color: $gray900;
+      border: 1px solid $gray900;
+    }
+
     &__button {
       margin: 0 12px;
     }
@@ -44,7 +60,7 @@
   }
 }
 
-.mypage-main {
+.mypage-main, .profile-main {
   @include flexbox($direction:row);
   border-top: 1px solid $gray900;
   margin-top: 32px;
@@ -231,6 +247,8 @@
 }
 
 .social {
+  @include autoMargin;
+  width: 960px;
 
   &__list {
     @include flexbox($direction: row,$wrap: wrap);
@@ -238,7 +256,7 @@
 
   &__item {
     width: 240px;
-    margin: 32px 0;
+    margin: 48px 0;
   }
   
   &__link {
