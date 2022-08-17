@@ -2,50 +2,12 @@
   min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  margin-top: 70px;
+  margin-top: 180px;
 }
 
-.profile {
-  @include flexbox($direction:column, $justify:center, $items:center);
-  margin-top: 140px;
-
-  &--pic {
-    &__img{
-      @include boxSize($w: 104px, $h: 104px);
-      border-radius: 50%;
-    }
-  }
-
-  &--nickname {
-    margin-top: 40px;
-    font-size: 24px;
-  }
-
-  &--id {
-    margin-top: 10px;
-  }
-
-  &--social {
-    margin-top: 24px;
-    @include flexbox($direction:row, $justify:space-between, $items:center);
-
-    &__button {
-      margin: 0 12px;
-    }
-
-    span {
-      margin: 0 4px;
-    }
-  }
-}
-
-.mypage-main {
-  border-top: 1px solid $gray900;
-
-}
-
-.mypage-main, .liked-travel-log, .profile-info-edit {
+.mypage-main, .profile-main {
   @include flexbox($direction:row);
+  border-top: 1px solid $gray900;
   margin-top: 32px;
 }
 
@@ -63,9 +25,8 @@
     font-size: 18px;
   }
   
-  &__item.active {
+  &__item.selected {
     border-bottom: 1px solid $gray900;
-    // text-decoration: underline 2px;
   }
 
   &__item:not(:last-child) {
@@ -74,8 +35,16 @@
 
 }
 
+.mypage-main__section {
+  section {
+    @include flexbox($direction: row, $justify:center);
+    margin: 32px 0;
+    width: 960px;
+  }
+}
+
+
 .my-travel-log {
-  width: 960px;
   height: 500px;
 
   &__list {
@@ -83,94 +52,68 @@
     padding: 30px;
   }
 
-  &__item:not(:last-child) {
-    margin-bottom: 24px;
+}
+
+.profile-info-edit__form {
+  @include pos($pos: relative);
+  // @include autoMargin;
+
+  &__input {
+    @include flexbox($direction: column);
+    width: 664px;
+    height: 120px;
+
+    label {
+      font-size: 18px;
+      color: $gray600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      padding: 12px 16px;
+      height: 54px;
+      border: 2px solid $gray300;
+      border-radius: 8px;
+
+    }
+  }
+  .profile-info-edit__form__button {
+    @include flexbox($direction: row, $justify: right);
+    margin: 16px 0;
+
+    button {
+      @include boxSize($w:120px, $h:48px);
+      @include buttonNone
+    }
+
+    button:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .profile-info-edit__form-cancel {
+      border: 1px solid $gray900;
+      border-radius: 8px;
+    }
+    
+    .profile-info-edit__form-edit {
+      background: $mainPurple;
+      border-radius: 8px;
+      color: $white;
+    }
   }
 
+  .input__form:not(:last-child) {
+    margin-bottom: 16px;
 
-  &__item{
-    @include flexbox($direction:row);
-    background: $white;
-    width: 900px;
-    height: 196px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
-
-    &-thumbnail {
-      display: flow-root;
-      @include boxSize($w: 240px, $h: 196px);
-
-      
-      &__img {
-        @include boxSize($w: 240px, $h: 196px);
-        border-radius: 8px 0px 0px 8px;
-      }
-    }
-
-    &__main {
-      position: relative;
-      padding: 20px 20px;
-
-      &__title {
-        text-indent: 4px;
-        font-weight: 700;
-        font-size: 20px;
-        margin-bottom: 12px;
-      }
-
-      &__subtitle {
-        font-size: 18px;
-        margin-bottom: 8px;
-        color: $gray500;
-      }
-
-      &__desc {
-        color: $gray900;
-      }
-
-      &__social {
-        @include flexbox($direction: row, $items:flex-start);
-        position: absolute;
-        // right: 0;
-        margin-top: 12px;
-        color: $gray500;
-
-        .social-icon:not(:last-child) {
-          margin-right: 12px;
-        }
-
-        svg {
-          margin-right: 4px;
-        }
-      }
-    }
-
-    &__button {
-      @include flexbox($direction: column, $justify:center);
-      width: 240px;
-      
-      &-edit, &-delete, &-like {
-        @include buttonNone;
-        @include boxSize($w: 64px, $h:32px);
-        border-radius: 8px;
-        font-size: 14px;
-      }
-
-      &-edit, &-like {
-        border: 1px solid $mainPurple;
-        margin-bottom: 12px;
-      }
-
-      &-delete {
-        background-color: $mainPurple;
-        color: $white;
-      }
-    }
   }
 }
 
-// .profile-info-edit__form {
-//   .input__form {
-//     width: 664px;
-//   }
-// }
+.social {
+  @include autoMargin;
+  width: 960px;
+
+  &__list {
+    @include flexbox($direction: row,$wrap: wrap);
+  }
+
+}
