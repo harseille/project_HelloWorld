@@ -1,3 +1,9 @@
-const Router = () => {};
+import { Login } from '../component';
 
-export default Router;
+const routes = {
+  '/': '',
+  '/login': Login,
+};
+const router = () => {};
+
+export default router;
