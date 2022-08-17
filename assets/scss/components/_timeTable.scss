@@ -102,10 +102,19 @@
   height: 54px;
   color: $white;
 }
+// .itinerary-btns--private:hover {
+//   background: #a36cfd;
+//   transition: all 0.3s;
+// }
 .itinerary-btns--public {
   background: none;
   border: 2px solid $mainPurple;
   border-radius: 6px;
   width: 630px;
   height: 54px;
+}
+.itinerary-btns--public:hover {
+  background: $mainPurple;
+  color: $white;
+  transition: all 0.2s;
 }
