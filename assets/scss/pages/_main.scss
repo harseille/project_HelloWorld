@@ -3,7 +3,7 @@
   min-width: 1280px;
   width: 1280px;
   margin: 0 auto;
-  margin-top: 120px;
+  margin-top: 160px;
 
   &__header {
     position: relative;
@@ -37,9 +37,9 @@
       &__circle {
         background-color: $gray300;
         margin: 0 auto;
-        width: 20px;
-        height: 20px;
-        margin-left: 12px;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
         border-radius: 100%;
       }
 
@@ -124,9 +124,17 @@
     margin-top: 20px;
     height: 48px;
     
-    // TODO: custom select
     &__dropdown {
+      position: relative;
+      overflow: hidden;
       width: 168px;
+      border-radius: 8px;
+      border: 1px solid #E5E5E5;
+      background: url(/assets/images/select_arrow.svg) no-repeat;
+      background-position: right 18px center;
+      background-size: 14px;
+      text-indent: 16px;
+      color: $gray900;
     }
 
     &__input {
