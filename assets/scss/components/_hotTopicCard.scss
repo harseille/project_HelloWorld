@@ -42,7 +42,10 @@
       &__desc {
         font-size: 14px;
       }
-
     }
+  }
+
+  &__item:hover {
+    opacity: 0.75;
   }
 }

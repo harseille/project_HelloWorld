@@ -744,6 +744,9 @@ footer {
 .hot-topic__item__detail__desc {
   font-size: 14px;
 }
+.hot-topic__item:hover {
+  opacity: 0.75;
+}
 
 .travel-log__item {
   background: #d1b4ff;
@@ -828,10 +831,16 @@ footer {
 .travel-log__item__like__count {
   margin-right: 16px;
 }
+.travel-log__item:hover {
+  opacity: 0.75;
+}
 
 .social__item {
   width: 240px;
   margin: 48px 0;
+}
+.social__item:hover {
+  opacity: 0.75;
 }
 .social__link {
   display: flex;
@@ -847,9 +856,19 @@ footer {
   align-items: center;
   margin-top: 96px;
 }
+.profile--pic {
+  position: relative;
+}
 .profile--pic__img {
   width: 104px;
   height: 104px;
+  border-radius: 50%;
+}
+.profile--pic--edit {
+  position: absolute;
+  width: 104px;
+  height: 104px;
+  background: url(/assets/images/iconCamera.svg) no-repeat center center/50% rgba(0, 0, 0, 0.5);
   border-radius: 50%;
 }
 .profile--nickname {
@@ -978,6 +997,9 @@ footer {
 }
 .my-travel-log__item:not(:last-child) {
   margin-bottom: 24px;
+}
+.my-travel-log__item:hover {
+  opacity: 0.75;
 }
 
 .newTrip__popup {
