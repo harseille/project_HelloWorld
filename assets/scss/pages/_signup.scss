@@ -1,28 +1,11 @@
 .signup {
-  &__id__form {
-    position: relative;
-
-    input {
-      padding-right: 67px;
-    }
-
-    &__btn {
-      @include buttonNone;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 67px;
-      height: 54px;
-      background: $mainPurple;
-      border-radius: 0 8px 8px 0;
-      color: $white;
-      font-size: 16px;
-    }
-  }
-
   .checkbox__form {
     @include flexbox(row, space-between, center);
     margin-top: 15px;
+
+    &:nth-last-child(5) {
+      margin-top: 50px;
+    }
 
     input {
       display: none;
@@ -44,6 +27,11 @@
       font-size: 14px;
       color: $textBlue;
     }
+  }
+
+  & > .error {
+    text-align: left;
+    bottom: 190px;
   }
 
   &__back__btn {
