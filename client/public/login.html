@@ -32,7 +32,7 @@
       </p>
     </form> -->
     <!-- 회원가입 -->
-    <form class="login signup" novalidate>
+    <!-- <form class="login signup" novalidate>
       <h2 class="login__title">sign up</h2>
       <div class="input__form signup__id__form">
         <label for="userId">아이디</label>
@@ -78,7 +78,7 @@
       <p class="login__errorMsg error">위의 약관에 동의해주세요.</p>
       <button class="submit__btn" disabled>회원가입</button>
       <button class="signup__back__btn" type="button">뒤로가기</button>
-    </form>
+    </form> -->
     <!-- 인트로 -->
     <!-- <div class="intro">
       <header class="header">
@@ -131,6 +131,56 @@
           <div class="newTrip__popup__form__input date__form">
             <label for="newTripStartDate" class="a11yHidden">출발 날짜</label>
             <input id="newTripStartDate" type="text" name="newTripStartDate" placeholder="출발일" readonly />
+            <div class="datepicker">
+              <div class="datepicker__header">
+                <strong>July 2022</strong>
+                <button class="datepicker__prev__btn">이전 달</button>
+                <button class="datepicker__next__btn">다음 달</button>
+              </div>
+              <div class="datepicker__contents">
+                <ul class="datepicker__week__list">
+                  <li class="datepicker__week__item">m</li>
+                  <li class="datepicker__week__item">t</li>
+                  <li class="datepicker__week__item">w</li>
+                  <li class="datepicker__week__item">t</li>
+                  <li class="datepicker__week__item">f</li>
+                  <li class="datepicker__week__item">s</li>
+                  <li class="datepicker__week__item">s</li>
+                </ul>
+                <ul class="datepicker__dates__list">
+                  <li class="datepicker__dates__item unable">1</li>
+                  <li class="datepicker__dates__item">2</li>
+                  <li class="datepicker__dates__item">3</li>
+                  <li class="datepicker__dates__item">4</li>
+                  <li class="datepicker__dates__item">5</li>
+                  <li class="datepicker__dates__item">6</li>
+                  <li class="datepicker__dates__item">7</li>
+                  <li class="datepicker__dates__item">8</li>
+                  <li class="datepicker__dates__item">9</li>
+                  <li class="datepicker__dates__item">10</li>
+                  <li class="datepicker__dates__item">11</li>
+                  <li class="datepicker__dates__item">12</li>
+                  <li class="datepicker__dates__item">13</li>
+                  <li class="datepicker__dates__item">14</li>
+                  <li class="datepicker__dates__item">15</li>
+                  <li class="datepicker__dates__item">16</li>
+                  <li class="datepicker__dates__item">17</li>
+                  <li class="datepicker__dates__item">18</li>
+                  <li class="datepicker__dates__item">19</li>
+                  <li class="datepicker__dates__item">20</li>
+                  <li class="datepicker__dates__item">21</li>
+                  <li class="datepicker__dates__item">22</li>
+                  <li class="datepicker__dates__item">23</li>
+                  <li class="datepicker__dates__item">24</li>
+                  <li class="datepicker__dates__item">25</li>
+                  <li class="datepicker__dates__item">26</li>
+                  <li class="datepicker__dates__item">27</li>
+                  <li class="datepicker__dates__item">28</li>
+                  <li class="datepicker__dates__item">29</li>
+                  <li class="datepicker__dates__item">30</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="newTrip__popup__form__input date__form">
             <label for="newTripEndDate" class="a11yHidden">도착 날짜</label>
@@ -297,56 +347,7 @@
       </div>
     </div> -->
     <!-- date picker -->
-    <!-- <div class="datepicker">
-      <div class="datepicker__header">
-        <strong>July 2022</strong>
-        <button class="datepicker__prev__btn">이전 달</button>
-        <button class="datepicker__next__btn">다음 달</button>
-      </div>
-      <div class="datepicker__contents">
-        <ul class="datepicker__week__list">
-          <li class="datepicker__week__item">m</li>
-          <li class="datepicker__week__item">t</li>
-          <li class="datepicker__week__item">w</li>
-          <li class="datepicker__week__item">t</li>
-          <li class="datepicker__week__item">f</li>
-          <li class="datepicker__week__item">s</li>
-          <li class="datepicker__week__item">s</li>
-        </ul>
-        <ul class="datepicker__dates__list">
-          <li class="datepicker__dates__item unable">1</li>
-          <li class="datepicker__dates__item">2</li>
-          <li class="datepicker__dates__item">3</li>
-          <li class="datepicker__dates__item">4</li>
-          <li class="datepicker__dates__item">5</li>
-          <li class="datepicker__dates__item">6</li>
-          <li class="datepicker__dates__item">7</li>
-          <li class="datepicker__dates__item">8</li>
-          <li class="datepicker__dates__item">9</li>
-          <li class="datepicker__dates__item">10</li>
-          <li class="datepicker__dates__item">11</li>
-          <li class="datepicker__dates__item">12</li>
-          <li class="datepicker__dates__item">13</li>
-          <li class="datepicker__dates__item">14</li>
-          <li class="datepicker__dates__item">15</li>
-          <li class="datepicker__dates__item">16</li>
-          <li class="datepicker__dates__item">17</li>
-          <li class="datepicker__dates__item">18</li>
-          <li class="datepicker__dates__item">19</li>
-          <li class="datepicker__dates__item">20</li>
-          <li class="datepicker__dates__item">21</li>
-          <li class="datepicker__dates__item">22</li>
-          <li class="datepicker__dates__item">23</li>
-          <li class="datepicker__dates__item">24</li>
-          <li class="datepicker__dates__item">25</li>
-          <li class="datepicker__dates__item">26</li>
-          <li class="datepicker__dates__item">27</li>
-          <li class="datepicker__dates__item">28</li>
-          <li class="datepicker__dates__item">29</li>
-          <li class="datepicker__dates__item">30</li>
-        </ul>
-      </div>
-    </div> -->
+
     <!-- 포스트 작성 -->
     <!-- <div class="dimmed__layer">
       <div class="modal newPost__popup">
