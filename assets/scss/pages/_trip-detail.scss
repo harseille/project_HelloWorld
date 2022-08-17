@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 68px;
 }
-
+// * cover 사진 및 post 수정 삭제
 .cover {
   position: relative;
   display: flex;
@@ -65,9 +65,15 @@
       height: 12px;
       margin: 0 auto;
     }
+
+    .edit-btn:hover,
+    .remove-btn:hover,
+    .add-cover-btn:hover {
+      background: $mainPurple;
+    }
   }
 }
-
+// * 여행 일정 상단
 .trip-planner {
   position: relative;
   width: 1280px;
@@ -107,6 +113,79 @@
   &__badge span img {
     margin-right: 4px;
   }
+  //* trip-planner 생성 시 화면
+  &__create {
+    &__title {
+      border-bottom: 1px solid $gray300;
+      .trip-planner__title {
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+    }
+
+    &__content {
+      padding: 20px 0;
+      border-bottom: 1px solid $gray300;
+      .trip-planner__content {
+        resize: none;
+        width: 100%;
+        height: 140px;
+        margin: 0;
+        outline: none;
+        border: none;
+      }
+    }
+
+    &__option {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: $gray600;
+
+      .trip-date {
+        display: flex;
+
+        &__span {
+          margin-right: 10px;
+        }
+
+        &__btn {
+          display: flex;
+          align-items: center;
+          background-color: white;
+          color: $gray600;
+          border: none;
+          outline: none;
+          cursor: pointer;
+
+          &__img {
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .trip-date::after {
+        display: inline-block;
+        content: '|';
+        margin: 0 16px;
+      }
+
+      .trip-people {
+        input {
+          margin-right: 2px;
+          width: 24%;
+          text-align: center;
+          border: 1px solid $gray300;
+          border-radius: 4px;
+          color: $gray600;
+        }
+      }
+    }
+  }
 }
 
 //* sticky용 레이아웃
@@ -118,7 +197,8 @@
     margin: 0px 30px 0px 20px;
   }
 
-  .left-aside {
+  //* 왼쪽 좋아요, 공유 버튼
+  .like-share-btnbox {
     position: sticky;
     display: flex;
     align-self: flex-start;
@@ -126,8 +206,36 @@
     margin-top: 20px;
     top: 50px;
     text-align: center;
+
+    .like-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+
+      .like-btn {
+        width: 40px;
+        height: 40px;
+        background-color: $white;
+        border-radius: 50%;
+        border: 1px solid $mainPurple;
+        cursor: pointer;
+      }
+      .like-degit {
+        font-size: 14px;
+        color: $mainPurple;
+      }
+    }
+    .share-btn {
+      width: 40px;
+      height: 40px;
+      background-color: $white;
+      border-radius: 50%;
+      border: 1px solid $gray500;
+      cursor: pointer;
+    }
   }
 
+  // * 오른쪽 스크롤 네비
   .nav-day {
     position: sticky;
     display: flex;
@@ -136,24 +244,49 @@
     margin-top: 20px;
     top: 50px;
     font-size: 14px;
-    color: $gray600;
+    color: $gray300;
+
+    &__item {
+      position: relative;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    &__item:hover {
+      color: $lightPurple;
+    }
+
+    &__item.active {
+      color: $mainPurple;
+      font-weight: 600;
+    }
 
     &__item::before {
       content: '';
       position: absolute;
-      width: 1px;
+      width: 2px;
       height: 100%;
-      background-color: $gray600;
+      background-color: $gray300;
       top: 0;
       left: -10px;
+    }
+
+    &__item:hover::before {
+      background-color: $lightPurple;
+    }
+
+    &__item.active::before {
+      background-color: $mainPurple;
     }
   }
 }
 
+// * 탭 포함 메인 (지도/일정표, 스토리)
 .trip-itinerary {
   width: 1280px;
   margin: 0 auto;
 
+  // * 탭(tab)
   &__tab {
     display: flex;
     font-size: 18px;
@@ -180,7 +313,7 @@
     }
   }
 }
-
+//* 스토리(trip-story)
 .trip-story {
   width: 1280px;
   margin: 0 auto;
@@ -195,7 +328,6 @@
     display: flex;
     flex-direction: column;
     margin: 20px 0 20px 20px;
-    // border-left: 1px solid red;
   }
 
   &__day-item::before {
@@ -255,7 +387,6 @@
         position: absolute;
         top: 18px;
         right: 18px;
-
         .edit-btn {
           width: 24px;
           height: 24px;
@@ -325,6 +456,7 @@
   }
 }
 
+//* 댓글(comment)
 .comment {
   width: 1280px;
   margin: 60px auto;
@@ -368,7 +500,8 @@
     &__button {
       width: 50px;
       height: 50px;
-      background: url('/assets/images/comment-add.svg');
+      border-radius: 50%;
+      background: $mainPurple url('/assets/images/comment-add.svg') no-repeat center center;
       outline: none;
       border: none;
       cursor: pointer;
@@ -380,7 +513,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 25px;
-    border-bottom: 1px solid $gray100;
+    border-bottom: 1px solid $gray300;
 
     &__contentbox {
       display: flex;
@@ -435,6 +568,18 @@
   }
 }
 
+//* 대댓글(recomment) 공통
+
+.comment__inputbox.recomment {
+  border-bottom: 1px solid $gray300;
+
+  .comment__inputbox__button {
+    width: 30px;
+    height: 30px;
+    background-size: 20px;
+  }
+}
+
 .recomment::before {
   content: '';
   text-align: center;
@@ -445,6 +590,7 @@
   background: url('/assets/images/recomment-arrow.svg') no-repeat center top;
 }
 
+//* 프로필 사진(profile) 공통
 .profile-img {
   width: 100%;
   height: 100%;

@@ -20,6 +20,7 @@
         </nav>
       </header>
       <main class="detail-main">
+        <!-- * cover 사진 및 post 수정 삭제-->
         <div class="cover">
           <div class="cover__inner">
             <div class="cover__content">
@@ -33,29 +34,50 @@
             </div>
           </div>
         </div>
-        <!-- <div class="trip-planner">
-          <input class="trip-planner__title" placeholder="어떤 여행인지 간단히 설명해주세요." />
-          <textarea class="trip-planner__content" placeholder="당신의 여행 스토리를 남겨보세요."></textarea>
-
-          <div class="trip-planner__info">
-            <p>여행 시작일: 2022-08-15 | 2명</p>
-            <p>작성일: 2022-08-25</p>
-          </div>
-          <div class="trip-planner__badge">
-            <span><img src="/assets/images/heart-nofill.svg" alt="좋아요 뱃지" /> 66</span>
-            <span><img src="/assets/images/comment.svg" alt="댓글" /> 1</span>
-          </div>
-        </div> -->
+        <!-- * sticky용 컨테이너 -->
         <div class="trip-container">
-          <div class="left-aside">
-            <button>좋아요</button>
-            <span>68</span>
-            <button>공유</button>
+          <!-- * 왼쪽 좋아요, 공유 버튼 -->
+          <div class="like-share-btnbox">
+            <div class="like-container">
+              <button class="like-btn"><img src="/assets/images/heart-nofill.svg" alt="좋아요" /></button>
+              <span class="like-degit">68</span>
+            </div>
+            <button class="share-btn"><img src="/assets/images/share.svg" alt="공유하기" /></button>
           </div>
+          <!-- * sticky용 메인 컨테이너 -->
           <div class="trip-main-container">
+            <!-- * trip-planner생성 시 -->
             <div class="trip-planner">
-              <h3 class="trip-planner__title">여행 일정 제목</h3>
-              <p class="trip-planner__content">
+              <div class="trip-planner__create">
+                <div class="trip-planner__create__title">
+                  <input class="trip-planner__title" placeholder="어떤 여행인지 간단히 설명해주세요." />
+                </div>
+                <div class="trip-planner__create__content">
+                  <textarea class="trip-planner__content" placeholder="당신의 여행 스토리를 남겨보세요."></textarea>
+                </div>
+                <div class="trip-planner__create__option">
+                  <div class="trip-date trip-start-date">
+                    <span class="trip-date__span">여행 시작일</span>
+                    <button class="trip-date__btn">
+                      <span>2022-08-14</span>
+                      <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
+                    </button>
+                  </div>
+                  <div class="trip-date trip-end-date">
+                    <span class="trip-date__span">여행 도착일</span>
+                    <button class="trip-date__btn">
+                      <span>2022-08-18</span>
+                      <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
+                    </button>
+                  </div>
+                  <div class="trip-people"><input type="number" value="2" max="99" /><span>명</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- * trip-planner 생성 후 -->
+            <!-- <div class="trip-planner">
+                <h3 class="trip-planner__title">여행 일정 제목</h3>
+                <p class="trip-planner__content">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint libero aliquid incidunt. Voluptate
                 mollitia consectetur sint harum eligendi in at blanditiis distinctio temporibus debitis, numquam facilis
                 officiis doloribus non nisi?
@@ -68,13 +90,15 @@
                 <span><img src="/assets/images/heart-nofill.svg" alt="좋아요 뱃지" /> 66</span>
                 <span><img src="/assets/images/comment.svg" alt="댓글" /> 1</span>
               </div>
-            </div>
-
+            </div> -->
+            <!-- * 탭 포함 메인 (지도/일정표, 스토리) -->
             <div class="trip-itinerary">
+              <!-- * 탭 -->
               <div class="trip-itinerary__tab">
                 <div class="trip-itinerary__tab__chart">지도/일정표</div>
                 <div class="trip-itinerary__tab__story">스토리</div>
               </div>
+              <!-- * 스토리 -->
               <div class="trip-story">
                 <ul class="trip-story__day-list">
                   <li class="trip-story__day-item">
@@ -135,6 +159,7 @@
                 </ul>
               </div>
             </div>
+            <!-- *댓글 -->
             <div class="comment">
               <h3 class="comment__title">댓글 (25)</h3>
               <div class="comment__container">
@@ -166,6 +191,16 @@
                     <button class="remove-btn"></button>
                   </div>
                 </div>
+                <div class="comment__inputbox recomment">
+                  <div class="comment__inputbox__profile">
+                    <img src="/assets/images/profile-mock.png" alt="프로필사진" class="profile-img" />
+                  </div>
+                  <div class="comment__inputbox__inputform">
+                    <label for="comment-input" class="a11yHidden">댓글입력창</label>
+                    <input type="text" name="comment-input" id="comment-input" placeholder="댓글을 입력해주세요." />
+                  </div>
+                  <button class="comment__inputbox__button"></button>
+                </div>
                 <div class="comment__box">
                   <div class="comment__box__contentbox recomment">
                     <div class="comment__box__contentbox__profile">
@@ -187,14 +222,14 @@
               </div>
             </div>
           </div>
+          <!-- * 오른쪽 스크롤 네비 -->
           <div class="nav-day">
             <ul class="nav-day__list">
-              <li class="nav-day__item">Top</li>
-              <li class="nav-day__item">Day 1</li>
-              <li class="nav-day__item">Day 2</li>
-              <li class="nav-day__item">Day 3</li>
-              <li class="nav-day__item">Day 4</li>
-              <li class="nav-day__item">댓글</li>
+              <li class="nav-day__item active"><a href="">Top</a></li>
+              <li class="nav-day__item"><a href="">Day 1</a></li>
+              <li class="nav-day__item"><a href="">Day 2</a></li>
+              <li class="nav-day__item"><a href="">Day 3</a></li>
+              <li class="nav-day__item"><a href="">댓글</a></li>
             </ul>
           </div>
         </div>
