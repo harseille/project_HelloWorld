@@ -1,19 +1,23 @@
-let router = {};
+import { Login, Signup } from '../component/index.js';
+
+const router = [
+  {
+    '/': Login,
+  },
+  {
+    '/signup': Signup,
+  },
+];
 
 // 현재 path에 따라 어떤 domString 할지 보여주도록 하는 함수
 const routes = () => {
   const location = window.location.pathname; //  /login
 
-  const same = router[location];
-
+  const same = Object.values(router.find(route => route[location]));
   if (same) {
-    const Component = same;
+    const Component = same[0];
     return new Component().render();
   }
 };
 
-const route = (path, component) => {
-  router = { ...router, ...{ [path]: component } };
-};
-
-export { routes, route };
+export { routes };
