@@ -9,7 +9,7 @@ class App extends Component {
   }
 
   render() {
-    route('/client/public/', Login);
+    route('/', Login);
     route('/signup', Signup);
     return routes();
   }
