@@ -45,11 +45,11 @@ class Login extends Component {
   }
 
   addEventListener() {
-    const go = e => {
-      e.preventDefault();
-      window.history.pushState({}, '/signup', window.location.origin + '/signup');
-      render();
-    };
+    // const go = e => {
+    //   e.preventDefault();
+    //   window.history.pushState({}, '/signup', window.location.origin + '/signup');
+    //   render();
+    // };
     return [{ type: 'submit', selector: '.login', handler: this.fetch }];
   }
 }

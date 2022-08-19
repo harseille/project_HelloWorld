@@ -1,4 +1,5 @@
 import Component from '../core/Component.js';
+import render from '../dom/render.js';
 
 class Signup extends Component {
   render() {
@@ -6,12 +7,12 @@ class Signup extends Component {
     <h2 class="login__title">sign up</h2>
     <div class="input__form signup__id__form">
       <label for="userId">아이디</label>
-      <input id="userId" type="text" name="userId" placeholder="abc@email.com" autocomplete="off" required />
+      <input id="userId" type="text" name="email" placeholder="abc@email.com" autocomplete="off" required />
       <p class="input__form__errorMsg error">아이디 형식에 맞게 입력해주세요.</p>
     </div>
     <div class="input__form">
       <label for="username">이름</label>
-      <input id="username" type="text" name="username" placeholder="abc@email.com" autocomplete="off" required />
+      <input id="username" type="text" name="name" placeholder="abc@email.com" autocomplete="off" required />
       <p class="input__form__errorMsg error">이름 형식에 맞게 입력해주세요.</p>
     </div>
     <div class="input__form">
@@ -49,6 +50,25 @@ class Signup extends Component {
     <button class="submit__btn" disabled>회원가입</button>
     <button class="signup__back__btn" type="button">뒤로가기</button>
   </form>`;
+  }
+
+  async fetch(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await axios.post('/auth/signup', Object.fromEntries([...formData.entries()]));
+      if (response.status === 200) {
+        window.history.pushState({}, '/main', window.location.origin + '/main');
+        render();
+      }
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  addEventListener() {
+    return [{ type: 'submit', selector: '.signup', handler: this.fetch }];
   }
 }
 
