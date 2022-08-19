@@ -1,8 +1,14 @@
-import { Login, Signup } from '../component/index.js';
+import { Intro, Main, Login, Signup } from '../component/index.js';
 
 const router = [
   {
-    '/': Login,
+    '/intro': Intro,
+  },
+  {
+    '/main': Main,
+  },
+  {
+    '/login': Login,
   },
   {
     '/signup': Signup,

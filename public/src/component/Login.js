@@ -32,10 +32,15 @@ class Login extends Component {
   async fetch(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const response = await axios.post('/auth/login', Object.fromEntries([...formData.entries()]));
-    if (response.status === 200) {
-      window.history.pushState({}, '/signup', window.location.origin + '/signup');
-      render();
+
+    try {
+      const response = await axios.post('/auth/login', Object.fromEntries([...formData.entries()]));
+      if (response.status === 200) {
+        window.history.pushState({}, '/main', window.location.origin + '/main');
+        render();
+      }
+    } catch (e) {
+      alert(e);
     }
   }
 
