@@ -117,7 +117,8 @@ class NewCardPopup extends Component {
     };
   }
 
-  closeModal() {
+  closeModal(e) {
+    if (!e.target.matches('.dimmed__layer') && !e.target.matches('.modal__header__close__btn')) return;
     store.state = { isShowModal: '' };
   }
 
@@ -215,7 +216,6 @@ class NewCardPopup extends Component {
     const { value } = e.target;
     const changedInfo = todo =>
       e.target.matches('.todo-input') ? { ...todo, todo: value } : { ...todo, completed: !todo.completed };
-    console.log(e.target.matches('.todo-input'));
     const _todos = todos.map(todo => (todo.id === +id ? changedInfo(todo) : todo));
 
     store.state = {
