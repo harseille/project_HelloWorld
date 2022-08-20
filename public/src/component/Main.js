@@ -1,8 +1,13 @@
 import Component from '../core/Component.js';
+import { Header } from './index.js';
 
 class Main extends Component {
   render() {
-    return `<div class="main">
+    const header = new Header().render();
+
+    return `
+    ${header}
+    <div class="main">
     <section class="hot-topic">
       <div class="hot-topic__header">
         <h2 class="hot-topic__title">핫 토픽</h2>
