@@ -1,11 +1,12 @@
 .dimmed__layer {
+  @include flexbox(column, center, center);
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
   background: $dimmed;
-  @include flexbox(column, center, center);
+  transition: display ease 0.3s;
 
   .modal {
     background: $white;
