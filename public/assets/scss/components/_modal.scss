@@ -1,11 +1,12 @@
 .dimmed__layer {
+  @include flexbox(column, center, center);
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
   background: $dimmed;
-  @include flexbox(column, center, center);
+  z-index: 10;
 
   .modal {
     background: $white;
@@ -35,4 +36,8 @@
       }
     }
   }
+}
+
+.dimmed__layer.hide {
+  display: none;
 }
