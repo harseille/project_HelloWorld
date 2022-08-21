@@ -6,7 +6,8 @@
   bottom: 0;
   right: 0;
   background: $dimmed;
-  transition: display ease 0.3s;
+  z-index: 10;
+
 
   .modal {
     background: $white;
@@ -36,4 +37,8 @@
       }
     }
   }
+}
+
+.dimmed__layer.hide {
+  display: none;
 }

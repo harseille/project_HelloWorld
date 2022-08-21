@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   height: 400px;
-  background: url('/assets/images/coverImg.jpg') no-repeat;
+  background: $gray300 no-repeat;
   background-size: cover;
 
   &__inner {
@@ -30,7 +30,14 @@
     top: -130px;
     right: 30px;
 
+    .add-cover-input {
+      display: none;
+    }
+
     .add-cover-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 35px;
       height: 35px;
       border-radius: 50%;
@@ -307,14 +314,20 @@
       align-items: center;
       width: 50%;
       height: 55px;
-      border: 1px solid $mainPurple;
+      border: 1px solid $gray300;
       border-radius: 0 8px 0 0;
+      color: $gray500;
+    }
+
+    .selected {
+      border: 1px solid $mainPurple;
       color: $mainPurple;
     }
   }
 }
 //* 스토리(trip-story)
 .trip-story {
+  display: none;
   width: 1280px;
   margin: 0 auto;
 
@@ -458,6 +471,7 @@
 
 //* 댓글(comment)
 .comment {
+  display: none;
   width: 1280px;
   margin: 60px auto;
 
