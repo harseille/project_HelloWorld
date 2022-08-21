@@ -1,5 +1,4 @@
 import Component from '../core/Component.js';
-import render from '../dom/render.js';
 import { NewTravelLogModal } from './index.js';
 
 class Header extends Component {

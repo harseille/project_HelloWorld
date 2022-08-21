@@ -82,6 +82,11 @@
       }
     }
 
+    &.prev-month,
+    &.next-month {
+      color: $gray300;
+    }
+
     &:hover {
       color: $white;
       border-radius: 50%;
