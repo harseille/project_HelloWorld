@@ -6,5 +6,6 @@ export { default as Itinerary } from './Itinerary.js';
 export { default as NewCardPopup } from './NewCardPopup.js';
 export { default as TripPlanner } from './TripPlanner.js';
 export { default as Header } from './Header.js';
+export { default as Footer } from './Footer.js';
 export { default as NewTravelLogModal } from './NewTravelLogModal.js';
 export { default as DatePicker } from './DatePicker.js';

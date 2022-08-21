@@ -1,12 +1,8 @@
 import Component from '../core/Component.js';
-import { Header } from './index.js';
 
 class Main extends Component {
   render() {
-    const header = new Header().render();
-
     return `
-    ${header}
     <div class="main">
     <section class="hot-topic">
       <div class="hot-topic__header">
