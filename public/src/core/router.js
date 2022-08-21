@@ -1,4 +1,6 @@
-import { Intro, Main, Login, Signup, Itinerary } from '../component/index.js';
+
+import { Intro, Main, Login, Signup, Itinerary, TripPlanner } from '../component/index.js';
+
 
 const router = [
   {
@@ -15,7 +17,10 @@ const router = [
   },
   {
     '/itinerary': Itinerary,
-  },
+   },
+   {
+    '/trip-planner': TripPlanner,
+   },
 ];
 
 // 현재 path에 따라 어떤 domString 할지 보여주도록 하는 함수

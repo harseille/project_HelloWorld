@@ -10,7 +10,6 @@ class Component {
 
   setState(newState) {
     this.state = { ...this.state, ...newState };
-    // rerendering
     render();
   }
 
@@ -36,9 +35,8 @@ class Component {
         event.handler = e => {
           if (e.target.matches(selector) || e.target.closest(selector)) handler(e);
         };
+        eventBuffer.events = event;
       }
-
-      eventBuffer.events = event;
     }
   }
 }
