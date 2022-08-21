@@ -1,3 +1,5 @@
+import render from '../dom/render.js';
+
 const store = {
   _store: {},
   get state() {
@@ -5,6 +7,7 @@ const store = {
   },
   set state(newState) {
     this._store = { ...this._store, ...newState };
+    render();
   },
 };
 

@@ -4,7 +4,7 @@ import render from '../dom/render.js';
 class DatePicker extends Component {
   render() {
     return `
-      <div class="datepicker hide">
+      <div class="datepicker">
         <div class="datepicker__header">
           <strong>July 2022</strong>
           <button class="datepicker__prev__btn">이전 달</button>

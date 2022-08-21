@@ -2,6 +2,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 10;
   border-radius: 8px;
   border: 1px solid $gray100;
   box-shadow: 0 0 10px 0 $shadow;
@@ -31,6 +32,7 @@
     button {
       @include buttonNone;
       text-indent: -9999px;
+      overflow: hidden;
       width: 30px;
       height: 30px;
       opacity: 0.8;

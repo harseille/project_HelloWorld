@@ -1,8 +1,12 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
+import store from '../store/store.js';
+import { NewCardPopup } from './index.js';
 
 class Login extends Component {
   render() {
+    const $newCardPopup = store.state.isShowModal === 'newCardPopup' ? new NewCardPopup().render() : '';
+
     return `
     <form class="login" novalidate>
     <h2 class="login__title">log in</h2>
@@ -26,6 +30,7 @@ class Login extends Component {
       <a href="#" class="link-signup">회원가입하기</a>
     </p>
   </form>
+  ${$newCardPopup}
     `;
   }
 
@@ -44,13 +49,30 @@ class Login extends Component {
     }
   }
 
+  open(e) {
+    e.preventDefault();
+    store.state = {
+      isShowModal: 'newCardPopup',
+      newCardPopup: {
+        showDatePicker: false,
+        type: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        location: '',
+        memo: '',
+        todos: [],
+      },
+    };
+  }
+
   addEventListener() {
     // const go = e => {
     //   e.preventDefault();
     //   window.history.pushState({}, '/signup', window.location.origin + '/signup');
     //   render();
     // };
-    return [{ type: 'submit', selector: '.login', handler: this.fetch }];
+    return [{ type: 'submit', selector: '.login', handler: this.open }];
   }
 }
 
