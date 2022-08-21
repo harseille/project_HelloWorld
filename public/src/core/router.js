@@ -1,4 +1,4 @@
-import { Intro, Main, Login, Signup } from '../component/index.js';
+import { Intro, Main, Login, Signup, TripPlanner } from '../component/index.js';
 
 const router = [
   {
@@ -12,6 +12,9 @@ const router = [
   },
   {
     '/signup': Signup,
+  },
+  {
+    '/trip-planner': TripPlanner,
   },
 ];
 
