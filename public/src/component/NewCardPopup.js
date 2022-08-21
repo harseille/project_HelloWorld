@@ -2,6 +2,20 @@ import Component from '../core/Component.js';
 import store from '../store/store.js';
 import { DatePicker } from './index.js';
 
+// store.state = {
+//   isShowModal: 'newCardPopup',
+//   newCardPopup: {
+//     showDatePicker: false,
+//     type: '',
+//     date: '',
+//     startTime: '',
+//     endTime: '',
+//     location: '',
+//     memo: '',
+//     todos: [],
+//   },
+// };
+
 class NewCardPopup extends Component {
   render() {
     const $datePicker = new DatePicker().render();
@@ -118,23 +132,22 @@ class NewCardPopup extends Component {
     };
   }
 
-  close(e) {
-    if (e.target.matches('.newCard.dimmed__layer') || e.target.matches('.newCard .modal__header__close__btn')) {
-      store.state = { isShowModal: '' };
-    }
-
-    if (!e.target.closest('.datepicker')) {
-      const { newCardPopup } = store.state;
-      store.state = {
-        newCardPopup: {
-          ...newCardPopup,
-          showDatePicker: false,
-        },
-      };
-    }
+  closeModal(e) {
+    if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
+    store.state = { isShowModal: '' };
   }
 
-  clickDate() {
+  closeDatepicker() {
+    const { newCardPopup } = store.state;
+    store.state = {
+      newCardPopup: {
+        ...newCardPopup,
+        showDatePicker: false,
+      },
+    };
+  }
+
+  clickDateInput() {
     const { newCardPopup } = store.state;
     store.state = {
       newCardPopup: {
@@ -154,13 +167,13 @@ class NewCardPopup extends Component {
 
   changeTypeNTimeNMemo(e) {
     const { name, value } = e.target;
-    console.log(name, value);
     const { newCardPopup } = store.state;
 
     store.state = {
       newCardPopup: {
         ...newCardPopup,
         [name]: value,
+        showDatePicker: false,
       },
     };
   }
@@ -170,22 +183,19 @@ class NewCardPopup extends Component {
     // false(기본값)로 설정하면 결과가 경계 내에 포함된 장소로 편향되지만 이에 국한되지는 않습니다.
     // types : 반환될 예측 유형
     // establishment : 비즈니스 결과만 반환하도록 장소 자동 완성 서비스에 지시합니다.
-
     const options = {
       fields: ['formatted_address', 'geometry', 'name'],
       strictBounds: false,
       types: ['establishment'],
     };
-
     const autocomplete = new google.maps.places.Autocomplete(e.target, options);
     autocomplete.addListener('place_changed', () => {
       // 사용자가 선택한 장소.
       const place = autocomplete.getPlace();
-
+      console.log(place);
       if (!place.geometry || !place.geometry.location) {
         window.alert("No details available for input: '" + place.name + "'");
       }
-
       const { newCardPopup } = store.state;
       store.state = {
         newCardPopup: {
@@ -196,8 +206,7 @@ class NewCardPopup extends Component {
           },
         },
       };
-
-      document.querySelector('.pac-container').forEach($pac => $pac.remove());
+      document.querySelectorAll('.pac-container').forEach($pac => $pac.remove());
     });
   }
 
@@ -255,10 +264,10 @@ class NewCardPopup extends Component {
     return [
       { type: 'submit', selector: '.newCard__popup__form', handler: this.addSchedule },
       { type: 'keydown', selector: '.newCard__popup__form input', handler: this.preventEnterKey },
-      { type: 'click', selector: '.dimmed__layer.newCard', handler: this.close },
-      { type: 'click', selector: '.newCard .modal__header__close__btn', handler: this.close },
+      { type: 'click', selector: '.dimmed__layer.newCard', handler: this.closeModal },
+      { type: 'click', selector: '.newCard .modal__header__close__btn', handler: this.closeModal },
       { type: 'change', selector: '.type__list', handler: this.changeTypeNTimeNMemo },
-      { type: 'click', selector: '.time__form__input', handler: this.clickDate },
+      { type: 'click', selector: '.time__form__input', handler: this.clickDateInput },
       {
         type: 'change',
         selector: '.newCard__popup__form__container .time__form__select',

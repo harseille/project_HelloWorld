@@ -72,7 +72,7 @@ class Login extends Component {
     //   window.history.pushState({}, '/signup', window.location.origin + '/signup');
     //   render();
     // };
-    return [{ type: 'submit', selector: '.login', handler: this.open }];
+    return [{ type: 'submit', selector: '.login', handler: this.fetch }];
   }
 }
 

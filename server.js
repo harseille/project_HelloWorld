@@ -20,7 +20,7 @@ const auth = (req, res, next) => {
 
     next();
   } catch (e) {
-    if (req.url === 'trip-planner') {
+    if (req.url === 'trip-planner-edit') {
       return res.redirect('/login');
     }
 
@@ -31,20 +31,6 @@ const auth = (req, res, next) => {
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-
-// auth 필요할 때
-// app.get('/main', auth, (req, res) => {
-//   console.log('main');
-// });
-// TODO: refectoring 필요
-// app.get('/login', auth, (req, res) => {
-//   res.redirect('/main');
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-// app.get('/signup', auth, (req, res) => {
-//   res.redirect('/main');
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
 
 app.get('*', auth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
