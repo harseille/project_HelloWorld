@@ -6,18 +6,20 @@ class EditTripTab extends Component {
     const { selectedTab } = store.state;
     return `
     <div class="trip-itinerary__tab">
-      <div class="trip-itinerary__tab__chart ${selectedTab === 'chart' ? 'selected' : ''}">지도/일정표</div>
-      <div class="trip-itinerary__tab__story ${selectedTab === 'story' ? 'selected' : ''}">스토리</div>
+      <div class="trip-itinerary__tab__chart ${
+        selectedTab === 'chart' ? 'selected' : ''
+      }" data-tab = "chart">지도/일정표</div>
+      <div class="trip-itinerary__tab__story ${
+        selectedTab === 'story' ? 'selected' : ''
+      }" data-tab = "story">스토리</div>
     </div>
     `;
   }
 
   renderSelectedContent(e) {
-    const selectedTab = e.target.classList.contains('trip-itinerary__tab__chart') ? 'chart' : 'story';
+    const selectedTab = e.target.dataset.tab;
 
-    store.state = {
-      selectedTab,
-    };
+    store.state = { selectedTab };
   }
 
   addEventListener() {

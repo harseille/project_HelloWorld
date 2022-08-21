@@ -16,9 +16,9 @@ class EditTripPlanner extends Component {
     const $editTripTab = new EditTripTab().render();
     const $editPlanMap = new EditPlanMap().render();
     const $timeTable = new TimeTable().render();
-    const $editTripStroy = new EditTripStroy().render();
+    // const $editTripStroy = new EditTripStroy().render();
     const $editTripAdd = new EditTripAdd().render();
-    console.log(store.state.selectedTab);
+    const test = selectedTab;
     return `
       <main class="detail-main">
         ${$editPlanCover}
@@ -28,7 +28,7 @@ class EditTripPlanner extends Component {
             <div class="trip-itinerary">
               ${$editTripTab}
               <div class="itinerary__container">
-                ${selectedTab === 'story' ? $editPlanMap : $editTripStroy}
+                ${selectedTab === 'chart' ? $editPlanMap + $timeTable : new EditTripStroy().render()}
               </div>
               ${$editTripAdd}
             </div>

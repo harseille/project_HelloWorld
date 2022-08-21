@@ -28,7 +28,7 @@ const router = [
 const routes = () => {
   const location = window.location.pathname; //  /login
   const same = Object.values(router.find(route => route[location]));
-  console.log(same);
+
   if (same) {
     const Component = same[0];
     return new Component().render();

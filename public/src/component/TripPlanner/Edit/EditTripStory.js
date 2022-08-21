@@ -11,7 +11,7 @@ class EditTripStroy extends Component {
         ${$editTripStoryItem}
       </ul>
     </div>
-    `;
+      `;
   }
 }
 

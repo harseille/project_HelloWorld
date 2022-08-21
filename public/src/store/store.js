@@ -3,6 +3,7 @@ import render from '../dom/render.js';
 const store = {
   _store: {
     selectedTab: 'chart',
+    coverImg: '',
   },
   get state() {
     return this._store;
