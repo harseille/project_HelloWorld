@@ -9,3 +9,5 @@ export { default as Header } from './Header.js';
 export { default as Footer } from './Footer.js';
 export { default as NewTravelLogModal } from './NewTravelLogModal.js';
 export { default as DatePicker } from './DatePicker.js';
+export { default as EditTripPlanner } from './EditTripPlanner.js';
+export { default as ViewTripPlanner } from './ViewTripPlanner.js';

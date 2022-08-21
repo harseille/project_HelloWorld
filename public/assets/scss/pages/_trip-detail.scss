@@ -92,9 +92,23 @@
   border-radius: 8px;
 
   &__title {
-    margin-bottom: 25px;
     font-size: 20px;
     font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    &__profile {
+      background-color: $accommodationBlue100;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      margin-right: 15px;
+    }
   }
 
   &__content {
@@ -327,7 +341,6 @@
 }
 //* 스토리(trip-story)
 .trip-story {
-  display: none;
   width: 1280px;
   margin: 0 auto;
 
@@ -471,7 +484,7 @@
 
 //* 댓글(comment)
 .comment {
-  display: none;
+  // display: none;
   width: 1280px;
   margin: 60px auto;
 
