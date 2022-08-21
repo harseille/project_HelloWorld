@@ -161,14 +161,19 @@ class NewCardPopup extends Component {
   }
 
   search(e) {
+    // strictBounds: 쿼리가 전송될 때 자동 완성 위젯이 자동 완성 위젯의 경계 내에 있는 장소만 반환해야 함
+    // false(기본값)로 설정하면 결과가 경계 내에 포함된 장소로 편향되지만 이에 국한되지는 않습니다.
+    // types : 반환될 예측 유형
+    // establishment : 비즈니스 결과만 반환하도록 장소 자동 완성 서비스에 지시합니다.
     const options = {
       fields: ['formatted_address', 'geometry', 'name'],
       strictBounds: false,
       types: ['establishment'],
     };
-    const autocomplete = new google.maps.places.Autocomplete(e.currentTarget, options);
+    const autocomplete = new google.maps.places.Autocomplete(e.target, options);
 
     autocomplete.addListener('place_changed', () => {
+      // 사용자가 선택한 장소.
       const place = autocomplete.getPlace();
       console.log(place);
 
