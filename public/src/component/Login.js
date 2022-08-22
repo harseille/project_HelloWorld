@@ -23,10 +23,9 @@ class Login extends Component {
     <button class="submit__btn" >로그인</button>
     <p class="login__signup__btn">
       <span>회원이 아니세요?</span>
-      <a href="#" class="link-signup">회원가입하기</a>
+      <a href="/signup" class="link-signup">회원가입하기</a>
     </p>
-  </form>
-    `;
+  </form>`;
   }
 
   async fetch(e) {
@@ -44,13 +43,19 @@ class Login extends Component {
     }
   }
 
+  link(e) {
+    e.preventDefault();
+    const path = e.target.getAttribute('href');
+
+    window.history.pushState({}, path, window.location.origin + path);
+    render();
+  }
+
   addEventListener() {
-    // const go = e => {
-    //   e.preventDefault();
-    //   window.history.pushState({}, '/signup', window.location.origin + '/signup');
-    //   render();
-    // };
-    return [{ type: 'submit', selector: '.login', handler: this.fetch }];
+    return [
+      { type: 'submit', selector: '.login', handler: this.fetch },
+      { type: 'click', selector: '.link-signup', handler: this.link },
+    ];
   }
 }
 

@@ -2,8 +2,6 @@ const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const url = require('url');
-const { log } = require('console');
 const users = require('./fake-data/user');
 
 require('dotenv').config();
@@ -16,44 +14,23 @@ const auth = (req, res, next) => {
 
   try {
     const decode = jwt.verify(accessToken, process.env.SECRET_KEY);
-
-    if (req.url === '/login' || req.url === '/signup') {
+    if (req.url === '/login' || req.url === '/signup' || req.url === '/intro') {
       return res.redirect('/main');
     }
 
     next();
   } catch (e) {
-    if (req.url === '/login' || req.url === '/signup') {
-      console.log(req.url);
-      res.sendFile(path.join(__dirname, 'public', 'index.html'));
-      return;
+    if (req.url === 'trip-planner-edit') {
+      return res.redirect('/login');
     }
 
-    return res.redirect('/login');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   }
 };
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-
-// auth 필요할 때
-// app.get('/main', auth, (req, res) => {
-//   console.log('main');
-// });
-// TODO: refectoring 필요
-// app.get('/login', auth, (req, res) => {
-//   res.redirect('/main');
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-// app.get('/signup', auth, (req, res) => {
-//   res.redirect('/main');
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-app.get('/intro', auth, (req, res) => {
-  res.redirect('/main');
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 app.get('*', auth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
