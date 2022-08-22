@@ -1,4 +1,3 @@
-import render from '../dom/render.js';
 import Component from '../core/Component.js';
 
 class TripPlanner extends Component {
@@ -35,7 +34,7 @@ class TripPlanner extends Component {
     <!-- * sticky용 메인 컨테이너 -->
     <div class="trip-main-container">
       <!-- * trip-planner생성 시 -->
-      <form class="trip-planner">
+      <div class="trip-planner">
         <div class="trip-planner__create">
           <div class="trip-planner__create__title">
             <input class="trip-planner__title" placeholder="어떤 여행인지 간단히 설명해주세요." />
@@ -61,7 +60,7 @@ class TripPlanner extends Component {
             <div class="trip-people"><input type="number" value="2" max="99" /><span>명</span></div>
           </div>
         </div>
-      </form>
+      </div>
       <!-- * 탭 포함 메인 (지도/일정표, 스토리) -->
       <div class="trip-itinerary">
         <!-- * 탭 -->
@@ -483,13 +482,17 @@ class TripPlanner extends Component {
   }
 
   renderSelectedContent(e) {
+    const $itineraryContainer = document.querySelector('.itinerary__container');
+
     [...document.querySelector('.trip-itinerary__tab').children].forEach(tab => {
       tab.classList.toggle('selected', e.target === tab);
     });
     if (e.target.classList.contains('trip-itinerary__tab__chart')) {
-      document.querySelector('.itinerary__container').style.display = 'block';
-      document.querySelector('.comment').style.display = 'none';
-      document.querySelector('.trip-story').style.display = 'none';
+      $itineraryContainer.innerHTML = `
+      ${$viewPlanMap}
+      ${$timeTable}
+      ${$viewPlanComment}
+      `;
     }
     if (e.target.classList.contains('trip-itinerary__tab__story')) {
       document.querySelector('.itinerary__container').style.display = 'none';
@@ -505,24 +508,15 @@ class TripPlanner extends Component {
     }
   }
 
-  setCoverImg(e) {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = e => {
-      console.log(e.target.result);
-      document.querySelector('.cover').style.background = `url(${e.target.result}) no-repeat center`;
-    };
-  }
-
-  addEventListener() {
-    return [
-      { type: 'change', selector: '.add-cover-input', handler: this.setCoverImg },
-      { type: 'keydown', selector: '.trip-planner__title', handler: e => this.checkNumOfWord(e, 3, 20) },
-      { type: 'keydown', selector: '.trip-planner__content', handler: e => this.checkNumOfWord(e, 10, 200) },
-      { type: 'click', selector: '.trip-itinerary__tab__chart', handler: this.renderSelectedContent },
-      { type: 'click', selector: '.trip-itinerary__tab__story', handler: this.renderSelectedContent },
-    ];
-  }
+  // addEventListener() {
+  //   return [
+  //     { type: 'change', selector: '.add-cover-input', handler: this.setCoverImg },
+  //     { type: 'keydown', selector: '.trip-planner__title', handler: e => this.checkNumOfWord(e, 3, 20) },
+  //     { type: 'keydown', selector: '.trip-planner__content', handler: e => this.checkNumOfWord(e, 10, 200) },
+  //     { type: 'click', selector: '.trip-itinerary__tab__chart', handler: this.renderSelectedContent },
+  //     { type: 'click', selector: '.trip-itinerary__tab__story', handler: this.renderSelectedContent },
+  //   ];
+  // }
 }
 
 export default TripPlanner;

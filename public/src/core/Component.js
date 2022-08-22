@@ -21,7 +21,6 @@ class Component {
   keepEvent() {
     const events = this.addEventListener?.();
     if (!events) return;
-
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
         const same = eventBuffer.events.find(
@@ -32,7 +31,6 @@ class Component {
         if (same === undefined) {
           eventBuffer.events = event;
         }
-
         continue;
       }
 
