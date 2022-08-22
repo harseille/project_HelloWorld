@@ -1,10 +1,10 @@
 import Component from '../core/Component.js';
-import render from '../dom/render.js';
+import store from '../store/store.js';
 import { NewTravelLogModal } from './index.js';
 
 class Header extends Component {
   render() {
-    const newTravelLogModal = new NewTravelLogModal().render();
+    const newTravelLogModal = new NewTravelLogModal(store.state.tripSchedule).render();
     return `
       <header class="header">
         <nav class="nav">

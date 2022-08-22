@@ -10,6 +10,7 @@ class Component {
 
   setState(newState) {
     this.state = { ...this.state, ...newState };
+    console.log(this.state);
     render();
   }
 
@@ -21,10 +22,16 @@ class Component {
     const events = this.addEventListener?.();
     if (!events) return;
 
-    // selector가 window일 때 window에 쌓인다(걸러주는 것 업이. 그래서 다른 클래스에서 event 날릴 때 component 추가해줘야함)
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
-        eventBuffer.events = event;
+        const same = eventBuffer.events.find(
+          ({ type, selector, component }) =>
+            type === event.type && selector === event.selector && component === event.component
+        );
+
+        if (same === undefined) {
+          eventBuffer.events = event;
+        }
         continue;
       }
 
@@ -39,6 +46,7 @@ class Component {
         eventBuffer.events = event;
       }
     }
+    // console.log(events);
   }
 }
 
