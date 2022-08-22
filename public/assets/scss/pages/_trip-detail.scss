@@ -10,12 +10,12 @@
   align-items: center;
   height: 400px;
   background: $gray600 no-repeat center / cover;
-  overflow: hidden;
+  // overflow: hidden;
 
-  &__img {
-    position: relative;
-    width: 100%;
-  }
+  // &__img {
+  //   position: relative;
+  //   width: 100%;
+  // }
 
   &__inner {
     position: absolute;
