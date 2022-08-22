@@ -8,4 +8,6 @@ export { default as TripPlanner } from './TripPlanner.js';
 export { default as Header } from './Header.js';
 export { default as Footer } from './Footer.js';
 export { default as NewTravelLogModal } from './NewTravelLogModal.js';
-export { default as DatePicker } from './DatePicker.js';
+export { default as DatePicker } from './DatePicker/DatePicker.js';
+export { default as DateInput } from './DatePicker/DateInput.js';
+export { default as Calendar } from './DatePicker/Calendar.js';

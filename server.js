@@ -3,6 +3,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const url = require('url');
+const { log } = require('console');
 const users = require('./fake-data/user');
 
 require('dotenv').config();
@@ -60,6 +61,8 @@ app.get('*', auth, (req, res) => {
 
 app.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
+
+  console.log(req.body);
 
   const userInfo = users.validateLogin(email, password);
 

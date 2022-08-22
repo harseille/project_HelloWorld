@@ -1,12 +1,28 @@
 import Component from '../core/Component.js';
 import { DatePicker } from './index.js';
+import store from '../store/store.js';
+
+/** Data set
+ *  store.state = {
+ *    tripSchedule: {
+ *      tripTitle: "",
+ *      startDate: "",
+ *      startDataPickerCurrentDate:
+ *      endDate: ""
+ *      endDataPickerCurrentDate:
+ *      numberOfPeople: 3
+ *    }
+ *  }
+ */
 
 class NewTravelLogModal extends Component {
   render() {
-    const datePicker = new DatePicker().render();
+    const _datePickerStartDate = new DatePicker({ ...store.state.tripSchedule, isStartDate: true }).render();
+    const _datePickerEndDate = new DatePicker({ ...store.state.tripSchedule, isStartDate: false }).render();
+
     return `
     <!-- 새 일정 만들기 모달 -->
-    <div class="dimmed__layer hide">
+    <div class="dimmed__layer">
       <div class="modal newTrip__popup">
         <div class="modal__header">
           <div class="modal__header__title">새 일정 만들기</div>
@@ -17,15 +33,8 @@ class NewTravelLogModal extends Component {
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
             <input id="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 유럽여행" />
           </div>
-          <div class="newTrip__popup__form__input date__form">
-            <label for="newTripStartDate" class="a11yHidden">출발 날짜</label>
-            <input class="newTripDate" id="newTripStartDate" type="text" name="newTripStartDate" placeholder="출발일" readonly />
-            ${datePicker}
-          </div>
-          <div class="newTrip__popup__form__input date__form">
-            <label for="newTripEndDate" class="a11yHidden">도착 날짜</label>
-            <input class="newTripDate" id="newTripEndDate" type="text" name="newTripEndDate" placeholder="도착일" readonly />
-          </div>
+          ${_datePickerStartDate}
+          ${_datePickerEndDate}
           <div class="newTrip__popup__form__select">
             <label for="selectedPeople" class="a11yHidden">인원 수</label>
             <select name="selectedPeople" id="selectedPeople">
@@ -61,14 +70,10 @@ class NewTravelLogModal extends Component {
     }
   }
 
-  showDatePicker(e) {
-    document.querySelector('.datepicker').classList.toggle('hide');
-  }
-
   addEventListener() {
     return [
       { type: 'click', selector: '.dimmed__layer', handler: this.closeNewTravelModal },
-      { type: 'click', selector: '.newTripDate', handler: this.showDatePicker },
+      // { type: 'click', selector: '.newTrip__popup__form__input', handler: this.toggleDatePicker },
     ];
   }
 }
