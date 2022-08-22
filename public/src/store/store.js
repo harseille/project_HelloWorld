@@ -6,6 +6,7 @@ const store = {
     tripSchedule: {
       activeStartDateCalendar: false,
       activeEndDateCalendar: false,
+      activeSelfInputForm: false,
       tripTitle: '',
       startDate: null,
       startDatePickerCurrentDate: new Date(),

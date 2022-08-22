@@ -14,7 +14,7 @@ class Calendar extends Component {
 
   dateDisable(month, date) {
     const { isStartDate, startDate, endDatePickerCurrentDate } = this.props;
-    if (isStartDate || startDate === null) return;
+    if (isStartDate || startDate === null) return '';
 
     // 출발일 ~ 출발일+31
     const targetEndDateCurrentDate = new Date(
@@ -31,8 +31,8 @@ class Calendar extends Component {
   }
 
   isStartDate(date) {
-    const { isStartDate, startDate, startDatePickerCurrentDate } = this.props;
-    if (!isStartDate || startDate === null) return;
+    const { startDate, startDatePickerCurrentDate } = this.props;
+    if (startDate === null) return '';
 
     return startDate.getFullYear() === startDatePickerCurrentDate.getFullYear() &&
       startDate.getMonth() === startDatePickerCurrentDate.getMonth() &&
@@ -42,8 +42,8 @@ class Calendar extends Component {
   }
 
   isEndDate(date) {
-    const { isStartDate, endDate, endDatePickerCurrentDate } = this.props;
-    if (isStartDate || endDate === null) return;
+    const { endDate, endDatePickerCurrentDate } = this.props;
+    if (endDate === null) return '';
 
     return endDate.getFullYear() === endDatePickerCurrentDate.getFullYear() &&
       endDate.getMonth() === endDatePickerCurrentDate.getMonth() &&
@@ -88,12 +88,9 @@ class Calendar extends Component {
     );
     const thisMonthDatesDOMString = thisMonthDates.map(
       date =>
-        ` <li class="calendar__dates__item 
-        ${isCurrentMonth && date === today.getDate() ? 'today' : ''} 
-        ${this.dateDisable(0, date)}
-        ${this.isStartDate(date)}
-        ${this.isEndDate(date)}
-        ">${date}</li>`
+        `<li class="calendar__dates__item ${
+          isCurrentMonth && date === today.getDate() ? 'today' : ''
+        } ${this.dateDisable(0, date)} ${this.isStartDate(date)} ${this.isEndDate(date)}">${date}</li>`
     );
     const nextMonthDatesDOMString = nextMonthDates.map(
       date => `<li class="calendar__dates__item next-month ${this.dateDisable(1, date)}">${date}</li>`
@@ -177,6 +174,7 @@ class Calendar extends Component {
           ...store.state.tripSchedule,
           startDate: newStartDate,
           startDatePickerCurrentDate: newStartDate,
+          activeStartDateCalendar: false,
         },
       };
       // 출발일+31일이 도착일보다 작으면 도착일을 출발일+31일로 바꾼다.
