@@ -9,18 +9,18 @@
   height: 60px;
   padding-left: 65px;
   background: $black;
-  /* carousel 요소의 width 셋팅이 완료될 때까지 감춘다. */
   opacity: 1;
   &__days {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden; 잠시만 사라져줘어ㅓ
     display: flex;
     justify-content: space-between;
     &__add--list {
+      // display: none;
       position: absolute;
       top: 40px;
-      left: 596px;
+      left: 80px;
       width: 108px;
       height: auto;
       border: 1px solid $gray500;
@@ -38,6 +38,9 @@
       height: 30px;
       padding-top: 7px;
       font-size: 14px;
+    }
+    &__add--item:hover {
+      background: $lightPurple;
     }
   }
   &--btn {
@@ -62,6 +65,7 @@
   }
 
   &__day-index {
+    position: relative;
     width: 395px;
     color: $white;
     text-align: center;

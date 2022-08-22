@@ -21,6 +21,7 @@ class Component {
   keepEvent() {
     const events = this.addEventListener?.();
     if (!events) return;
+
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
         const same = eventBuffer.events.find(
@@ -35,7 +36,7 @@ class Component {
       }
 
       const same = eventBuffer.events.find(({ type, selector }) => type === event.type && selector === event.selector);
-
+      // console.log(same);
       if (same === undefined) {
         const { selector, handler } = event;
 
