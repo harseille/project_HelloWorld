@@ -28,7 +28,7 @@ class Intro extends Component {
           <dd>117,432</dd>
         </dl>
       </div>
-      <video autoplay muted title="여행 비디오">
+      <video autoplay loop muted title="여행 비디오">
         <source src="/assets/videos/MainMovie3.mp4" />
       </video>
     </section>
