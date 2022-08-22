@@ -20,9 +20,9 @@ class Component {
   keepEvent() {
     const events = this.addEventListener?.();
     if (!events) return;
-
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
+        console.log(event);
         eventBuffer.events = event;
         continue;
       }
