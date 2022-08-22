@@ -1,25 +1,20 @@
 import Component from '../core/Component.js';
+import render from '../dom/render.js';
+import { Header, Footer } from './index.js';
 
 class Intro extends Component {
   render() {
+    const $header = new Header().render();
+    const $footer = new Footer().render();
     return `<div class="intro">
-    <header class="header">
-      <nav class="nav">
-        <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
-        <ul class="nav__list">
-          <li class="nav__item"><a href="" class="nav__item__link">로그인</a></li>
-        </ul>
-      </nav>
-    </header>
+    ${$header}
     <section class="intro__copywriter">
       <h2 class="intro__copywriter__title">
         <span>함께 만드는 여행 계획</span>
         <strong>Hello World</strong>
       </h2>
-      <a href="#" class="intro__copywriter__link">여행일지 둘러보기</a>
-      <footer class="footer">
-        <small class="footer__copyright">&copy; HelloWorld. All rights reserved.</small>
-      </footer>
+      <a href="/main" class="intro__copywriter__link">여행일지 둘러보기</a>
+      ${$footer}
     </section>
     <section class="intro__service">
       <h2 class="a11yHidden">서비스 이용자 및 여행일지 수, 비디오</h2>
@@ -38,6 +33,17 @@ class Intro extends Component {
       </video>
     </section>
   </div>`;
+  }
+
+  link(e) {
+    e.preventDefault();
+    const path = e.target.getAttribute('href');
+    window.history.pushState({}, path, window.location.origin + path);
+    render();
+  }
+
+  addEventListener() {
+    return [{ type: 'click', selector: '.intro__copywriter__link', handler: this.link }];
   }
 }
 export default Intro;
