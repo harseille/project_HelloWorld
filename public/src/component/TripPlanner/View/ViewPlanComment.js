@@ -1,10 +1,11 @@
 import Component from '../../../core/Component.js';
+import store from '../../../store/store.js';
 
 class ViewPlanComment extends Component {
   render() {
     return `
-    <div class="comment">
-        <h3 class="comment__title">댓글 (25)</h3>
+    <div class="comment" id="comment">
+        <h3 class="comment__title">댓글 (${store.state.commentCount})</h3>
         <div class="comment__container">
           <div class="comment__inputbox">
             <div class="comment__inputbox__profile">

@@ -33,7 +33,7 @@ class ViewTripPlanner extends Component {
             <div class="trip-itinerary">
               ${$viewTripTab}
               <div class="itinerary__container">
-              ${selectedTab === 'chart' ? $viewPlanMap + $timeTable : $viewTripStory}
+                ${selectedTab === 'chart' ? $viewPlanMap + $timeTable : $viewTripStory}
               </div>
               ${$viewPlanComment}
             </div>
