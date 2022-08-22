@@ -1,13 +1,34 @@
 import Component from '../core/Component.js';
-import render from '../dom/render.js';
 import { DatePicker } from './index.js';
+import store from '../store/store.js';
+
+/** Data set
+ *  _store: {
+    isShowModal: 'newTripSchedulePopup',
+    tripSchedule: {
+      activeStartDateCalendar: false,
+      activeEndDateCalendar: false,
+      activeSelfInputForm: false,
+      tripTitle: '',
+      startDate: null,
+      startDatePickerCurrentDate: new Date(),
+      endDate: null,
+      endDatePickerCurrentDate: new Date(),
+      numberOfPeople: '',
+    },
+  },
+ */
 
 class NewTravelLogModal extends Component {
   render() {
-    const datePicker = new DatePicker().render();
+    const { activeSelfInputForm, tripTitle, numberOfPeople } = this.props;
+
+    const _datePickerStartDate = new DatePicker({ ...this.props, isStartDate: true }).render();
+    const _datePickerEndDate = new DatePicker({ ...this.props, isStartDate: false }).render();
+
     return `
     <!-- 새 일정 만들기 모달 -->
-    <div class="dimmed__layer hide">
+    <div class="dimmed__layer">
       <div class="modal newTrip__popup">
         <div class="modal__header">
           <div class="modal__header__title">새 일정 만들기</div>
@@ -16,17 +37,10 @@ class NewTravelLogModal extends Component {
         <form class="newTrip__popup__form">
           <div class="newTrip__popup__form__input">
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
-            <input id="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 유럽여행" />
+            <input id="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 유럽여행" value="${tripTitle}"/>
           </div>
-          <div class="newTrip__popup__form__input date__form">
-            <label for="newTripStartDate" class="a11yHidden">출발 날짜</label>
-            <input class="newTripDate" id="newTripStartDate" type="text" name="newTripStartDate" placeholder="출발일" readonly />
-            ${datePicker}
-          </div>
-          <div class="newTrip__popup__form__input date__form">
-            <label for="newTripEndDate" class="a11yHidden">도착 날짜</label>
-            <input class="newTripDate" id="newTripEndDate" type="text" name="newTripEndDate" placeholder="도착일" readonly />
-          </div>
+          ${_datePickerStartDate}
+          ${_datePickerEndDate}
           <div class="newTrip__popup__form__select">
             <label for="selectedPeople" class="a11yHidden">인원 수</label>
             <select name="selectedPeople" id="selectedPeople">
@@ -40,9 +54,9 @@ class NewTravelLogModal extends Component {
               </optgroup>
             </select>
           </div>
-          <div class="newTrip__popup__form__input self__input__form hide">
+          <div class="newTrip__popup__form__input self__input__form ${activeSelfInputForm ? '' : 'hide'}">
             <label for="inputPeople" class="a11yHidden">인원 수 입력</label>
-            <input id="inputPeople" type="text" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." />
+            <input id="inputPeople" type="text" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
           </div>
           <button class="newTrip__popup__form__submit">새 일정 만들기</button>
         </form>
@@ -62,14 +76,16 @@ class NewTravelLogModal extends Component {
     }
   }
 
-  showDatePicker(e) {
-    document.querySelector('.datepicker').classList.toggle('hide');
+  showSelfInputForm(e) {
+    console.log(e.target);
+    if (e.target.value !== 6) return;
+    console.log(123);
   }
 
   addEventListener() {
     return [
       { type: 'click', selector: '.dimmed__layer', handler: this.closeNewTravelModal },
-      { type: 'click', selector: '.newTripDate', handler: this.showDatePicker },
+      { type: 'click', selector: '.newTrip__popup__form__select', handler: this.showSelfInputForm },
     ];
   }
 }

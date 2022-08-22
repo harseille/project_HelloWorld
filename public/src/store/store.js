@@ -2,6 +2,19 @@ import render from '../dom/render.js';
 
 const store = {
   _store: {
+    isShowModal: 'newTripSchedulePopup',
+    tripSchedule: {
+      activeStartDateCalendar: false,
+      activeEndDateCalendar: false,
+      activeSelfInputForm: false,
+      tripTitle: '',
+      startDate: null,
+      startDatePickerCurrentDate: new Date(),
+      endDate: null,
+      endDatePickerCurrentDate: new Date(),
+      numberOfPeople: '',
+    },
+  },
     tripPlanner: {
       coverImg:
         'https://images.unsplash.com/photo-1564596823821-79b97151055e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',

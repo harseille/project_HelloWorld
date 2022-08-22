@@ -10,6 +10,7 @@ class Component {
 
   setState(newState) {
     this.state = { ...this.state, ...newState };
+    console.log(this.state);
     render();
   }
 
@@ -22,8 +23,14 @@ class Component {
     if (!events) return;
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
-        console.log(event);
-        eventBuffer.events = event;
+        const same = eventBuffer.events.find(
+          ({ type, selector, component }) =>
+            type === event.type && selector === event.selector && component === event.component
+        );
+
+        if (same === undefined) {
+          eventBuffer.events = event;
+        }
         continue;
       }
 
@@ -38,6 +45,7 @@ class Component {
         eventBuffer.events = event;
       }
     }
+    // console.log(events);
   }
 }
 
