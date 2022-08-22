@@ -1,13 +1,11 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
-import { Header, Footer } from './index.js';
+import { Footer } from './index.js';
 
 class Intro extends Component {
   render() {
-    const $header = new Header().render();
     const $footer = new Footer().render();
     return `<div class="intro">
-    ${$header}
     <section class="intro__copywriter">
       <h2 class="intro__copywriter__title">
         <span>함께 만드는 여행 계획</span>

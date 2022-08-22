@@ -1,25 +1,31 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
 import { NewTravelLogModal } from './index.js';
+import store from '../store/store.js';
 
 class Header extends Component {
   render() {
-    const path = window.location.pathname;
     const newTravelLogModal = new NewTravelLogModal().render();
+    // user가 로그인했는지 서버에서 가져오기
+    const isUser = store.state?.session;
+    const path = window.location.pathname;
     const navList = [
       { href: '/main', content: '여행일지' },
       { href: '#', content: '일정 만들기' },
       { href: '/login', content: '로그인' },
+      { href: '/mypage', content: '마이페이지' },
     ];
 
     // prettier-ignore
     return `
-      <header class="header">
+      <header class="header ${path === '/intro'? 'intro__header': ''}">
         <nav class="nav">
           <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
           <ul class="nav__list">
            ${navList.map(({ href, content }) => {
-            if(path === '/' && href !== '/login') return '';
+            if(path === '/intro' && href !== '/login') return '';
+            if(!isUser && href === '/mypage') return '';
+            if(isUser && href === '/login') return '';
 
             return `<li class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
