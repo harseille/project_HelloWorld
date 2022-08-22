@@ -1,12 +1,8 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
-import store from '../store/store.js';
-import { NewCardPopup } from './index.js';
 
 class Login extends Component {
   render() {
-    const $newCardPopup = store.state.isShowModal === 'newCardPopup' ? new NewCardPopup().render() : '';
-
     return `
     <form class="login" novalidate>
     <h2 class="login__title">log in</h2>
@@ -27,11 +23,9 @@ class Login extends Component {
     <button class="submit__btn" >로그인</button>
     <p class="login__signup__btn">
       <span>회원이 아니세요?</span>
-      <a href="#" class="link-signup">회원가입하기</a>
+      <a href="/signup" class="link-signup">회원가입하기</a>
     </p>
-  </form>
-  ${$newCardPopup}
-    `;
+  </form>`;
   }
 
   async fetch(e) {
@@ -49,30 +43,19 @@ class Login extends Component {
     }
   }
 
-  open(e) {
+  link(e) {
     e.preventDefault();
-    store.state = {
-      isShowModal: 'newCardPopup',
-      newCardPopup: {
-        showDatePicker: false,
-        type: '',
-        date: '',
-        startTime: '',
-        endTime: '',
-        location: '',
-        memo: '',
-        todos: [],
-      },
-    };
+    const path = e.target.getAttribute('href');
+
+    window.history.pushState({}, path, window.location.origin + path);
+    render();
   }
 
   addEventListener() {
-    // const go = e => {
-    //   e.preventDefault();
-    //   window.history.pushState({}, '/signup', window.location.origin + '/signup');
-    //   render();
-    // };
-    return [{ type: 'submit', selector: '.login', handler: this.fetch }];
+    return [
+      { type: 'submit', selector: '.login', handler: this.fetch },
+      { type: 'click', selector: '.link-signup', handler: this.link },
+    ];
   }
 }
 
