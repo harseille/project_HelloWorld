@@ -28,7 +28,7 @@ class NewTravelLogModal extends Component {
 
     return `
     <!-- 새 일정 만들기 모달 -->
-    <div class="dimmed__layer">
+    <div class="dimmed__layer hide">
       <div class="modal newTrip__popup">
         <div class="modal__header">
           <div class="modal__header__title">새 일정 만들기</div>

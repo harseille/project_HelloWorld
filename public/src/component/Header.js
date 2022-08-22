@@ -1,11 +1,10 @@
 import Component from '../core/Component.js';
 import store from '../store/store.js';
 import { NewTravelLogModal } from './index.js';
-import store from '../store/store.js';
 
 class Header extends Component {
   render() {
-    const newTravelLogModal = new NewTravelLogModal().render();
+    const newTravelLogModal = new NewTravelLogModal(store.state.tripSchedule).render();
     const isUser = store.state?.session;
     const path = window.location.pathname;
     const navList = [

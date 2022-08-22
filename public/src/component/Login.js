@@ -31,7 +31,7 @@ class Login extends Component {
   async fetch(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+    console.log(Object.fromEntries([...formData.entries()]));
     try {
       const response = await axios.post('/auth/login', Object.fromEntries([...formData.entries()]));
       if (response.status === 200) {
