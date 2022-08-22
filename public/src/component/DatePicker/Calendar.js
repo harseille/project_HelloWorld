@@ -31,20 +31,34 @@ class Calendar extends Component {
   }
 
   isStartDate(date) {
-    const { startDate, startDatePickerCurrentDate } = this.props;
+    const { isStartDate, startDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
     if (startDate === null) return '';
 
-    return startDate.getFullYear() === startDatePickerCurrentDate.getFullYear() &&
-      startDate.getMonth() === startDatePickerCurrentDate.getMonth() &&
+    if (isStartDate) {
+      return startDate.getFullYear() === startDatePickerCurrentDate.getFullYear() &&
+        startDate.getMonth() === startDatePickerCurrentDate.getMonth() &&
+        startDate.getDate() === date
+        ? 'start-date'
+        : '';
+    }
+    return startDate.getFullYear() === endDatePickerCurrentDate.getFullYear() &&
+      startDate.getMonth() === endDatePickerCurrentDate.getMonth() &&
       startDate.getDate() === date
       ? 'start-date'
       : '';
   }
 
   isEndDate(date) {
-    const { endDate, endDatePickerCurrentDate } = this.props;
+    const { isStartDate, endDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
     if (endDate === null) return '';
 
+    if (isStartDate) {
+      return endDate.getFullYear() === startDatePickerCurrentDate.getFullYear() &&
+        endDate.getMonth() === startDatePickerCurrentDate.getMonth() &&
+        endDate.getDate() === date
+        ? 'end-date'
+        : '';
+    }
     return endDate.getFullYear() === endDatePickerCurrentDate.getFullYear() &&
       endDate.getMonth() === endDatePickerCurrentDate.getMonth() &&
       endDate.getDate() === date
@@ -54,12 +68,20 @@ class Calendar extends Component {
 
   // TODO: 추가사항 중간 날짜
   // isTripDate(date) {
-  //   const { startDate, endDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
+  //   const { isStartDate, startDate, endDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
   //   if (startDate === null || endDate === null) return;
 
-  //   const targetDate = new Date();
+  //   if (isStartDate) {
+  //     const targetDate = new Date(
+  //       startDatePickerCurrentDate.getFullYear(),
+  //       startDatePickerCurrentDate.getMonth(),
+  //       date
+  //     );
+  //     return startDate < targetDate && targetDate < endDate ? 'trip-date' : '';
+  //   }
+  //   const targetDate = new Date(endDatePickerCurrentDate.getFullYear(), endDatePickerCurrentDate.getMonth(), date);
+  //   return endDate < targetDate && targetDate < endDate ? 'trip-date' : '';
 
-  //   return;
   // }
 
   renderCalendarGridDates() {

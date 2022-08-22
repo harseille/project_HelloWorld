@@ -9,13 +9,13 @@ const store = {
         { id: 2, country: '프랑스', date: '08.15', day: 'Sun' },
         { id: 3, country: '이태리', date: '08.16', day: 'Mon' },
         { id: 4, country: '체코', date: '08.17', day: 'Tue' },
-    ]
-  },
-  isShowModal: 'newTripSchedulePopup',
+      ],
+    },
+    isShowModal: 'newTripSchedulePopup',
     tripSchedule: {
       activeStartDateCalendar: false,
       activeEndDateCalendar: false,
-      activeSelfInputForm: false,
+      activeSelfNumberOfPeopleInputForm: false,
       tripTitle: '',
       startDate: null,
       startDatePickerCurrentDate: new Date(),
