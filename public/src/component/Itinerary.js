@@ -1,41 +1,42 @@
 import Component from '../core/Component.js';
 import myMap from './myMap.js';
+import store from '../store/store.js';
 
 class Itinerary extends Component {
   render() {
+    const { currentId, schedule } = store.state.itinerary;
+    console.log({ currentId });
+    // prettier-ignore
     return `
     <div class="itinerary__container">
-    <!-- google map -->
+      <!-- google map -->
       <div id="googleMap" class="map"></div>
-      
        <!-- carousel -->
-    <div class="carousel">
-      <div class="carousel__days">
-        <div class="carousel__day-index">
-          <button class="carousel__day-index--add">+</button>Day1.08.14 Sat
-          <div>영국</div>
-        </div>
-        <div class="carousel__day-index">
-          <button class="carousel__day-index--add">+</button>Day2.08.18 Sun
-          <div>프랑스</div>
-        </div>
-        <div class="carousel__day-index">
-          <button class="carousel__day-index--add">+</button>Day3.08.25 Mon
-          <div>이탈리아</div>
-        </div>
-        <div class="carousel__day-index">
-          <button class="carousel__day-index--add">+</button>Day3.08.30 Mon
-          <div>아이슬란드</div>
-        </div>
+      <div class="carousel">
+        <div class="carousel__days">
+        ${
+          schedule.map(shed => `
+            <div class="carousel__day-index" data-id=${shed.id}>
+              <button class="carousel__day-index--add" data-id=${shed.id}>+</button>Day ${shed.id} <span>/</span> ${shed.date} ${shed.day}
+              ${currentId === shed.id ? `
+                <ul class="carousel__days__add--list">
+                  <li class="carousel__days__add--item first-item">앞에 추가</li>
+                  <li class="carousel__days__add--item">뒤에 추가</li>
+                  <li class="carousel__days__add--item delete--item">일정 삭제</li>
+                </ul>
+              `: ''}
+              <div>${shed.country}</div>
+            </div>`).join('')
+        }
       </div>
       <button class="prev--btn carousel--btn">〈</button>
       <button class="next--btn carousel--btn">〉</button>
 
-      <ul class="carousel__days__add--list">
-        <li class="carousel__days__add--item first-item">앞에 추가</li>
-        <li class="carousel__days__add--item">뒤에 추가</li>
-        <li class="carousel__days__add--item">일정 삭제</li>
-      </ul>
+      <!--<ul class="carousel__days__add--list" style="display:none">
+        <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
+        <li class="carousel__days__add--item next--add--item">뒤에 추가</li>
+        <li class="carousel__days__add--item delete--item">일정 삭제</li>
+      </ul> -->
 
     </div>
 
@@ -272,14 +273,107 @@ class Itinerary extends Component {
     <div class="itinerary-btns">
       <button class="itinerary-btns--private">나만의 일정</button>
       <button class="itinerary-btns--public">다른 사람들에게도 공유하기</button>
-    </div>
-
-  </div>
-    `;
+      </div>
+      
+      </div>;`
   }
 
+  stopAddDays() {
+    const { itinerary } = store.state;
+    const { schedule } = itinerary;
+    console.log('stopAddDays');
+
+    if (schedule.length > 5) {
+      alert('더이상 생성하지 맙시다');
+    }
+
+    // schedule.push(store.state =...schedule, { id: 5, country: '스페인', date: '08.18', day: 'Wed' });
+    store.state = {
+      itinerary: {
+        ...itinerary,
+        schedule: [...schedule, { id: 5, country: '독일', date: '08.18', day: 'Wed' }],
+      },
+    };
+  }
+
+  buttonHandler(e) {
+    const { itinerary } = store.state;
+    if (e.target.matches('.carousel__day-index--add')) {
+      store.state = { itinerary: { ...itinerary, currentId: +e.target.dataset.id } };
+      console.log(store.state.itinerary.currentId);
+
+      // document.querySelector('.carousel__days__add--list').style.display = 'block';
+      return;
+    }
+    if (!e.target.closest('.carousel__days__add--list')) {
+      console.log(document.querySelector('.carousel__days__add--list'));
+      // document.querySelector('.carousel__days__add--list').style.display = 'none';
+      store.state = { itinerary: { ...itinerary, currentId: '' } };
+    }
+    // console.log(schedule);
+  }
+
+  deleteSchedule(e) {
+    const { schedule } = store.state.itinerary;
+    if (schedule.length < 1) {
+      store.state = {
+        itinerary: {
+          ...store.state.itinerary,
+          // schedule: [],
+          // currentId: '',
+          currentId: '',
+        },
+      };
+    }
+    if (!e.target.matches('.carousel__days__add--item')) return;
+    const restItems = schedule.filter(sched => sched.id !== +e.target.closest('.carousel__day-index').dataset.id);
+    console.log(restItems);
+  }
+
+  addSchedule(e) {
+    // store.state = {
+    //   itinerary: {
+    //     schedule: [],
+    //     currentId: ''
+    //   }
+    // }
+    const { itinerary } = store.state;
+    const { schedule } = itinerary;
+    const id = +e.target.closest('.carousel__day-index').dataset.id;
+    const beforeArr = schedule.filter((_, i) => i < id);
+    const afterArr = schedule.filter((_, i) => i >= id);
+    console.log('addS');
+    console.log(beforeArr);
+    console.log(afterArr);
+    store.state = {
+      itinerary: {
+        ...itinerary,
+        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, afterArr],
+      },
+    };
+    // const setScheduleForm = { id: 6, country: '아이슬란드', date: '08.19', day: 'Thur' };
+    // const addedSchedule = schedule.forEach(sched => {
+    //   if (sched.id === +e.target.closest('.carousel__day-index').dataset.id) {
+    //     //
+    //   }
+    // });
+  }
+
+  // generateId() {
+  //   Math.max(...state.todos.map(todo => todo.id), 0) + 1;
+  // }
+
+  // addTodo() {
+  //   setTodos([{ id: generateTodoId(), content, completed: false }, ...state.todos]);
+  // }
+
   addEventListener() {
-    return [{ type: 'DOMContentLoaded', selector: 'window', handler: myMap }];
+    return [
+      { type: 'DOMContentLoaded', selector: 'window', handler: myMap },
+      { type: 'click', selector: '.next--btn', handler: this.stopAddDays },
+      { type: 'click', selector: '.itinerary__container', handler: this.buttonHandler },
+      { type: 'click', selector: '.carousel__days__add--list', handler: this.addSchedule },
+    ];
   }
 }
 

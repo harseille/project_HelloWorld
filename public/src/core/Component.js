@@ -21,6 +21,7 @@ class Component {
     const events = this.addEventListener?.();
     if (!events) return;
 
+    // selector가 window일 때 window에 쌓인다(걸러주는 것 업이. 그래서 다른 클래스에서 event 날릴 때 component 추가해줘야함)
     for (const event of events) {
       if (event.selector === 'window' || event.selector === null) {
         eventBuffer.events = event;
@@ -28,7 +29,7 @@ class Component {
       }
 
       const same = eventBuffer.events.find(({ type, selector }) => type === event.type && selector === event.selector);
-
+      // console.log(same);
       if (same === undefined) {
         const { selector, handler } = event;
 
