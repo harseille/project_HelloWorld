@@ -42,18 +42,11 @@ const store = {
     tripSchedule: {
       activeStartDateCalendar: false,
       activeEndDateCalendar: false,
-      activeSelfNumberOfPeopleInputForm: false,
-      activeCalendar: '',
-      currentDate: new Date(),
-      title: '',
-      startDate: null,
-    isShowModal: 'newTripSchedulePopup',
-    tripSchedule: {
-      activeStartDateCalendar: false,
-      activeEndDateCalendar: false,
       startDatePickerCurrentDate: new Date(),
       endDatePickerCurrentDate: new Date(),
       activeSelfNumberOfPeopleInputForm: false,
+      activeCalendar: '',
+      currentDate: new Date(),
 
       title: '',
       summary: '베트남ㆍ3일', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
