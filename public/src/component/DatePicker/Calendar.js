@@ -4,13 +4,13 @@ import store from '../../store/store.js';
 
 class Calendar extends Component {
   get currentYear() {
-    const { isStartDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
-    return isStartDate ? startDatePickerCurrentDate.getFullYear() : endDatePickerCurrentDate.getFullYear();
+    const { currentDate } = this.props;
+    return currentDate.getFullYear();
   }
 
   get currentMonth() {
-    const { isStartDate, startDatePickerCurrentDate, endDatePickerCurrentDate } = this.props;
-    return isStartDate ? startDatePickerCurrentDate.getMonth() : endDatePickerCurrentDate.getMonth();
+    const { currentDate } = this.props;
+    return currentDate.getMonth();
   }
 
   dateDisable(month, date) {
@@ -122,7 +122,7 @@ class Calendar extends Component {
   }
 
   render() {
-    const { isStartDate, activeStartDateCalendar, activeEndDateCalendar } = this.props;
+    const { isStartDate, activeStartDateCalendar, activeEndDateCalendar, calendarId } = this.props;
 
     const MONTH_NAMES = [
       'January',
@@ -142,9 +142,7 @@ class Calendar extends Component {
     const DAY_OF_THE_WEEK_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
 
     return `
-      <div class="calendar ${
-        isStartDate ? (activeStartDateCalendar ? '' : 'hide') : activeEndDateCalendar ? '' : 'hide'
-      }" id=${isStartDate ? 'calendarStartDate' : 'calendarEndDate'}>
+      <div class="calendar" id=${calendarId}>
         <div class="calendar__header">
           <strong>${MONTH_NAMES[this.currentMonth]} ${this.currentYear}</strong>
           <button class="calendar__prev__btn prev-month" type="button">이전 달</button>

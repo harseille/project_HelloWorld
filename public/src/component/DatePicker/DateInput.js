@@ -8,18 +8,11 @@ class DateInput extends Component {
   }
 
   render() {
-    const { isStartDate, startDate, endDate } = this.props;
+    const { inputPlaceholder, calendarId, date } = this.props;
 
     return `
-      ${
-        isStartDate
-          ? `<input class="newTripDate datePicker" id="newTripStartDate" type="text" name="newTripStartDate" placeholder="출발일" value="${
-              startDate ? this.formattedDate(startDate) : ''
-            }"readonly />`
-          : `<input class="newTripDate datePicker" id="newTripEndDate" type="text" name="newTripEndDate" placeholder="도착일" value="${
-              endDate ? this.formattedDate(endDate) : ''
-            }"readonly />`
-      }
+    <input class="newTripDate datePicker" id="${calendarId}" type="text" name="${calendarId}" placeholder="${inputPlaceholder}"
+    ${date ? `value="${this.formattedDate(date)}"` : ''}" readonly />
     `;
   }
 

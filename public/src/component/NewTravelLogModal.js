@@ -8,28 +8,34 @@ class NewTravelLogModal extends Component {
   render() {
     const {
       isShowModal,
-      tripSchedule: { activeSelfNumberOfPeopleInputForm, title, numberOfPeople },
+      tripSchedule: { activeSelfNumberOfPeopleInputForm, title, numberOfPeople, startDate, endDate },
     } = this.props;
 
-    // const startDatePickerProps = {
-    //   ...this.props.tripSchedule,
-    //   calendarId: 'calendarStartDate',
-    //   activeCalendar: '',
-    //   inputPlaceholder: '출발일',
-    //   labelContent: '출발 날짜',
-    //   date: '',
-    // };
-    // const endDatePickerProps = {
-    //   ...this.props.tripSchedule,
-    //   calendarId: 'calendarEndDate',
-    //   activeCalendar: '',
-    //   inputPlaceholder: '도착일',
-    //   labelContent: '도착 날짜',
-    //   date: '',
-    // };
+    const startDatePickerProps = {
+      ...this.props.tripSchedule,
+      calendarId: 'calendarStartDate',
+      activeCalendar: '',
+      inputPlaceholder: '출발일',
+      labelContent: '출발 날짜',
+      date: startDate,
+      currentDate: new Date(),
+      startDate,
+      endDate,
+    };
+    const endDatePickerProps = {
+      ...this.props.tripSchedule,
+      calendarId: 'calendarEndDate',
+      activeCalendar: '',
+      inputPlaceholder: '도착일',
+      labelContent: '도착 날짜',
+      date: endDate,
+      currentDate: new Date(),
+      startDate,
+      endDate,
+    };
 
-    const _datePickerStartDate = new DatePicker({ ...this.props.tripSchedule, isStartDate: true }).render();
-    const _datePickerEndDate = new DatePicker({ ...this.props.tripSchedule, isStartDate: false }).render();
+    const _datePickerStartDate = new DatePicker(startDatePickerProps).render();
+    const _datePickerEndDate = new DatePicker(endDatePickerProps).render();
 
     const options = [
       { value: '1', content: '1명' },
