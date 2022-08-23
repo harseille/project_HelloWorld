@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import Component from '../core/Component.js';
 import myMap from './myMap.js';
 import store from '../store/store.js';
@@ -5,7 +6,6 @@ import store from '../store/store.js';
 class Itinerary extends Component {
   render() {
     const { currentId, schedule } = store.state.itinerary;
-    console.log({ currentId });
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -15,13 +15,13 @@ class Itinerary extends Component {
       <div class="carousel">
         <div class="carousel__days">
         ${
-          schedule.map(shed => `
+          schedule.map((shed, i) => `
             <div class="carousel__day-index" data-id=${shed.id}>
-              <button class="carousel__day-index--add" data-id=${shed.id}>+</button>Day ${shed.id} <span>/</span> ${shed.date} ${shed.day}
+              <button class="carousel__day-index--add" data-id=${shed.id}>+</button>Day ${i + 1} <span>/</span> ${shed.date} ${shed.day}
               ${currentId === shed.id ? `
                 <ul class="carousel__days__add--list">
-                  <li class="carousel__days__add--item first-item">앞에 추가</li>
-                  <li class="carousel__days__add--item">뒤에 추가</li>
+                  <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
+                  <li class="carousel__days__add--item next--add--item">뒤에 추가</li>
                   <li class="carousel__days__add--item delete--item">일정 삭제</li>
                 </ul>
               `: ''}
@@ -281,56 +281,67 @@ class Itinerary extends Component {
   stopAddDays() {
     const { itinerary } = store.state;
     const { schedule } = itinerary;
-    console.log('stopAddDays');
 
-    if (schedule.length > 5) {
+    if (schedule.length > 31) {
       alert('더이상 생성하지 맙시다');
     }
 
-    // schedule.push(store.state =...schedule, { id: 5, country: '스페인', date: '08.18', day: 'Wed' });
     store.state = {
       itinerary: {
         ...itinerary,
         schedule: [...schedule, { id: 5, country: '독일', date: '08.18', day: 'Wed' }],
       },
     };
+    console.log(store.state.itinerary.schedule);
   }
 
   buttonHandler(e) {
     const { itinerary } = store.state;
     if (e.target.matches('.carousel__day-index--add')) {
       store.state = { itinerary: { ...itinerary, currentId: +e.target.dataset.id } };
-      console.log(store.state.itinerary.currentId);
-
-      // document.querySelector('.carousel__days__add--list').style.display = 'block';
+      console.log(store.state.itinerary);
       return;
     }
     if (!e.target.closest('.carousel__days__add--list')) {
-      console.log(document.querySelector('.carousel__days__add--list'));
-      // document.querySelector('.carousel__days__add--list').style.display = 'none';
       store.state = { itinerary: { ...itinerary, currentId: '' } };
     }
-    // console.log(schedule);
   }
 
   deleteSchedule(e) {
-    const { schedule } = store.state.itinerary;
-    if (schedule.length < 1) {
-      store.state = {
-        itinerary: {
-          ...store.state.itinerary,
-          // schedule: [],
-          // currentId: '',
-          currentId: '',
-        },
-      };
-    }
-    if (!e.target.matches('.carousel__days__add--item')) return;
+    const {
+      itinerary,
+      itinerary: { schedule },
+    } = store.state;
+
+    if (!e.target.classList.contains('delete--item')) return;
+
     const restItems = schedule.filter(sched => sched.id !== +e.target.closest('.carousel__day-index').dataset.id);
+
     console.log(restItems);
+    store.state = {
+      itinerary: {
+        ...itinerary,
+        currentId: '',
+        schedule: [...restItems],
+      },
+    };
+
+    // if (schedule.length < 1) {
+    //   store.state = {
+    //     itinerary: {
+    //       ...store.state.itinerary,
+    //       // schedule: [],
+    //       // currentId: '',
+    //       currentId: '',
+    //     },
+    //   };
+    // }
+    // console.log(store.state.itinerary.currentId);
   }
 
-  addSchedule(e) {
+  addScheduleBefore(e) {
+    if (!e.target.classList.contains('prev--add--item')) return;
+
     // store.state = {
     //   itinerary: {
     //     schedule: [],
@@ -340,39 +351,81 @@ class Itinerary extends Component {
     const { itinerary } = store.state;
     const { schedule } = itinerary;
     const id = +e.target.closest('.carousel__day-index').dataset.id;
-    const beforeArr = schedule.filter((_, i) => i < id);
-    const afterArr = schedule.filter((_, i) => i >= id);
-    console.log('addS');
+
+    const idx = schedule.findIndex(sched => sched.id === id);
+
+    // 앞에 추가 로직
+    const beforeArr = schedule.filter((_, i) => i < idx); // id = 0
+    const afterArr = schedule.filter((_, i) => i >= idx);
+    // const beforeArr = schedule.slice(0, idx); // id = 0
+    // const afterArr = schedule.slice(idx);
+
+    console.log(id);
     console.log(beforeArr);
     console.log(afterArr);
     store.state = {
       itinerary: {
         ...itinerary,
-        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, afterArr],
+        currentId: '',
+        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
       },
     };
-    // const setScheduleForm = { id: 6, country: '아이슬란드', date: '08.19', day: 'Thur' };
-    // const addedSchedule = schedule.forEach(sched => {
-    //   if (sched.id === +e.target.closest('.carousel__day-index').dataset.id) {
-    //     //
-    //   }
-    // });
   }
 
-  // generateId() {
-  //   Math.max(...state.todos.map(todo => todo.id), 0) + 1;
-  // }
+  addScheduleAfter(e) {
+    if (!e.target.classList.contains('next--add--item')) return;
+    const { itinerary } = store.state;
+    const { schedule } = itinerary;
+    const id = +e.target.closest('.carousel__day-index').dataset.id;
 
-  // addTodo() {
-  //   setTodos([{ id: generateTodoId(), content, completed: false }, ...state.todos]);
-  // }
+    // 뒤에 추가 로직
+    // const beforeArr = schedule.filter((_, i) => i <= id); // id = 0
+    // const afterArr = schedule.filter((_, i) => i > id);
+
+    // index 찾기
+    let idx;
+    schedule.forEach((sched, i) => {
+      if (sched.id === id) idx = i;
+    });
+    const beforeArr = schedule.filter((_, i) => i <= idx); // id = 0
+    const afterArr = schedule.filter((_, i) => i > idx);
+
+    console.log(e.target.closest('.carousel__day-index'));
+    console.log(id);
+    console.log(beforeArr);
+    console.log(afterArr);
+    store.state = {
+      itinerary: {
+        ...itinerary,
+        currentId: '',
+        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
+      },
+    };
+  }
 
   addEventListener() {
     return [
       { type: 'DOMContentLoaded', selector: 'window', handler: myMap },
       { type: 'click', selector: '.next--btn', handler: this.stopAddDays },
       { type: 'click', selector: '.itinerary__container', handler: this.buttonHandler },
-      { type: 'click', selector: '.carousel__days__add--list', handler: this.addSchedule },
+      {
+        type: 'click',
+        selector: '.carousel__days__add--list',
+        component: 'next--add--item',
+        handler: this.addScheduleAfter,
+      },
+      {
+        type: 'click',
+        selector: '.carousel__days__add--list',
+        component: 'prev--add--item',
+        handler: this.addScheduleBefore,
+      },
+      {
+        type: 'click',
+        selector: '.carousel__days__add--list',
+        component: 'delete--item',
+        handler: this.deleteSchedule,
+      },
     ];
   }
 }

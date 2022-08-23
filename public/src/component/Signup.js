@@ -12,17 +12,17 @@ class Signup extends Component {
     </div>
     <div class="input__form">
       <label for="username">이름</label>
-      <input id="username" type="text" name="name" placeholder="abc@email.com" autocomplete="off" required />
+      <input id="username" type="text" name="name" placeholder="둘리" autocomplete="off" required />
       <p class="input__form__errorMsg error">이름 형식에 맞게 입력해주세요.</p>
     </div>
     <div class="input__form">
       <label for="nickname">닉네임</label>
-      <input id="nickname" type="text" name="nickname" placeholder="abc@email.com" autocomplete="off" required />
+      <input id="nickname" type="text" name="nickname" placeholder="nickname" autocomplete="off" required />
       <p class="input__form__errorMsg error">닉네임 형식에 맞게 입력해주세요.</p>
     </div>
     <div class="input__form">
       <label for="password">비밀번호</label>
-      <input id="password" type="password" name="password" placeholder="abc@email.com" autocomplete="off" required />
+      <input id="password" type="password" name="password" placeholder="******" autocomplete="off" required />
       <p class="input__form__errorMsg error">비밀번호 형식에 맞게 입력해주세요.</p>
     </div>
     <div class="input__form">
@@ -31,7 +31,7 @@ class Signup extends Component {
         id="passwordCheck"
         type="password"
         name="passwordCheck"
-        placeholder="abc@email.com"
+        placeholder="******"
         autocomplete="off"
         required />
       <p class="input__form__errorMsg error show">비밀번호와 일치하지 않습니다.</p>

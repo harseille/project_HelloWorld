@@ -35,10 +35,14 @@ class Component {
         continue;
       }
 
-      const same = eventBuffer.events.find(({ type, selector }) => type === event.type && selector === event.selector);
+      const same = eventBuffer.events.find(
+        ({ type, selector, component }) =>
+          type === event.type && selector === event.selector && component === event.component
+      );
       // console.log(same);
       if (same === undefined) {
         const { selector, handler } = event;
+        // console.log(event);
 
         event.handler = e => {
           if (e.target.matches(selector) || e.target.closest(selector)) handler(e);
