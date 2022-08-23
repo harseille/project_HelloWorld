@@ -21,28 +21,6 @@ class DatePicker extends Component {
       </div>`;
   }
 
-  // updateMonth(e) {
-  //   const { id } = e.target.closest('.calendar');
-
-  //   const delta = e.target.matches('.prev-month') ? -1 : 1;
-
-  //   if (id === 'calendarStartDate') {
-  //     store.state = {
-  //       tripSchedule: {
-  //         ...store.state.tripSchedule,
-  //         startDatePickerCurrentDate: new Date(this.currentYear, this.currentMonth + 1 * delta),
-  //       },
-  //     };
-  //   } else if (id === 'calendarEndDate') {
-  //     store.state = {
-  //       tripSchedule: {
-  //         ...store.state.tripSchedule,
-  //         endDatePickerCurrentDate: new Date(this.currentYear, this.currentMonth + 1 * delta),
-  //       },
-  //     };
-  //   }
-  // }
-
   // addEventListener() {
   //   return [{ type: 'click', selector: '.calendar', handler: this.updateMonth }];
   // }

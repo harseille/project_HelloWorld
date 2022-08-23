@@ -1,30 +1,35 @@
+/* eslint-disable class-methods-use-this */
 import Component from '../core/Component.js';
 import { DatePicker } from './index.js';
 import store from '../store/store.js';
-
-/** Data set
- *  _store: {
-    isShowModal: 'newTripSchedulePopup',
-    tripSchedule: {
-      activeStartDateCalendar: false,
-      activeEndDateCalendar: false,
-      activeSelfInputForm: false,
-      tripTitle: '',
-      startDate: null,
-      startDatePickerCurrentDate: new Date(),
-      endDate: null,
-      endDatePickerCurrentDate: new Date(),
-      numberOfPeople: '',
-    },
-  },
- */
+import render from '../dom/render.js';
 
 class NewTravelLogModal extends Component {
   render() {
-    const { activeSelfNumberOfPeopleInputForm, tripTitle, numberOfPeople } = this.props;
+    const {
+      isShowModal,
+      tripSchedule: { activeSelfNumberOfPeopleInputForm, title, numberOfPeople },
+    } = this.props;
 
-    const _datePickerStartDate = new DatePicker({ ...this.props, isStartDate: true }).render();
-    const _datePickerEndDate = new DatePicker({ ...this.props, isStartDate: false }).render();
+    // const startDatePickerProps = {
+    //   ...this.props.tripSchedule,
+    //   calendarId: 'calendarStartDate',
+    //   activeCalendar: '',
+    //   inputPlaceholder: '출발일',
+    //   labelContent: '출발 날짜',
+    //   date: '',
+    // };
+    // const endDatePickerProps = {
+    //   ...this.props.tripSchedule,
+    //   calendarId: 'calendarEndDate',
+    //   activeCalendar: '',
+    //   inputPlaceholder: '도착일',
+    //   labelContent: '도착 날짜',
+    //   date: '',
+    // };
+
+    const _datePickerStartDate = new DatePicker({ ...this.props.tripSchedule, isStartDate: true }).render();
+    const _datePickerEndDate = new DatePicker({ ...this.props.tripSchedule, isStartDate: false }).render();
 
     const options = [
       { value: '1', content: '1명' },
@@ -32,12 +37,11 @@ class NewTravelLogModal extends Component {
       { value: '3', content: '3명' },
       { value: '4', content: '4명' },
       { value: '5', content: '5명' },
-      // { value: '6', content: '직접입력' },
     ];
 
     return `
     <!-- 새 일정 만들기 모달 -->
-    <div class="dimmed__layer">
+    <div class="dimmed__layer ${isShowModal === 'newTripScheduleModal' ? '' : 'hide'}">
       <div class="modal newTrip__popup">
         <div class="modal__header">
           <div class="modal__header__title">새 일정 만들기</div>
@@ -46,7 +50,7 @@ class NewTravelLogModal extends Component {
         <form class="newTrip__popup__form">
           <div class="newTrip__popup__form__input">
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
-            <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 유럽여행" value="${tripTitle}"/>
+            <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 유럽여행" value="${title}"/>
           </div>
           ${_datePickerStartDate}
           ${_datePickerEndDate}
@@ -57,7 +61,7 @@ class NewTravelLogModal extends Component {
                 ${options
                   .map(
                     ({ value, content }) =>
-                      `<option value="${value}" ${numberOfPeople === value ? 'selected' : ''}>${content}</option>`
+                      `<option value="${value}" ${numberOfPeople === +value ? 'selected' : ''}>${content}</option>`
                   )
                   .join('')}
                   <option value="6" ${numberOfPeople >= 6 ? 'selected' : ''}>직접입력</option>
@@ -68,26 +72,45 @@ class NewTravelLogModal extends Component {
             <label for="inputPeople" class="a11yHidden">인원 수 입력</label>
             <input class="inputPeople" id="inputPeople" type="number" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
           </div>
-          <button class="newTrip__popup__form__submit">새 일정 만들기</button>
+          <button class="newTrip__popup__form__submit" type="button">새 일정 만들기</button>
         </form>
       </div>
     </div>
     `;
   }
 
-  closeNewTravelModal(e) {
+  closeNewTripScheduleModal(e) {
+    console.log('closeNewTripScheduleModal');
     if (e.target.matches('.modal__header__close__btn'))
-      document.querySelector('.newTravelLogModal .dimmed__layer').classList.add('hide');
+      store.state = {
+        ...store.state,
+        isShowModal: '',
+      };
+  }
 
-    if (e.target.closest('.newTrip__popup')) return;
+  inputTitle(e) {
+    // const _tripTitle = e.target.value.replace(/^.{0,20}$/);
+    store.state = {
+      ...store.state,
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        title: e.target.value,
+      },
+    };
+  }
 
-    if (e.target.matches('.dimmed__layer')) {
-      document.querySelector('.newTravelLogModal .dimmed__layer').classList.add('hide');
-    }
+  inputNumberOfPeople(e) {
+    store.state = {
+      ...store.state,
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        numberOfPeople: +e.target.value,
+      },
+    };
   }
 
   changeSelfInputForm(e) {
-    console.log(e.target.value);
+    console.log('changeSelfInputForm');
     if (+e.target.value >= 6) {
       store.state = {
         ...store.state,
@@ -109,33 +132,28 @@ class NewTravelLogModal extends Component {
     }
   }
 
-  inputTripTitle(e) {
-    // const _tripTitle = e.target.value.replace(/^.{0,20}$/);
-    store.state = {
-      ...store.state,
-      tripSchedule: {
-        ...store.state.tripSchedule,
-        tripTitle: e.target.value,
-      },
-    };
-  }
+  submitTripSchedule(e) {
+    console.log('submitTripSchedule');
 
-  inputNumberOfPeople(e) {
+    // 팝업 close
     store.state = {
       ...store.state,
-      tripSchedule: {
-        ...store.state.tripSchedule,
-        numberOfPeople: +e.target.value,
-      },
+      isShowModal: '',
     };
+
+    // edit 페이지로 이동
+    console.log(window.location.origin + '/trip-planner-edit');
+    window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit');
+    render();
   }
 
   addEventListener() {
     return [
-      { type: 'click', selector: '.dimmed__layer', handler: this.closeNewTravelModal },
-      { type: 'change', selector: '.newTrip__popup__form__select', handler: this.changeSelfInputForm },
-      { type: 'input', selector: '.newTripTitle', handler: this.inputTripTitle },
+      { type: 'click', selector: '.dimmed__layer', handler: this.closeNewTripScheduleModal },
+      { type: 'input', selector: '.newTripTitle', handler: this.inputTitle },
       { type: 'input', selector: '.inputPeople', handler: this.inputNumberOfPeople },
+      { type: 'change', selector: '.newTrip__popup__form__select', handler: this.changeSelfInputForm },
+      { type: 'click', selector: '.newTrip__popup__form__submit', handler: this.submitTripSchedule },
     ];
   }
 }

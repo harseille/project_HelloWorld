@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Component from '../../core/Component.js';
 import store from '../../store/store.js';
 
@@ -161,7 +162,15 @@ class Calendar extends Component {
   }
 
   clickOutOfCalender(e) {
-    if (!(e.target.matches('.datePicker') || e.target.closest('.calendar') !== null)) {
+    const {
+      tripSchedule: { activeStartDateCalendar, activeEndDateCalendar },
+    } = store.state;
+
+    if (
+      (activeStartDateCalendar === true || activeEndDateCalendar === true) &&
+      !(e.target.matches('.datePicker') || e.target.closest('.calendar') !== null)
+    ) {
+      console.log('clickOutOfCalender');
       store.state = {
         ...store.state,
         tripSchedule: {
@@ -178,15 +187,18 @@ class Calendar extends Component {
     if (!e.target.classList.contains('calendar__dates__item') || e.target.classList.contains('unable')) return;
 
     const { id } = e.target.closest('.calendar');
+    const {
+      tripSchedule: { startDate, startDatePickerCurrentDate, endDatePickerCurrentDate },
+    } = store.state;
 
     if (id === 'calendarStartDate') {
       const newStartDate = new Date(
-        store.state.tripSchedule.startDatePickerCurrentDate.getFullYear(),
+        startDatePickerCurrentDate.getFullYear(),
         e.target.matches('.prev-month')
-          ? store.state.tripSchedule.startDatePickerCurrentDate.getMonth() - 1
+          ? startDatePickerCurrentDate.getMonth() - 1
           : e.target.matches('.next-month')
-          ? store.state.tripSchedule.startDatePickerCurrentDate.getMonth() + 1
-          : store.state.tripSchedule.startDatePickerCurrentDate.getMonth(),
+          ? startDatePickerCurrentDate.getMonth() + 1
+          : startDatePickerCurrentDate.getMonth(),
         e.target.textContent
       );
 
@@ -200,13 +212,12 @@ class Calendar extends Component {
         },
       };
       // 출발일+31일이 도착일보다 작으면 도착일을 출발일+31일로 바꾼다.
-      const targetStartDate = new Date(
-        store.state.tripSchedule.startDate.getFullYear(),
-        store.state.tripSchedule.startDate.getMonth(),
-        store.state.tripSchedule.startDate.getDate() + 31
-      );
+      const targetStartDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 31);
+      console.log(targetStartDate);
+      console.log(store.state.tripSchedule?.endDate);
+      console.log(targetStartDate < store.state.tripSchedule?.endDate);
       if (targetStartDate < store.state.tripSchedule?.endDate) {
-        store.state.tripSchedule.endDate = targetStartDate;
+        // store.state.tripSchedule.endDate = targetStartDate;
         store.state = {
           ...store.state,
           tripSchedule: {
@@ -219,12 +230,12 @@ class Calendar extends Component {
       }
     } else if (id === 'calendarEndDate') {
       const newEndDate = new Date(
-        store.state.tripSchedule.endDatePickerCurrentDate.getFullYear(),
+        endDatePickerCurrentDate.getFullYear(),
         e.target.matches('.prev-month')
-          ? store.state.tripSchedule.endDatePickerCurrentDate.getMonth() - 1
+          ? endDatePickerCurrentDate.getMonth() - 1
           : e.target.matches('.next-month')
-          ? store.state.tripSchedule.endDatePickerCurrentDate.getMonth() + 1
-          : store.state.tripSchedule.endDatePickerCurrentDate.getMonth(),
+          ? endDatePickerCurrentDate.getMonth() + 1
+          : endDatePickerCurrentDate.getMonth(),
         e.target.textContent
       );
 
@@ -243,6 +254,11 @@ class Calendar extends Component {
   updateMonth(e) {
     console.log('updateMonth');
     if (!(e.target.classList.contains('prev-month') || e.target.classList.contains('next-month'))) return;
+
+    const {
+      tripSchedule: { startDatePickerCurrentDate, endDatePickerCurrentDate },
+    } = store.state;
+
     const { id } = e.target.closest('.calendar');
 
     const delta = e.target.matches('.prev-month') ? -1 : 1;
@@ -253,8 +269,8 @@ class Calendar extends Component {
         tripSchedule: {
           ...store.state.tripSchedule,
           startDatePickerCurrentDate: new Date(
-            store.state.tripSchedule.startDatePickerCurrentDate.getFullYear(),
-            store.state.tripSchedule.startDatePickerCurrentDate.getMonth() + 1 * delta
+            startDatePickerCurrentDate.getFullYear(),
+            startDatePickerCurrentDate.getMonth() + 1 * delta
           ),
           activeStartDateCalendar: true,
         },
@@ -265,8 +281,8 @@ class Calendar extends Component {
         tripSchedule: {
           ...store.state.tripSchedule,
           endDatePickerCurrentDate: new Date(
-            store.state.tripSchedule.endDatePickerCurrentDate.getFullYear(),
-            store.state.tripSchedule.endDatePickerCurrentDate.getMonth() + 1 * delta
+            endDatePickerCurrentDate.getFullYear(),
+            endDatePickerCurrentDate.getMonth() + 1 * delta
           ),
           activeEndDateCalendar: true,
         },
