@@ -3,7 +3,7 @@ import Component from '../../../core/Component.js';
 class EditPlanMap extends Component {
   render() {
     return `
-    <!-- google map -->
+
     <div class="map"></div>
     <!-- carousel -->
     <div class="carousel">

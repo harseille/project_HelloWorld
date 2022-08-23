@@ -252,6 +252,7 @@ class Calendar extends Component {
     }
   }
 
+
   // addEventListener() {
   //   return [
   //     { type: 'click', selector: 'window', component: 'Calendar', handler: this.clickOutOfCalender },
@@ -259,6 +260,7 @@ class Calendar extends Component {
   //     { type: 'click', selector: '.calendar', handler: this.updateMonth },
   //   ];
   // }
+
 }
 
 export default Calendar;

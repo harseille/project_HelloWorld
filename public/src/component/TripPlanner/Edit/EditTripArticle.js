@@ -2,15 +2,20 @@ import Component from '../../../core/Component.js';
 
 class EditTripArticle extends Component {
   render() {
+    const {
+      userInfo: { profilePic, nickname },
+      cell: { location, startTime },
+    } = this.props;
+
     return `
       <article class="trip-article">
         <div class="trip-article__header">
           <div class="trip-article__header__profile">
-            <img src="/assets/images/profile-mock.png" alt="프로필사진" class="profile-img" />
+            <img src="${profilePic}" alt="${nickname} 님의 프로필사진" class="profile-img" />
           </div>
           <div class="trip-article__header__content">
-            <p class="trip-article__header__content__place">호이안 마을</p>
-            <p class="trip-article__header__content__time">오후 10:00</p>
+            <p class="trip-article__header__content__place">${location}</p>
+            <p class="trip-article__header__content__time">${startTime}</p>
           </div>
           <div class="trip-article__header__badge">
             <button class="add-btn">

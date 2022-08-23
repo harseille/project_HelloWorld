@@ -10,15 +10,19 @@ import store from '../store/store.js';
 
 class EditTripPlanner extends Component {
   render() {
-    const { selectedTab } = store.state;
-    const $editPlanCover = new EditPlanCover().render();
-    const $editPlanner = new EditPlanner().render();
-    const $editTripTab = new EditTripTab().render();
+    const {
+      state,
+      state: { selectedTab },
+    } = store;
+
+    const $editPlanCover = new EditPlanCover(state).render();
+    const $editPlanner = new EditPlanner(state).render();
+    const $editTripTab = new EditTripTab(state).render();
     const $editPlanMap = new EditPlanMap().render();
     const $timeTable = new TimeTable().render();
-    // const $editTripStroy = new EditTripStroy().render();
+    const $editTripStroy = new EditTripStroy(state).render();
     const $editTripAdd = new EditTripAdd().render();
-    const test = selectedTab;
+
     return `
       <main class="detail-main">
         ${$editPlanCover}
@@ -28,7 +32,7 @@ class EditTripPlanner extends Component {
             <div class="trip-itinerary">
               ${$editTripTab}
               <div class="itinerary__container">
-                ${selectedTab === 'chart' ? $editPlanMap + $timeTable : new EditTripStroy().render()}
+                ${selectedTab === 'chart' ? $editPlanMap + $timeTable : $editTripStroy}
               </div>
               ${$editTripAdd}
             </div>
