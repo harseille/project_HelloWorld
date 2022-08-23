@@ -17,16 +17,11 @@ class ViewTripTab extends Component {
   }
 
   renderSelectedContent(e) {
-    const selectedTab = e.target.dataset.tab;
-
-    store.state = { selectedTab };
+    store.state = { selectedTab: e.target.dataset.tab };
   }
 
   addEventListener() {
-    return [
-      { type: 'click', selector: '.trip-itinerary__tab__chart', handler: this.renderSelectedContent },
-      { type: 'click', selector: '.trip-itinerary__tab__story', handler: this.renderSelectedContent },
-    ];
+    return [{ type: 'click', selector: '.trip-itinerary__tab', handler: this.renderSelectedContent }];
   }
 }
 

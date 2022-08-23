@@ -3,7 +3,6 @@ import Component from '../../../core/Component.js';
 class ViewPlanMap extends Component {
   render() {
     return `
-    <!-- google map -->
     <div class="map"></div>
     <!-- carousel -->
     <div class="carousel">

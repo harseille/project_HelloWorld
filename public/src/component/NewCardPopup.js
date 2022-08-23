@@ -1,6 +1,6 @@
+/* eslint-disable import/extensions */
 import Component from '../core/Component.js';
 import store from '../store/store.js';
-import { DatePicker } from './index.js';
 
 // store.state = {
 //   isShowModal: 'newCardPopup',
@@ -17,8 +17,26 @@ import { DatePicker } from './index.js';
 // };
 
 class NewCardPopup extends Component {
+  // toggleDatePicker(e) {
+  //   if (!e.target.matches('.datePicker')) return;
+  //   const { id } = e.target.closest('.newTrip__popup__form__input').dataset;
+  //   const {
+  //     tripSchedule: { startDate },
+  //   } = store.state;
+
+  //   if (id === 'endDate' && startDate === null) return;
+  //   store.state = {
+  //     ...store.state,
+  //     calendar: {
+  //       ...store.state.calendar,
+  //       activeCalendar: id,
+  //       temporary: store.state.tripSchedule[id] || new Date(),
+  //     },
+  //   };
+  // }
+
   render() {
-    const $datePicker = new DatePicker().render();
+    // const $datePicker = new DatePicker().render();
     const { showDatePicker, type, date, startTime, endTime, location, memo, todos } = store.state.newCardPopup;
     const typeList = [
       { id: 'type__accomodation', value: 'accomodation', content: '숙박' },
@@ -26,6 +44,23 @@ class NewCardPopup extends Component {
       { id: 'type__transportation', value: 'transportation', content: '교통' },
       { id: 'type__etc', value: 'etc', content: '기타' },
     ];
+
+    // const { activeCalendar, date: newDate } = store.state.calendar;
+    // const { startDate, endDate } = store.state.tripSchedule;
+
+    // const $datePicker = new DatePicker({
+    //   calendarId: 'startDate',
+    //   activeCalendar,
+    //   inputPlaceholder: '출발일',
+    //   labelContent: '출발 날짜',
+    //   unableType: 'none ',
+    //   isSetEnd: true,
+    //   date: startDate || newDate,
+    //   startDate,
+    //   endDate,
+    //   toggle: this.toggleDatePicker,
+    // }).render();
+
     const timeList = [
       '00:00 AM',
       '01:00 AM',
@@ -77,7 +112,7 @@ class NewCardPopup extends Component {
             <div class="time__form__input">
               <label for="newCard__date">Select a day</label>
               <input id="newCard__date" type="text" name="date" placeholder="yyyy-mm-dd" value="${date}" readOnly/>
-              ${showDatePicker? $datePicker: ''}
+              ${showDatePicker? '': ''}
             </div>
             <div class="time__form__select">
               <label for="newCard__startTime">Start with</label>
@@ -155,14 +190,6 @@ class NewCardPopup extends Component {
         showDatePicker: true,
       },
     };
-
-    // store.state = {
-    //   newCardPopup: {
-    //     ...newCardPopup,
-    //     showDatePicker: false,
-    //     date: '0000-00-00',
-    //   },
-    // };
   }
 
   changeTypeNTimeNMemo(e) {

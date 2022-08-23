@@ -1,13 +1,15 @@
 import Component from '../../../core/Component.js';
-import store from '../../../store/store.js';
 
 class ViewNavDay extends Component {
   render() {
-    const DayDOMString = store.state.dayItem
-      .map(
-        (item, idx) =>
-          `<li class="nav-day__item" data-scrollNav="${idx + 1}"><a href="#day${idx + 1}">Day ${idx + 1}</a></li>`
-      )
+    const {
+      tripSchedule: {
+        itinerary: { schedule },
+      },
+    } = this.props;
+
+    const DayDOMString = schedule
+      .map(({ id }) => `<li class="nav-day__item" data-scrollNav="${id}"><a href="#day${id}">Day ${id}</a></li>`)
       .join('');
 
     return `

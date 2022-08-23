@@ -1,6 +1,7 @@
 import Component from '../core/Component.js';
 import store from '../store/store.js';
 import { NewTravelLogModal } from './index.js';
+import render from '../dom/render.js';
 
 class Header extends Component {
   render() {
@@ -34,7 +35,7 @@ class Header extends Component {
         </nav>
       </header>
       <div class="newTravelLogModal">
-      ${newTravelLogModal}
+      
       </div>
     `;
   }
