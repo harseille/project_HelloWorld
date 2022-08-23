@@ -4,14 +4,13 @@ import { DateInput, Calendar } from '../index.js';
 
 class DatePicker extends Component {
   render() {
-    const { labelContent } = this.props;
-
+    const { labelContent, inputId } = this.props;
     const _dateInput = new DateInput(this.props).render();
     const _calendar = new Calendar(this.props).render();
 
     return `
       <div class="newTrip__popup__form__input date__form">
-      <label for="{newTripStartDate" class="a11yHidden">${labelContent}</label>
+      <label for="${inputId}" class="a11yHidden">${labelContent}</label>
         ${_dateInput}
         ${_calendar}
       </div>`;

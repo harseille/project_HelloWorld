@@ -13,25 +13,25 @@ class NewTravelLogModal extends Component {
 
     const startDatePickerProps = {
       ...this.props.tripSchedule,
-      calendarId: 'calendarStartDate',
-      activeCalendar: '',
+      inputId: 'newTripStartDate',
+      calendarId: 'startDate',
       inputPlaceholder: '출발일',
       labelContent: '출발 날짜',
       date: startDate,
-      currentDate: new Date(),
       startDate,
       endDate,
+      unableType: 'none',
     };
     const endDatePickerProps = {
       ...this.props.tripSchedule,
-      calendarId: 'calendarEndDate',
-      activeCalendar: '',
+      inputId: 'newTripEndDate',
+      calendarId: 'endDate',
       inputPlaceholder: '도착일',
       labelContent: '도착 날짜',
       date: endDate,
-      currentDate: new Date(),
       startDate,
       endDate,
+      unableType: 'term',
     };
 
     const _datePickerStartDate = new DatePicker(startDatePickerProps).render();
@@ -87,15 +87,27 @@ class NewTravelLogModal extends Component {
 
   closeNewTripScheduleModal(e) {
     console.log('closeNewTripScheduleModal');
-    if (e.target.matches('.modal__header__close__btn'))
+    if (e.target.matches('.modal__header__close__btn') || e.target.matches('.dimmed__layer'))
       store.state = {
         ...store.state,
         isShowModal: '',
+        tripSchedule: {
+          activeStartDateCalendar: false,
+          activeEndDateCalendar: false,
+          activeSelfNumberOfPeopleInputForm: false,
+          activeCalendar: '',
+          currentDate: new Date(),
+          title: '',
+          startDate: null,
+          startDatePickerCurrentDate: new Date(),
+          endDate: null,
+          endDatePickerCurrentDate: new Date(),
+          numberOfPeople: '',
+        },
       };
   }
 
   inputTitle(e) {
-    // const _tripTitle = e.target.value.replace(/^.{0,20}$/);
     store.state = {
       ...store.state,
       tripSchedule: {
