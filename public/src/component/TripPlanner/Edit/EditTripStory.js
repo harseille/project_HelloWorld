@@ -3,7 +3,14 @@ import EditTripStoryItem from './EditTripStoryItem.js';
 
 class EditTripStroy extends Component {
   render() {
-    const $editTripStoryItem = new EditTripStoryItem().render();
+    const {
+      userInfo,
+      tripSchedule: {
+        itinerary: { schedule },
+      },
+    } = this.props;
+
+    const $editTripStoryItem = schedule.map(item => new EditTripStoryItem({ userInfo, item }).render()).join('');
 
     return `
     <div class="trip-story">

@@ -1,19 +1,25 @@
 import Component from '../../../core/Component.js';
-import store from '../../../store/store.js';
 
 class ViewTripArticle extends Component {
   render() {
-    const { props } = this;
-    const { state } = store;
+    const {
+      userInfo: { profilePic, nickname },
+      cell: {
+        location,
+        startTime,
+        article: { picture, content },
+      },
+    } = this.props;
+
     return `
     <article class="trip-article">
     <div class="trip-article__header">
       <div class="trip-article__header__profile">
-        <img src="${state.user.profileImg}" alt="프로필사진" class="profile-img" />
+        <img src="${profilePic}" alt="${nickname} 님의 프로필사진" class="profile-img" />
       </div>
       <div class="trip-article__header__content">
-        <p class="trip-article__header__content__place">${props.place}</p>
-        <p class="trip-article__header__content__time">${props.time}</p>
+        <p class="trip-article__header__content__place">${location}</p>
+        <p class="trip-article__header__content__time">${startTime}</p>
       </div>
       <div class="trip-article__header__badge">
         <button class="edit-btn"></button>
@@ -22,10 +28,10 @@ class ViewTripArticle extends Component {
     </div>
     <div class="trip-article__main">
       <div class="trip-article__main__img-container">
-        <img src="${props.picture}" alt="${props.place} 사진" />
+        <img src="${picture}" alt="${location} 사진" />
       </div>
       <div class="trip-article__main__content">
-        ${props.content}
+        ${content}
       </div>
     </div>
   </article>

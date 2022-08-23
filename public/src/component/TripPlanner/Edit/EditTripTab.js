@@ -3,7 +3,7 @@ import store from '../../../store/store.js';
 
 class EditTripTab extends Component {
   render() {
-    const { selectedTab } = store.state;
+    const { selectedTab } = this.props;
     return `
     <div class="trip-itinerary__tab">
       <div class="trip-itinerary__tab__chart ${

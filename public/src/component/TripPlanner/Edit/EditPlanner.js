@@ -6,10 +6,10 @@ class EditPlanner extends Component {
     <div class="trip-planner">
       <div class="trip-planner__create">
         <div class="trip-planner__create__title">
-          <input class="trip-planner__title" placeholder="어떤 여행인지 간단히 설명해주세요." />
+          <input class="trip-planner__title" placeholder="어떤 여행인지 간단히 설명해주세요." minlength="3" maxlength="50" />
         </div>
         <div class="trip-planner__create__content">
-          <textarea class="trip-planner__content" placeholder="당신의 여행 스토리를 남겨보세요."></textarea>
+          <textarea class="trip-planner__content" placeholder="당신의 여행 스토리를 남겨보세요." minlength="10" maxlength="500"></textarea>
         </div>
         <div class="trip-planner__create__option">
           <div class="trip-date trip-start-date">
@@ -31,6 +31,13 @@ class EditPlanner extends Component {
       </div>
     </div>
     `;
+  }
+
+  addEventListener() {
+    return [
+      { type: 'change', selector: '.trip-planner__title', handler: this.renderSelectedContent },
+      { type: 'change', selector: '.trip-planner__content', handler: this.renderSelectedContent },
+    ];
   }
 }
 

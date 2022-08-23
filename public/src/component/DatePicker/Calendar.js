@@ -254,9 +254,9 @@ class Calendar extends Component {
 
   addEventListener() {
     return [
-      { type: 'click', selector: 'window', component: 'Calendar', handler: this.clickOutOfCalender },
-      { type: 'click', selector: '.calendar__dates__list', handler: this.updateSelectedDate },
-      { type: 'click', selector: '.calendar', handler: this.updateMonth },
+      // { type: 'click', selector: 'window', component: 'Calendar', handler: this.clickOutOfCalender },
+      // { type: 'click', selector: '.calendar__dates__list', handler: this.updateSelectedDate },
+      // { type: 'click', selector: '.calendar', handler: this.updateMonth },
     ];
   }
 }

@@ -3,14 +3,18 @@ import ViewTripArticle from './ViewTripArticle.js';
 
 class ViewTripStoryItem extends Component {
   render() {
-    const { item, idx } = this.props;
-    const $viewTripArticle = item.articles.map(article => new ViewTripArticle(article).render()).join('');
+    const {
+      userInfo,
+      item: { id, date, country, cells },
+    } = this.props;
+
+    const $viewTripArticle = cells.map(cell => new ViewTripArticle({ userInfo, cell }).render()).join('');
 
     return `
-      <li class="trip-story__day-item" id="day${idx + 1}">
+      <li class="trip-story__day-item" id="day${id}">
         <div class="trip-story__day-content">
-          <h3 class="trip-story__day-content__title">Day ${idx + 1}</h3>
-          <p class="trip-story__day-content__summary">${item.date} | ${item.country}</p>
+          <h3 class="trip-story__day-content__title">Day ${id}</h3>
+          <p class="trip-story__day-content__summary">${date} | ${country}</p>
         </div>
         ${$viewTripArticle}
       </li>
