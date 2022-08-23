@@ -17,7 +17,7 @@ class Header extends Component {
         </nav>
       </header>
       <div class="newTravelLogModal">
-      ${newTravelLogModal}
+      
       </div>
     `;
   }
