@@ -16,7 +16,7 @@ class EditTripPlanner extends Component {
     } = store;
 
     const $editPlanCover = new EditPlanCover(state).render();
-    const $editPlanner = new EditPlanner().render();
+    const $editPlanner = new EditPlanner(state).render();
     const $editTripTab = new EditTripTab(state).render();
     const $editPlanMap = new EditPlanMap().render();
     const $timeTable = new TimeTable().render();

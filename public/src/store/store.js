@@ -35,8 +35,7 @@ const store = {
       createdDate: '2022.08.12',
       numberOfPeople: '',
       coverImg: '',
-      content:
-        ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint libero aliquid incidunt. Voluptatemollitia consectetur sint harum eligendi in at blanditiis distinctio temporibus debitis, numquam facilisofficiis doloribus non nisi?',
+      content: '',
       isLiked: false,
       likeCount: 69,
       commentCount: 12,

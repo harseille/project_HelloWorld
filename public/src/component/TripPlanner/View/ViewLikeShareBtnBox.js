@@ -29,7 +29,7 @@ class ViewLikeShareBtnBox extends Component {
       tripSchedule,
       tripSchedule: { isLiked, likeCount },
     } = this.props;
-    console.log(isLiked, likeCount);
+    
     store.state = {
       tripSchedule: {
         ...tripSchedule,
@@ -37,7 +37,6 @@ class ViewLikeShareBtnBox extends Component {
         likeCount: isLiked ? likeCount - 1 : likeCount + 1,
       },
     };
-    console.log(isLiked, likeCount);
   }
 
   addEventListener() {
