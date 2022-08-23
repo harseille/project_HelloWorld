@@ -9,7 +9,7 @@ const store = {
       nickname: 'tester123',
       profilePic: '/assets/images/profile-mock.png',
     },
-    isShowModal: 'newTripScheduleModal',
+    isShowModal: '',
     selectedTab: 'chart',
     newScheduleCell: {
       showDatePicker: false,

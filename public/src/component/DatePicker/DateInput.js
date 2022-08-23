@@ -38,9 +38,9 @@ class DateInput extends Component {
     };
   }
 
-  // addEventListener() {
-  //   return [{ type: 'click', selector: '.newTrip__popup__form__input', handler: this.toggleDatePicker }];
-  // }
+  addEventListener() {
+    return [{ type: 'click', selector: '.newTrip__popup__form__input', handler: this.toggleDatePicker }];
+  }
 }
 
 export default DateInput;

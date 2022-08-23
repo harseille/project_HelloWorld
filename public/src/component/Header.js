@@ -35,7 +35,7 @@ class Header extends Component {
         </nav>
       </header>
       <div class="newTravelLogModal">
-      
+        ${newTravelLogModal}
       </div>
     `;
   }
@@ -58,20 +58,20 @@ class Header extends Component {
     }
   }
 
-  // activeNewTripScheduleModal(e) {
-  //   // tripSchedule 상태 초기화
-  //   // tripSchedule 모달을 보여줘야 한다.
+  activeNewTripScheduleModal(e) {
+    // tripSchedule 상태 초기화
+    // tripSchedule 모달을 보여줘야 한다.
 
-  //   store.state = {
-  //     ...store.state,
-  //     isShowModal: 'newTripScheduleModal',
-  //   };
-  // }
+    store.state = {
+      ...store.state,
+      isShowModal: 'newTripScheduleModal',
+    };
+  }
 
   addEventListener() {
     return [
       { type: 'click', selector: '.nav__list', handler: this.link },
-      // { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },
+      { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },
     ];
   }
 }
