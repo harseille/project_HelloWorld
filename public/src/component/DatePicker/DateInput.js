@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Component from '../../core/Component.js';
 import store from '../../store/store.js';
 
@@ -8,18 +9,11 @@ class DateInput extends Component {
   }
 
   render() {
-    const { isStartDate, startDate, endDate } = this.props;
+    const { inputPlaceholder, inputId, date } = this.props;
 
     return `
-      ${
-        isStartDate
-          ? `<input class="newTripDate datePicker" id="newTripStartDate" type="text" name="newTripStartDate" placeholder="출발일" value="${
-              startDate ? this.formattedDate(startDate) : ''
-            }"readonly />`
-          : `<input class="newTripDate datePicker" id="newTripEndDate" type="text" name="newTripEndDate" placeholder="도착일" value="${
-              endDate ? this.formattedDate(endDate) : ''
-            }"readonly />`
-      }
+    <input class="newTripDate datePicker" id="${inputId}" type="text" name="${inputId}" placeholder="${inputPlaceholder}"
+    ${date ? `value="${this.formattedDate(date)}"` : ''}" readonly />
     `;
   }
 
@@ -28,14 +22,18 @@ class DateInput extends Component {
 
     const { id } = e.target;
 
+    // 출발일이 설정 되었을 때에만 도착일 설정
     if (id === 'newTripEndDate' && store.state.tripSchedule.startDate === null) return;
+
+    const targetDate =
+      e.target?.value.split('-').join(',') === '' ? new Date() : new Date(e.target?.value.split('-').join(','));
 
     store.state = {
       ...store.state,
       tripSchedule: {
         ...store.state.tripSchedule,
-        activeStartDateCalendar: id === 'newTripStartDate',
-        activeEndDateCalendar: id === 'newTripEndDate',
+        activeCalendar: e.target.nextElementSibling.id,
+        currentDate: targetDate,
       },
     };
   }

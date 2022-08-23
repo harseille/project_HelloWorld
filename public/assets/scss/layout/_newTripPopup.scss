@@ -2,6 +2,7 @@
   width: 530px;
 
   &__form {
+    position: relative;
     padding: 25px;
 
     &__input {
@@ -69,9 +70,9 @@
     .self__input__form {
       position: absolute;
       left: 25px;
-      bottom: 95px;
-      width: calc(100% - 50px);
-
+      // bottom: 95px;
+      // width: calc(100% - 50px);
+      width: 480px;
       &.hide {
         display: none;
       }

@@ -5,7 +5,7 @@ import render from '../dom/render.js';
 
 class Header extends Component {
   render() {
-    const newTravelLogModal = new NewTravelLogModal(store.state.tripSchedule).render();
+    const newTravelLogModal = new NewTravelLogModal(store.state).render();
     const isUser = store.state?.session;
     const path = window.location.pathname;
     const navList = [
@@ -47,15 +47,32 @@ class Header extends Component {
     const path = e.target.getAttribute('href');
 
     if (path === '#') {
-      document.querySelector('.newTravelLogModal .dimmed__layer').classList.remove('hide');
+      store.state = {
+        ...store.state,
+        isShowModal: 'newTripScheduleModal',
+      };
+      // document.querySelector('.newTravelLogModal .dimmed__layer').classList.remove('hide');
     } else {
       window.history.pushState({}, path, window.location.origin + path);
       render();
     }
   }
 
+  // activeNewTripScheduleModal(e) {
+  //   // tripSchedule 상태 초기화
+  //   // tripSchedule 모달을 보여줘야 한다.
+
+  //   store.state = {
+  //     ...store.state,
+  //     isShowModal: 'newTripScheduleModal',
+  //   };
+  // }
+
   addEventListener() {
-    return [{ type: 'click', selector: '.nav__list', handler: this.link }];
+    return [
+      { type: 'click', selector: '.nav__list', handler: this.link },
+      // { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },
+    ];
   }
 }
 

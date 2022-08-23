@@ -30,6 +30,23 @@ const store = {
         { id: 4, country: '체코', date: '08.17', day: 'Tue' },
       ],
     },
+    // datePicker: {
+    //   calendarId: '',
+    //   activeCalendar: '',
+    //   inputPlaceholder: '',
+    //   labelContent: '',
+    //   date: '',
+    //   currentDate: '',
+    //   isDatesDisable: false,
+    // },
+    tripSchedule: {
+      activeStartDateCalendar: false,
+      activeEndDateCalendar: false,
+      activeSelfNumberOfPeopleInputForm: false,
+      activeCalendar: '',
+      currentDate: new Date(),
+      title: '',
+      startDate: null,
     isShowModal: 'newTripSchedulePopup',
     tripSchedule: {
       activeStartDateCalendar: false,
