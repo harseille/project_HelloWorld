@@ -16,7 +16,7 @@ class Itinerary extends Component {
         <div class="carousel__days">
         ${
           schedule.map((shed, i) => `
-            <div class="carousel__day-index" data-id=${i}>
+            <div class="carousel__day-index" data-id=${shed.id}>
               <button class="carousel__day-index--add" data-id=${shed.id}>+</button>Day ${i + 1} <span>/</span> ${shed.date} ${shed.day}
               ${currentId === shed.id ? `
                 <ul class="carousel__days__add--list">
@@ -282,7 +282,7 @@ class Itinerary extends Component {
     const { itinerary } = store.state;
     const { schedule } = itinerary;
 
-    if (schedule.length > 5) {
+    if (schedule.length > 31) {
       alert('더이상 생성하지 맙시다');
     }
 
@@ -308,20 +308,20 @@ class Itinerary extends Component {
   }
 
   deleteSchedule(e) {
-    const { itinerary } = store.state;
-    const { schedule } = itinerary;
-    // const id = +e.target.closest('.carousel__day-index').dataset.id;
-    console.log(e.target);
+    const {
+      itinerary,
+      itinerary: { schedule },
+    } = store.state;
+
     if (!e.target.classList.contains('delete--item')) return;
 
-    // if (!e.target.matches('.carousel__days__add--item')) return;
-    // 내가 클릭한 애랑 schedule 요소의 id값과 동일하지 않은 애들만 restItems에 넣어줘
     const restItems = schedule.filter(sched => sched.id !== +e.target.closest('.carousel__day-index').dataset.id);
 
     console.log(restItems);
     store.state = {
       itinerary: {
         ...itinerary,
+        currentId: '',
         schedule: [...restItems],
       },
     };
@@ -352,9 +352,13 @@ class Itinerary extends Component {
     const { schedule } = itinerary;
     const id = +e.target.closest('.carousel__day-index').dataset.id;
 
+    const idx = schedule.findIndex(sched => sched.id === id);
+
     // 앞에 추가 로직
-    const beforeArr = schedule.filter((_, i) => i < id); // id = 0
-    const afterArr = schedule.filter((_, i) => i >= id);
+    const beforeArr = schedule.filter((_, i) => i < idx); // id = 0
+    const afterArr = schedule.filter((_, i) => i >= idx);
+    // const beforeArr = schedule.slice(0, idx); // id = 0
+    // const afterArr = schedule.slice(idx);
 
     console.log(id);
     console.log(beforeArr);
@@ -362,6 +366,7 @@ class Itinerary extends Component {
     store.state = {
       itinerary: {
         ...itinerary,
+        currentId: '',
         schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
       },
     };
@@ -374,8 +379,16 @@ class Itinerary extends Component {
     const id = +e.target.closest('.carousel__day-index').dataset.id;
 
     // 뒤에 추가 로직
-    const beforeArr = schedule.filter((_, i) => i <= id); // id = 0
-    const afterArr = schedule.filter((_, i) => i > id);
+    // const beforeArr = schedule.filter((_, i) => i <= id); // id = 0
+    // const afterArr = schedule.filter((_, i) => i > id);
+
+    // index 찾기
+    let idx;
+    schedule.forEach((sched, i) => {
+      if (sched.id === id) idx = i;
+    });
+    const beforeArr = schedule.filter((_, i) => i <= idx); // id = 0
+    const afterArr = schedule.filter((_, i) => i > idx);
 
     console.log(e.target.closest('.carousel__day-index'));
     console.log(id);
@@ -384,6 +397,7 @@ class Itinerary extends Component {
     store.state = {
       itinerary: {
         ...itinerary,
+        currentId: '',
         schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
       },
     };
