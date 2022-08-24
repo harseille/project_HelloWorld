@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
 

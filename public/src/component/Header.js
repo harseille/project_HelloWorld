@@ -18,19 +18,22 @@ class Header extends Component {
     return `
       <header class="header ${path === '/intro' ? 'intro__header' : ''}">
         <nav class="nav">
-          <h1 class="logo"><img src="./assets/images/HelloWorldLogo.svg" alt="Hello World" /></h1>
+          <h1 class="logo">
+            <a class="logo__link" href="/intro">
+              <img src="./assets/images/HelloWorldLogo.svg" alt="HelloWorld" />
+            </a>
+          </h1>
           <ul class="nav__list">
-           ${navList
-             .map(({ href, content }) => {
-               if (path === '/intro' && href !== '/login') return '';
-               if (!isUser && href === '/mypage') return '';
-               if (isUser && href === '/login') return '';
-
-               return `<li class="nav__item ${path === href ? 'active' : ''}">
+            ${navList
+              .map(({ href, content }) => {
+                if (path === '/intro' && href !== '/login') return '';
+                if (!isUser && href === '/mypage') return '';
+                if (isUser && href === '/login') return '';
+                return `<li class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
             </li>`;
-             })
-             .join('')}
+              })
+              .join('')}
           </ul>
         </nav>
       </header>

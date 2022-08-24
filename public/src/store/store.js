@@ -10,6 +10,7 @@ const store = {
       profilePic: '/assets/images/profile-mock.png',
     },
     isShowModal: '',
+    isFilledAllModalInput: false,
     selectedTab: 'chart',
     newScheduleCell: {
       showDatePicker: false,
@@ -30,21 +31,8 @@ const store = {
         { id: 4, country: '체코', date: '08.17', day: 'Tue' },
       ],
     },
-    // datePicker: {
-    //   calendarId: '',
-    //   activeCalendar: '',
-    //   inputPlaceholder: '',
-    //   labelContent: '',
-    //   date: '',
-    //   currentDate: '',
-    //   isDatesDisable: false,
-    // },
     tripSchedule: {
-      activeStartDateCalendar: false,
-      activeEndDateCalendar: false,
-      startDatePickerCurrentDate: new Date(),
-      endDatePickerCurrentDate: new Date(),
-      activeSelfNumberOfPeopleInputForm: false,
+      isActiveSelfNumberOfPeopleInputForm: false,
       activeCalendar: '',
       currentDate: new Date(),
 
@@ -53,7 +41,7 @@ const store = {
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
-      numberOfPeople: '',
+      numberOfPeople: 1,
       coverImg: '',
       content: '',
       isLiked: false,

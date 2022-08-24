@@ -33,8 +33,11 @@ class Login extends Component {
     const formData = new FormData(e.target);
     console.log(Object.fromEntries([...formData.entries()]));
     try {
+      // eslint-disable-next-line no-undef
       const response = await axios.post('/auth/login', Object.fromEntries([...formData.entries()]));
       if (response.status === 200) {
+        // userInfo 전역에 추가
+
         window.history.pushState({}, '/main', window.location.origin + '/main');
         render();
       }

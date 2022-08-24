@@ -235,7 +235,7 @@ class Calendar extends Component {
       ...store.state,
       tripSchedule: {
         ...store.state.tripSchedule,
-        currentDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1 * delta),
+        currentDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + delta),
         activeStartDateCalendar: true,
       },
     };

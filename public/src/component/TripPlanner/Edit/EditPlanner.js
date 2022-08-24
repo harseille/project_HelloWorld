@@ -2,6 +2,11 @@ import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 
 class EditPlanner extends Component {
+  formattedDate(date) {
+    const format = n => (n < 10 ? '0' + n : n + '');
+    return `${date.getFullYear()}-${format(date.getMonth() + 1)}-${format(date.getDate())}`;
+  }
+
   render() {
     const {
       tripSchedule: { title, content, startDate, endDate, numberOfPeople },
@@ -19,18 +24,18 @@ class EditPlanner extends Component {
           <div class="trip-date trip-start-date">
             <span class="trip-date__span">여행 시작일</span>
             <button class="trip-date__btn">
-              <span>2022-08-14</span>
+              <span>${this.formattedDate(startDate)}</span>
               <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
             </button>
           </div>
           <div class="trip-date trip-end-date">
             <span class="trip-date__span">여행 도착일</span>
             <button class="trip-date__btn">
-              <span>2022-08-18</span>
+              <span>${this.formattedDate(endDate)}</span>
               <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
             </button>
           </div>
-          <div class="trip-people"><input type="number" value="2" max="99" /><span>명</span></div>
+          <div class="trip-people"><input type="number" value="${numberOfPeople}" max="99" /><span>명</span></div>
         </div>
       </div>
     </div>
