@@ -13,7 +13,6 @@ const store = {
     selectedTab: 'chart',
     newScheduleCell: {
       type: '',
-      date: null,
       startTime: '',
       endTime: '',
       location: '',
