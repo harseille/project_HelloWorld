@@ -147,13 +147,21 @@ class NewScheduleCellPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
 
-    const { newScheduleCell } = store.state;
-    console.log(newScheduleCell);
-    // const id = Math.max(...schedule.map(card => card.id), 0) + 1;
-    // store.state = {
-    //   schedule: schedule.map((sche, i) => (i === scheduleId ? [...sche, { id, ...newScheduleCell }] : sche)),
-    //   isShowModal: '',
-    // };
+    const { newScheduleCell, tripSchedule } = store.state;
+    const { scheduleId, info } = newScheduleCell;
+    const {
+      newScheduleCellDate,
+      itinerary: { schedule },
+    } = tripSchedule;
+    const id = Math.max(...schedule.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
+    console.log(id, scheduleId, info, newScheduleCellDate);
+    store.state = {
+      isShowModal: '',
+      tripSchedule: {
+        ...tripSchedule,
+        newScheduleCellDate: null,
+      },
+    };
   }
 
   closeModal(e) {
