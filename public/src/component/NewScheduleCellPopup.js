@@ -1,10 +1,11 @@
 /* eslint-disable import/extensions */
 import Component from '../core/Component.js';
 import store from '../store/store.js';
+import CellDatePicker from './DatePicker/CellDatePicker.js';
 
 // store.state = {
-//   isShowModal: 'newCardPopup',
-//   newCardPopup: {
+//   isShowModal: 'newScheduleCellPopup',
+//   newScheduleCell: {
 //     showDatePicker: false,
 //     type: '',
 //     date: '',
@@ -16,28 +17,22 @@ import store from '../store/store.js';
 //   },
 // };
 
-class NewCardPopup extends Component {
-  // toggleDatePicker(e) {
-  //   if (!e.target.matches('.datePicker')) return;
-  //   const { id } = e.target.closest('.newTrip__popup__form__input').dataset;
-  //   const {
-  //     tripSchedule: { startDate },
-  //   } = store.state;
-
-  //   if (id === 'endDate' && startDate === null) return;
-  //   store.state = {
-  //     ...store.state,
-  //     calendar: {
-  //       ...store.state.calendar,
-  //       activeCalendar: id,
-  //       temporary: store.state.tripSchedule[id] || new Date(),
-  //     },
-  //   };
-  // }
+class NewScheduleCellPopup extends Component {
+  toggleDatePicker(e) {
+    if (!e.target.matches('.datePicker')) return;
+    store.state = {
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        activeCalendar: 'newScheduleCellDate',
+      },
+    };
+  }
 
   render() {
-    // const $datePicker = new DatePicker().render();
-    const { showDatePicker, type, date, startTime, endTime, location, memo, todos } = store.state.newCardPopup;
+    const { newScheduleCell, tripSchedule } = store.state;
+    const { type, startTime, endTime, location, memo, todos } = newScheduleCell;
+    const { activeCalendar, currentDate, startDate, endDate } = tripSchedule;
+
     const typeList = [
       { id: 'type__accomodation', value: 'accomodation', content: '숙박' },
       { id: 'type__sightseeing', value: 'sightseeing', content: '관광' },
@@ -45,21 +40,18 @@ class NewCardPopup extends Component {
       { id: 'type__etc', value: 'etc', content: '기타' },
     ];
 
-    // const { activeCalendar, date: newDate } = store.state.calendar;
-    // const { startDate, endDate } = store.state.tripSchedule;
-
-    // const $datePicker = new DatePicker({
-    //   calendarId: 'startDate',
-    //   activeCalendar,
-    //   inputPlaceholder: '출발일',
-    //   labelContent: '출발 날짜',
-    //   unableType: 'none ',
-    //   isSetEnd: true,
-    //   date: startDate || newDate,
-    //   startDate,
-    //   endDate,
-    //   toggle: this.toggleDatePicker,
-    // }).render();
+    const $datePicker = new CellDatePicker({
+      calendarId: 'newScheduleCellDate',
+      activeCalendar,
+      inputPlaceholder: 'yyyy-mm-dd',
+      labelContent: 'Select a day',
+      unableType: 'term',
+      date: tripSchedule.newScheduleCellDate,
+      currentDate,
+      startDate,
+      endDate,
+      toggle: this.toggleDatePicker,
+    }).render();
 
     const timeList = [
       '00:00 AM',
@@ -109,11 +101,7 @@ class NewCardPopup extends Component {
         <div class="newCard__popup__form__container time">
           <h3 class="newCard__popup__form__title">시간</h3>
           <div class="time__form">
-            <div class="time__form__input">
-              <label for="newCard__date">Select a day</label>
-              <input id="newCard__date" type="text" name="date" placeholder="yyyy-mm-dd" value="${date}" readOnly/>
-              ${showDatePicker? '': ''}
-            </div>
+            ${$datePicker}
             <div class="time__form__select">
               <label for="newCard__startTime">Start with</label>
               <select name="startTime" id="newCard__startTime" value="${startTime}">
@@ -159,10 +147,10 @@ class NewCardPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
 
-    const { schedule, scheduleId, newCardPopup } = store.state;
+    const { schedule, scheduleId, newScheduleCell } = store.state;
     const id = Math.max(...schedule.map(card => card.id), 0) + 1;
     store.state = {
-      schedule: schedule.map((sche, i) => (i === scheduleId ? [...sche, { id, ...newCardPopup }] : sche)),
+      schedule: schedule.map((sche, i) => (i === scheduleId ? [...sche, { id, ...newScheduleCell }] : sche)),
       isShowModal: '',
     };
   }
@@ -173,20 +161,20 @@ class NewCardPopup extends Component {
   }
 
   closeDatepicker() {
-    const { newCardPopup } = store.state;
+    const { newScheduleCell } = store.state;
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         showDatePicker: false,
       },
     };
   }
 
   clickDateInput() {
-    const { newCardPopup } = store.state;
+    const { newScheduleCell } = store.state;
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         showDatePicker: true,
       },
     };
@@ -194,11 +182,11 @@ class NewCardPopup extends Component {
 
   changeTypeNTimeNMemo(e) {
     const { name, value } = e.target;
-    const { newCardPopup } = store.state;
+    const { newScheduleCell } = store.state;
 
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         [name]: value,
         showDatePicker: false,
       },
@@ -223,10 +211,10 @@ class NewCardPopup extends Component {
       if (!place.geometry || !place.geometry.location) {
         window.alert("No details available for input: '" + place.name + "'");
       }
-      const { newCardPopup } = store.state;
+      const { newScheduleCell } = store.state;
       store.state = {
-        newCardPopup: {
-          ...newCardPopup,
+        newScheduleCell: {
+          ...newScheduleCell,
           location: {
             ...place,
             name: e.target.value,
@@ -238,13 +226,13 @@ class NewCardPopup extends Component {
   }
 
   addTodo() {
-    const { newCardPopup } = store.state;
-    const { todos } = newCardPopup;
+    const { newScheduleCell } = store.state;
+    const { todos } = newScheduleCell;
 
     const id = Math.max(...todos.map(todo => todo.id), 0) + 1;
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         todos: [...todos, { id, todo: '', completed: false }],
       },
     };
@@ -253,12 +241,12 @@ class NewCardPopup extends Component {
   deleteTodo(e) {
     if (!e.target.matches('.memo__delete__btn')) return;
     const { id } = e.target.closest('.memo__todo__item').dataset;
-    const { newCardPopup } = store.state;
-    const { todos } = newCardPopup;
+    const { newScheduleCell } = store.state;
+    const { todos } = newScheduleCell;
 
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         todos: todos.filter(todo => todo.id !== +id),
       },
     };
@@ -267,8 +255,8 @@ class NewCardPopup extends Component {
   changeTodo(e) {
     if (!e.target.matches('.todo-input') && !e.target.matches('.todo-chk')) return;
 
-    const { newCardPopup } = store.state;
-    const { todos } = newCardPopup;
+    const { newScheduleCell } = store.state;
+    const { todos } = newScheduleCell;
     const { id } = e.target.closest('.memo__todo__item').dataset;
     const { value } = e.target;
     const changedInfo = todo =>
@@ -276,8 +264,8 @@ class NewCardPopup extends Component {
     const _todos = todos.map(todo => (todo.id === +id ? changedInfo(todo) : todo));
 
     store.state = {
-      newCardPopup: {
-        ...newCardPopup,
+      newScheduleCell: {
+        ...newScheduleCell,
         todos: _todos,
       },
     };
@@ -309,4 +297,4 @@ class NewCardPopup extends Component {
   }
 }
 
-export default NewCardPopup;
+export default NewScheduleCellPopup;

@@ -127,7 +127,6 @@ class Calendar extends Component {
     ];
 
     const DAY_OF_THE_WEEK_NAMES = ['일', '월', '화', '수', '목', '금', '토'];
-
     return `
       <div class="calendar ${activeCalendar === calendarId ? '' : 'hide'}" id=${calendarId}>
         <div class="calendar__header">
@@ -226,16 +225,14 @@ class Calendar extends Component {
       // tripSchedule: { startDatePickerCurrentDate, endDatePickerCurrentDate },
       tripSchedule: { currentDate },
     } = store.state;
-
     // const { id } = e.target.closest('.calendar');
 
     const delta = e.target.matches('.prev-month') ? -1 : 1;
 
     store.state = {
-      ...store.state,
       tripSchedule: {
         ...store.state.tripSchedule,
-        currentDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1 * delta),
+        currentDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + delta),
         activeStartDateCalendar: true,
       },
     };

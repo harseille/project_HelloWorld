@@ -12,9 +12,8 @@ const store = {
     isShowModal: '',
     selectedTab: 'chart',
     newScheduleCell: {
-      showDatePicker: false,
       type: '',
-      date: '',
+      date: null,
       startTime: '',
       endTime: '',
       location: '',
@@ -59,18 +58,6 @@ const store = {
       isLiked: false,
       likeCount: 69,
       commentCount: 12,
-
-      newScheduleCell: {
-        showDatePicker: false,
-        type: '',
-        date: '',
-        startTime: '',
-        endTime: '',
-        location: '',
-        memo: '',
-        todos: [],
-      },
-
       itinerary: {
         currentId: '',
         schedule: [
