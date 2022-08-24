@@ -2,10 +2,13 @@
 import Component from '../core/Component.js';
 import myMap from './myMap.js';
 import store from '../store/store.js';
+import { NewScheduleCellPopup } from './index.js';
 
 class Itinerary extends Component {
   render() {
+    const { isShowModal } = store.state;
     const { currentId, schedule } = store.state.itinerary;
+    const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -275,7 +278,7 @@ class Itinerary extends Component {
       <button class="itinerary-btns--public">다른 사람들에게도 공유하기</button>
       </div>
       
-      </div>;`
+      </div>${$newScheduleCellPopup}`
   }
 
   stopAddDays() {
@@ -403,11 +406,45 @@ class Itinerary extends Component {
     };
   }
 
+  openNewCellModal(e) {
+    const NodeList = [...e.target.closest('.time-table__day-index').children];
+    const idx = NodeList.indexOf(e.target.closest('.time-table__day-index__blank'));
+    const timeNodeList = [...e.target.closest('ul').children];
+    const i = timeNodeList.indexOf(e.target.closest('li'));
+
+    const startTime = i < 10 ? `0${i}:00` : `${i}:00`;
+    const endTime = i + 1 < 10 ? `0${i + 1}:00` : `${i + 1}:00`;
+
+    const {
+      itinerary: { schedule },
+    } = store.state;
+    const { id, date } = schedule[idx];
+    store.state = {
+      isShowModal: 'newScheduleCellPopup',
+      newScheduleCell: {
+        scheduleId: id,
+        info: {
+          type: '',
+          startTime,
+          endTime,
+          location: '',
+          memo: '',
+          todos: [],
+        },
+      },
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        newScheduleCellDate: new Date(),
+      },
+    };
+  }
+
   addEventListener() {
     return [
       { type: 'DOMContentLoaded', selector: 'window', handler: myMap },
       { type: 'click', selector: '.next--btn', handler: this.stopAddDays },
       { type: 'click', selector: '.itinerary__container', handler: this.buttonHandler },
+      { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
       {
         type: 'click',
         selector: '.carousel__days__add--list',
