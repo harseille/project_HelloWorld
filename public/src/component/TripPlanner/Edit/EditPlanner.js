@@ -1,11 +1,46 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
+import DatePicker from '../../DatePicker/DatePicker.js';
 
 class EditPlanner extends Component {
+  // eslint-disable-next-line class-methods-use-this
+  formattedDate(date) {
+    const format = n => (n < 10 ? '0' + n : n + '');
+    return `${date?.getFullYear()}-${format(date?.getMonth() + 1)}-${format(date?.getDate())}`;
+  }
+  // <button class="trip-date__btn">
+  //   <span>${this.formattedDate(startDate)}</span>
+  //   <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
+  // </button>
+
   render() {
     const {
       tripSchedule: { title, content, startDate, endDate, numberOfPeople },
     } = this.props;
+
+    const startDatePickerProps = {
+      ...this.props.tripSchedule,
+      inputId: 'newTripStartDate',
+      calendarId: 'startDate',
+      inputPlaceholder: '출발일',
+      labelContent: '출발 날짜',
+      date: startDate,
+      startDate,
+      endDate,
+      unableType: 'none',
+    };
+    const endDatePickerProps = {
+      ...this.props.tripSchedule,
+      inputId: 'newTripEndDate',
+      calendarId: 'endDate',
+      inputPlaceholder: '도착일',
+      labelContent: '도착 날짜',
+      date: endDate,
+      startDate,
+      endDate,
+      unableType: 'term',
+    };
+
     return `
     <div class="trip-planner">
       <div class="trip-planner__create">
@@ -18,19 +53,13 @@ class EditPlanner extends Component {
         <div class="trip-planner__create__option">
           <div class="trip-date trip-start-date">
             <span class="trip-date__span">여행 시작일</span>
-            <button class="trip-date__btn">
-              <span>2022-08-14</span>
-              <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
-            </button>
+            ${new DatePicker(startDatePickerProps).render()}
           </div>
           <div class="trip-date trip-end-date">
             <span class="trip-date__span">여행 도착일</span>
-            <button class="trip-date__btn">
-              <span>2022-08-18</span>
-              <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
-            </button>
+            ${new DatePicker(endDatePickerProps).render()}
           </div>
-          <div class="trip-people"><input type="number" value="2" max="99" /><span>명</span></div>
+          <div class="trip-people"><input type="number" value="${numberOfPeople}" max="99" /><span>명</span></div>
         </div>
       </div>
     </div>
