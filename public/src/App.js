@@ -1,6 +1,7 @@
 import Component from './core/Component.js';
 import { Header, Footer } from './component/index.js';
 import { routes } from './core/router.js';
+import store from './store/store.js';
 
 class App extends Component {
   constructor() {
@@ -17,6 +18,27 @@ class App extends Component {
       ${$main}
       ${$footer}
     `;
+  }
+
+  async fetchUserInfo(e) {
+    // userInfo
+    console.log('fetchUserInfo');
+    try {
+      const userInfo = await axios.get('/userInfo');
+
+      if (typeof userInfo === 'string') return;
+
+      store.state = {
+        ...store.state,
+        userInfo: userInfo.data,
+      };
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  addEventListener() {
+    return [{ type: 'DOMContentLoaded', selector: 'window', component: 'App', handler: this.fetchUserInfo }];
   }
 }
 

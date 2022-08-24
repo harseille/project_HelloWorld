@@ -3,11 +3,12 @@ import render from '../dom/render.js';
 const store = {
   _store: {
     userInfo: {
-      userid: 21,
-      email: 'test@test.com',
-      name: 'test',
-      nickname: 'tester123',
-      profilePic: '/assets/images/profile-mock.png',
+      userid: null,
+      email: '',
+      name: '',
+      nickname: '',
+      // profilePic: '/assets/images/profile-mock.png',
+      profilePic: '',
     },
     isShowModal: '',
     isFilledAllModalInput: false,

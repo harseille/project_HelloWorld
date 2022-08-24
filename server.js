@@ -13,15 +13,9 @@ const auth = (req, res, next) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
 
   try {
-    const decode = jwt.verify(accessToken, process.env.SECRET_KEY);
-
-    // const { email } = decode;
-    // const userInfo = users.findUser(email);
-    // const { userId, name, nickname, profilePic } = userInfo;
-    // res.send({ userId, email, name, nickname, profilePic });
+    jwt.verify(accessToken, process.env.SECRET_KEY);
 
     if (req.url === '/login' || req.url === '/signup' || req.url === '/intro') {
-      // res.send({email });
       return res.redirect('/main');
     }
 
@@ -38,6 +32,21 @@ const auth = (req, res, next) => {
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
+
+app.get('/userInfo', (req, res) => {
+  try {
+    const accessToken = req.headers.authorization || req.cookies.accessToken;
+
+    const decode = jwt.verify(accessToken, process.env.SECRET_KEY);
+    const { email } = decode;
+    const userInfo = users.findUser(email);
+    const { userId, name, nickname, profilePic } = userInfo;
+
+    res.send({ userId, email, name, nickname, profilePic });
+  } catch (e) {
+    console.error(e);
+  }
+});
 
 app.get('*', auth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

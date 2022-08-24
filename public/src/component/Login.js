@@ -1,5 +1,6 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
+import store from '../store/store.js';
 
 class Login extends Component {
   render() {
@@ -37,6 +38,11 @@ class Login extends Component {
       const response = await axios.post('/auth/login', Object.fromEntries([...formData.entries()]));
       if (response.status === 200) {
         // userInfo 전역에 추가
+        console.log(response.data);
+        store.state = {
+          ...store.state,
+          userInfo: response.data,
+        };
 
         window.history.pushState({}, '/main', window.location.origin + '/main');
         render();

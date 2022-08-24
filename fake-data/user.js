@@ -5,7 +5,7 @@ let users = [
     password: '123456',
     name: 'blah',
     nickname: 'blahblah',
-    profilePic: '/assets/images.users/1/thumbnail.png',
+    profilePic: '/assets/images/users/1/thumbnail.png',
   },
   {
     userId: 2,
@@ -13,7 +13,7 @@ let users = [
     password: '123',
     name: 'wo',
     nickname: 'wowo',
-    profilePic: '/assets/images.users/2/thumbnail.png',
+    profilePic: '/assets/images/users/2/thumbnail.png',
   },
 ];
 
