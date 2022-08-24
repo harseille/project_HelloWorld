@@ -13,9 +13,15 @@
   &__days {
     width: 100%;
     height: 100%;
-    // overflow: hidden; 잠시만 사라져줘어ㅓ
+    // overflow: hidden;
+    .carousel-slides {
+      --currentSlide: 0;
+      --duration: 0;
+      display: flex;
+      transition: transform calc(var(--duration) * 1ms) ease-out;
+      transform: translate3D(calc(var(--currentSlide) * -100%), 0, 0);
+    }
     display: flex;
-    // justify-content: space-between;
     &__add--list {
       // display: none;
       position: absolute;
