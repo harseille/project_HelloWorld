@@ -16,7 +16,7 @@ class Header extends Component {
     ];
 
     return `
-      <header class="header ${path === '/intro' ? 'intro__header' : ''}">
+      <header id="top"  class="header ${path === '/intro' ? 'intro__header' : ''}">
         <nav class="nav">
           <h1 class="logo">
             <a class="logo__link" href="/intro">

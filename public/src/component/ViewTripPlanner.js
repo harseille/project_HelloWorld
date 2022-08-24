@@ -40,8 +40,8 @@ class ViewTripPlanner extends Component {
               </div>
               ${$viewPlanComment}
             </div>
-            </div>
-            ${$viewNavDay}
+          </div>
+          ${$viewNavDay}
         </div>
       </main>
       `;
