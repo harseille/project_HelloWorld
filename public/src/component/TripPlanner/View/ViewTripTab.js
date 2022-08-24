@@ -16,8 +16,46 @@ class ViewTripTab extends Component {
     `;
   }
 
+  observer() {
+    const scrollObserver = new IntersectionObserver(
+      entries => {
+        console.log(entries);
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+      }
+    );
+
+    [...document.querySelector('.trip-story__day-list').children].forEach(item => scrollObserver.observe(item));
+  }
+
   renderSelectedContent(e) {
     store.state = { selectedTab: e.target.dataset.tab };
+
+    // Todo IntersectionObserver 관련 상위 컴포넌트로 올려서 사용 필요
+    if (e.target.dataset.tab === 'story') {
+      const scrollObserver = new IntersectionObserver(
+        entries => {
+          const { target } = entries.find(entry => entry.isIntersecting);
+          [...document.querySelector('.nav-day__list').children].forEach(item =>
+            item.classList.toggle('active', item.dataset.nav === target.id)
+          );
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.5,
+        }
+      );
+
+      [
+        document.querySelector('.header'),
+        ...document.querySelector('.trip-story__day-list').children,
+        document.querySelector('.comment'),
+      ].forEach(item => scrollObserver.observe(item));
+    }
   }
 
   addEventListener() {

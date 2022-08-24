@@ -1,5 +1,5 @@
 import Component from '../core/Component.js';
-import EditPlanCover from './TripPlanner/Edit/EditPlanCover.js';
+import { EditPlanCover } from './TripPlanner/Edit/index.js';
 import EditPlanner from './TripPlanner/Edit/EditPlanner.js';
 import EditTripTab from './TripPlanner/Edit/EditTripTab.js';
 import EditPlanMap from './TripPlanner/Edit/EditPlanMap.js';

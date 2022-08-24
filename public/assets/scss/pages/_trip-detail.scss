@@ -172,24 +172,36 @@
 
       .trip-date {
         display: flex;
+        align-items: center;
 
         &__span {
           margin-right: 10px;
         }
 
-        &__btn {
-          display: flex;
-          align-items: center;
-          background-color: white;
-          color: $gray600;
-          border: none;
-          outline: none;
-          cursor: pointer;
+        // &__btn {
+        //   display: flex;
+        //   align-items: center;
+        //   background-color: white;
+        //   color: $gray600;
+        //   border: none;
+        //   outline: none;
+        //   cursor: pointer;
 
-          &__img {
-            width: 20px;
-            height: 20px;
-            margin-left: 8px;
+        //   &__img {
+        //     width: 20px;
+        //     height: 20px;
+        //     margin-left: 8px;
+        //   }
+        // }
+        .newTrip__popup__form__input.date__form {
+          margin: 0;
+          height: 30px;
+          float: none;
+          width: 160px;
+
+          input {
+            font-size: 14px;
+            color: $gray600;
           }
         }
       }
@@ -202,8 +214,9 @@
 
       .trip-people {
         input {
-          margin-right: 2px;
+          margin-right: 6px;
           width: 24%;
+          height: 30px;
           text-align: center;
           border: 1px solid $gray300;
           border-radius: 4px;
