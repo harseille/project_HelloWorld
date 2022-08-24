@@ -11,9 +11,44 @@ class Itinerary extends Component {
   }
 
   render() {
-    const { isShowModal } = store.state;
-    const { currentId, schedule } = store.state.itinerary;
+    const { isShowModal, isShowNewScheuleCellBtn } = store.state;
+    // const { currentId, startIdx, schedule } = store.state.itinerary;
+    const {
+      scheduleId,
+      info: { startTime },
+    } = store.state.newScheduleCell;
+    const { currentId, startIdx, schedule } = store.state.tripSchedule.itinerary;
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
+    const _schedule = schedule.filter(sch => sch.id >= startIdx && sch.id < startIdx + 3);
+    const timeList = [
+      '00:00',
+      '01:00',
+      '02:00',
+      '03:00',
+      '04:00',
+      '05:00',
+      '06:00',
+      '07:00',
+      '08:00',
+      '09:00',
+      '10:00',
+      '11:00',
+      '12:00',
+      '13:00',
+      '14:00',
+      '15:00',
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+      '20:00',
+      '21:00',
+      '22:00',
+      '23:00',
+      '24:00',
+    ];
+
+    // console.log(_schedule, startIdx, startTime);
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -154,127 +189,29 @@ class Itinerary extends Component {
         </li>
       </ul>
       <div class="time-table__day-index">
-        <ul class="time-table__day-index__blank">
-          <li>
-            <div class="itinerary-card itinerary-card--check">
+      ${_schedule.map(sch => {
+        const {cells} = sch
+        return `
+        <ul class="time-table__day-index__blank" data-id="${sch.id}">
+          ${timeList.map((time, i) => {
+            const cellStartTime = cells.map(cell => cell.startTime);
+            const idx = cellStartTime.indexOf(time)
+            
+            return `<li data-time="${i}">
+              ${idx === -1 ? (isShowNewScheuleCellBtn && scheduleId === sch.id && startTime === time?'<button class="itinerary-card--add">+</button>': ''): `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" draggable="true">
               <div class="itinerary-card-emph"></div>
               <div class="itinerary-card--check__content">
                 <div class="itinerary-card--check__title">
-                  히드로 공항
+                  ${cells[idx].location.name}
                 </div>
                 <div class="itinerary-card--check__memo">
-                  공항 도착해서 유심칩 찾기
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="itinerary-card">
-              <button class="itinerary-card--add">+</button>
-            </div>
-          </li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
-          <li><div class="itinerary-card"></li>
+                  ${cells[idx].memo}
+                </div>`}
+            </li>`
+          }).join('')}
         </ul>
-        <ul class="time-table__day-index__blank">
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-        </ul>
-        <ul class="time-table__day-index__blank">
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-          <li>
-            <span class="time"></span>
-            <span class="line"></span>
-          </li>
-        </ul>
+      `
+      }).join('')}
       </div>
     </div>
 
@@ -441,27 +378,21 @@ class Itinerary extends Component {
     };
   }
 
-  openNewCellModal(e) {
-    const NodeList = [...e.target.closest('.time-table__day-index').children];
-    const idx = NodeList.indexOf(e.target.closest('.time-table__day-index__blank'));
-    const timeNodeList = [...e.target.closest('ul').children];
-    const i = timeNodeList.indexOf(e.target.closest('li'));
+  openNewCellModal() {
+    console.log('openNewCellModal');
+    const { newScheduleCell, itinerary } = store.state;
+    const { scheduleId, info } = newScheduleCell;
+    const { schedule } = itinerary;
+    const { date } = schedule[scheduleId];
 
-    const startTime = i < 10 ? `0${i}:00` : `${i}:00`;
-    const endTime = i + 1 < 10 ? `0${i + 1}:00` : `${i + 1}:00`;
-
-    const {
-      itinerary: { schedule },
-    } = store.state;
-    const { id, date } = schedule[idx];
     store.state = {
+      isShowNewScheuleCellBtn: false,
       isShowModal: 'newScheduleCellPopup',
       newScheduleCell: {
-        scheduleId: id,
+        ...newScheduleCell,
         info: {
+          ...info,
           type: '',
-          startTime,
-          endTime,
           location: '',
           memo: '',
           todos: [],
@@ -469,7 +400,51 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
-        newScheduleCellDate: new Date(),
+        newScheduleCellDate: date,
+      },
+    };
+  }
+
+  mouseoverTimetable(e) {
+    const newScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    const newTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
+
+    const newStartTime = newTime < 10 ? `0${newTime}:00` : `${newTime}:00`;
+    const newEndTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
+    const { newScheduleCell } = store.state;
+    const { scheduleId, startTime } = newScheduleCell;
+    console.log(e.target.closest('.time-table__day-index__blank li'));
+    if (newScheduleId === scheduleId && startTime === newStartTime) return;
+
+    store.state = {
+      isShowNewScheuleCellBtn: true,
+      newScheduleCell: {
+        ...newScheduleCell,
+        scheduleId: newScheduleId,
+        info: {
+          ...newScheduleCell.info,
+          startTime: newStartTime,
+          endTime: newEndTime,
+        },
+      },
+    };
+  }
+
+  mouseoutTimetable(e) {
+    if (!e.target.closest('.time-table__day-index__blank li')) return;
+    console.log('mouseoutTimetable');
+
+    const { newScheduleCell } = store.state;
+    store.state = {
+      isShowNewScheuleCellBtn: false,
+      newScheduleCell: {
+        ...newScheduleCell,
+        scheduleId: '',
+        info: {
+          ...newScheduleCell.info,
+          startTime: '',
+          endTime: '',
+        },
       },
     };
   }
@@ -480,6 +455,8 @@ class Itinerary extends Component {
       { type: 'click', selector: '.next--btn', handler: this.moveBtnsController },
       { type: 'click', selector: '.itinerary__container', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
+      { type: 'mouseover', selector: '.time-table__day-index li', handler: this.mouseoverTimetable },
+      { type: 'mouseout', selector: '.time-table__day-index li', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',

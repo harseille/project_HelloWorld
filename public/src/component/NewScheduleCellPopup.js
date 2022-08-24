@@ -78,6 +78,7 @@ class NewScheduleCellPopup extends Component {
       '21:00',
       '22:00',
       '23:00',
+      '24:00',
     ];
 
     // prettier-ignore
@@ -154,12 +155,22 @@ class NewScheduleCellPopup extends Component {
       itinerary: { schedule },
     } = tripSchedule;
     const id = Math.max(...schedule.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
-    console.log(id, scheduleId, info, newScheduleCellDate);
+    // console.log(id, scheduleId, info, newScheduleCellDate);
     store.state = {
       isShowModal: '',
       tripSchedule: {
         ...tripSchedule,
         newScheduleCellDate: null,
+        itinerary: {
+          ...tripSchedule.itinerary,
+          schedule: schedule.map(sch => {
+            if (sch.date === newScheduleCellDate) {
+              return { ...sch, cells: [...sch.cells, { id, ...info, article: {} }] };
+            }
+
+            return sch;
+          }),
+        },
       },
     };
   }
