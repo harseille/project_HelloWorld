@@ -1,6 +1,20 @@
 let users = [
-  { userId: 1, email: 'testtest@test123.com', password: '123456', name: 'blah', nickname: 'blahblah' },
-  { userId: 2, email: 'aaa', password: '123', name: 'wo', nickname: 'wowo' },
+  {
+    userId: 1,
+    email: 'testtest@test123.com',
+    password: '123456',
+    name: 'blah',
+    nickname: 'blahblah',
+    profilePic: '/assets/images.users/1/thumbnail.png',
+  },
+  {
+    userId: 2,
+    email: 'aaa',
+    password: '123',
+    name: 'wo',
+    nickname: 'wowo',
+    profilePic: '/assets/images.users/2/thumbnail.png',
+  },
 ];
 
 const findUser = email => users.find(user => user.email === email);

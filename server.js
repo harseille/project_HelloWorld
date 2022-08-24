@@ -14,13 +14,20 @@ const auth = (req, res, next) => {
 
   try {
     const decode = jwt.verify(accessToken, process.env.SECRET_KEY);
+
+    // const { email } = decode;
+    // const userInfo = users.findUser(email);
+    // const { userId, name, nickname, profilePic } = userInfo;
+    // res.send({ userId, email, name, nickname, profilePic });
+
     if (req.url === '/login' || req.url === '/signup' || req.url === '/intro') {
+      // res.send({email });
       return res.redirect('/main');
     }
 
     next();
   } catch (e) {
-    if (req.url === 'trip-planner-edit') {
+    if (req.url === '/trip-planner-edit') {
       return res.redirect('/login');
     }
 
@@ -39,19 +46,17 @@ app.get('*', auth, (req, res) => {
 app.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req.body);
-
   const userInfo = users.validateLogin(email, password);
 
   if (userInfo) {
-    const { email, name, nickname } = userInfo;
+    const { userId, email, name, nickname, profilePic } = userInfo;
     const accessToken = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
     res.cookie('accessToken', accessToken, {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true,
     });
-    res.send({ email, name, nickname });
+    res.send({ userId, email, name, nickname, profilePic });
   } else {
     res.status(401).send({ error: '아이디, 비밀번호를 확인해주세요.' });
   }
@@ -65,7 +70,9 @@ app.post('/auth/signup', (req, res) => {
 
   if (!userInfo) {
     // id 생성
-    users.setUsers({ userId: users.generateUserId(), email, nickname, name, password });
+    const newUserId = users.generateUserId();
+
+    users.setUsers({ userId: newUserId, email, nickname, name, password });
 
     const accessToken = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
@@ -74,7 +81,7 @@ app.post('/auth/signup', (req, res) => {
       httpOnly: true,
     });
 
-    res.send({ email, name, nickname });
+    res.send({ userId: newUserId, email, name, nickname });
   } else {
     res.status(401).send({ error: '이미 등록된 이메일 입니다.' });
   }

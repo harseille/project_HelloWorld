@@ -3,8 +3,8 @@ $base-font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'H
   sans-serif;
 
 body {
-  font-family: $base-font;
   font: inherit;
+  font-family: 'Spoqa Han Sans Neo', $base-font, 'sans-serif';
   background-color: #fff;
 }
 

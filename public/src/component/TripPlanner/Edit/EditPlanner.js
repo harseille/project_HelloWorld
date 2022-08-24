@@ -3,15 +3,10 @@ import store from '../../../store/store.js';
 import DatePicker from '../../DatePicker/DatePicker.js';
 
 class EditPlanner extends Component {
-  // eslint-disable-next-line class-methods-use-this
   formattedDate(date) {
     const format = n => (n < 10 ? '0' + n : n + '');
     return `${date?.getFullYear()}-${format(date?.getMonth() + 1)}-${format(date?.getDate())}`;
   }
-  // <button class="trip-date__btn">
-  //   <span>${this.formattedDate(startDate)}</span>
-  //   <img class="trip-date__btn__img" src="/assets/images/calendar-dark.svg" alt="캘린더" />
-  // </button>
 
   render() {
     const {
