@@ -54,7 +54,7 @@ class Itinerary extends Component {
     //   day: startDate.getDay(),
     //   cells: [],
     // };
-
+    console.log(itinerary);
     const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
 
     const timeList = [
@@ -383,12 +383,18 @@ class Itinerary extends Component {
         currentId: '',
       },
       tripSchedule: {
-        itinerary: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat', cells: [] }, ...afterArr],
+        ...store.state.tripSchedule,
+        itinerary: [
+          ...beforeArr,
+          { id: 5, country: '스페인', date: new Date('2022-08-14'), day: 'Sat', cells: [] },
+          ...afterArr,
+        ],
       },
     };
   }
 
   addScheduleAfter(e) {
+    console.log('addScheduleAfter');
     if (!e.target.classList.contains('next--add--item')) return;
     const { itinerary } = store.state.tripSchedule;
     const id = +e.target.closest('.carousel__day-index').dataset.id;
@@ -405,16 +411,21 @@ class Itinerary extends Component {
     const beforeArr = itinerary.filter((_, i) => i <= idx); // id = 0
     const afterArr = itinerary.filter((_, i) => i > idx);
 
-    console.log(e.target.closest('.carousel__day-index'));
-    console.log(id);
-    console.log(beforeArr);
-    console.log(afterArr);
+    // console.log(e.target.closest('.carousel__day-index'));
+    // console.log(id);
+    // console.log(beforeArr);
+    // console.log(afterArr);
     store.state = {
       tripSchedule: {
-        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat', cells: [] }, ...afterArr],
+        ...store.state.tripSchedule,
+        itinerary: [
+          ...beforeArr,
+          { id: 5, country: '스페인', date: new Date('2022-08-14'), day: 'Sat', cells: [] },
+          ...afterArr,
+        ],
       },
       localItinerary: {
-        ...itinerary,
+        ...store.state.localItinerary,
         currentId: '',
       },
     };
@@ -425,6 +436,7 @@ class Itinerary extends Component {
     const { selectedScheduleId, info } = localNewScheduleCell;
     const { itinerary } = tripSchedule;
     const { date } = itinerary.filter(sch => sch.id === selectedScheduleId)[0];
+    console.log(date);
 
     store.state = {
       localCommon: {
