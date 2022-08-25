@@ -174,7 +174,10 @@ class NewTravelLogModal extends Component {
     store.state = {
       ...store.state,
       localCommon: {
+        ...store.state.localCommon,
         isShowModal: '',
+        // Todo 수정 필요 setEvent 중 다른부분 초기화 시키는지 확인
+        selectedTab: 'chart',
       },
     };
 

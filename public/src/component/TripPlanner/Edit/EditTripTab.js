@@ -20,7 +20,7 @@ class EditTripTab extends Component {
   renderSelectedContent(e) {
     const selectedTab = e.target.dataset.tab;
 
-    store.state = { localCommon: { selectedTab } };
+    store.state = { ...store.state.localCommon, localCommon: { selectedTab } };
   }
 
   addEventListener() {
