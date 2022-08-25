@@ -41,7 +41,7 @@ const store = {
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
-      numberOfPeople: 1,
+      numberOfPeople: 0,
       coverImg: '',
       content: '',
       isLiked: false,

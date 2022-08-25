@@ -6,7 +6,7 @@ import render from '../dom/render.js';
 class Header extends Component {
   render() {
     const newTravelLogModal = new NewTravelLogModal(store.state).render();
-    const isLogined = store.state?.userInfo?.userId;
+    const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
     const navList = [
       { href: '/main', content: '여행일지' },

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Component from './core/Component.js';
 import { Header, Footer } from './component/index.js';
 import { routes } from './core/router.js';
@@ -26,14 +27,14 @@ class App extends Component {
     try {
       const userInfo = await axios.get('/userInfo');
 
-      if (typeof userInfo === 'string') return;
+      // if (typeof userInfo === 'string') return;
 
       store.state = {
         ...store.state,
         userInfo: userInfo.data,
       };
     } catch (e) {
-      alert(e);
+      console.error(e);
     }
   }
 
