@@ -168,7 +168,7 @@ class Calendar extends Component {
 
     const {
       localDatePicker: { currentDate, activeCalendar },
-      tripSchedule: { endDate },
+      tripSchedule: { startDate, endDate },
     } = store.state;
 
     const selectedDate = new Date(
@@ -183,7 +183,17 @@ class Calendar extends Component {
 
     const _endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 31);
 
+    let _itinerary = [];
+    let _tripDays = 0;
+
     if (endDate !== null && _endDate < endDate) {
+      _itinerary = Array.from({ length: 31 }, (_, i) => ({
+        id: i + 1,
+        country: '',
+        date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+        cells: [],
+      }));
+
       store.state = {
         ...store.state,
         localDatePicker: {
@@ -194,6 +204,8 @@ class Calendar extends Component {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
           endDate: _endDate,
+          tripDays: 31,
+          itinerary: _itinerary,
         },
       };
     } else if (endDate !== null && activeCalendar === 'startDate' && selectedDate > endDate) {
@@ -207,9 +219,33 @@ class Calendar extends Component {
           ...store.state.tripSchedule,
           startDate: selectedDate,
           endDate: selectedDate,
+          tripDays: 1,
+          itinerary: [
+            {
+              id: 1,
+              country: '',
+              date: selectedDate,
+              cells: [],
+            },
+          ],
         },
       };
     } else {
+      _tripDays = store.state.tripDays;
+
+      if (activeCalendar === 'startDate') {
+        _tripDays = Math.floor((endDate - selectedDate) / 86400000) + 1;
+      } else if (activeCalendar === 'endDate') {
+        _tripDays = Math.floor((selectedDate - startDate) / 86400000) + 1;
+      }
+
+      _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
+        id: i + 1,
+        country: '',
+        date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+        cells: [],
+      }));
+
       store.state = {
         ...store.state,
         localDatePicker: {
@@ -219,6 +255,8 @@ class Calendar extends Component {
         tripSchedule: {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
+          tripDays: _tripDays > 0 ? _tripDays : store.state._tripDays,
+          itinerary: _itinerary > 0 ? _itinerary : store.state.itinerary,
         },
       };
     }
