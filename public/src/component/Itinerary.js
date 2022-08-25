@@ -6,7 +6,7 @@ import { NewScheduleCellPopup } from './index.js';
 
 class Itinerary extends Component {
   render() {
-    const { isShowModal,isShowNewScheuleCellBtn } = store.state;
+    const { isShowModal, isShowNewScheuleCellBtn } = store.state;
     const { currentId, schedule, startId } = store.state.itinerary;
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
     // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
