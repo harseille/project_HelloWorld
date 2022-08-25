@@ -54,7 +54,7 @@ class Itinerary extends Component {
     //   day: startDate.getDay(),
     //   cells: [],
     // };
-    console.log(itinerary);
+
     const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
 
     const timeList = [
@@ -85,6 +85,8 @@ class Itinerary extends Component {
       '24:00',
     ];
 
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -97,8 +99,7 @@ class Itinerary extends Component {
         ${
           _schedule.map(sched =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
-              <button class="carousel__day-index--add" data-id=${sched.id}>+</button>Day ${sched.id} <span>/</span> ${sched.date} ${sched.day}
-              
+              <button class="carousel__day-index--add" data-id=${sched.id}>+</button>Day${sched.id}<span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
               
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
@@ -432,11 +433,10 @@ class Itinerary extends Component {
   }
 
   openNewCellModal() {
-    const { localCommon, localItinerary, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const { localCommon, localItinerary, localNewScheduleCell, tripSchedule } = store.state;
     const { selectedScheduleId, info } = localNewScheduleCell;
     const { itinerary } = tripSchedule;
     const { date } = itinerary.filter(sch => sch.id === selectedScheduleId)[0];
-    console.log(date);
 
     store.state = {
       localCommon: {
@@ -457,8 +457,8 @@ class Itinerary extends Component {
           todos: [],
         },
       },
-      localDatePicker: {
-        ...localDatePicker,
+      tripSchedule: {
+        ...tripSchedule,
         newScheduleCellDate: date,
       },
     };
@@ -614,7 +614,7 @@ class Itinerary extends Component {
 
   addEventListener() {
     return [
-      { type: 'DOMContentLoaded', selector: 'window', handler: myMap },
+      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
