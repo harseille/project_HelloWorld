@@ -5,12 +5,15 @@ import render from '../dom/render.js';
 
 class Header extends Component {
   render() {
-    const newTravelLogModal = new NewTravelLogModal(store.state).render();
-    const mypageModal = new MypageModal(store.state).render();
-
     const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
     const profilePic = store.state?.userInfo.profilePic;
+    const nickname = store.state?.userInfo.nickname;
+    const { isShowModal } = store.state;
+
+    const newTravelLogModal = new NewTravelLogModal(store.state).render();
+    const mypageModal = new MypageModal({ isShowModal, nickname }).render();
+
     const navList = [
       { href: '/main', content: '여행일지', type: 'main' },
       { href: '#', content: '일정 만들기', type: 'newTripScheduleModal' },
@@ -19,7 +22,7 @@ class Header extends Component {
         href: '#',
         content: `<img class="travel-log__item__user-info__profile-pic" src="${
           profilePic || '/assets/images/users/profileDefault.png'
-        }" alt="${store.state?.userInfo.nickname}">${mypageModal}`,
+        }" alt="${nickname}">${mypageModal}`,
         type: 'mypageModal',
       },
     ];

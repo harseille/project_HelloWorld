@@ -21,11 +21,19 @@
   &__list {
     display: flex;
     align-items: center;
+    height: 45px;
+
+    &__profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
   }
+
   &__item {
-    width: 80px;
-    margin-left: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 90px;
 
     &.active {
       font-weight: bold;

@@ -2,7 +2,7 @@ import Component from '../../core/Component.js';
 
 class MypageModal extends Component {
   render() {
-    const { isShowModal } = this.props;
+    const { isShowModal, nickname } = this.props;
 
     const myPageLink = [
       {
@@ -20,6 +20,7 @@ class MypageModal extends Component {
     return `
     <div class="my-page-modal ${isShowModal === 'myPageModal' ? '' : 'hide'}">
       <ul class="my-page-modal__list">
+      <span class="my-page-modal__nickname">${nickname} 님</span>
       ${myPageLink
         .map(
           ({ className, href, content }) => `
