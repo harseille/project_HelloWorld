@@ -1,7 +1,6 @@
-import Component from '../core/Component.js';
-import { DatePicker } from './index.js';
-import store from '../store/store.js';
-import render from '../dom/render.js';
+import Component from '../../core/Component.js';
+import { DatePicker } from '../index.js';
+import store from '../../store/store.js';
 
 class NewTravelLogModal extends Component {
   render() {

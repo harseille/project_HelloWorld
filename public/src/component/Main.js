@@ -92,12 +92,12 @@ class Main extends Component {
           <option value="city">도시</option>
         </select>
         <input class="travel-log__form__input" type="text" placeholder="검색어를 입력해주세요." />
-        <button class="travel-log__form__button--submit">검색</button>
+        <button class="travel-log__form__button--submit" type="button">검색</button>
       </form>
       <div class="travel-log__body">
         <ul class="travel-log__list">
           <!-- * travel-log card component -->
-          <li class="travel-log__item">
+          <li class="travel-log__item" id="1">
             <a href="#" class="travel-log__link">
               <div class="travel-log__item__top-section">
                 <div class="travel-log__item__user-info">
@@ -146,6 +146,24 @@ class Main extends Component {
       </div>
     </section>
   </div>`;
+  }
+
+  async changeToTripScheduleView(e) {
+    // console.log(e.target.closest('li').classList.contains('travel-log__item'));
+    if (!e.target.closest('.travel-log__item')) return;
+    console.log(e.target);
+
+    const { id } = e.target.closest('.travel-log__item');
+
+    console.log(id);
+    console.log('/trip-planner-view/' + id);
+    const response = await axios.get('/trip-planner-view/' + id);
+
+    console.log(response.data);
+  }
+
+  addEventListener() {
+    return [{ type: 'click', selector: '.travel-log__item', handler: this.changeToTripScheduleView }];
   }
 }
 
