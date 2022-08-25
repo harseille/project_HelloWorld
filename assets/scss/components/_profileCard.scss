@@ -1,0 +1,77 @@
+.social {
+  &__item {
+    width: 240px;
+    margin: 48px 0;
+  }
+
+  &__item:hover {
+    opacity: 0.75;
+  }
+  
+  &__link {
+    @include flexbox($direction: column, $justify: center, $items: center);
+  }
+}
+
+.profile {
+  @include flexbox($direction:column, $justify:center, $items:center);
+  margin-top: 96px;
+
+  &--pic {
+    position: relative;
+    &__img{
+      @include boxSize($w: 104px, $h: 104px);
+      border-radius: 50%;
+    }
+
+    &--edit {
+      position: absolute;
+      @include boxSize($w: 104px, $h: 104px);
+      background: url(/assets/images/iconCamera.svg) no-repeat center center / 50%  rgba(0,0,0,0.5);
+      border-radius: 50%;
+    }
+  }
+
+  &--nickname {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+
+  &--id {
+    margin-top: 10px;
+  }
+
+  &--social {
+    @include flexbox($direction:row, $justify:space-between, $items:center);
+    margin-top: 24px;
+    width: fit-content;
+
+    &__follow {
+      @include buttonNone;
+      @include boxSize($w:104px, $h: 40px);
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+
+    &__follow.follow {
+      background: $mainPurple;
+      color: $white;
+    }
+    &__follow.following {
+      color: $gray900;
+      border: 1px solid $gray900;
+    }
+
+    &__button {
+      margin: 0 12px;
+    }
+
+    &__button.selected {
+      border-bottom: 1px solid #252525;
+    }
+
+    span {
+      margin: 0 4px;
+    }
+  }
+}
