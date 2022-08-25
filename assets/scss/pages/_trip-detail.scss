@@ -1,0 +1,648 @@
+.detail-main {
+  position: relative;
+  padding-top: 68px;
+}
+// * cover 사진 및 post 수정 삭제
+.cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  background: $gray600 no-repeat center / cover;
+  // overflow: hidden;
+
+  // &__img {
+  //   position: relative;
+  //   width: 100%;
+  // }
+
+  &__inner {
+    position: absolute;
+    width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+    color: $white;
+  }
+
+  &__content {
+    &__title {
+      font-size: 48px;
+    }
+  }
+  &__buttonbox {
+    position: absolute;
+    top: -130px;
+    right: 30px;
+
+    .add-cover-input {
+      display: none;
+    }
+
+    .add-cover-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+    }
+    .edit-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+    }
+
+    .remove-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+    }
+    .add-cover-btn img {
+      width: 22px;
+      height: 16px;
+    }
+    .edit-btn img {
+      width: 15px;
+      height: 15px;
+    }
+    .remove-btn img {
+      width: 12px;
+      height: 12px;
+      margin: 0 auto;
+    }
+
+    .edit-btn:hover,
+    .remove-btn:hover,
+    .add-cover-btn:hover {
+      background: $mainPurple;
+    }
+  }
+}
+// * 여행 일정 상단
+.trip-planner {
+  position: relative;
+  width: 1280px;
+  margin: 0 auto;
+  transform: translateY(-50px);
+  background-color: $white;
+  padding: 25px;
+  border: 1px solid $gray300;
+  border-radius: 8px;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+
+    &__profile {
+      background-color: $accommodationBlue100;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  &__content {
+    margin-bottom: 32px;
+  }
+
+  &__info {
+    font-size: 14px;
+    color: $gray600;
+  }
+
+  &__badge {
+    position: absolute;
+    display: flex;
+    top: 25px;
+    right: 25px;
+  }
+  &__badge span {
+    display: flex;
+    align-self: center;
+    margin-right: 12px;
+  }
+  &__badge span img {
+    margin-right: 4px;
+  }
+  //* trip-planner 생성 시 화면
+  &__create {
+    &__title {
+      border-bottom: 1px solid $gray300;
+      .trip-planner__title {
+        width: 100%;
+        border: none;
+        outline: none;
+      }
+    }
+
+    &__content {
+      padding: 20px 0;
+      border-bottom: 1px solid $gray300;
+      .trip-planner__content {
+        resize: none;
+        width: 100%;
+        height: 140px;
+        margin: 0;
+        outline: none;
+        border: none;
+      }
+    }
+
+    &__option {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: $gray600;
+
+      .trip-date {
+        display: flex;
+        align-items: center;
+
+        &__span {
+          margin-right: 10px;
+        }
+
+        // &__btn {
+        //   display: flex;
+        //   align-items: center;
+        //   background-color: white;
+        //   color: $gray600;
+        //   border: none;
+        //   outline: none;
+        //   cursor: pointer;
+
+        //   &__img {
+        //     width: 20px;
+        //     height: 20px;
+        //     margin-left: 8px;
+        //   }
+        // }
+        .newTrip__popup__form__input.date__form {
+          margin: 0;
+          height: 30px;
+          float: none;
+          width: 160px;
+
+          input {
+            font-size: 14px;
+            color: $gray600;
+          }
+        }
+      }
+
+      .trip-date::after {
+        display: inline-block;
+        content: '|';
+        margin: 0 16px;
+      }
+
+      .trip-people {
+        input {
+          margin-right: 6px;
+          width: 24%;
+          height: 30px;
+          text-align: center;
+          border: 1px solid $gray300;
+          border-radius: 4px;
+          color: $gray600;
+        }
+      }
+    }
+  }
+}
+
+//* sticky용 레이아웃
+.trip-container {
+  display: flex;
+  justify-content: center;
+
+  .trip-main-container {
+    margin: 0px 30px 0px 20px;
+  }
+
+  //* 왼쪽 좋아요, 공유 버튼
+  .like-share-btnbox {
+    position: sticky;
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    margin-top: 20px;
+    top: 50px;
+    text-align: center;
+
+    .like-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+
+      .like-btn {
+        width: 40px;
+        height: 40px;
+        background-color: $white;
+        border-radius: 50%;
+        border: 1px solid $mainPurple;
+        cursor: pointer;
+      }
+      .like-degit {
+        font-size: 14px;
+        color: $mainPurple;
+      }
+    }
+    .share-btn {
+      width: 40px;
+      height: 40px;
+      background-color: $white;
+      border-radius: 50%;
+      border: 1px solid $gray500;
+      cursor: pointer;
+    }
+  }
+
+  // * 오른쪽 스크롤 네비
+  .nav-day {
+    position: sticky;
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    margin-top: 20px;
+    top: 50px;
+    font-size: 14px;
+    color: $gray300;
+
+    &__item {
+      position: relative;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    &__item:hover {
+      color: $lightPurple;
+    }
+
+    &__item.active {
+      color: $mainPurple;
+      font-weight: 600;
+    }
+
+    &__item::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background-color: $gray300;
+      top: 0;
+      left: -10px;
+    }
+
+    &__item:hover::before {
+      background-color: $lightPurple;
+    }
+
+    &__item.active::before {
+      background-color: $mainPurple;
+    }
+  }
+}
+
+// * 탭 포함 메인 (지도/일정표, 스토리)
+.trip-itinerary {
+  width: 1280px;
+  margin: 0 auto;
+
+  // * 탭(tab)
+  &__tab {
+    display: flex;
+    font-size: 18px;
+
+    &__chart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      height: 55px;
+      border: 1px solid $gray300;
+      border-radius: 8px 0 0 0;
+      color: $gray500;
+    }
+    &__story {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      height: 55px;
+      border: 1px solid $gray300;
+      border-radius: 0 8px 0 0;
+      color: $gray500;
+    }
+
+    .selected {
+      border: 1px solid $mainPurple;
+      color: $mainPurple;
+    }
+  }
+}
+//* 스토리(trip-story)
+.trip-story {
+  width: 1280px;
+  margin: 0 auto;
+
+  &__day-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__day-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 20px 20px;
+  }
+
+  &__day-item::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 1px;
+    height: calc(100% - 10px);
+    top: 10px;
+    left: 0px;
+    background-color: $gray300;
+  }
+
+  &__day-item::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    top: 10px;
+    left: -4px;
+    background-color: $black;
+    border-radius: 50%;
+  }
+
+  &__day-content {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-bottom: 15px;
+
+    &__title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    &__summary {
+      font-size: 14px;
+      color: $gray500;
+    }
+  }
+
+  .trip-article {
+    position: relative;
+    border: 1px solid $gray300;
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    &__header {
+      display: flex;
+      align-items: center;
+
+      &__badge {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        .edit-btn {
+          width: 24px;
+          height: 24px;
+          margin-right: 2px;
+          background: url('/assets/images/post-edit.svg') no-repeat center;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
+        .remove-btn {
+          width: 24px;
+          height: 24px;
+          background: url('/assets/images/cancel.svg') no-repeat center;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
+
+        .add-btn {
+          display: flex;
+          align-items: center;
+          background-color: $white;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          font-size: 18px;
+          font-weight: 600;
+          color: $gray600;
+
+          .add-img {
+            margin-right: 4px;
+          }
+        }
+      }
+
+      &__profile {
+        background-color: $accommodationBlue100;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        margin-right: 10px;
+      }
+
+      &__content {
+        &__place {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        &__time {
+          font-size: 12px;
+          color: $gray500;
+        }
+      }
+    }
+
+    &__main {
+      &__img-container {
+        height: 240px;
+        margin: 30px 28px;
+        background-color: $etcYellow100;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__content {
+        margin: 30px 0;
+      }
+    }
+  }
+}
+
+//* 댓글(comment)
+.comment {
+  // display: none;
+  width: 1280px;
+  margin: 60px auto;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  &__container {
+    border: 1px solid $gray300;
+    border-radius: 8px;
+  }
+
+  &__inputbox {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 2px solid $gray300;
+    height: 81px;
+
+    &__profile {
+      background-color: $accommodationBlue100;
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      margin-right: 10px;
+    }
+
+    &__inputform {
+      width: 90%;
+      margin: 16px;
+    }
+    &__inputform input {
+      width: 100%;
+      height: 40px;
+      outline: none;
+      border: none;
+    }
+    &__button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: $mainPurple url('/assets/images/comment-add.svg') no-repeat center center;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-bottom: 1px solid $gray300;
+
+    &__contentbox {
+      display: flex;
+      align-items: center;
+
+      &__profile {
+        background-color: $accommodationBlue100;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        margin-right: 30px;
+      }
+
+      &__content {
+        &__username {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+        }
+
+        &__add-time {
+          font-size: 12px;
+          color: $gray500;
+          margin-left: 8px;
+        }
+
+        &__main {
+          margin-top: 6px;
+        }
+      }
+    }
+
+    &__buttonbox {
+      .recomment-btn {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        background: url('/assets/images/recomment-add.svg') no-repeat center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+      .remove-btn {
+        width: 24px;
+        height: 24px;
+        background: url('/assets/images/cancel.svg') no-repeat center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+//* 대댓글(recomment) 공통
+
+.comment__inputbox.recomment {
+  border-bottom: 1px solid $gray300;
+
+  .comment__inputbox__button {
+    width: 30px;
+    height: 30px;
+    background-size: 20px;
+  }
+}
+
+.recomment::before {
+  content: '';
+  text-align: center;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  background: url('/assets/images/recomment-arrow.svg') no-repeat center top;
+}
+
+//* 프로필 사진(profile) 공통
+.profile-img {
+  width: 100%;
+  height: 100%;
+}

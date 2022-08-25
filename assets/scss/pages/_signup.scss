@@ -1,0 +1,47 @@
+.signup {
+  .checkbox__form {
+    @include flexbox(row, space-between, center);
+    margin-top: 15px;
+
+    &:nth-last-child(5) {
+      margin-top: 50px;
+    }
+
+    input {
+      display: none;
+    }
+
+    input:checked + label {
+      background-image: url(/assets/images/checkbox_on.svg);
+    }
+
+    label {
+      padding-left: 30px;
+      font-size: 16px;
+      color: $gray900;
+      background: url(/assets/images/checkbox_off.svg) no-repeat;
+      background-position: left center;
+    }
+
+    &__link {
+      font-size: 14px;
+      color: $textBlue;
+    }
+  }
+
+  & > .error {
+    text-align: left;
+    bottom: 190px;
+  }
+
+  &__back__btn {
+    @include buttonNone;
+    width: 100%;
+    height: 54px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: $gray500;
+    color: $white;
+    font-size: 16px;
+  }
+}

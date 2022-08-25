@@ -1,0 +1,43 @@
+.dimmed__layer {
+  @include flexbox(column, center, center);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: $dimmed;
+  z-index: 10;
+
+  .modal {
+    background: $white;
+
+    &__header {
+      position: relative;
+      padding: 17px 0;
+      border-bottom: 1px solid $gray300;
+
+      &__title {
+        font-size: 18px;
+        font-weight: bold;
+        color: $black;
+        text-align: center;
+      }
+
+      &__close__btn {
+        @include buttonNone;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        background: url(/assets/images/close.svg) no-repeat;
+        background-position: center;
+        background-size: 16px;
+      }
+    }
+  }
+}
+
+.dimmed__layer.hide {
+  display: none;
+}
