@@ -6,15 +6,16 @@ import CellDatePicker from './DatePicker/CellDatePicker.js';
 // store.state = {
 //   isShowModal: 'newScheduleCellPopup',
 //   newScheduleCell: {
-//     showDatePicker: false,
 //     type: '',
-//     date: '',
 //     startTime: '',
 //     endTime: '',
 //     location: '',
 //     memo: '',
 //     todos: [],
 //   },
+//  tripShedule: {
+//    newSceduleCellDate: Date 객체,
+// }
 // };
 
 class NewScheduleCellPopup extends Component {
@@ -39,19 +40,6 @@ class NewScheduleCellPopup extends Component {
       { id: 'type__transportation', value: 'transportation', content: '교통' },
       { id: 'type__etc', value: 'etc', content: '기타' },
     ];
-
-    const $datePicker = new CellDatePicker({
-      calendarId: 'newScheduleCellDate',
-      activeCalendar,
-      inputPlaceholder: 'yyyy-mm-dd',
-      labelContent: 'Select a day',
-      unableType: 'term',
-      date: tripSchedule.newScheduleCellDate,
-      currentDate,
-      startDate,
-      endDate,
-      toggle: this.toggleDatePicker,
-    }).render();
 
     const timeList = [
       '00:00',
@@ -80,6 +68,19 @@ class NewScheduleCellPopup extends Component {
       '23:00',
       '24:00',
     ];
+
+    const $datePicker = new CellDatePicker({
+      calendarId: 'newScheduleCellDate',
+      activeCalendar,
+      inputPlaceholder: 'yyyy-mm-dd',
+      labelContent: 'Select a day',
+      unableType: 'term',
+      date: tripSchedule.newScheduleCellDate,
+      currentDate,
+      startDate,
+      endDate,
+      toggle: this.toggleDatePicker,
+    }).render();
 
     // prettier-ignore
     return `<div class="dimmed__layer newCard">
@@ -139,7 +140,7 @@ class NewScheduleCellPopup extends Component {
             </ul>
           </div>
         </div>
-        <button class="newCard__popup__form__submit">완료</button>
+        <button class="newCard__popup__form__submit" ${type !== '' && location !== ''? '': 'disabled'}>완료</button>
       </form>
     </div>
   </div>`;
@@ -148,29 +149,34 @@ class NewScheduleCellPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
 
-    const { newScheduleCell, tripSchedule } = store.state;
-    const { scheduleId, info } = newScheduleCell;
-    const {
-      newScheduleCellDate,
-      itinerary: { schedule },
-    } = tripSchedule;
+    const { newScheduleCell, itinerary, tripSchedule } = store.state;
+    const { schedule } = itinerary;
+    const { newScheduleCellDate } = tripSchedule;
     const id = Math.max(...schedule.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
     // console.log(id, scheduleId, info, newScheduleCellDate);
+    const selectedYear = newScheduleCellDate.getFullYear();
+    const selectedMonth = newScheduleCellDate.getMonth();
+    const selectedDate = newScheduleCellDate.getDate();
+
     store.state = {
       isShowModal: '',
+      itinerary: {
+        ...itinerary,
+        schedule: schedule.map(sch => {
+          const scheYear = sch.date.getFullYear();
+          const scheMonth = sch.date.getMonth();
+          const scheDate = sch.date.getDate();
+
+          if (scheYear === selectedYear && scheMonth === selectedMonth && scheDate === selectedDate) {
+            return { ...sch, cells: [...sch.cells, { id, ...newScheduleCell.info, article: {} }] };
+          }
+
+          return sch;
+        }),
+      },
       tripSchedule: {
         ...tripSchedule,
         newScheduleCellDate: null,
-        itinerary: {
-          ...tripSchedule.itinerary,
-          schedule: schedule.map(sch => {
-            if (sch.date === newScheduleCellDate) {
-              return { ...sch, cells: [...sch.cells, { id, ...info, article: {} }] };
-            }
-
-            return sch;
-          }),
-        },
       },
     };
   }
@@ -213,7 +219,9 @@ class NewScheduleCellPopup extends Component {
 
       if (!place.geometry || !place.geometry.location) {
         window.alert("No details available for input: '" + place.name + "'");
+        return;
       }
+
       const { newScheduleCell } = store.state;
       const { info } = newScheduleCell;
 
