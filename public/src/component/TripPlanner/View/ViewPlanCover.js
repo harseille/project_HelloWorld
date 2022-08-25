@@ -34,7 +34,7 @@ class ViewPlanCover extends Component {
   deleteTripSchedule(e) {
     const deleteConfirm = confirm('일정을 삭제하시겠습니까?');
     if (deleteConfirm) {
-      // Todo 해당 일정 삭제 기능 추가 필요
+      // Todo 해당 일정 state 삭제 기능 추가 필요
       window.history.pushState({}, 'Main', window.location.origin + '/main');
       render();
     }

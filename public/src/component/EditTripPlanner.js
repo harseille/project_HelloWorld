@@ -1,11 +1,13 @@
 import Component from '../core/Component.js';
-import { EditPlanCover } from './TripPlanner/Edit/index.js';
-import EditPlanner from './TripPlanner/Edit/EditPlanner.js';
-import EditTripTab from './TripPlanner/Edit/EditTripTab.js';
-import EditPlanMap from './TripPlanner/Edit/EditPlanMap.js';
-import TimeTable from './TripPlanner/Edit/TimeTable.js';
-import EditTripStroy from './TripPlanner/Edit/EditTripStory.js';
-import EditTripAdd from './TripPlanner/Edit/EditTripAdd.js';
+import {
+  EditPlanCover,
+  EditPlanner,
+  EditTripTab,
+  EditPlanMap,
+  TimeTable,
+  EditTripStroy,
+  EditTripAdd,
+} from './TripPlanner/Edit/index.js';
 import store from '../store/store.js';
 
 class EditTripPlanner extends Component {
