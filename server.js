@@ -3,6 +3,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const users = require('./fake-data/user');
+const tripSchedules = require('./fake-data/tripSchedules');
 
 require('dotenv').config();
 
@@ -50,9 +51,19 @@ app.post('/userInfo', (req, res) => {
 
 app.post('/logout', (req, res) => {
   try {
-    console.log(11111111111111);
     res.clearCookie('accessToken');
     res.redirect('/main');
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+app.get('/trip-planner-view/:tripScheduleId', (req, res) => {
+  try {
+    const { tripScheduleId } = req.params;
+    const responseSchedule = tripSchedules.findTripSchedule(tripScheduleId);
+
+    res.send(responseSchedule);
   } catch (e) {
     console.error(e);
   }

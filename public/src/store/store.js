@@ -41,6 +41,9 @@ const store = {
       activeCalendar: '',
       currentDate: new Date(),
 
+      tripScheduleId: 1,
+      author: '',
+      authorProfilePic: '',
       title: '',
       summary: '베트남ㆍ3일', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
       startDate: null, // * Date 객체

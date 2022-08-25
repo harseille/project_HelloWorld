@@ -20,7 +20,7 @@ class Header extends Component {
       { href: '/login', content: '로그인', type: 'login' },
       {
         href: '#',
-        content: `<img class="travel-log__item__user-info__profile-pic" src="${
+        content: `<img class="nav__list__profile-pic" src="${
           profilePic || '/assets/images/users/profileDefault.png'
         }" alt="${nickname}">${mypageModal}`,
         type: 'mypageModal',
