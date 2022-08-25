@@ -6,6 +6,8 @@ import render from '../dom/render.js';
 class Header extends Component {
   render() {
     const newTravelLogModal = new NewTravelLogModal(store.state).render();
+    const mypageModal = new MypageModal(store.state).render();
+
     const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
     const profilePic = store.state?.userInfo.profilePic;
@@ -17,7 +19,7 @@ class Header extends Component {
         href: '#',
         content: `<img class="travel-log__item__user-info__profile-pic" src="${
           profilePic || '/assets/images/users/profileDefault.png'
-        }" alt="${store.state?.userInfo.nickname}">`,
+        }" alt="${store.state?.userInfo.nickname}">${mypageModal}`,
       },
     ];
 
@@ -31,10 +33,10 @@ class Header extends Component {
           </h1>
           <ul class="nav__list">
             ${navList
-              .map(({ href, content }) => {
+              .map(({ href, content }, idx) => {
                 if (path === '/intro' && href !== '/login') return '';
                 if (isLogined && href === '/login') return '';
-                return `<li class="nav__item ${path === href ? 'active' : ''}">
+                return `<li id="headerNav${idx}" class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
             </li>`;
               })
@@ -44,27 +46,40 @@ class Header extends Component {
       </header>
       <div class="newTravelLogModal">
         ${newTravelLogModal}
-        ${MypageModal}
       </div>
     `;
   }
 
-  link(e) {
-    if (!e.target.matches('.nav__item__link')) return;
+  showMyPageModal(e) {
+    if (e.target.closest('li').id !== 'headerNav3') return;
 
+    store.state = {
+      ...store.state,
+      isShowModal: store.state.isShowModal === 'myPageModal' ? '' : 'myPageModal',
+    };
+  }
+
+  hideMyPageModal(e) {
+    if (store.state.isShowModal !== 'myPageModal') return;
+    console.log(e.target);
+  }
+
+  showNewTripScheduleModal(e) {
+    if (e.target.closest('li').id !== 'headerNav1') return;
+
+    store.state = {
+      ...store.state,
+      isShowModal: 'newTripScheduleModal',
+    };
+  }
+
+  link(e) {
     e.preventDefault();
     const path = e.target.getAttribute('href');
+    if (!path || path === '#') return;
 
-    if (path === '#') {
-      store.state = {
-        ...store.state,
-        isShowModal: 'newTripScheduleModal',
-      };
-      // document.querySelector('.newTravelLogModal .dimmed__layer').classList.remove('hide');
-    } else {
-      window.history.pushState({}, path, window.location.origin + path);
-      render();
-    }
+    window.history.pushState({}, path, window.location.origin + path);
+    render();
   }
 
   activeNewTripScheduleModal(e) {
@@ -79,6 +94,9 @@ class Header extends Component {
 
   addEventListener() {
     return [
+      { type: 'click', selector: '.nav__list', component: 'headerNav3', handler: this.showMyPageModal },
+      { type: 'mouseleave', selector: '.nav__list', component: 'headerNav3', handler: this.MyPageModal },
+      { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
       { type: 'click', selector: '.nav__list', handler: this.link },
       { type: 'click', selector: '.nav__list', handler: this.logout },
       { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },

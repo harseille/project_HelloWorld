@@ -147,18 +147,6 @@ class Main extends Component {
     </section>
   </div>`;
   }
-
-  logout(e) {
-    // e.preventDefault();
-
-    if (!e.target.classList.contains('travel-log__form__button--submit')) return;
-
-    console.log(1111);
-  }
-
-  addEventListener() {
-    return [{ type: 'click', selector: '.travel-log__form__button--submit', handler: this.logout }];
-  }
 }
 
 export default Main;
