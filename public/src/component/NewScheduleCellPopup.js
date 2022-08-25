@@ -160,10 +160,9 @@ class NewScheduleCellPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
     const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
-    const { itinerary } = tripSchedule;
-    const { newScheduleCellDate } = localDatePicker;
+    const { itinerary, newScheduleCellDate } = tripSchedule;
     const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
-    // console.log(id, scheduleId, info, newScheduleCellDate);
+    // console.log(newScheduleCellDate);
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
