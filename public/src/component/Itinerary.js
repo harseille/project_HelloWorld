@@ -431,7 +431,11 @@ class Itinerary extends Component {
   }
 
   mouseoutTimetable(e) {
-    if (!e.target.closest('.time-table__day-index__blank li')) return;
+    if (
+      !e.target.closest('.time-table__day-index__blank li') &&
+      !e.target.closest('.time-table__day-index__blank li button')
+    )
+      return;
     console.log('mouseoutTimetable');
 
     const { newScheduleCell } = store.state;
