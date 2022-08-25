@@ -28,8 +28,8 @@ class ViewLikeShareBtnBox extends Component {
     const {
       tripSchedule,
       tripSchedule: { isLiked, likeCount },
-    } = this.props;
-    
+    } = store.state;
+
     store.state = {
       tripSchedule: {
         ...tripSchedule,

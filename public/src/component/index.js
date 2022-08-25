@@ -14,3 +14,4 @@ export { default as DateInput } from './DatePicker/DateInput.js';
 export { default as Calendar } from './DatePicker/Calendar.js';
 export { default as EditTripPlanner } from './EditTripPlanner.js';
 export { default as ViewTripPlanner } from './ViewTripPlanner.js';
+export { default as Mypage } from './Mypage.js';
