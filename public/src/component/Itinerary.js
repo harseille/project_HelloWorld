@@ -36,7 +36,6 @@ class Itinerary extends Component {
   }
 
   render() {
-
     const { startDate, endDate } = store.state.tripSchedule;
 
     const {
@@ -60,12 +59,6 @@ class Itinerary extends Component {
     // };
 
     const _schedule = schedule.filter((_, i) => i >= startId && i < startId + 3);
-
-
-    const {
-      scheduleId,
-      info: { startTime },
-    } = store.state.newScheduleCell;
 
     const timeList = [
       '00:00',

@@ -2,19 +2,21 @@ import render from '../dom/render.js';
 
 const store = {
   _store: {
-    userInfo: {
-      userid: null,
-      email: '',
-      name: '',
-      nickname: '',
-      // profilePic: '/assets/images/profile-mock.png',
-      profilePic: '',
+    localCommon: {
+      isShowModal: '',
+      selectedTab: 'chart',
     },
-    isShowModal: '',
-    isFilledAllModalInput: false,
-    isShowNewScheuleCellBtn: false,
-    selectedTab: 'chart',
-    newScheduleCell: {
+    localItinerary: {
+      isShowNewScheuleCellBtn: false,
+      currentId: '',
+      startId: 0,
+      schedule: [],
+      dragTarget: '',
+    },
+    localNewTripSchedule: {
+      isFilledAllModalInput: false,
+    },
+    localNewScheduleCell: {
       selectedScheduleId: '',
       info: {
         type: '',
@@ -25,17 +27,19 @@ const store = {
         todos: [],
       },
     },
-
-    ControlItinerary: {
-      currentId: '',
-      startId: 0,
-      schedule: [],
-      dragTarget: '',
-    },
-    tripSchedule: {
+    localDatePicker: {
       isActiveSelfNumberOfPeopleInputForm: false,
       activeCalendar: '',
       currentDate: new Date(),
+    },
+    userInfo: {
+      userid: null,
+      email: '',
+      name: '',
+      nickname: '',
+      profilePic: '',
+    },
+    tripSchedule: {
       tripScheduleId: 1,
       author: '',
       authorProfilePic: '',
@@ -50,77 +54,76 @@ const store = {
       isLiked: false,
       likeCount: 69,
       commentCount: 12,
-      itinerary: {
-        schedule: [
-          {
-            id: 1,
-            country: '영국',
-            date: new Date('2022-08-14'),
-            day: 'Sat',
-            cells: [],
-          },
-          {
-            id: 2,
-            country: '프랑스',
-            date: new Date('2022-08-15'),
-            day: 'Sun',
-            cells: [],
-          },
-          {
-            id: 3,
-            country: '인도',
-            date: new Date('2022-08-16'),
-            day: 'Sun',
-            cells: [
-              {
-                id: 1,
-                type: '',
-                startTime: '오후 08:00',
-                endTime: '오후 10:00',
-                location: '호이안 마을',
-                memo: '',
-                todos: [],
-                article: {
-                  picture:
-                    'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                  content:
-                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
-                },
+      itinerary: [
+        {
+          id: 1,
+          country: '영국',
+          date: new Date('2022-08-14'),
+          day: 'Sat',
+          cells: [],
+        },
+        {
+          id: 2,
+          country: '프랑스',
+          date: new Date('2022-08-15'),
+          day: 'Sun',
+          cells: [],
+        },
+        {
+          id: 3,
+          country: '인도',
+          date: new Date('2022-08-16'),
+          day: 'Sun',
+          cells: [
+            {
+              id: 1,
+              type: '',
+              startTime: '오후 08:00',
+              endTime: '오후 10:00',
+              location: '호이안 마을',
+              memo: '',
+              todos: [],
+              article: {
+                picture:
+                  'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                content:
+                  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
               },
-              {
-                id: 2,
-                type: '',
-                startTime: '오후 10:00',
-                endTime: '오후 12:00',
-                location: '숙소',
-                memo: '',
-                todos: [],
-                article: {
-                  picture:
-                    'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                  content:
-                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
-                },
+            },
+            {
+              id: 2,
+              type: '',
+              startTime: '오후 10:00',
+              endTime: '오후 12:00',
+              location: '숙소',
+              memo: '',
+              todos: [],
+              article: {
+                picture:
+                  'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                content:
+                  'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
               },
-            ],
-          },
-          {
-            id: 4,
-            country: '이태리',
-            date: new Date('2022-08-16'),
-            day: 'Mon',
-            cells: [],
-          },
-          {
-            id: 5,
-            country: '체코',
-            date: new Date('2022-08-17'),
-            day: 'Tue',
-            cells: [],
-          },
-        ],
-      },
+            },
+          ],
+        },
+        {
+          id: 4,
+          country: '이태리',
+          date: new Date('2022-08-16'),
+          day: 'Mon',
+          cells: [],
+        },
+        {
+          id: 5,
+          country: '체코',
+          date: new Date('2022-08-17'),
+          day: 'Tue',
+          cells: [],
+        },
+      ],
     },
+    tripSchedules: [],
   },
   get state() {
     return this._store;
