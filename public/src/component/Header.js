@@ -11,7 +11,7 @@ class Header extends Component {
     const nickname = store.state?.userInfo.nickname;
     const { isShowModal } = store.state;
 
-    const newTravelLogModal = new NewTravelLogModal(store.state).render();
+    const newTravelLogModal = isShowModal === 'newTripScheduleModal' ? new NewTravelLogModal(store.state).render() : '';
     const mypageModal = new MypageModal({ isShowModal, nickname }).render();
 
     const navList = [
@@ -61,6 +61,7 @@ class Header extends Component {
     store.state = {
       ...store.state,
       localCommon: {
+        ...store.state.localCommon,
         isShowModal: store.state.isShowModal === 'myPageModal' ? '' : 'myPageModal',
       },
     };
@@ -77,6 +78,7 @@ class Header extends Component {
     store.state = {
       ...store.state,
       localCommon: {
+        ...store.state.localCommon,
         isShowModal: 'newTripScheduleModal',
       },
     };
@@ -98,6 +100,7 @@ class Header extends Component {
     store.state = {
       ...store.state,
       localCommon: {
+        ...store.state.localCommon,
         isShowModal: 'newTripScheduleModal',
       },
     };

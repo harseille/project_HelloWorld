@@ -44,6 +44,7 @@ const store = {
       authorProfilePic: '',
       title: '',
       summary: '베트남ㆍ3일', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
+      tripDays: 1,
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
