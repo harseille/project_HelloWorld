@@ -7,7 +7,6 @@ class DatePicker extends Component {
     const { labelContent, inputId } = this.props;
     const _dateInput = new DateInput(this.props).render();
     const _calendar = new Calendar(this.props).render();
-    console.log('DatePicker');
 
     return `
       <div class="newTrip__popup__form__input date__form">

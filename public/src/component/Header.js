@@ -9,7 +9,9 @@ class Header extends Component {
     const path = window.location.pathname;
     const profilePic = store.state?.userInfo.profilePic;
     const nickname = store.state?.userInfo.nickname;
-    const { isShowModal } = store.state;
+    const {
+      localCommon: { isShowModal },
+    } = store.state;
 
     const newTravelLogModal = isShowModal === 'newTripScheduleModal' ? new NewTravelLogModal(store.state).render() : '';
     const mypageModal = new MypageModal({ isShowModal, nickname }).render();
@@ -58,52 +60,46 @@ class Header extends Component {
   showMyPageModal(e) {
     if (e.target.closest('li').id !== 'headerNav3') return;
 
+    console.log('showMyPageModal');
+    console.log(store.state);
+
     store.state = {
-      ...store.state,
       localCommon: {
         ...store.state.localCommon,
-        isShowModal: store.state.isShowModal === 'myPageModal' ? '' : 'myPageModal',
+        isShowModal: store.state.localCommon.isShowModal === 'myPageModal' ? '' : 'myPageModal',
       },
     };
+    console.log(store.state);
   }
 
   hideMyPageModal(e) {
     if (store.state.isShowModal !== 'myPageModal') return;
+    console.log('hideMyPageModal');
     console.log(e.target);
   }
 
   showNewTripScheduleModal(e) {
     if (e.target.closest('li').id !== 'headerNav1') return;
 
+    console.log('showNewTripScheduleModal');
+    console.log(store.state);
     store.state = {
-      ...store.state,
       localCommon: {
         ...store.state.localCommon,
         isShowModal: 'newTripScheduleModal',
       },
     };
+    console.log(store.state);
   }
 
   link(e) {
     e.preventDefault();
     const path = e.target.getAttribute('href');
+    console.log('link');
     if (!path || path === '#') return;
 
     window.history.pushState({}, path, window.location.origin + path);
     render();
-  }
-
-  activeNewTripScheduleModal(e) {
-    // tripSchedule 상태 초기화
-    // tripSchedule 모달을 보여줘야 한다.
-
-    store.state = {
-      ...store.state,
-      localCommon: {
-        ...store.state.localCommon,
-        isShowModal: 'newTripScheduleModal',
-      },
-    };
   }
 
   async logout(e) {
@@ -123,9 +119,9 @@ class Header extends Component {
       { type: 'click', selector: '.nav__list', component: 'headerNav3', handler: this.showMyPageModal },
       { type: 'mouseleave', selector: '.nav__list', component: 'headerNav3', handler: this.MyPageModal },
       { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
-      { type: 'click', selector: '.nav__list', handler: this.link },
+      { type: 'click', selector: '.nav__list', component: 'testtest', handler: this.link },
       { type: 'click', selector: '.nav__list', component: 'logout', handler: this.logout },
-      { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },
+      // { type: 'click', selector: '.nav__list', component: 'test', handler: this.activeNewTripScheduleModal },
     ];
   }
 }

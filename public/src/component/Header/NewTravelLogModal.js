@@ -193,6 +193,7 @@ class NewTravelLogModal extends Component {
       ...store.state,
       localCommon: {
         ...store.state.localCommon,
+        isShowModal: '',
         selectedTab: 'chart',
       },
       tripSchedule: {

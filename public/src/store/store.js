@@ -59,21 +59,21 @@ const store = {
           id: 1,
           country: '영국',
           date: new Date('2022-08-14'),
-          day: 'Sat',
+
           cells: [],
         },
         {
           id: 2,
           country: '프랑스',
           date: new Date('2022-08-15'),
-          day: 'Sun',
+
           cells: [],
         },
         {
           id: 3,
           country: '인도',
           date: new Date('2022-08-16'),
-          day: 'Sun',
+
           cells: [
             {
               id: 1,
@@ -111,14 +111,12 @@ const store = {
           id: 4,
           country: '이태리',
           date: new Date('2022-08-16'),
-          day: 'Mon',
           cells: [],
         },
         {
           id: 5,
           country: '체코',
           date: new Date('2022-08-17'),
-          day: 'Tue',
           cells: [],
         },
       ],
