@@ -146,6 +146,7 @@ class NewTravelLogModal extends Component {
     store.state = {
       ...store.state,
       localNewTripSchedule: {
+        ...store.state.localNewTripSchedule,
         isActiveSelfNumberOfPeopleInputForm: isActive,
       },
       tripSchedule: {
