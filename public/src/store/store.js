@@ -3,11 +3,12 @@ import render from '../dom/render.js';
 const store = {
   _store: {
     userInfo: {
-      userid: 21,
-      email: 'test@test.com',
-      name: 'test',
-      nickname: 'tester123',
-      profilePic: '/assets/images/profile-mock.png',
+      userid: null,
+      email: '',
+      name: '',
+      nickname: '',
+      // profilePic: '/assets/images/profile-mock.png',
+      profilePic: '',
     },
     isShowModal: '',
     isFilledAllModalInput: false,
@@ -40,7 +41,7 @@ const store = {
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
-      numberOfPeople: 1,
+      numberOfPeople: 0,
       coverImg: '',
       content: '',
       isLiked: false,
