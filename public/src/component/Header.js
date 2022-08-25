@@ -1,6 +1,6 @@
 import Component from '../core/Component.js';
 import store from '../store/store.js';
-import { NewTravelLogModal } from './index.js';
+import { NewTravelLogModal, MypageModal } from './Header/index.js';
 import render from '../dom/render.js';
 
 class Header extends Component {
@@ -8,12 +8,17 @@ class Header extends Component {
     const newTravelLogModal = new NewTravelLogModal(store.state).render();
     const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
+    const profilePic = store.state?.userInfo.profilePic;
     const navList = [
       { href: '/main', content: '여행일지' },
       { href: '#', content: '일정 만들기' },
       { href: '/login', content: '로그인' },
-      { href: '#', content: '로그아웃' },
-      { href: '/mypage', content: '마이페이지' },
+      {
+        href: '#',
+        content: `<img class="travel-log__item__user-info__profile-pic" src="${
+          profilePic || '/assets/images/users/profileDefault.png'
+        }" alt="${store.state?.userInfo.nickname}">`,
+      },
     ];
 
     return `
@@ -28,7 +33,6 @@ class Header extends Component {
             ${navList
               .map(({ href, content }) => {
                 if (path === '/intro' && href !== '/login') return '';
-                if (!isLogined && href === '/mypage') return '';
                 if (isLogined && href === '/login') return '';
                 return `<li class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
@@ -40,6 +44,7 @@ class Header extends Component {
       </header>
       <div class="newTravelLogModal">
         ${newTravelLogModal}
+        ${MypageModal}
       </div>
     `;
   }
