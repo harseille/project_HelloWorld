@@ -92,7 +92,7 @@ class Main extends Component {
           <option value="city">도시</option>
         </select>
         <input class="travel-log__form__input" type="text" placeholder="검색어를 입력해주세요." />
-        <button class="travel-log__form__button--submit">검색</button>
+        <button class="travel-log__form__button--submit" type="button">검색</button>
       </form>
       <div class="travel-log__body">
         <ul class="travel-log__list">
@@ -146,6 +146,18 @@ class Main extends Component {
       </div>
     </section>
   </div>`;
+  }
+
+  logout(e) {
+    // e.preventDefault();
+
+    if (!e.target.classList.contains('travel-log__form__button--submit')) return;
+
+    console.log(1111);
+  }
+
+  addEventListener() {
+    return [{ type: 'click', selector: '.travel-log__form__button--submit', handler: this.logout }];
   }
 }
 

@@ -12,6 +12,7 @@ class Header extends Component {
       { href: '/main', content: '여행일지' },
       { href: '#', content: '일정 만들기' },
       { href: '/login', content: '로그인' },
+      { href: '#', content: '로그아웃' },
       { href: '/mypage', content: '마이페이지' },
     ];
 
@@ -74,6 +75,7 @@ class Header extends Component {
   addEventListener() {
     return [
       { type: 'click', selector: '.nav__list', handler: this.link },
+      { type: 'click', selector: '.nav__list', handler: this.logout },
       { type: 'click', selector: '.nav__list', handler: this.activeNewTripScheduleModal },
     ];
   }
