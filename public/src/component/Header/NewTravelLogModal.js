@@ -98,6 +98,7 @@ class NewTravelLogModal extends Component {
       store.state = {
         ...store.state,
         localCommon: {
+          ...store.state.localCommon,
           isShowModal: '',
         },
         localNewTripSchedule: {
@@ -109,6 +110,7 @@ class NewTravelLogModal extends Component {
           currentDate: new Date(),
         },
         tripSchedule: {
+          ...store.state.tripSchedule,
           title: '',
           startDate: null,
           endDate: null,
@@ -162,6 +164,7 @@ class NewTravelLogModal extends Component {
     store.state = {
       ...store.state,
       localNewTripSchedule: {
+        ...store.state.localNewTripSchedule,
         isFilledAllModalInput: isAllFilled,
       },
     };
@@ -170,16 +173,32 @@ class NewTravelLogModal extends Component {
   submitTripSchedule(e) {
     console.log('submitTripSchedule');
 
-    // 팝업 close
+    const {
+      tripSchedule: { startDate, endDate },
+    } = store.state;
+
+    const _tripDays = Math.floor((endDate - startDate) / 86400000) + 1;
+
+    const _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
+      id: i + 1,
+      country: '',
+      date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+      cells: [],
+    }));
     store.state = {
       ...store.state,
       localCommon: {
-        isShowModal: '',
+        ...store.state.localCommon,
+        selectedTab: 'chart',
+      },
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        tripDays: _tripDays,
+        itinerary: _itinerary,
       },
     };
 
     // edit 페이지로 이동
-    console.log(window.location.origin + '/trip-planner-edit');
     window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit');
     render();
   }
