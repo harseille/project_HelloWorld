@@ -89,6 +89,7 @@
 .trip-planner {
   position: relative;
   width: 1280px;
+  z-index: 1;
   margin: 0 auto;
   transform: translateY(-50px);
   background-color: $white;

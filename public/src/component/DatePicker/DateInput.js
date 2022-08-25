@@ -9,7 +9,7 @@ class DateInput extends Component {
   }
 
   render() {
-    const { inputPlaceholder, inputId, date, startDate } = this.props;
+    const { inputPlaceholder, inputId, date } = this.props;
 
     return `
     <input class="newTripDate datePicker" id="${inputId}" type="text" name="${inputId}" placeholder="${inputPlaceholder}" 
@@ -30,8 +30,8 @@ class DateInput extends Component {
 
     store.state = {
       ...store.state,
-      tripSchedule: {
-        ...store.state.tripSchedule,
+      ...store.state.tripSchedule,
+      localDatePicker: {
         activeCalendar: e.target.nextElementSibling.id,
         currentDate: targetDate,
       },

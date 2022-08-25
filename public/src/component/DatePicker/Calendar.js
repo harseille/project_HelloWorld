@@ -147,15 +147,14 @@ class Calendar extends Component {
 
   clickOutOfCalender(e) {
     const {
-      tripSchedule,
-      tripSchedule: { activeCalendar },
+      localDatePicker: { activeCalendar },
     } = store.state;
 
     if (activeCalendar && !(e.target.matches('.datePicker') || e.target.closest('.calendar') !== null)) {
       store.state = {
         ...store.state,
-        tripSchedule: {
-          ...tripSchedule,
+        localDatePicker: {
+          ...store.state.localDatePicker,
           activeCalendar: '',
         },
       };
@@ -167,7 +166,8 @@ class Calendar extends Component {
     if (!e.target.classList.contains('calendar__dates__item') || e.target.classList.contains('unable')) return;
 
     const {
-      tripSchedule: { endDate, currentDate, activeCalendar },
+      localDatePicker: { currentDate, activeCalendar },
+      tripSchedule: { endDate },
     } = store.state;
 
     const selectedDate = new Date(
@@ -185,33 +185,39 @@ class Calendar extends Component {
     if (endDate !== null && _endDate < endDate) {
       store.state = {
         ...store.state,
+        localDatePicker: {
+          currentDate: selectedDate,
+          activeCalendar: '',
+        },
         tripSchedule: {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
-          currentDate: selectedDate,
-          activeCalendar: '',
           endDate: _endDate,
         },
       };
     } else if (endDate !== null && activeCalendar === 'startDate' && selectedDate > endDate) {
       store.state = {
         ...store.state,
+        localDatePicker: {
+          currentDate: selectedDate,
+          activeCalendar: '',
+        },
         tripSchedule: {
           ...store.state.tripSchedule,
           startDate: selectedDate,
           endDate: selectedDate,
-          currentDate: selectedDate,
-          activeCalendar: '',
         },
       };
     } else {
       store.state = {
         ...store.state,
+        localDatePicker: {
+          currentDate: selectedDate,
+          activeCalendar: '',
+        },
         tripSchedule: {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
-          currentDate: selectedDate,
-          activeCalendar: '',
         },
       };
     }
@@ -223,17 +229,17 @@ class Calendar extends Component {
 
     const {
       // tripSchedule: { startDatePickerCurrentDate, endDatePickerCurrentDate },
-      tripSchedule: { currentDate },
+      localDatePicker: { currentDate },
     } = store.state;
     // const { id } = e.target.closest('.calendar');
 
     const delta = e.target.matches('.prev-month') ? -1 : 1;
 
     store.state = {
-      tripSchedule: {
-        ...store.state.tripSchedule,
+      ...store.state,
+      localDatePicker: {
+        ...store.state.localDatePicker,
         currentDate: new Date(currentDate.getFullYear(), currentDate.getMonth() + delta),
-        activeStartDateCalendar: true,
       },
     };
   }

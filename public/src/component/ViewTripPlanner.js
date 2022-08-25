@@ -16,18 +16,22 @@ import store from '../store/store.js';
 class ViewTripPlanner extends Component {
   render() {
     const {
-      state,
-      state: { selectedTab },
+      state: {
+        userInfo,
+        tripSchedule,
+        localCommon: { selectedTab },
+        tripSchedule: { coverImg, title, summary, itinerary, isLiked, likeCount },
+      },
     } = store;
-    const $viewPlanCover = new ViewPlanCover(state).render();
-    const $viewPlanner = new ViewPlanner(state).render();
-    const $viewTripTab = new ViewTripTab(state).render();
-    const $viewPlanMap = new ViewPlanMap(state).render();
-    const $viewTripStory = new ViewTripStory(state).render();
+    const $viewPlanCover = new ViewPlanCover({ coverImg, title, summary }).render();
+    const $viewPlanner = new ViewPlanner({ userInfo, tripSchedule }).render();
+    const $viewTripTab = new ViewTripTab({ selectedTab }).render();
+    // const $viewPlanMap = new ViewPlanMap(state).render();
+    const $viewTripStory = new ViewTripStory({ userInfo, itinerary }).render();
     const $timeTable = new TimeTable().render();
     const $viewPlanComment = new ViewPlanComment().render();
-    const $viewLikeShareBtnBox = new ViewLikeShareBtnBox(state).render();
-    const $viewNavDay = new ViewNavDay(state).render();
+    const $viewLikeShareBtnBox = new ViewLikeShareBtnBox({ isLiked, likeCount }).render();
+    const $viewNavDay = new ViewNavDay({ itinerary }).render();
 
     return `
       <main class="detail-main">
@@ -39,7 +43,7 @@ class ViewTripPlanner extends Component {
             <div class="trip-itinerary">
               ${$viewTripTab}
               <div class="itinerary__container">
-                ${selectedTab === 'chart' ? $viewPlanMap + $timeTable : $viewTripStory}
+                ${selectedTab === 'chart' ? $timeTable : $viewTripStory}
               </div>
               ${$viewPlanComment}
             </div>

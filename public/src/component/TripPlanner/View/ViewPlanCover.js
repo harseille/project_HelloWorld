@@ -3,9 +3,7 @@ import render from '../../../dom/render.js';
 
 class ViewPlanCover extends Component {
   render() {
-    const {
-      tripSchedule: { coverImg, title, summary },
-    } = this.props;
+    const { coverImg, title, summary } = this.props;
 
     return `
     <div class="cover" style="background-image: url('${coverImg}')">

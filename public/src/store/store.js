@@ -10,11 +10,11 @@ const store = {
       isShowNewScheuleCellBtn: false,
       currentId: '',
       startId: 0,
-      schedule: [],
       dragTarget: '',
     },
     localNewTripSchedule: {
       isFilledAllModalInput: false,
+      isActiveSelfNumberOfPeopleInputForm: false,
     },
     localNewScheduleCell: {
       selectedScheduleId: '',
@@ -28,7 +28,6 @@ const store = {
       },
     },
     localDatePicker: {
-      isActiveSelfNumberOfPeopleInputForm: false,
       activeCalendar: '',
       currentDate: new Date(),
     },

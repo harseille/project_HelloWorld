@@ -12,9 +12,9 @@ class CellDatePicker extends Component {
     const $calendar = new Calendar(this.props).render();
     return `<div class="time__form__input">
     <label for="${calendarId}">${labelContent}</label>
-    <input id="${calendarId}" class="datePicker" type="text" name="date" placeholder="${inputPlaceholder}" value="${this.formattedDate(
-      date
-    )}" readOnly/>
+    <input id="${calendarId}" class="datePicker" type="text" name="date" placeholder="${inputPlaceholder}" value="${
+      date === null ? '' : this.formattedDate(date)
+    }" readOnly/>
     ${$calendar}
   </div>`;
   }

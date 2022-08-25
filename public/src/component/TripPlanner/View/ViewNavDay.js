@@ -2,13 +2,9 @@ import Component from '../../../core/Component.js';
 
 class ViewNavDay extends Component {
   render() {
-    const {
-      tripSchedule: {
-        itinerary: { schedule },
-      },
-    } = this.props;
+    const { itinerary } = this.props;
 
-    const DayDOMString = schedule
+    const DayDOMString = itinerary
       .map(({ id }) => `<li class="nav-day__item" data-nav="day${id}"><a href="#day${id}">Day ${id}</a></li>`)
       .join('');
 

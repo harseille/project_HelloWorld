@@ -4,8 +4,12 @@ import store from '../store/store.js';
 import CellDatePicker from './DatePicker/CellDatePicker.js';
 
 // store.state = {
-//   isShowModal: 'newScheduleCellPopup',
-//   newScheduleCell: {
+//  localCommon: {
+//   isShowModal: '',
+// },
+// localNewScheduleCell: {
+//   selectedScheduleId: '',
+//   info: {
 //     type: '',
 //     startTime: '',
 //     endTime: '',
@@ -13,6 +17,10 @@ import CellDatePicker from './DatePicker/CellDatePicker.js';
 //     memo: '',
 //     todos: [],
 //   },
+// },
+// localDatePicker: {
+//   activeCalendar: '',
+// },
 //  tripShedule: {
 //    newSceduleCellDate: Date 객체,
 // }
@@ -22,17 +30,18 @@ class NewScheduleCellPopup extends Component {
   toggleDatePicker(e) {
     if (!e.target.matches('.datePicker')) return;
     store.state = {
-      tripSchedule: {
-        ...store.state.tripSchedule,
+      localDatePicker: {
+        ...store.state.localDatePicker,
         activeCalendar: 'newScheduleCellDate',
       },
     };
   }
 
   render() {
-    const { newScheduleCell, tripSchedule } = store.state;
-    const { type, startTime, endTime, location, memo, todos } = newScheduleCell.info;
-    const { activeCalendar, currentDate, startDate, endDate } = tripSchedule;
+    const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const { type, startTime, endTime, location, memo, todos } = localNewScheduleCell.info;
+    const { activeCalendar, currentDate, newScheduleCellDate } = localDatePicker;
+    const { startDate, endDate } = tripSchedule;
 
     const typeList = [
       { id: 'type__accomodation', value: 'accomodation', content: '숙박' },
@@ -75,7 +84,7 @@ class NewScheduleCellPopup extends Component {
       inputPlaceholder: 'yyyy-mm-dd',
       labelContent: 'Select a day',
       unableType: 'term',
-      date: tripSchedule.newScheduleCellDate,
+      date: newScheduleCellDate,
       currentDate,
       startDate,
       endDate,
@@ -149,10 +158,10 @@ class NewScheduleCellPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
 
-    const { newScheduleCell, itinerary, tripSchedule } = store.state;
-    const { schedule } = itinerary;
-    const { newScheduleCellDate } = tripSchedule;
-    const id = Math.max(...schedule.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
+    const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const { itinerary } = tripSchedule;
+    const { newScheduleCellDate } = localDatePicker;
+    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
     // console.log(id, scheduleId, info, newScheduleCellDate);
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
@@ -160,22 +169,22 @@ class NewScheduleCellPopup extends Component {
 
     store.state = {
       isShowModal: '',
-      itinerary: {
-        ...itinerary,
-        schedule: schedule.map(sch => {
+      tripSchedule: {
+        ...tripSchedule,
+        itinerary: itinerary.map(sch => {
           const scheYear = sch.date.getFullYear();
           const scheMonth = sch.date.getMonth();
           const scheDate = sch.date.getDate();
 
           if (scheYear === selectedYear && scheMonth === selectedMonth && scheDate === selectedDate) {
-            return { ...sch, cells: [...sch.cells, { id, ...newScheduleCell.info, article: {} }] };
+            return { ...sch, cells: [...sch.cells, { id, ...localNewScheduleCell.info, article: {} }] };
           }
 
           return sch;
         }),
       },
-      tripSchedule: {
-        ...tripSchedule,
+      localDatePicker: {
+        ...localDatePicker,
         newScheduleCellDate: null,
       },
     };
@@ -183,17 +192,23 @@ class NewScheduleCellPopup extends Component {
 
   closeModal(e) {
     if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
-    store.state = { isShowModal: '' };
+    const { common } = store.state;
+    store.state = {
+      common: {
+        ...common,
+        isShowModal: '',
+      },
+    };
   }
 
   changeTypeNTimeNMemo(e) {
     const { name, value } = e.target;
-    const { newScheduleCell } = store.state;
-    const { info } = newScheduleCell;
+    const { localNewScheduleCell } = store.state;
+    const { info } = localNewScheduleCell;
 
     store.state = {
-      newScheduleCell: {
-        ...newScheduleCell,
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
         info: {
           ...info,
           [name]: value,
@@ -222,12 +237,12 @@ class NewScheduleCellPopup extends Component {
         return;
       }
 
-      const { newScheduleCell } = store.state;
-      const { info } = newScheduleCell;
+      const { localNewScheduleCell } = store.state;
+      const { info } = localNewScheduleCell;
 
       store.state = {
-        newScheduleCell: {
-          ...newScheduleCell,
+        localNewScheduleCell: {
+          ...localNewScheduleCell,
           info: {
             ...info,
             location: {
@@ -242,14 +257,14 @@ class NewScheduleCellPopup extends Component {
   }
 
   addTodo() {
-    const { newScheduleCell } = store.state;
-    const { info } = newScheduleCell;
+    const { localNewScheduleCell } = store.state;
+    const { info } = localNewScheduleCell;
     const { todos } = info;
 
     const id = Math.max(...todos.map(todo => todo.id), 0) + 1;
     store.state = {
-      newScheduleCell: {
-        ...newScheduleCell,
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
         info: {
           ...info,
           todos: [...todos, { id, todo: '', completed: false }],
@@ -261,13 +276,13 @@ class NewScheduleCellPopup extends Component {
   deleteTodo(e) {
     if (!e.target.matches('.memo__delete__btn')) return;
     const { id } = e.target.closest('.memo__todo__item').dataset;
-    const { newScheduleCell } = store.state;
-    const { info } = newScheduleCell;
+    const { localNewScheduleCell } = store.state;
+    const { info } = localNewScheduleCell;
     const { todos } = info;
 
     store.state = {
-      newScheduleCell: {
-        ...newScheduleCell,
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
         info: {
           ...info,
           todos: todos.filter(todo => todo.id !== +id),
@@ -279,8 +294,8 @@ class NewScheduleCellPopup extends Component {
   changeTodo(e) {
     if (!e.target.matches('.todo-input') && !e.target.matches('.todo-chk')) return;
 
-    const { newScheduleCell } = store.state;
-    const { info } = newScheduleCell;
+    const { localNewScheduleCell } = store.state;
+    const { info } = localNewScheduleCell;
     const { todos } = info;
     const { id } = e.target.closest('.memo__todo__item').dataset;
     const { value } = e.target;
@@ -289,8 +304,8 @@ class NewScheduleCellPopup extends Component {
     const _todos = todos.map(todo => (todo.id === +id ? changedInfo(todo) : todo));
 
     store.state = {
-      newScheduleCell: {
-        ...newScheduleCell,
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
         info: {
           ...info,
           todos: _todos,

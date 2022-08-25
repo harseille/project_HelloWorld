@@ -5,17 +5,19 @@ import DatePicker from '../../DatePicker/DatePicker.js';
 class EditPlanner extends Component {
   formattedDate(date) {
     const format = n => (n < 10 ? '0' + n : n + '');
-    return `${date?.getFullYear()}-${format(date?.getMonth() + 1)}-${format(date?.getDate())}`;
+    return `${date?.getFullYear()}-${format(date.getMonth() + 1)}-${format(date.getDate())}`;
   }
 
   render() {
-    console.log(store.state);
     const {
+      tripSchedule,
+      localDatePicker,
       tripSchedule: { title, content, startDate, endDate, numberOfPeople },
     } = this.props;
 
     const startDatePickerProps = {
-      ...this.props.tripSchedule,
+      ...tripSchedule,
+      ...localDatePicker,
       inputId: 'newTripStartDate',
       calendarId: 'startDate',
       inputPlaceholder: '출발일',
@@ -26,7 +28,8 @@ class EditPlanner extends Component {
       unableType: 'none',
     };
     const endDatePickerProps = {
-      ...this.props.tripSchedule,
+      ...tripSchedule,
+      ...localDatePicker,
       inputId: 'newTripEndDate',
       calendarId: 'endDate',
       inputPlaceholder: '도착일',

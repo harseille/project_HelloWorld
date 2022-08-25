@@ -60,7 +60,9 @@ class Header extends Component {
 
     store.state = {
       ...store.state,
-      isShowModal: store.state.isShowModal === 'myPageModal' ? '' : 'myPageModal',
+      localCommon: {
+        isShowModal: store.state.isShowModal === 'myPageModal' ? '' : 'myPageModal',
+      },
     };
   }
 
@@ -74,7 +76,9 @@ class Header extends Component {
 
     store.state = {
       ...store.state,
-      isShowModal: 'newTripScheduleModal',
+      localCommon: {
+        isShowModal: 'newTripScheduleModal',
+      },
     };
   }
 
@@ -93,7 +97,9 @@ class Header extends Component {
 
     store.state = {
       ...store.state,
-      isShowModal: 'newTripScheduleModal',
+      localCommon: {
+        isShowModal: 'newTripScheduleModal',
+      },
     };
   }
 

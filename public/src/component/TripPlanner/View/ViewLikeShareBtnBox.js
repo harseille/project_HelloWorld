@@ -2,14 +2,8 @@ import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 
 class ViewLikeShareBtnBox extends Component {
-  get isLI() {
-    return this.props.likeCount;
-  }
-
   render() {
-    const {
-      tripSchedule: { isLiked, likeCount },
-    } = this.props;
+    const { isLiked, likeCount } = this.props;
 
     return `
     <div class="like-share-btnbox">

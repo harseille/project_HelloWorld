@@ -1,17 +1,19 @@
 import Component from '../../core/Component.js';
 import { DatePicker } from '../index.js';
 import store from '../../store/store.js';
+import render from '../../dom/render.js';
 
 class NewTravelLogModal extends Component {
   render() {
     const {
-      isShowModal,
-      isFilledAllModalInput,
-      tripSchedule: { isSelfNumberOfPeopleInputFormActive, title, numberOfPeople, startDate, endDate },
+      localCommon: { isShowModal },
+      localNewTripSchedule: { isFilledAllModalInput, isActiveSelfNumberOfPeopleInputForm },
+      tripSchedule: { title, numberOfPeople, startDate, endDate },
     } = this.props;
 
     const startDatePickerProps = {
       ...this.props.tripSchedule,
+      ...this.props.localDatePicker,
       inputId: 'newTripStartDate',
       calendarId: 'startDate',
       inputPlaceholder: '출발일',
@@ -23,6 +25,7 @@ class NewTravelLogModal extends Component {
     };
     const endDatePickerProps = {
       ...this.props.tripSchedule,
+      ...this.props.localDatePicker,
       inputId: 'newTripEndDate',
       calendarId: 'endDate',
       inputPlaceholder: '도착일',
@@ -75,7 +78,7 @@ class NewTravelLogModal extends Component {
             </select>
           </div>
           <div class="newTrip__popup__form__input self__input__form ${
-            isSelfNumberOfPeopleInputFormActive ? '' : 'hide'
+            isActiveSelfNumberOfPeopleInputForm ? '' : 'hide'
           }">
             <label for="inputPeople" class="a11yHidden">인원 수 입력</label>
             <input class="inputPeople" id="inputPeople" type="number" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
@@ -94,19 +97,21 @@ class NewTravelLogModal extends Component {
     if (e.target.matches('.modal__header__close__btn') || e.target.matches('.dimmed__layer'))
       store.state = {
         ...store.state,
-        isShowModal: '',
-        isFilledAllModalInput: false,
-        tripSchedule: {
-          activeStartDateCalendar: false,
-          activeEndDateCalendar: false,
+        localCommon: {
+          isShowModal: '',
+        },
+        localNewTripSchedule: {
+          isFilledAllModalInput: false,
           isActiveSelfNumberOfPeopleInputForm: false,
+        },
+        localDatePicker: {
           activeCalendar: '',
           currentDate: new Date(),
+        },
+        tripSchedule: {
           title: '',
           startDate: null,
-          startDatePickerCurrentDate: new Date(),
           endDate: null,
-          endDatePickerCurrentDate: new Date(),
           numberOfPeople: '',
         },
       };
@@ -138,9 +143,11 @@ class NewTravelLogModal extends Component {
 
     store.state = {
       ...store.state,
+      localNewTripSchedule: {
+        isActiveSelfNumberOfPeopleInputForm: isActive,
+      },
       tripSchedule: {
         ...store.state.tripSchedule,
-        isSelfNumberOfPeopleInputFormActive: isActive,
         numberOfPeople: +e.target.value,
       },
     };
@@ -154,7 +161,9 @@ class NewTravelLogModal extends Component {
     const isAllFilled = !!(title && startDate && endDate);
     store.state = {
       ...store.state,
-      isFilledAllModalInput: isAllFilled,
+      localNewTripSchedule: {
+        isFilledAllModalInput: isAllFilled,
+      },
     };
   }
 
@@ -164,7 +173,9 @@ class NewTravelLogModal extends Component {
     // 팝업 close
     store.state = {
       ...store.state,
-      isShowModal: '',
+      localCommon: {
+        isShowModal: '',
+      },
     };
 
     // edit 페이지로 이동

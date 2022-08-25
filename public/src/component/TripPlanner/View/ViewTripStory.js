@@ -3,14 +3,9 @@ import ViewTripStoryItem from './ViewTripStoryItem.js';
 
 class ViewTripStory extends Component {
   render() {
-    const {
-      userInfo,
-      tripSchedule: {
-        itinerary: { schedule },
-      },
-    } = this.props;
+    const { userInfo, itinerary } = this.props;
 
-    const $viewTripStoryItem = schedule.map(item => new ViewTripStoryItem({ userInfo, item }).render()).join('');
+    const $viewTripStoryItem = itinerary.map(item => new ViewTripStoryItem({ userInfo, item }).render()).join('');
 
     return `
     <div class="trip-story">

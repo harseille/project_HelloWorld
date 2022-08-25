@@ -4,6 +4,7 @@ import store from '../../../store/store.js';
 class EditTripTab extends Component {
   render() {
     const { selectedTab } = this.props;
+
     return `
     <div class="trip-itinerary__tab">
       <div class="trip-itinerary__tab__chart ${
@@ -19,7 +20,7 @@ class EditTripTab extends Component {
   renderSelectedContent(e) {
     const selectedTab = e.target.dataset.tab;
 
-    store.state = { selectedTab };
+    store.state = { localCommon: { selectedTab } };
   }
 
   addEventListener() {
