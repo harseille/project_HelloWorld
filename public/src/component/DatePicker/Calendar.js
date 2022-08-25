@@ -151,6 +151,7 @@ class Calendar extends Component {
     } = store.state;
 
     if (activeCalendar && !(e.target.matches('.datePicker') || e.target.closest('.calendar') !== null)) {
+      console.log('clickOutOfCalender');
       store.state = {
         ...store.state,
         localDatePicker: {

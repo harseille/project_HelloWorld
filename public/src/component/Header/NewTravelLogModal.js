@@ -94,7 +94,10 @@ class NewTravelLogModal extends Component {
 
   closeNewTripScheduleModal(e) {
     console.log('closeNewTripScheduleModal');
-    if (e.target.matches('.modal__header__close__btn') || e.target.matches('.dimmed__layer'))
+    if (
+      e.target.matches('.newTravelLogModal .modal__header__close__btn') ||
+      e.target.matches('.newTravelLogModal .dimmed__layer')
+    )
       store.state = {
         ...store.state,
         localCommon: {

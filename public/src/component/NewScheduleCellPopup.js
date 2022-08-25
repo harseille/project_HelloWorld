@@ -157,8 +157,7 @@ class NewScheduleCellPopup extends Component {
 
   addSchedule(e) {
     e.preventDefault();
-
-    const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { itinerary } = tripSchedule;
     const { newScheduleCellDate } = localDatePicker;
     const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
@@ -168,7 +167,7 @@ class NewScheduleCellPopup extends Component {
     const selectedDate = newScheduleCellDate.getDate();
 
     store.state = {
-      isShowModal: '',
+      localCommon: { ...localCommon, isShowModal: '' },
       tripSchedule: {
         ...tripSchedule,
         itinerary: itinerary.map(sch => {
