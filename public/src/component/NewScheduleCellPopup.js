@@ -29,6 +29,7 @@ import CellDatePicker from './DatePicker/CellDatePicker.js';
 class NewScheduleCellPopup extends Component {
   toggleDatePicker(e) {
     if (!e.target.matches('.datePicker')) return;
+    console.log(store.state.localDatePicker);
     store.state = {
       localDatePicker: {
         ...store.state.localDatePicker,
@@ -40,7 +41,8 @@ class NewScheduleCellPopup extends Component {
   render() {
     const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { type, startTime, endTime, location, memo, todos } = localNewScheduleCell.info;
-    const { activeCalendar, currentDate, newScheduleCellDate } = localDatePicker;
+    const { newScheduleCellDate } = tripSchedule;
+    const { activeCalendar, currentDate } = localDatePicker;
     const { startDate, endDate } = tripSchedule;
 
     const typeList = [
@@ -158,10 +160,9 @@ class NewScheduleCellPopup extends Component {
   addSchedule(e) {
     e.preventDefault();
     const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
-    const { itinerary } = tripSchedule;
-    const { newScheduleCellDate } = localDatePicker;
+    const { itinerary, newScheduleCellDate } = tripSchedule;
     const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
-    // console.log(id, scheduleId, info, newScheduleCellDate);
+    // console.log(newScheduleCellDate);
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
@@ -191,12 +192,9 @@ class NewScheduleCellPopup extends Component {
 
   closeModal(e) {
     if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
-    const { common } = store.state;
+    const { localCommon } = store.state;
     store.state = {
-      common: {
-        ...common,
-        isShowModal: '',
-      },
+      localCommon: { ...localCommon, isShowModal: '' },
     };
   }
 

@@ -23,15 +23,13 @@ class App extends Component {
 
   async fetchUserInfo(e) {
     // userInfo
-    console.log('fetchUserInfo');
     try {
       const userInfo = await axios.post('/userInfo', {});
 
       // if (typeof userInfo === 'string') return;
 
       store.state = {
-        ...store.state,
-        userInfo: userInfo.data,
+        userInfo: { ...store.state.userInfo, ...userInfo.data },
       };
     } catch (e) {
       console.error(e);

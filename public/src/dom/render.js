@@ -18,6 +18,9 @@ const render = (RootComponent, $container) => {
   const domString = rootComponentInstance.render();
   $virtual.innerHTML = domString;
 
+  console.log($virtual);
+  console.log(domString);
+
   applyDiff($root, $virtual);
   bindEventHandler($root);
 };

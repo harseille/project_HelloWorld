@@ -44,6 +44,7 @@ const store = {
       authorProfilePic: '',
       title: '',
       summary: '베트남ㆍ3일', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
+      tripDays: 1,
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
@@ -58,21 +59,21 @@ const store = {
           id: 1,
           country: '영국',
           date: new Date('2022-08-14'),
-          day: 'Sat',
+
           cells: [],
         },
         {
           id: 2,
           country: '프랑스',
           date: new Date('2022-08-15'),
-          day: 'Sun',
+
           cells: [],
         },
         {
           id: 3,
           country: '인도',
           date: new Date('2022-08-16'),
-          day: 'Sun',
+
           cells: [
             {
               id: 1,
@@ -110,14 +111,12 @@ const store = {
           id: 4,
           country: '이태리',
           date: new Date('2022-08-16'),
-          day: 'Mon',
           cells: [],
         },
         {
           id: 5,
           country: '체코',
           date: new Date('2022-08-17'),
-          day: 'Tue',
           cells: [],
         },
       ],
