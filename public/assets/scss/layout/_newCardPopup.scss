@@ -61,11 +61,11 @@
         }
 
         &:nth-child(2) input:checked + label {
-          background: $etcYellow100;
+          background: $sighitGreen100;
         }
 
         &:nth-child(3) input:checked + label {
-          background: $sighitGreen100;
+          background: $transferRed100;
         }
 
         &:last-child input:checked + label {
@@ -243,6 +243,10 @@
       background: $mainPurple;
       font-size: 16px;
       color: $white;
+
+      &:disabled {
+        background-color: $gray500;
+      }
     }
   }
 }
