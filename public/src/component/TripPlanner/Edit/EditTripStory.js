@@ -6,7 +6,7 @@ class EditTripStroy extends Component {
     const {
       userInfo,
       tripSchedule: {
-        itinerary: { schedule },
+        secondItinerary: { schedule },
       },
     } = this.props;
 

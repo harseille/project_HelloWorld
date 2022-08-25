@@ -9,6 +9,7 @@ class EditPlanner extends Component {
   }
 
   render() {
+    console.log(store.state);
     const {
       tripSchedule: { title, content, startDate, endDate, numberOfPeople },
     } = this.props;
