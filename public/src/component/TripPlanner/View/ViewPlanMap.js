@@ -1,4 +1,5 @@
 import Component from '../../../core/Component.js';
+import store from '../../../store/store.js';
 
 class ViewPlanMap extends Component {
   render() {

@@ -5,15 +5,13 @@ import store from '../store/store.js';
 import { NewScheduleCellPopup } from './index.js';
 
 class Itinerary extends Component {
-  constructor() {
-    super();
-    this.isMoving = false;
-  }
-
   render() {
     const { isShowModal } = store.state;
-    const { currentId, schedule } = store.state.itinerary;
+    const { currentId, schedule, startId } = store.state.itinerary;
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
+    // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
+    const _schedule = schedule.filter((_, i) => i >= startId && i < startId + 3);
+    console.log(_schedule, startId);
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -24,17 +22,19 @@ class Itinerary extends Component {
       <div class="carousel">
         <div class="carousel__days">
         ${
-          schedule.map((shed, i) => `
-            <div class="carousel__day-index" data-id=${shed.id}>
-              <button class="carousel__day-index--add" data-id=${shed.id}>+</button>Day ${i + 1} <span>/</span> ${shed.date} ${shed.day}
-              ${currentId === shed.id ? `
+          _schedule.map(sched =>  `
+            <div class="carousel__day-index" data-id=${sched.id}>
+              <button class="carousel__day-index--add" data-id=${sched.id}>+</button>Day ${sched.id} <span>/</span> ${sched.date} ${sched.day}
+              
+              
+              ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
                   <li class="carousel__days__add--item next--add--item">뒤에 추가</li>
                   <li class="carousel__days__add--item delete--item">일정 삭제</li>
                 </ul>
               `: ''}
-              <div>${shed.country}</div>
+              <div>${sched.country}</div>
             </div>`).join('')
         }
       </div>
@@ -287,50 +287,45 @@ class Itinerary extends Component {
       </div>${$newScheduleCellPopup}`
   }
 
-  moveSlide(direction) {
-    let currentSlide = 0;
-
-    const DURATION = 300;
-    const $carouselSlides = document.querySelector('.carousel__days');
-
-    direction === 'next' ? (currentSlide += 1) : (currentSlide -= 1);
-    this.isMoving = true;
-    $carouselSlides.style.setProperty('--duration', DURATION);
-    $carouselSlides.style.setProperty('--currentSlide', currentSlide);
-  }
-
-  moveBtnsController(e) {
+  nextBtnsController() {
     const { itinerary } = store.state;
     const { schedule } = itinerary;
-
-    const $carouselSlides = document.querySelector('.carousel__days');
-    let currentSlide = 0;
-    // eslint-disable-next-line prefer-const
-
-    if (this.isMoving) return;
-    if (e.target.matches('.next--btn')) this.moveSlide('next');
-    if (e.target.matches('.prev--btn')) this.moveSlide('prev');
-
-    // if (!e.target.classList.contains('carousel-control') || isMoving) return;
-    // 오른쪽 버튼일 때 => 이동(item이 있으면 보여주고, 없으면 추가) , 31일 이상이면 alert창
-
-    // $carouselSlides.style.setProperty('--duration', currentSlide);
-    // $carouselSlides.style.setProperty('--currentSlide', currentSlide);
+    let { startId } = itinerary;
 
     if (schedule.length > 31) {
       alert('더이상 생성하지 맙시다');
       return;
     }
+    if (schedule.length === startId + 3) {
+      alert('마지막 입니다.');
+      return;
+    }
+    startId += 1;
 
     store.state = {
       itinerary: {
         ...itinerary,
-        schedule: [...schedule, { id: 5, country: '독일', date: '08.18', day: 'Wed' }],
+        startId,
       },
     };
+  }
 
-    // 왼쪽 버튼일 때 => 이동(왼쪽으로 -1씩) 1이하일 때 삭제시 초기화,
-    currentSlide += 1;
+  prevBtnsController() {
+    const { itinerary } = store.state;
+    let { startId } = itinerary;
+
+    if (startId === 0) {
+      alert('첫번째 여행일 입니다');
+      return;
+    }
+    startId -= 1;
+
+    store.state = {
+      itinerary: {
+        ...itinerary,
+        startId,
+      },
+    };
   }
 
   buttonHandler(e) {
@@ -363,18 +358,6 @@ class Itinerary extends Component {
         schedule: restItems,
       },
     };
-
-    // if (schedule.length < 1) {
-    //   store.state = {
-    //     itinerary: {
-    //       ...store.state.itinerary,
-    //       // schedule: [],
-    //       // currentId: '',
-    //       currentId: '',
-    //     },
-    //   };
-    // }
-    // console.log(store.state.itinerary.currentId);
   }
 
   addScheduleBefore(e) {
@@ -477,8 +460,9 @@ class Itinerary extends Component {
   addEventListener() {
     return [
       { type: 'DOMContentLoaded', selector: 'window', handler: myMap },
-      { type: 'click', selector: '.next--btn', handler: this.moveBtnsController },
-      { type: 'click', selector: '.itinerary__container', handler: this.buttonHandler },
+      { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
+      { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
+      { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
       {
         type: 'click',

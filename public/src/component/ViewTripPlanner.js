@@ -19,7 +19,7 @@ class ViewTripPlanner extends Component {
     const $viewPlanCover = new ViewPlanCover(state).render();
     const $viewPlanner = new ViewPlanner(state).render();
     const $viewTripTab = new ViewTripTab(state).render();
-    const $viewPlanMap = new ViewPlanMap().render();
+    const $viewPlanMap = new ViewPlanMap(state).render();
     const $viewTripStory = new ViewTripStory(state).render();
     const $timeTable = new TimeTable().render();
     const $viewPlanComment = new ViewPlanComment().render();
