@@ -1,7 +1,8 @@
 .time-table {
+  --time--height: 62;
   position: relative;
   width: 100%;
-  height: 1274px;
+  height: calc(var(--time--height) * 24px + 25px);
   padding-left: 65px;
 
   &__times {
@@ -24,7 +25,7 @@
 
   &__time-item {
     position: relative;
-    height: 52px;
+    height: calc(var(--time--height) * 1px);
     color: $gray500;
     width: 100%;
 
@@ -47,50 +48,117 @@
       padding-top: 25px;
       left: 65px;
       border-left: 1px solid $gray300;
-      background: none;
 
       li {
+        position: relative;
         width: 100%;
-        height: 52px;
+        height: calc(var(--time--height) * 1px);
       }
 
       .itinerary-card {
         padding-top: 10px;
-        height: 52px;
+        height: 100%;
+
         &--check {
           position: relative;
-          margin-top: 25px;
-          width: 405px;
+          width: 100%;
           align-items: center;
-          background: $etcYellow100;
+
           &__title {
-            color: #f6c257;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
             padding-left: 25px;
+            padding-right: 10px;
             font-weight: 700;
           }
+
           &__memo {
             padding-left: 25px;
-            color: #f6c257;
             font-size: 14px;
           }
         }
+
         &--add {
           position: absolute;
-          left: 20%;
+          top: 10px;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
           border: 1px solid $mainPurple;
           border-radius: 50%;
           background: $mainPurple;
           color: $white;
           cursor: pointer;
         }
+
+        &-emph {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 10px;
+          height: 100%;
+        }
       }
-      .itinerary-card-emph {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 10px;
-        height: 52px;
-        background: #f6c257;
+
+      .accomodation {
+        &.itinerary-card {
+          background: $accommodationBlue100;
+
+          .itinerary-card--check__title,
+          .itinerary-card--check__memo {
+            color: $accommodationBlue500;
+          }
+
+          .itinerary-card-emph {
+            background: $accommodationBlue500;
+          }
+        }
+      }
+
+      .transportation {
+        &.itinerary-card {
+          background: $transferRed100;
+
+          .itinerary-card--check__title,
+          .itinerary-card--check__memo {
+            color: $transferRed500;
+          }
+
+          .itinerary-card-emph {
+            background: $transferRed500;
+          }
+        }
+      }
+
+      .sightseeing {
+        &.itinerary-card {
+          background: $sighitGreen100;
+
+          .itinerary-card--check__title,
+          .itinerary-card--check__memo {
+            color: $sighitGreen500;
+          }
+
+          .itinerary-card-emph {
+            background: $sighitGreen500;
+          }
+        }
+      }
+
+      .etc {
+        &.itinerary-card {
+          background: $etcYellow100;
+
+          .itinerary-card--check__title,
+          .itinerary-card--check__memo {
+            color: $etcYellow500;
+          }
+
+          .itinerary-card-emph {
+            background: $etcYellow500;
+          }
+        }
       }
     }
   }

@@ -30,6 +30,7 @@ const router = [
 // 현재 path에 따라 어떤 domString 할지 보여주도록 하는 함수
 const routes = () => {
   const location = window.location.pathname;
+
   const [same] = Object.values(router.find(route => route[location]));
 
   if (same) {

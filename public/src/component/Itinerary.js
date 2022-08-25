@@ -36,9 +36,19 @@ class Itinerary extends Component {
   }
 
   render() {
-    const { isShowModal, isShowNewScheuleCellBtn } = store.state;
-    const { currentId, schedule, startId } = store.state.itinerary;
+
     const { startDate, endDate } = store.state.tripSchedule;
+
+    const {
+      isShowModal,
+      isShowNewScheuleCellBtn,
+      itinerary,
+      newScheduleCell: {
+        selectedScheduleId,
+        info: { startTime },
+      },
+    } = store.state;
+    const { currentId, startId, schedule } = itinerary;
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
     // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
     // const setSchedule = {
@@ -50,6 +60,7 @@ class Itinerary extends Component {
     // };
 
     const _schedule = schedule.filter((_, i) => i >= startId && i < startId + 3);
+
 
     const {
       scheduleId,
@@ -227,28 +238,44 @@ class Itinerary extends Component {
       </ul>
       <div class="time-table__day-index">
       ${_schedule.map(sch => {
-        const {cells} = sch
+        const { cells, id } = sch
+        const cellStartTimeArr = cells.map(cell => cell.startTime);
+
         return `
-        <ul class="time-table__day-index__blank" data-id="${sch.id}">
-          ${timeList.map((time, i) => {
-            const cellStartTime = cells.map(cell => cell.startTime);
-            const idx = cellStartTime.indexOf(time)
+        <ul class="time-table__day-index__blank" data-id="${id}">
+          ${timeList.map((timeItem, i) => {
+            const idx = cellStartTimeArr.indexOf(timeItem)
+            const isInculdedCell = idx !== -1
+            let timeGap = 62;
+
+            // 시간에 따른 item 높이 조절
+            if(isInculdedCell){
+              const cellStartTime = +cells[idx].startTime.slice(0,2)
+              const cellEndTime = +cells[idx].endTime.slice(0,2)
+              timeGap *= cellEndTime - cellStartTime
+            }
             
+            // timeItem 시간이 cells의 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가 
+            // 세부 일정이 없는 시간이고 mouseover되었으면 button.itinerary-card--add를 추가
             return `<li data-time="${i}">
-              ${idx === -1 ? (isShowNewScheuleCellBtn && scheduleId === sch.id && startTime === time?'<button class="itinerary-card--add">+</button>': ''): `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" draggable="true">
-              <div class="itinerary-card-emph"></div>
-              <div class="itinerary-card--check__content">
-                <div class="itinerary-card--check__title">
-                  ${cells[idx].location.name}
-                </div>
-                <div class="itinerary-card--check__memo">
-                  ${cells[idx].memo}
-                </div>`}
+              ${isInculdedCell ? 
+                `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true" style="height:${timeGap}px;">
+                  <div class="itinerary-card-emph"></div>
+                  <div class="itinerary-card--check__content">
+                    <div class="itinerary-card--check__title">
+                      ${cells[idx].location.name}
+                    </div>
+                    <div class="itinerary-card--check__memo">
+                      ${cells[idx].memo}
+                    </div>
+                  </div>
+                </div>` :
+                (isShowNewScheuleCellBtn && selectedScheduleId === id && startTime === timeItem ?'<button class="itinerary-card--add">+</button>': '')
+                }
             </li>`
           }).join('')}
         </ul>
-      `
-      }).join('')}
+      `}).join('')}
       </div>
     </div>
 
@@ -399,11 +426,10 @@ class Itinerary extends Component {
   }
 
   openNewCellModal() {
-    console.log('openNewCellModal');
     const { newScheduleCell, itinerary } = store.state;
-    const { scheduleId, info } = newScheduleCell;
+    const { selectedScheduleId, info } = newScheduleCell;
     const { schedule } = itinerary;
-    const { date } = schedule[scheduleId];
+    const { date } = schedule.filter(sch => sch.id === selectedScheduleId)[0];
 
     store.state = {
       isShowNewScheuleCellBtn: false,
@@ -426,21 +452,32 @@ class Itinerary extends Component {
   }
 
   mouseoverTimetable(e) {
+    if (!e.target.closest('.time-table__day-index__blank') || !e.target.closest('.time-table__day-index__blank li'))
+      return;
+
     const newScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
     const newTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
 
     const newStartTime = newTime < 10 ? `0${newTime}:00` : `${newTime}:00`;
     const newEndTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
     const { newScheduleCell } = store.state;
-    const { scheduleId, startTime } = newScheduleCell;
-    console.log(e.target.closest('.time-table__day-index__blank li'));
-    if (newScheduleId === scheduleId && startTime === newStartTime) return;
+    const {
+      selectedScheduleId,
+      info: { startTime },
+    } = newScheduleCell;
+
+    // console.log('newScheduleId=' + newScheduleId);
+    // console.log('selectedScheduleId=' + selectedScheduleId);
+    // console.log('startTime=' + startTime);
+    // console.log('newStartTime=' + newStartTime);
+
+    if (newScheduleId === selectedScheduleId && startTime === newStartTime) return;
 
     store.state = {
       isShowNewScheuleCellBtn: true,
       newScheduleCell: {
         ...newScheduleCell,
-        scheduleId: newScheduleId,
+        selectedScheduleId: newScheduleId,
         info: {
           ...newScheduleCell.info,
           startTime: newStartTime,
@@ -451,26 +488,102 @@ class Itinerary extends Component {
   }
 
   mouseoutTimetable(e) {
-    if (
-      !e.target.closest('.time-table__day-index__blank li') &&
-      !e.target.closest('.time-table__day-index__blank li button')
-    )
-      return;
-    console.log('mouseoutTimetable');
-
-    const { newScheduleCell } = store.state;
-    store.state = {
-      isShowNewScheuleCellBtn: false,
-      newScheduleCell: {
-        ...newScheduleCell,
-        scheduleId: '',
-        info: {
-          ...newScheduleCell.info,
-          startTime: '',
-          endTime: '',
+    if (e.target.matches('.time-table')) {
+      const { newScheduleCell } = store.state;
+      store.state = {
+        isShowNewScheuleCellBtn: false,
+        newScheduleCell: {
+          ...newScheduleCell,
+          selectedScheduleId: '',
+          info: {
+            ...newScheduleCell.info,
+            startTime: '',
+            endTime: '',
+          },
         },
+      };
+    }
+  }
+
+  dragCard(e) {
+    const { id } = e.target.closest('.itinerary-card').dataset;
+    store.state = {
+      itinerary: {
+        ...store.state.itinerary,
+        dragTarget: +id,
       },
     };
+  }
+
+  dragoverCard(e) {
+    if (!e.target.closest('.time-table__day-index__blank li')) return;
+    e.preventDefault();
+  }
+
+  dropCard(e) {
+    const {
+      itinerary: { dragTarget },
+    } = store.state;
+    if (e.target === dragTarget || !e.target.closest('.time-table__day-index__blank li')) return;
+
+    const newScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    const newTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
+    const newStartTime = newTime < 10 ? `0${newTime}:00` : `${newTime}:00`;
+    const newEndTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
+
+    const {
+      itinerary,
+      newScheduleCell: { selectedScheduleId },
+    } = store.state;
+    const { schedule } = itinerary;
+
+    const _schedule = schedule.filter(sch => sch.id === selectedScheduleId)[0].cells;
+    const target = {
+      ..._schedule.filter(cell => cell.id === dragTarget)[0],
+      startTime: newStartTime,
+      endTime: newEndTime,
+    };
+    const rest = _schedule.filter(cell => cell.id !== dragTarget);
+    console.log(dragTarget, selectedScheduleId, newScheduleId);
+    if (selectedScheduleId === newScheduleId) {
+      store.state = {
+        itinerary: {
+          ...itinerary,
+          dragTarget: '',
+          schedule: schedule.map(sch => {
+            if (sch.id === selectedScheduleId) {
+              return {
+                ...sch,
+                cells: sch.cells.map(cell => {
+                  if (cell.id === dragTarget) return { ...cell, startTime: newStartTime, endTime: newEndTime };
+                  return cell;
+                }),
+              };
+            }
+
+            return sch;
+          }),
+        },
+      };
+    } else {
+      store.state = {
+        itinerary: {
+          ...itinerary,
+          dragTarget: '',
+          schedule: schedule.map(sch => {
+            if (sch.id === selectedScheduleId) {
+              return { ...sch, cells: rest };
+            }
+
+            if (sch.id === newScheduleId) {
+              return { ...sch, cells: [...sch.cells, target] };
+            }
+
+            return sch;
+          }),
+        },
+      };
+    }
   }
 
   addEventListener() {
@@ -480,8 +593,11 @@ class Itinerary extends Component {
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
-      { type: 'mouseover', selector: '.time-table__day-index li', handler: this.mouseoverTimetable },
-      { type: 'mouseout', selector: '.time-table__day-index li', handler: this.mouseoutTimetable },
+      { type: 'dragstart', selector: '.time-table__day-index__blank li', handler: this.dragCard },
+      { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
+      { type: 'drop', selector: '.time-table__day-index__blank li', handler: this.dropCard },
+      { type: 'mouseover', selector: '.time-table', handler: this.mouseoverTimetable },
+      { type: 'mouseout', selector: '.time-table', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',

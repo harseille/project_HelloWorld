@@ -7,7 +7,6 @@ export { default as NewScheduleCellPopup } from './NewScheduleCellPopup.js';
 export { default as TripPlanner } from './TripPlanner.js';
 export { default as Header } from './Header.js';
 export { default as Footer } from './Footer.js';
-export { default as NewTravelLogModal } from './NewTravelLogModal.js';
 export { default as CellDatePicker } from './DatePicker/CellDatePicker.js';
 export { default as DatePicker } from './DatePicker/DatePicker.js';
 export { default as DateInput } from './DatePicker/DateInput.js';
