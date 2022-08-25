@@ -25,22 +25,15 @@ const store = {
         todos: [],
       },
     },
-    itinerary: {
+    ControlItinerary: {
       currentId: '',
       startId: 0,
-      schedule: [
-        { id: 1, country: '영국', date: '08.14', day: 'Sat', cells: [] },
-        { id: 2, country: '프랑스', date: '08.15', day: 'Sun', cells: [] },
-        { id: 3, country: '이태리', date: '08.16', day: 'Mon', cells: [] },
-        { id: 4, country: '체코', date: '08.17', day: 'Tue', cells: [] },
-        { id: 5, country: '그리스', date: '08.17', day: 'Tue', cells: [] },
-      ],
+      schedule: [],
     },
     tripSchedule: {
       isActiveSelfNumberOfPeopleInputForm: false,
       activeCalendar: '',
       currentDate: new Date(),
-
       title: '',
       summary: '베트남ㆍ3일', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
       startDate: null, // * Date 객체
@@ -53,8 +46,6 @@ const store = {
       likeCount: 69,
       commentCount: 12,
       itinerary: {
-        currentId: '',
-        startId: 1,
         schedule: [
           {
             id: 1,

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable import/extensions */
 import Component from '../core/Component.js';
 import myMap from './myMap.js';
@@ -5,17 +6,56 @@ import store from '../store/store.js';
 import { NewScheduleCellPopup } from './index.js';
 
 class Itinerary extends Component {
+  // formattedDate(date) {
+  //   const format = n => (n < 10 ? '0' + n : n + '');
+  //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
+  // }
+  init() {
+    const { startDate, endDate } = store.state.tripSchedule;
+    const { schedule } = store.state.Controlitinerary;
+    let middleDays = startDate - endDate;
+    let id = 1;
+    // 기본 셋
+    let initSchedule = {
+      id,
+      country: '',
+      date: startDate.getDate(),
+      day: startDate.getDay(),
+      cells: [],
+    };
+
+    if (schedule.length === 0) {
+      store.state = {
+        itinerary: {
+          schedule: initSchedule,
+        },
+      };
+    }
+
+    if (id < middleDays) id += 1;
+  }
+
   render() {
     const { isShowModal, isShowNewScheuleCellBtn } = store.state;
     const { currentId, schedule, startId } = store.state.itinerary;
+    const { startDate, endDate } = store.state.tripSchedule;
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
     // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
+    // const setSchedule = {
+    //   id: startId + 1,
+    //   country: '영국',
+    //   date: startDate.getDate(),
+    //   day: startDate.getDay(),
+    //   cells: [],
+    // };
+
     const _schedule = schedule.filter((_, i) => i >= startId && i < startId + 3);
-    console.log(_schedule, startId);
+
     const {
       scheduleId,
       info: { startTime },
     } = store.state.newScheduleCell;
+
     const timeList = [
       '00:00',
       '01:00',
@@ -265,7 +305,7 @@ class Itinerary extends Component {
   buttonHandler(e) {
     const { itinerary } = store.state;
     if (e.target.matches('.carousel__day-index--add')) {
-      store.state = { itinerary: { ...itinerary, currentId: +e.target.dataset.id } };
+      store.state = { controlItinerary: { ...itinerary, currentId: +e.target.dataset.id } };
       console.log(store.state.itinerary);
       return;
     }
@@ -322,7 +362,7 @@ class Itinerary extends Component {
       itinerary: {
         ...itinerary,
         currentId: '',
-        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
+        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat', cells: [] }, ...afterArr],
       },
     };
   }
@@ -353,7 +393,7 @@ class Itinerary extends Component {
       itinerary: {
         ...itinerary,
         currentId: '',
-        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat' }, ...afterArr],
+        schedule: [...beforeArr, { id: 5, country: '스페인', date: '08.14', day: 'Sat', cells: [] }, ...afterArr],
       },
     };
   }
