@@ -6,7 +6,7 @@ import render from '../dom/render.js';
 class Header extends Component {
   render() {
     const newTravelLogModal = new NewTravelLogModal(store.state).render();
-    const isUser = store.state?.session;
+    const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
     const navList = [
       { href: '/main', content: '여행일지' },
@@ -27,8 +27,8 @@ class Header extends Component {
             ${navList
               .map(({ href, content }) => {
                 if (path === '/intro' && href !== '/login') return '';
-                if (!isUser && href === '/mypage') return '';
-                if (isUser && href === '/login') return '';
+                if (!isLogined && href === '/mypage') return '';
+                if (isLogined && href === '/login') return '';
                 return `<li class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
             </li>`;

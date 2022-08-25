@@ -39,6 +39,7 @@ class ViewTripTab extends Component {
       const scrollObserver = new IntersectionObserver(
         entries => {
           const { target } = entries.find(entry => entry.isIntersecting);
+
           [...document.querySelector('.nav-day__list').children].forEach(item =>
             item.classList.toggle('active', item.dataset.nav === target.id)
           );

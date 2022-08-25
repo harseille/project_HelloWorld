@@ -38,6 +38,7 @@ class NewTravelLogModal extends Component {
     const _datePickerEndDate = new DatePicker(endDatePickerProps).render();
 
     const options = [
+      { value: '0', content: '여행인원을 선택 해주세요.' },
       { value: '1', content: '1명' },
       { value: '2', content: '2명' },
       { value: '3', content: '3명' },
@@ -56,7 +57,7 @@ class NewTravelLogModal extends Component {
         <form class="newTrip__popup__form">
           <div class="newTrip__popup__form__input">
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
-            <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 하와이 여행" value="${title}" minlength="3" maxlength="50" required/>
+            <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 하와이 여행" value="${title}" pattern=".{3,50}" required/>
           </div>
           ${_datePickerStartDate}
           ${_datePickerEndDate}
@@ -148,10 +149,10 @@ class NewTravelLogModal extends Component {
 
   validateInputFill() {
     const {
-      tripSchedule: { title, startDate, endDate, numberOfPeople },
+      tripSchedule: { title, startDate, endDate },
     } = store.state;
 
-    const isAllFilled = !!(title && startDate && endDate && numberOfPeople);
+    const isAllFilled = !!(title && startDate && endDate);
     store.state = {
       ...store.state,
       isFilledAllModalInput: isAllFilled,

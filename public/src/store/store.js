@@ -3,11 +3,12 @@ import render from '../dom/render.js';
 const store = {
   _store: {
     userInfo: {
-      userid: 21,
-      email: 'test@test.com',
-      name: 'test',
-      nickname: 'tester123',
-      profilePic: '/assets/images/profile-mock.png',
+      userid: null,
+      email: '',
+      name: '',
+      nickname: '',
+      // profilePic: '/assets/images/profile-mock.png',
+      profilePic: '',
     },
     isShowModal: '',
     isFilledAllModalInput: false,
@@ -44,7 +45,7 @@ const store = {
       startDate: null, // * Date 객체
       endDate: null, // * Date 객체
       createdDate: '2022.08.12',
-      numberOfPeople: 1,
+      numberOfPeople: 0,
       coverImg: '',
       content: '',
       isLiked: false,
@@ -52,7 +53,7 @@ const store = {
       commentCount: 12,
       itinerary: {
         currentId: '',
-        startIdx: 1,
+        startId: 1,
         schedule: [
           {
             id: 1,
@@ -73,7 +74,36 @@ const store = {
             country: '인도',
             date: new Date('2022-08-16'),
             day: 'Sun',
-            cells: [],
+            cells: [
+              {
+                type: '',
+                startTime: '오후 08:00',
+                endTime: '오후 10:00',
+                location: '호이안 마을',
+                memo: '',
+                todos: [],
+                article: {
+                  picture:
+                    'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                  content:
+                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
+                },
+              },
+              {
+                type: '',
+                startTime: '오후 10:00',
+                endTime: '오후 12:00',
+                location: '숙소',
+                memo: '',
+                todos: [],
+                article: {
+                  picture:
+                    'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+                  content:
+                    'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
+                },
+              },
+            ],
           },
           {
             id: 4,
