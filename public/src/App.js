@@ -25,7 +25,7 @@ class App extends Component {
     // userInfo
     console.log('fetchUserInfo');
     try {
-      const userInfo = await axios.get('/userInfo');
+      const userInfo = await axios.post('/userInfo', {});
 
       // if (typeof userInfo === 'string') return;
 

@@ -33,7 +33,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/userInfo', (req, res) => {
+app.post('/userInfo', (req, res) => {
   try {
     const accessToken = req.headers.authorization || req.cookies.accessToken;
 
@@ -43,6 +43,16 @@ app.get('/userInfo', (req, res) => {
     const { userId, name, nickname, profilePic } = userInfo;
 
     res.send({ userId, email, name, nickname, profilePic });
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+app.post('/logout', (req, res) => {
+  try {
+    console.log(11111111111111);
+    res.clearCookie('accessToken');
+    res.redirect('/main');
   } catch (e) {
     console.error(e);
   }
