@@ -1,4 +1,6 @@
 import Component from '../core/Component.js';
+import render from '../dom/render.js';
+import store from '../store/store.js';
 
 class Main extends Component {
   render() {
@@ -155,11 +157,15 @@ class Main extends Component {
 
     const { id } = e.target.closest('.travel-log__item');
 
-    console.log(id);
-    console.log('/trip-planner-view/' + id);
-    const response = await axios.get('/trip-planner-view/' + id);
+    const path = '/trip-planner-view/' + id;
 
-    console.log(response.data);
+    console.log(window.location.origin + path);
+
+    const selectedTripSchedule = await axios.get('/trip-planner-view/' + id);
+
+    console.log(selectedTripSchedule);
+    window.history.pushState({}, path, window.location.origin + path);
+    store.state = store.state.selectedTripSchedule = selectedTripSchedule.data;
   }
 
   addEventListener() {

@@ -168,7 +168,7 @@ class Calendar extends Component {
 
     const {
       localDatePicker: { currentDate, activeCalendar },
-      tripSchedule: { startDate, endDate },
+      tripSchedule: { startDate, endDate, tripDays, itinerary },
     } = store.state;
 
     const selectedDate = new Date(
@@ -231,8 +231,6 @@ class Calendar extends Component {
         },
       };
     } else {
-      _tripDays = store.state.tripDays;
-
       if (activeCalendar === 'startDate') {
         _tripDays = Math.floor((endDate - selectedDate) / 86400000) + 1;
       } else if (activeCalendar === 'endDate') {
@@ -246,6 +244,11 @@ class Calendar extends Component {
         cells: [],
       }));
 
+      console.log(_tripDays);
+      console.log(_itinerary);
+
+      console.log();
+
       store.state = {
         ...store.state,
         localDatePicker: {
@@ -255,16 +258,17 @@ class Calendar extends Component {
         tripSchedule: {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
-          tripDays: _tripDays > 0 ? _tripDays : store.state._tripDays,
-          itinerary: _itinerary > 0 ? _itinerary : store.state.itinerary,
+          tripDays: _tripDays > 0 ? _tripDays : tripDays,
+          itinerary: _tripDays > 0 ? _itinerary : itinerary,
         },
       };
+      console.log(store.state.tripSchedule);
     }
   }
 
   updateMonth(e) {
-    console.log('updateMonth');
     if (!(e.target.classList.contains('prev-month') || e.target.classList.contains('next-month'))) return;
+    console.log('updateMonth');
 
     const {
       // tripSchedule: { startDatePickerCurrentDate, endDatePickerCurrentDate },

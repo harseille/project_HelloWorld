@@ -31,7 +31,9 @@ const router = [
 const routes = () => {
   const location = window.location.pathname;
 
-  const [same] = Object.values(router.find(route => route[location]));
+  const path = location.split('/').slice(0, 2).join('/');
+
+  const [same] = Object.values(router.find(route => route[path]));
 
   if (same) {
     const Component = same;

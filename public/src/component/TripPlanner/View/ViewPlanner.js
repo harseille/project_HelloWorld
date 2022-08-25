@@ -3,23 +3,31 @@ import Component from '../../../core/Component.js';
 class ViewPlanner extends Component {
   render() {
     const {
-      userInfo: { profilePic, nickname },
-      tripSchedule: { content, startDate, people, createdDate, likeCount, commentCount },
+      selectedTripSchedule: {
+        author,
+        authorProfilePic,
+        content,
+        startDate,
+        numberOfPeople,
+        createdDate,
+        likeCount,
+        commentCount,
+      },
     } = this.props;
 
     return `
     <div class="trip-planner">
       <div class="trip-planner__author">
         <div class="trip-planner__author__profile">
-          <img src='${profilePic}' alt="프로필사진" class="profile-img" />
+          <img src='${authorProfilePic}' alt="프로필사진" class="profile-img" />
         </div>
-        <span class="trip-planner__author__nickname">${nickname}</span>
+        <span class="trip-planner__author__nickname">${author}</span>
       </div>
       <p class="trip-planner__content">
         ${content}
       </p>
       <div class="trip-planner__info">
-        <p>여행 시작일: ${startDate} | ${people}명</p>
+        <p>여행 시작일: ${startDate} | ${numberOfPeople}명</p>
         <p>작성일: ${createdDate}</p>
       </div>
       <div class="trip-planner__badge">

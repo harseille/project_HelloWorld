@@ -26,6 +26,7 @@ class Itinerary extends Component {
     if (itinerary.length === 0) {
       store.state = {
         tripSchedule: {
+          ...store.state.tripSchedule,
           itinerary: initSchedule,
         },
       };
