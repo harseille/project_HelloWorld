@@ -61,7 +61,7 @@ class Header extends Component {
     if (e.target.closest('li').id !== 'headerNav3') return;
 
     console.log('showMyPageModal');
-    console.log(store.state);
+    // console.log(store.state);
 
     store.state = {
       localCommon: {
@@ -75,27 +75,44 @@ class Header extends Component {
   hideMyPageModal(e) {
     if (store.state.isShowModal !== 'myPageModal') return;
     console.log('hideMyPageModal');
-    console.log(e.target);
   }
 
   showNewTripScheduleModal(e) {
     if (e.target.closest('li').id !== 'headerNav1') return;
 
     console.log('showNewTripScheduleModal');
-    console.log(store.state);
+
     store.state = {
       localCommon: {
         ...store.state.localCommon,
         isShowModal: 'newTripScheduleModal',
       },
+      // tripSchedule: {
+      //   tripScheduleId: '',
+      //   authorId: '',
+      //   author: '',
+      //   authorProfilePic: '',
+      //   title: '',
+      //   summary: '',
+      //   tripDays: 0,
+      //   startDate: null, // * Date 객체
+      //   endDate: null, // * Date 객체
+      //   createdDate: new Date(),
+      //   numberOfPeople: 0,
+      //   coverImg: '',
+      //   content: '',
+      //   isLiked: false,
+      //   likeCount: 0,
+      //   commentCount: 0,
+      //   itinerary: [],
+      // },
     };
-    console.log(store.state);
   }
 
   link(e) {
     e.preventDefault();
     const path = e.target.getAttribute('href');
-    console.log('link');
+
     if (!path || path === '#') return;
 
     window.history.pushState({}, path, window.location.origin + path);

@@ -8,30 +8,6 @@ class ViewPlanMap extends Component {
   //   const format = n => (n < 10 ? '0' + n : n + '');
   //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
   // }
-  init() {
-    const { startDate, endDate, itinerary } = store.state.tripSchedule;
-    const middleDays = startDate - endDate;
-    let id = 1;
-    // 기본 셋
-    const initSchedule = {
-      id,
-      country: '',
-      date: startDate.getDate(),
-      day: startDate.getDay(),
-      cells: [],
-    };
-
-    if (itinerary.length === 0) {
-      store.state = {
-        tripSchedule: {
-          ...store.state.tripSchedule,
-          itinerary: initSchedule,
-        },
-      };
-    }
-
-    if (id < middleDays) id += 1;
-  }
 
   render() {
     console.log('hi');
@@ -103,106 +79,10 @@ class ViewPlanMap extends Component {
     <!-- time table -->
     <div class="time-table">
       <ul class="time-table__times">
-        <li class="time-table__time-item">
-          <span class="time-table__time">00:00</span>
+        ${timeList.map(time => `<li class="time-table__time-item">
+          <span class="time-table__time">${time}</span>
           <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">01:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">02:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">03:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">04:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">05:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">06:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">07:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">08:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">09:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">10:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">11:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">12:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">13:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">14:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">15:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">16:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">17:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">18:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">19:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">20:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">21:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">22:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">23:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">24:00</span>
-          <span class="line"></span>
-        </li>
+        </li>`).join('')}
       </ul>
       <div class="time-table__day-index">
       ${_schedule.map(sch => {

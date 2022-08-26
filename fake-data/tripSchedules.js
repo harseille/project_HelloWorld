@@ -1,4 +1,4 @@
-const tripSchedules = [
+let tripSchedules = [
   {
     tripScheduleId: '1',
     author: '민홍손',
@@ -133,21 +133,22 @@ const tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '2',
-    author: '오똑똑',
-    authorProfilePic: '/assets/images/profile6.png',
-    title: '제주 핵심 명소 78곳 1분 요약',
-    summary: '한국 - 5일',
+    tripScheduleId: '3',
+    author: '백종원',
+    authorProfilePic:
+      'https://yt3.ggpht.com/ytc/AMLnZu98MEQvuszPd3pPRdkn47wibmrW81BeDYy3lj15pQ=s900-c-k-c0x00ffffff-no-rj',
+    title: '돼지 갈비 찜 맛집을 찾아',
+    summary: '한국 - 1일',
     startDate: new Date(2022, 8, 25), // * Date 객체
-    endDate: new Date(2022, 8, 29), // * Date 객체
-    createdDate: '2022.09.02',
+    endDate: new Date(2022, 8, 25), // * Date 객체
+    createdDate: '2022.08.28',
     numberOfPeople: 2,
-    tripDays: 5,
-    coverImg: '/assets/images/cover-jeju.jpg',
+    tripDays: 1,
+    coverImg: 'https://i.ytimg.com/vi/nfQpiuMAbuE/maxresdefault.jpg',
     content:
-      '여행 기간은 한정적인데 가고 싶은 곳은 너무 많 아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고,...',
+      '1군 - 무 / 2군 - 당근/버섯 / 3군 - 양파, 대파, 고추 갈비찜이 30~40분정도 끓으면 무를 먼저 넣어주세요. 무가 익었을때 2군 채소 당근을 넣어주시구요. 당근이 익을때쯤 마지막 고추와 양파를 넣어주심되요. 그리고 마지막 채소들을 넣고 10~15분정도 끓여주면 완성....',
     isLiked: false,
-    likeCount: 32,
+    likeCount: 2232,
     commentCount: 12,
     itinerary: [
       {
@@ -182,22 +183,23 @@ const tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '2',
-    author: '오똑똑',
-    authorProfilePic: '/assets/images/profile6.png',
-    title: '제주 핵심 명소 78곳 1분 요약',
-    summary: '한국 - 5일',
-    startDate: new Date(2022, 8, 25), // * Date 객체
-    endDate: new Date(2022, 8, 29), // * Date 객체
-    createdDate: '2022.09.02',
-    numberOfPeople: 2,
-    tripDays: 5,
-    coverImg: '/assets/images/cover-jeju.jpg',
+    tripScheduleId: '4',
+    author: '크라이',
+    authorProfilePic: '/assets/images/profile3.png',
+    title: '룩 룩 룩셈부르크 ',
+    summary: '룩셈부르크 - 3일',
+    startDate: new Date(2022, 9, 1), // * Date 객체
+    endDate: new Date(2022, 9, 3), // * Date 객체
+    createdDate: '2022.09.05',
+    numberOfPeople: 4,
+    tripDays: 3,
+    coverImg:
+      'https://images.unsplash.com/photo-1590337828257-b13c65643bdc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     content:
-      '여행 기간은 한정적인데 가고 싶은 곳은 너무 많 아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고,...',
+      '룩 룩 룩셈부르크 아 아 아리헨티나 자 같이 펼쳐보자 세계지도 너의 꿈들을 펼쳐보아라 자 어디 붙어있나 찾아보자 다같이 불러보자 룩셈부르크...',
     isLiked: false,
-    likeCount: 32,
-    commentCount: 12,
+    likeCount: 4,
+    commentCount: 2,
     itinerary: [
       {
         id: 1,
@@ -232,20 +234,27 @@ const tripSchedules = [
   },
 ];
 
-const mainTripSchedules = tripSchedules.map(
-  ({ tripScheduleId, author, authorProfilePic, title, summary, coverImg, content, likeCount, commentCount }) => ({
-    tripScheduleId,
-    author,
-    authorProfilePic,
-    title,
-    summary,
-    coverImg,
-    content,
-    likeCount,
-    commentCount,
-  })
-);
+const mainTripSchedules = () =>
+  tripSchedules.map(
+    ({ tripScheduleId, author, authorProfilePic, title, summary, coverImg, content, likeCount, commentCount }) => ({
+      tripScheduleId,
+      author,
+      authorProfilePic,
+      title,
+      summary,
+      coverImg,
+      content,
+      likeCount,
+      commentCount,
+    })
+  );
 
 const findTripSchedule = id => tripSchedules.find(tripSchedule => tripSchedule.tripScheduleId === id);
+const generateTripScheduleId = () => Math.max(...tripSchedules.map(tripSchedule => tripSchedule.tripScheduleId), 0) + 1;
+const setTripSchdule = newTripSchedule => {
+  const responseTripSchedule = { ...newTripSchedule, tripScheduleId: generateTripScheduleId() };
+  tripSchedules = [...tripSchedules, responseTripSchedule];
+  return responseTripSchedule;
+};
 
-module.exports = { mainTripSchedules, findTripSchedule };
+module.exports = { mainTripSchedules, findTripSchedule, setTripSchdule };

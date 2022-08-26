@@ -4,8 +4,14 @@ import store from '../../store/store.js';
 
 class DateInput extends Component {
   formattedDate(date) {
+    let _date = date;
+    if (typeof _date === 'string') {
+      _date = new Date(_date);
+    }
+
     const format = n => (n < 10 ? '0' + n : n + '');
-    return `${date.getFullYear()}-${format(date.getMonth() + 1)}-${format(date.getDate())}`;
+
+    return `${_date.getFullYear()}-${format(_date.getMonth() + 1)}-${format(_date.getDate())}`;
   }
 
   render() {
@@ -29,9 +35,9 @@ class DateInput extends Component {
     const targetDate =
       e.target?.value.split('-').join(',') === '' ? new Date() : new Date(e.target?.value.split('-').join(','));
 
+    console.log(e.target.nextElementSibling.id);
+    console.log(targetDate);
     store.state = {
-      ...store.state,
-      ...store.state.tripSchedule,
       localDatePicker: {
         activeCalendar: e.target.nextElementSibling.id,
         currentDate: targetDate,

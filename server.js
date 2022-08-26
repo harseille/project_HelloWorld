@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8089;
 
 const auth = (req, res, next) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
-
+  console.log('auth');
   try {
     jwt.verify(accessToken, process.env.SECRET_KEY);
 
@@ -33,6 +33,19 @@ const auth = (req, res, next) => {
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
+
+app.post('/tripSchedule', (req, res) => {
+  try {
+    console.log('[POST] /tripSchedule');
+    const tripSchedule = req.body;
+    // console.log(tripSchedule);
+    const newTripSchedule = tripSchedules.setTripSchdule(tripSchedule);
+    // console.log(tripSchedule.tripSchedules);
+    res.send(newTripSchedule);
+  } catch (e) {
+    console.error(e);
+  }
+});
 
 app.post('/userInfo', (req, res) => {
   try {
@@ -58,20 +71,21 @@ app.post('/logout', (req, res) => {
   }
 });
 
-
 app.get('/mainTripSchedules', (req, res) => {
   try {
-    const responseSchedules = tripSchedules.mainTripSchedules;
+    console.log('[server] mainTripSchedules');
+    const responseSchedules = tripSchedules.mainTripSchedules();
+    console.log(responseSchedules);
     res.send(responseSchedules);
   } catch (e) {
     console.error(e);
   }
 });
 
-
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
     const { tripScheduleId } = req.params;
+    console.log('[server] /tripSchedule/' + tripScheduleId);
     const responseSchedule = tripSchedules.findTripSchedule(tripScheduleId);
 
     res.send(responseSchedule);

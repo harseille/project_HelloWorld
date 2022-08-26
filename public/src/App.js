@@ -25,12 +25,12 @@ class App extends Component {
     // userInfo
     try {
       const userInfo = await axios.post('/userInfo', {});
-      const mainTripSchedules = await axios.get('/mainTripSchedules');
+      // const mainTripSchedules = await axios.get('/mainTripSchedules');
       // if (typeof userInfo === 'string') return;
 
       store.state = {
         userInfo: { ...store.state.userInfo, ...userInfo.data },
-        tripSchedules: mainTripSchedules.data,
+        // tripSchedules: mainTripSchedules.data,
       };
     } catch (e) {
       console.error(e);

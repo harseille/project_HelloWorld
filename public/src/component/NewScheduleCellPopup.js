@@ -124,14 +124,17 @@ class NewScheduleCellPopup extends Component {
             <div class="time__form__select">
               <label for="newCard__endTime">End with</label>
               <select name="endTime" id="newCard__endTime" value="${endTime}">
-                ${timeList.map(time => `<option value="${time}" ${endTime === time? 'selected':''}>${time}</option>`)}
+                ${timeList.map(time => {
+                  const isDisabled = +startTime.slice(0, 2) >= +time.slice(0,2);
+                  return `<option value="${time}" ${endTime === time? 'selected':''} ${isDisabled? 'disabled': ''}>${time}</option>`
+                })}
               </select>
             </div>
           </div>
         </div>
         <div class="newCard__popup__form__container location">
           <h3 class="newCard__popup__form__title">위치</h3>
-          <input type="text" name="location" class="location" value="${location.name === undefined ? '': location.name}"/>
+          <input type="text" name="location" class="location" autocomplete="off" value="${location.name === undefined ? '': location.name}"/>
         </div>
         <div class="newCard__popup__form__container memo">
           <h3 class="newCard__popup__form__title">메모</h3>
@@ -158,6 +161,7 @@ class NewScheduleCellPopup extends Component {
   }
 
   addSchedule(e) {
+    console.log('addSchedule');
     e.preventDefault();
     const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { itinerary, newScheduleCellDate } = tripSchedule;
@@ -192,6 +196,7 @@ class NewScheduleCellPopup extends Component {
 
   closeModal(e) {
     if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
+    console.log('closeModal');
     const { localCommon } = store.state;
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
@@ -202,12 +207,21 @@ class NewScheduleCellPopup extends Component {
     const { name, value } = e.target;
     const { localNewScheduleCell } = store.state;
     const { info } = localNewScheduleCell;
+    let { endTime } = info;
+
+    if (name === 'startTime') {
+      let newTime = +value.slice(0, 2);
+      const isPassed = newTime > +endTime.slice(0, 2);
+      newTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
+      endTime = isPassed ? newTime : endTime;
+    }
 
     store.state = {
       localNewScheduleCell: {
         ...localNewScheduleCell,
         info: {
           ...info,
+          endTime,
           [name]: value,
         },
       },

@@ -9,17 +9,17 @@
     position: relative;
     @include flexbox($direction: row, $items: center);
   }
-  
+
   &__title {
     font-weight: 700;
     font-size: 28px;
   }
-  
+
   &__hashtag__list {
     @include flexbox($direction: row);
     margin-left: 24px;
   }
-  
+
   &__hashtag__item {
     padding-left: 16px;
     color: $gray600;
@@ -44,7 +44,7 @@
         cursor: pointer;
       }
 
-      &__circle.checked{
+      &__circle.checked {
         background-color: $gray600;
       }
     }
@@ -77,13 +77,13 @@
     @include flexbox($direction: row);
     margin-top: 20px;
     height: 48px;
-    
+
     &__dropdown {
       position: relative;
       overflow: hidden;
       width: 168px;
       border-radius: 8px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #e5e5e5;
       background: url(/assets/images/select_arrow.svg) no-repeat;
       background-position: right 18px center;
       background-size: 14px;
@@ -98,7 +98,7 @@
       width: 924px;
       height: 48px;
       text-indent: 16px;
-      border: 1px solid #E5E5E5 ;
+      border: 1px solid #e5e5e5;
       border-radius: 8px 0 0 8px;
       color: $gray500;
     }
@@ -122,7 +122,7 @@
 
   &__list {
     position: relative;
-    @include flexbox($direction: row, $justify:space-between, $wrap: wrap);
+    @include flexbox($direction: row, $wrap: wrap);
+    gap: 40px;
   }
-
 }

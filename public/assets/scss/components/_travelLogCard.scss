@@ -6,7 +6,7 @@
     height: 488px;
     box-shadow: 0px 4px 10px rgba(213, 213, 213, 1.25);
     border-radius: 8px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 
     &__top-section {
       @include boxSize($w: 400px, $h: 288px);

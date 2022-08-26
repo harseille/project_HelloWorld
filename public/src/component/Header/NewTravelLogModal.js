@@ -11,6 +11,10 @@ class NewTravelLogModal extends Component {
       tripSchedule: { title, numberOfPeople, startDate, endDate },
     } = this.props;
 
+    // console.log(store.state);
+    // console.log(new Date(startDate));
+    // console.log(new Date(endDate));
+
     const startDatePickerProps = {
       ...this.props.tripSchedule,
       ...this.props.localDatePicker,
@@ -56,7 +60,7 @@ class NewTravelLogModal extends Component {
           <div class="modal__header__title">새 일정 만들기</div>
           <button class="modal__header__close__btn" aria-label="닫기"></button>
         </div>
-        <form class="newTrip__popup__form">
+        <form class="newTrip__popup__form" novalidate>
           <div class="newTrip__popup__form__input">
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
             <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 하와이 여행" value="${title}" pattern=".{3,50}" required/>
@@ -83,7 +87,7 @@ class NewTravelLogModal extends Component {
             <label for="inputPeople" class="a11yHidden">인원 수 입력</label>
             <input class="inputPeople" id="inputPeople" type="number" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
           </div>
-          <button class="newTrip__popup__form__submit ${isFilledAllModalInput ? 'active' : ''}" type="button" ${
+          <button class="newTrip__popup__form__submit ${isFilledAllModalInput ? 'active' : ''}" ${
       isFilledAllModalInput ? '' : 'disabled'
     }>새 일정 만들기</button>
         </form>
@@ -175,9 +179,17 @@ class NewTravelLogModal extends Component {
   }
 
   submitTripSchedule(e) {
+    e.preventDefault();
     console.log('submitTripSchedule');
 
+    const inputValues = new FormData(document.querySelector('.newTrip__popup__form'));
+
+    const { newTripTitle, newTripStartDate, newTripEndDate, inputPeople } = Object.fromEntries([
+      ...inputValues.entries(),
+    ]);
+
     const {
+      userInfo: { userId, profilePic, nickname },
       tripSchedule: { startDate, endDate },
     } = store.state;
 
@@ -190,7 +202,6 @@ class NewTravelLogModal extends Component {
       cells: [],
     }));
     store.state = {
-      ...store.state,
       localCommon: {
         ...store.state.localCommon,
         isShowModal: '',
@@ -198,7 +209,21 @@ class NewTravelLogModal extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
+        authorId: userId,
+        author: nickname,
+        authorProfilePic: profilePic,
+        title: newTripTitle,
+        summary: '',
         tripDays: _tripDays,
+        startDate: newTripStartDate, // * Date 객체
+        endDate: newTripEndDate, // * Date 객체
+        createdDate: new Date(),
+        numberOfPeople: inputPeople,
+        coverImg: '',
+        content: '',
+        isLiked: false,
+        likeCount: 0,
+        commentCount: 0,
         itinerary: _itinerary,
       },
     };

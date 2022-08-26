@@ -20,33 +20,45 @@ class Calendar extends Component {
     const targetCurrentDate = new Date(currentDate.getFullYear(), month, date);
 
     startDate = startDate || new Date();
-    const _endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 31);
+    startDate = endDate || new Date();
+
+    let _startDate = startDate;
+    let _endDate = endDate;
+
+    if (typeof _startDate === 'string') {
+      _startDate = new Date(_startDate);
+    }
+    if (typeof _endDate === 'string') {
+      _endDate = new Date(_endDate);
+    }
+
+    const startDateAfter31 = new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + 31);
 
     if (
-      startDate.getFullYear() === targetCurrentDate.getFullYear() &&
-      startDate.getMonth() === targetCurrentDate.getMonth() &&
-      startDate.getDate() === date
+      _startDate.getFullYear() === targetCurrentDate.getFullYear() &&
+      _startDate.getMonth() === targetCurrentDate.getMonth() &&
+      _startDate.getDate() === date
     )
       return 'start-date';
 
     if (
-      endDate !== null &&
-      endDate.getFullYear() === targetCurrentDate.getFullYear() &&
-      endDate.getMonth() === targetCurrentDate.getMonth() &&
-      endDate.getDate() === date
+      _endDate !== null &&
+      _endDate.getFullYear() === targetCurrentDate.getFullYear() &&
+      _endDate.getMonth() === targetCurrentDate.getMonth() &&
+      _endDate.getDate() === date
     )
       return 'end-date';
 
     let isUnableDate = false;
 
     if (unableType === 'start') {
-      isUnableDate = targetCurrentDate < startDate;
+      isUnableDate = targetCurrentDate < _startDate;
     }
     if (unableType === 'end') {
-      isUnableDate = targetCurrentDate > _endDate;
+      isUnableDate = targetCurrentDate > startDateAfter31;
     }
     if (unableType === 'term') {
-      isUnableDate = targetCurrentDate <= startDate || targetCurrentDate >= _endDate;
+      isUnableDate = targetCurrentDate <= _startDate || targetCurrentDate >= startDateAfter31;
     }
 
     return isUnableDate ? 'unable' : '';
@@ -153,7 +165,6 @@ class Calendar extends Component {
     if (activeCalendar && !(e.target.matches('.datePicker') || e.target.closest('.calendar') !== null)) {
       console.log('clickOutOfCalender');
       store.state = {
-        ...store.state,
         localDatePicker: {
           ...store.state.localDatePicker,
           activeCalendar: '',
@@ -187,6 +198,8 @@ class Calendar extends Component {
     let _tripDays = 0;
 
     if (endDate !== null && _endDate < endDate) {
+      // TODO: cells 정보 살리기
+
       _itinerary = Array.from({ length: 31 }, (_, i) => ({
         id: i + 1,
         country: '',
@@ -195,7 +208,6 @@ class Calendar extends Component {
       }));
 
       store.state = {
-        ...store.state,
         localDatePicker: {
           currentDate: selectedDate,
           activeCalendar: '',
@@ -252,8 +264,6 @@ class Calendar extends Component {
       console.log(_tripDays);
       console.log(_itinerary);
 
-      console.log();
-
       store.state = {
         ...store.state,
         localDatePicker: {
@@ -267,7 +277,6 @@ class Calendar extends Component {
           itinerary: _tripDays > 0 ? _itinerary : itinerary,
         },
       };
-      console.log(store.state.tripSchedule);
     }
   }
 

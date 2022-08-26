@@ -1,4 +1,5 @@
 import { Intro, Main, Login, Signup, Itinerary, EditTripPlanner, ViewTripPlanner, Mypage } from '../component/index.js';
+// import observe from './observe.js';
 
 const router = [
   {
@@ -26,6 +27,8 @@ const router = [
     '/mypage': Mypage,
   },
 ];
+
+// window.addEventListener('historyChange', observe);
 
 // 현재 path에 따라 어떤 domString 할지 보여주도록 하는 함수
 const routes = () => {

@@ -11,28 +11,26 @@ class Itinerary extends Component {
   //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
   // }
   init() {
-    const { startDate, endDate, itinerary } = store.state.tripSchedule;
-    let middleDays = startDate - endDate;
-    let id = 1;
-    // 기본 셋
-    let initSchedule = {
-      id,
-      country: '',
-      date: startDate.getDate(),
-      day: startDate.getDay(),
-      cells: [],
-    };
-
-    if (itinerary.length === 0) {
-      store.state = {
-        tripSchedule: {
-          ...store.state.tripSchedule,
-          itinerary: initSchedule,
-        },
-      };
-    }
-
-    if (id < middleDays) id += 1;
+    // const { startDate, endDate, itinerary } = store.state.tripSchedule;
+    // let middleDays = startDate - endDate;
+    // let id = 1;
+    // // 기본 셋
+    // let initSchedule = {
+    //   id,
+    //   country: '',
+    //   date: startDate.getDate(),
+    //   day: startDate.getDay(),
+    //   cells: [],
+    // };
+    // if (itinerary.length === 0) {
+    //   store.state = {
+    //     tripSchedule: {
+    //       ...store.state.tripSchedule,
+    //       itinerary: initSchedule,
+    //     },
+    //   };
+    // }
+    // if (id < middleDays) id += 1;
   }
 
   render() {
@@ -57,6 +55,7 @@ class Itinerary extends Component {
     // };
 
     const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
+    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const timeList = [
       '00:00',
@@ -86,12 +85,9 @@ class Itinerary extends Component {
       '24:00',
     ];
 
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
     // prettier-ignore
     return `
     <div class="itinerary__container">
-      <!-- google map -->
       <div id="googleMap" class="map"></div>
        
       <!-- carousel -->
@@ -129,106 +125,10 @@ class Itinerary extends Component {
     <!-- time table -->
     <div class="time-table">
       <ul class="time-table__times">
-        <li class="time-table__time-item">
-          <span class="time-table__time">00:00</span>
+        ${timeList.map(time => `<li class="time-table__time-item">
+          <span class="time-table__time">${time}</span>
           <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">01:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">02:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">03:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">04:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">05:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">06:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">07:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">08:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">09:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">10:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">11:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">12:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">13:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">14:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">15:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">16:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">17:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">18:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">19:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">20:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">21:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">22:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">23:00</span>
-          <span class="line"></span>
-        </li>
-        <li class="time-table__time-item">
-          <span class="time-table__time">24:00</span>
-          <span class="line"></span>
-        </li>
+        </li>`).join('')}
       </ul>
       <div class="time-table__day-index">
       ${_schedule.map(sch => {
@@ -275,11 +175,6 @@ class Itinerary extends Component {
       </div>
     </div>
 
-    <!-- private & public button -->
-    <div class="itinerary-btns">
-      <button class="itinerary-btns--private">나만의 일정</button>
-      <button class="itinerary-btns--public">다른 사람들에게도 공유하기</button>
-      </div>
       
       </div>${$newScheduleCellPopup}`
   }
@@ -354,6 +249,7 @@ class Itinerary extends Component {
         currentId: '',
       },
       tripSchedule: {
+        ...store.state.tripSchedule,
         itinerary: restItems,
       },
     };
@@ -509,25 +405,35 @@ class Itinerary extends Component {
   }
 
   mouseoutTimetable(e) {
-    // const { localNewScheduleCell, localItinerary } = store.state;
-    // store.state = {
-    //   localItinerary: {
-    //     ...localItinerary,
-    //     isShowNewScheuleCellBtn: false,
-    //   },
-    //   localNewScheduleCell: {
-    //     ...localNewScheduleCell,
-    //     selectedScheduleId: '',
-    //     info: {
-    //       ...localNewScheduleCell.info,
-    //       startTime: '',
-    //       endTime: '',
-    //     },
-    //   },
-    // };
+    //   if (
+    //     !(
+    //       e.target.matches('.time-table__day-index') ||
+    //       e.target.matches('.time-table__day-index__blank li') ||
+    //       e.target.matches('.time-table__day-index__blank li button')
+    //     )
+    //   ) {
+    //     console.log('mouseout');
+    //     const { localNewScheduleCell, localItinerary } = store.state;
+    //     store.state = {
+    //       localItinerary: {
+    //         ...localItinerary,
+    //         isShowNewScheuleCellBtn: false,
+    //       },
+    //       localNewScheduleCell: {
+    //         ...localNewScheduleCell,
+    //         selectedScheduleId: '',
+    //         info: {
+    //           ...localNewScheduleCell.info,
+    //           startTime: '',
+    //           endTime: '',
+    //         },
+    //       },
+    //     };
+    //   }
   }
 
   dragCard(e) {
+    e.dataTransfer.dropEffect = 'move';
     const { id } = e.target.closest('.itinerary-card').dataset;
     store.state = {
       localItinerary: {
@@ -615,7 +521,7 @@ class Itinerary extends Component {
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
       { type: 'drop', selector: '.time-table__day-index__blank li', handler: this.dropCard },
       { type: 'mouseover', selector: '.time-table', handler: this.mouseoverTimetable },
-      { type: 'mouseout', selector: '.time-table__day-index', handler: this.mouseoutTimetable },
+      { type: 'mouseout', selector: 'window', component: 'editPlanMap', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',

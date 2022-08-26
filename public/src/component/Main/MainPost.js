@@ -6,7 +6,7 @@ class MainPost extends Component {
       this.props;
     return `
     <li class="travel-log__item" id="${tripScheduleId}">
-    <a href="#" class="travel-log__link">
+    <a href="${'/trip-planner-view/' + tripScheduleId}" class="travel-log__link">
       <div class="travel-log__item__top-section" style="background-image: url('${coverImg}')">
         <div class="travel-log__item__user-info">
           <img class="travel-log__item__user-info__profile-pic" src="${authorProfilePic}" alt="${author} 님의 프로필 사진" />

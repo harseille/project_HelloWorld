@@ -32,7 +32,7 @@ const store = {
       currentDate: new Date(),
     },
     userInfo: {
-      userid: null,
+      userId: null,
       email: '',
       name: '',
       nickname: '',
@@ -40,6 +40,7 @@ const store = {
     },
     tripSchedule: {
       tripScheduleId: 1,
+      authorId: '',
       author: '',
       authorProfilePic: '',
       title: '',
@@ -128,14 +129,14 @@ const store = {
   },
   set state(newState) {
     this._store = { ...this._store, ...newState };
-    // console.log(this._store.isShowNewScheuleCellBtn);
+    console.log('store');
     render();
   },
 
   clearState() {
     this.state = {
       userInfo: {
-        userid: null,
+        userId: null,
         email: '',
         name: '',
         nickname: '',

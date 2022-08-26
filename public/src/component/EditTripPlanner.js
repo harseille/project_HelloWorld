@@ -4,7 +4,6 @@ import {
   EditPlanner,
   EditTripTab,
   EditPlanMap,
-  TimeTable,
   EditTripStroy,
   EditTripAdd,
 } from './TripPlanner/Edit/index.js';

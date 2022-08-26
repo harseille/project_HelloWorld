@@ -340,6 +340,7 @@ class Itinerary extends Component {
   deleteSchedule(e) {
     const {
       localItinerary,
+      tripSchedule,
       tripSchedule: { itinerary },
     } = store.state;
 
@@ -354,6 +355,7 @@ class Itinerary extends Component {
         currentId: '',
       },
       tripSchedule: {
+        ...tripSchedule,
         itinerary: restItems,
       },
     };
