@@ -34,7 +34,7 @@ class Header extends Component {
         <nav class="nav">
           <h1 class="logo">
             <a class="logo__link" href="/intro">
-              <img src="./assets/images/HelloWorldLogo.svg" alt="HelloWorld" />
+              <img src="/assets/images/HelloWorldLogo.svg" alt="HelloWorld" />
             </a>
           </h1>
           <ul class="nav__list">

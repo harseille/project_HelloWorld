@@ -233,16 +233,21 @@ class Calendar extends Component {
     } else {
       if (activeCalendar === 'startDate') {
         _tripDays = Math.floor((endDate - selectedDate) / 86400000) + 1;
+        _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
+          id: i + 1,
+          country: '',
+          date: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + i),
+          cells: [],
+        }));
       } else if (activeCalendar === 'endDate') {
         _tripDays = Math.floor((selectedDate - startDate) / 86400000) + 1;
+        _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
+          id: i + 1,
+          country: '',
+          date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+          cells: [],
+        }));
       }
-
-      _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
-        id: i + 1,
-        country: '',
-        date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
-        cells: [],
-      }));
 
       console.log(_tripDays);
       console.log(_itinerary);

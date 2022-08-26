@@ -6,7 +6,10 @@ class Component {
   constructor(props) {
     this.props = props;
     this.keepEvent();
+    this.init();
   }
+
+  init() {}
 
   setState(newState) {
     this.state = { ...this.state, ...newState };

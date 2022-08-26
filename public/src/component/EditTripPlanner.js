@@ -25,8 +25,7 @@ class EditTripPlanner extends Component {
     const $editPlanCover = new EditPlanCover({ coverImg }).render();
     const $editPlanner = new EditPlanner({ tripSchedule, localDatePicker }).render();
     const $editTripTab = new EditTripTab({ selectedTab }).render();
-    // const $editPlanMap = new EditPlanMap().render();
-    const $timeTable = new TimeTable().render();
+    const $editPlanMap = new EditPlanMap().render();
     const $editTripStroy = new EditTripStroy({ userInfo, itinerary }).render();
     const $editTripAdd = new EditTripAdd().render();
 
@@ -39,7 +38,7 @@ class EditTripPlanner extends Component {
             <div class="trip-itinerary">
               ${$editTripTab}
               <div class="itinerary__container">
-                ${selectedTab === 'chart' ? $timeTable : $editTripStroy}
+                ${selectedTab === 'chart' ? $editPlanMap : $editTripStroy}
               </div>
               ${$editTripAdd}
             </div>

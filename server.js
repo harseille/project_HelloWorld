@@ -58,6 +58,7 @@ app.post('/logout', (req, res) => {
   }
 });
 
+
 app.get('/mainTripSchedules', (req, res) => {
   try {
     const responseSchedules = tripSchedules.mainTripSchedules;
@@ -67,7 +68,8 @@ app.get('/mainTripSchedules', (req, res) => {
   }
 });
 
-app.get('/trip-planner-view/:tripScheduleId', (req, res) => {
+
+app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
     const { tripScheduleId } = req.params;
     const responseSchedule = tripSchedules.findTripSchedule(tripScheduleId);

@@ -78,11 +78,8 @@
     flex-shrink: 0;
     padding-top: 10px;
     &--add {
-      border: none;
-      background: transparent;
       border: 1px solid $mainPurple;
       border-radius: 50%;
-      background: $white;
       color: $mainPurple;
       cursor: pointer;
       margin-right: 4px;
@@ -90,6 +87,9 @@
       height: 20px;
       padding: 0;
       line-height: 21px;
+      background: $white url('/assets/images/plus-solid.svg') no-repeat;
+      background-position: center;
+      background-size: 10px;
     }
   }
 }
