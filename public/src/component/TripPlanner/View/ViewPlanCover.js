@@ -13,7 +13,7 @@ class ViewPlanCover extends Component {
         <p class="cover__content__summary">${summary}</p>
         </div>
         <div class="cover__buttonbox">
-        <button class="edit-btn"><img src="./assets/images/post-edit.svg" alt="글 수정" /></button>
+        <button class="edit-btn"><img src="/assets/images/post-edit.svg" alt="글 수정" /></button>
         <button class="remove-btn"><img src="/assets/images/cancel.svg" alt="글 삭제" /></button>
         </div>
         </div>
