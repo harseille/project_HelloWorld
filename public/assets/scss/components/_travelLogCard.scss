@@ -1,5 +1,6 @@
 .travel-log {
   &__item {
+    position: relative;
     background: $lightPurple;
     width: 400px;
     height: 488px;
@@ -9,7 +10,7 @@
 
     &__top-section {
       @include boxSize($w: 400px, $h: 288px);
-      background-image: url(/assets/images/mainCardPic4.png);
+      background: $mainPurple no-repeat center / cover;
       border-radius: 8px 8px 0 0;
     }
 
@@ -70,7 +71,8 @@
     &__social {
       position: absolute;
       @include flexbox($direction: row, $items: center);
-      bottom: 60px;
+      left: 6px;
+      bottom: 0px;
       padding: 10px;
       color: $gray500;
     }

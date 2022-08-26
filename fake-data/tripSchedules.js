@@ -83,8 +83,169 @@ const tripSchedules = [
       },
     ],
   },
+  {
+    tripScheduleId: '2',
+    author: '오똑똑',
+    authorProfilePic: '/assets/images/profile6.png',
+    title: '제주 핵심 명소 78곳 1분 요약',
+    summary: '한국 - 5일',
+    startDate: new Date(2022, 8, 25), // * Date 객체
+    endDate: new Date(2022, 8, 29), // * Date 객체
+    createdDate: '2022.09.02',
+    numberOfPeople: 2,
+    tripDays: 5,
+    coverImg: '/assets/images/cover-jeju.jpg',
+    content:
+      '여행 기간은 한정적인데 가고 싶은 곳은 너무 많 아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고,...',
+    isLiked: false,
+    likeCount: 32,
+    commentCount: 12,
+    itinerary: [
+      {
+        id: 1,
+        country: '한국',
+        date: new Date('2022-01-01'),
+        day: 'Sat',
+        cells: [
+          {
+            type: '',
+            startTime: '오전 08:00',
+            endTime: '오전 09:00',
+            location: '인천국제 공항',
+            memo: '',
+            todos: [],
+            article: {
+              picture:
+                'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              content:
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
+            },
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '한국',
+        date: new Date('2022-01-02'),
+        day: 'Sun',
+        cells: [],
+      },
+    ],
+  },
+  {
+    tripScheduleId: '2',
+    author: '오똑똑',
+    authorProfilePic: '/assets/images/profile6.png',
+    title: '제주 핵심 명소 78곳 1분 요약',
+    summary: '한국 - 5일',
+    startDate: new Date(2022, 8, 25), // * Date 객체
+    endDate: new Date(2022, 8, 29), // * Date 객체
+    createdDate: '2022.09.02',
+    numberOfPeople: 2,
+    tripDays: 5,
+    coverImg: '/assets/images/cover-jeju.jpg',
+    content:
+      '여행 기간은 한정적인데 가고 싶은 곳은 너무 많 아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고,...',
+    isLiked: false,
+    likeCount: 32,
+    commentCount: 12,
+    itinerary: [
+      {
+        id: 1,
+        country: '한국',
+        date: new Date('2022-01-01'),
+        day: 'Sat',
+        cells: [
+          {
+            type: '',
+            startTime: '오전 08:00',
+            endTime: '오전 09:00',
+            location: '인천국제 공항',
+            memo: '',
+            todos: [],
+            article: {
+              picture:
+                'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              content:
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
+            },
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '한국',
+        date: new Date('2022-01-02'),
+        day: 'Sun',
+        cells: [],
+      },
+    ],
+  },
+  {
+    tripScheduleId: '2',
+    author: '오똑똑',
+    authorProfilePic: '/assets/images/profile6.png',
+    title: '제주 핵심 명소 78곳 1분 요약',
+    summary: '한국 - 5일',
+    startDate: new Date(2022, 8, 25), // * Date 객체
+    endDate: new Date(2022, 8, 29), // * Date 객체
+    createdDate: '2022.09.02',
+    numberOfPeople: 2,
+    tripDays: 5,
+    coverImg: '/assets/images/cover-jeju.jpg',
+    content:
+      '여행 기간은 한정적인데 가고 싶은 곳은 너무 많 아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고,...',
+    isLiked: false,
+    likeCount: 32,
+    commentCount: 12,
+    itinerary: [
+      {
+        id: 1,
+        country: '한국',
+        date: new Date('2022-01-01'),
+        day: 'Sat',
+        cells: [
+          {
+            type: '',
+            startTime: '오전 08:00',
+            endTime: '오전 09:00',
+            location: '인천국제 공항',
+            memo: '',
+            todos: [],
+            article: {
+              picture:
+                'https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+              content:
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati autem officia mollitia vel',
+            },
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '한국',
+        date: new Date('2022-01-02'),
+        day: 'Sun',
+        cells: [],
+      },
+    ],
+  },
 ];
+
+const mainTripSchedules = tripSchedules.map(
+  ({ tripScheduleId, author, authorProfilePic, title, summary, coverImg, content, likeCount, commentCount }) => ({
+    tripScheduleId,
+    author,
+    authorProfilePic,
+    title,
+    summary,
+    coverImg,
+    content,
+    likeCount,
+    commentCount,
+  })
+);
 
 const findTripSchedule = id => tripSchedules.find(tripSchedule => tripSchedule.tripScheduleId === id);
 
-module.exports = { findTripSchedule };
+module.exports = { mainTripSchedules, findTripSchedule };

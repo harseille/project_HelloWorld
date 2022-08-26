@@ -58,6 +58,17 @@ app.post('/logout', (req, res) => {
   }
 });
 
+
+app.get('/mainTripSchedules', (req, res) => {
+  try {
+    const responseSchedules = tripSchedules.mainTripSchedules;
+    res.send(responseSchedules);
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
     const { tripScheduleId } = req.params;

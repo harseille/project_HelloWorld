@@ -1,8 +1,21 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
 import store from '../store/store.js';
+import MainPost from './Main/MainPost.js';
 
 class Main extends Component {
+  async init() {
+    try {
+      const mainTripSchedules = await axios.get('/mainTripSchedules');
+
+      store.state = {
+        tripSchedules: mainTripSchedules.data,
+      };
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   render() {
     return `
     <div class="main">
@@ -144,6 +157,7 @@ class Main extends Component {
               </div>
             </a>
           </li>
+          ${store.state.tripSchedules.map(schedule => new MainPost(schedule).render()).join('')}
         </ul>
       </div>
     </section>
