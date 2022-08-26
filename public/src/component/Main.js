@@ -150,7 +150,7 @@ class Main extends Component {
   </div>`;
   }
 
-  async changeToTripScheduleView(e) {
+  changeToTripScheduleView(e) {
     // console.log(e.target.closest('li').classList.contains('travel-log__item'));
     if (!e.target.closest('.travel-log__item')) return;
     console.log(e.target);
@@ -159,13 +159,7 @@ class Main extends Component {
 
     const path = '/trip-planner-view/' + id;
 
-    console.log(window.location.origin + path);
-
-    const selectedTripSchedule = await axios.get('/trip-planner-view/' + id);
-
-    console.log(selectedTripSchedule);
     window.history.pushState({}, path, window.location.origin + path);
-    store.state = store.state.selectedTripSchedule = selectedTripSchedule.data;
   }
 
   addEventListener() {

@@ -3,7 +3,7 @@ import Component from '../../../core/Component.js';
 class ViewPlanner extends Component {
   render() {
     const {
-      selectedTripSchedule: {
+      tripSchedule: {
         author,
         authorProfilePic,
         content,
