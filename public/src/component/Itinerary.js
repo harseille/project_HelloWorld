@@ -101,7 +101,7 @@ class Itinerary extends Component {
           _schedule.map(sched =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
 
-              <button class="carousel__day-index--add" data-id=${sched.id}>+</button>Day${sched.id}<span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day${sched.id}<span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
 
               
               ${currentId === sched.id ? `
