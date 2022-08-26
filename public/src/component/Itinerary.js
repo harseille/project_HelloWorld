@@ -237,7 +237,9 @@ class Itinerary extends Component {
 
         return `
         <ul class="time-table__day-index__blank" data-id="${id}">
-          ${timeList.map((timeItem, i) => {
+          ${timeList.map((timeItem, i, self) => {
+            if(i === self.length - 1) return '';
+
             const idx = cellStartTimeArr.indexOf(timeItem)
             const isInculdedCell = idx !== -1
             let timeGap = 62;
@@ -507,24 +509,22 @@ class Itinerary extends Component {
   }
 
   mouseoutTimetable(e) {
-    if (e.target.matches('.time-table')) {
-      const { localNewScheduleCell, localItinerary } = store.state;
-      store.state = {
-        localItinerary: {
-          ...localItinerary,
-          isShowNewScheuleCellBtn: false,
-        },
-        localNewScheduleCell: {
-          ...localNewScheduleCell,
-          selectedScheduleId: '',
-          info: {
-            ...localNewScheduleCell.info,
-            startTime: '',
-            endTime: '',
-          },
-        },
-      };
-    }
+    // const { localNewScheduleCell, localItinerary } = store.state;
+    // store.state = {
+    //   localItinerary: {
+    //     ...localItinerary,
+    //     isShowNewScheuleCellBtn: false,
+    //   },
+    //   localNewScheduleCell: {
+    //     ...localNewScheduleCell,
+    //     selectedScheduleId: '',
+    //     info: {
+    //       ...localNewScheduleCell.info,
+    //       startTime: '',
+    //       endTime: '',
+    //     },
+    //   },
+    // };
   }
 
   dragCard(e) {
@@ -548,11 +548,6 @@ class Itinerary extends Component {
     } = store.state;
     if (e.target === dragTarget || !e.target.closest('.time-table__day-index__blank li')) return;
 
-    const newScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
-    const newTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
-    const newStartTime = newTime < 10 ? `0${newTime}:00` : `${newTime}:00`;
-    const newEndTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
-
     const {
       localItinerary,
       tripSchedule,
@@ -560,59 +555,53 @@ class Itinerary extends Component {
     } = store.state;
     const { itinerary } = tripSchedule;
 
-    const _schedule = itinerary.filter(sch => sch.id === selectedScheduleId)[0].cells;
-    const target = {
-      ..._schedule.filter(cell => cell.id === dragTarget)[0],
-      startTime: newStartTime,
-      endTime: newEndTime,
+    const dropScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    const dropTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
+
+    const _itinerary = itinerary.filter(sch => sch.id === selectedScheduleId)[0].cells;
+    let targetItinerary = _itinerary.filter(cell => cell.id === dragTarget)[0];
+    let { startTime, endTime } = targetItinerary;
+
+    const targetTimeGap = +endTime.slice(0, 2) - +startTime.slice(0, 2);
+
+    startTime = dropTime < 10 ? `0${dropTime}:00` : `${dropTime}:00`;
+    endTime = dropTime + targetTimeGap < 10 ? `0${dropTime + targetTimeGap}:00` : `${dropTime + targetTimeGap}:00`;
+
+    targetItinerary = {
+      ...targetItinerary,
+      startTime,
+      endTime,
     };
-    const rest = _schedule.filter(cell => cell.id !== dragTarget);
-    console.log(dragTarget, selectedScheduleId, newScheduleId);
-    if (selectedScheduleId === newScheduleId) {
-      store.state = {
-        localItinerary: {
-          ...localItinerary,
-          dragTarget: '',
-        },
-        tripSchedule: {
-          ...tripSchedule,
-          itinerary: itinerary.map(sch => {
-            if (sch.id === selectedScheduleId) {
-              return {
-                ...sch,
-                cells: sch.cells.map(cell => {
-                  if (cell.id === dragTarget) return { ...cell, startTime: newStartTime, endTime: newEndTime };
-                  return cell;
-                }),
-              };
-            }
+    const restSchedule = _itinerary.filter(cell => cell.id !== dragTarget);
 
-            return sch;
-          }),
-        },
-      };
-    } else {
-      store.state = {
-        localItinerary: {
-          ...localItinerary,
-          dragTarget: '',
-        },
-        tripSchedule: {
-          ...tripSchedule,
-          itinerary: itinerary.map(sch => {
-            if (sch.id === selectedScheduleId) {
-              return { ...sch, cells: rest };
-            }
+    const changeShedule = sch => {
+      if (sch.id === selectedScheduleId) {
+        return {
+          ...sch,
+          cells:
+            selectedScheduleId === dropScheduleId
+              ? sch.cells.map(cell => (cell.id === dragTarget ? targetItinerary : cell))
+              : restSchedule,
+        };
+      }
 
-            if (sch.id === newScheduleId) {
-              return { ...sch, cells: [...sch.cells, target] };
-            }
+      if (sch.id === dropScheduleId) {
+        return { ...sch, cells: [...sch.cells, targetItinerary] };
+      }
 
-            return sch;
-          }),
-        },
-      };
-    }
+      return sch;
+    };
+    // console.log(dragTarget, selectedScheduleId, dropScheduleId);
+    store.state = {
+      localItinerary: {
+        ...localItinerary,
+        dragTarget: '',
+      },
+      tripSchedule: {
+        ...tripSchedule,
+        itinerary: itinerary.map(sch => changeShedule(sch)),
+      },
+    };
   }
 
   addEventListener() {
@@ -626,7 +615,7 @@ class Itinerary extends Component {
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
       { type: 'drop', selector: '.time-table__day-index__blank li', handler: this.dropCard },
       { type: 'mouseover', selector: '.time-table', handler: this.mouseoverTimetable },
-      { type: 'mouseout', selector: '.time-table', handler: this.mouseoutTimetable },
+      { type: 'mouseout', selector: '.time-table__day-index', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',
