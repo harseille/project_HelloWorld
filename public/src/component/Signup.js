@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
+import store from '../store/store.js';
 import { signupSchema, vaildate, isChecked, initValue } from '../store/authStore.js';
 
 class Signup extends Component {
   render() {
     const { serverError, checked, email, password, nickname, passwordCheck, username, isValid } = signupSchema;
 
-    return `<form class="login signup" novalidate>
+    return `<form class="login signup only-signup" novalidate>
     <h2 class="login__title">sign up</h2>
     <div class="input__form signup__id__form">
       <label for="userId">아이디</label>
@@ -71,10 +72,13 @@ class Signup extends Component {
   </form>`;
   }
 
-  async fetch(e) {
+  async fetchSignup(e) {
+    if (!e.target.classList.contains('only-signup')) return;
+    console.log(e.target);
+    console.log(e.target, '나는 회원가입');
     e.preventDefault();
     const formData = new FormData(e.target);
-
+    console.log(Object.fromEntries([...formData.entries()]));
     try {
       const response = await axios.post('/auth/signup', Object.fromEntries([...formData.entries()]));
 
@@ -83,10 +87,11 @@ class Signup extends Component {
         ...store.state,
         userInfo: response.data,
       };
-
+      console.log('리다이렉트 일어나니?');
       window.history.pushState({}, '/main', window.location.origin + '/main');
+      console.log('리다이렉트 일어나니? 222222222222222222');
 
-      // initValue();
+      initValue();
     } catch (e) {
       const errorMsg = e.response.data.error;
       signupSchema.serverError = errorMsg;
@@ -95,11 +100,16 @@ class Signup extends Component {
     }
   }
 
+  backHistory() {
+    window.history.back();
+  }
+
   addEventListener() {
     return [
-      { type: 'submit', selector: '.signup', handler: this.fetch },
+      { type: 'submit', selector: '.signup', handler: this.fetchSignup },
       { type: 'change', selector: '.checkbox__form', handler: isChecked },
       { type: 'keyup', selector: '.signup', handler: _.throttle(vaildate, 400, { leading: false }) },
+      { type: 'click', selector: '.signup__back__btn', handler: this.backHistory },
     ];
   }
 }

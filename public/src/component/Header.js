@@ -58,7 +58,8 @@ class Header extends Component {
   }
 
   showMyPageModal(e) {
-    if (e.target.closest('li').id !== 'headerNav3') return;
+    if (e.target.closest('li')?.id !== 'headerNav3' || e.target.classList.contains('nav__list')) return;
+    console.log(e.target);
 
     console.log('showMyPageModal');
     // console.log(store.state);
@@ -78,7 +79,7 @@ class Header extends Component {
   }
 
   showNewTripScheduleModal(e) {
-    if (e.target.closest('li').id !== 'headerNav1') return;
+    if (e.target.closest('li')?.id !== 'headerNav1') return;
 
     console.log('showNewTripScheduleModal');
 

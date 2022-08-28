@@ -8,7 +8,7 @@ class Signin extends Component {
     const { email, password, isValid, serverError } = signinSchema;
 
     return `
-    <form class="login" novalidate>
+    <form class="login only-login" novalidate>
       <h2 class="login__title">log in</h2>
       <div class="input__form">
         <label for="userId">아이디</label>
@@ -38,6 +38,8 @@ class Signin extends Component {
   }
 
   async fetch(e) {
+    if (!e.target.classList.contains('only-login')) return;
+
     e.preventDefault();
     const formData = new FormData(e.target);
 

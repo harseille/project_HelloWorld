@@ -50,15 +50,13 @@ app.post('/tripSchedule', (req, res) => {
 app.post('/userInfo', (req, res) => {
   try {
     const accessToken = req.headers.authorization || req.cookies.accessToken;
-
     const decode = jwt.verify(accessToken, process.env.SECRET_KEY);
     const { email } = decode;
     const userInfo = users.findUser(email);
     const { userId, name, nickname, profilePic } = userInfo;
-
     res.send({ userId, email, name, nickname, profilePic });
   } catch (e) {
-    console.error(e);
+    res.status(401).send({});
   }
 });
 
@@ -101,7 +99,6 @@ app.post('/auth/signin', (req, res) => {
   const { email, password } = req.body;
 
   const userInfo = users.validateSignin(email, password);
-
   if (userInfo) {
     const { userId, email, name, nickname, profilePic } = userInfo;
     const accessToken = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1d' });
@@ -119,19 +116,16 @@ app.post('/auth/signin', (req, res) => {
 });
 
 app.post('/auth/signup', (req, res) => {
-  const { email, nickname, name, password } = req.body;
-
+  const { email, nickname, username, password } = req.body;
   // 중복 id check
   const userInfo = users.findUser(email);
 
-  console.log('무조건 찍어', users, '무조건 찍어 끝');
-
   if (!userInfo) {
     // id 생성
+    console.log(userInfo);
     const newUserId = users.generateUserId();
 
-    users.setUsers({ userId: newUserId, email, nickname, name, password });
-    console.log('성공시 찍어', users, '성공시 찍어 끝');
+    users.setUsers({ userId: newUserId, email, nickname, username, password });
 
     const accessToken = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
@@ -140,9 +134,8 @@ app.post('/auth/signup', (req, res) => {
       httpOnly: true,
     });
 
-    res.send({ userId: newUserId, email, name, nickname });
+    res.send({ userId: newUserId, email, username, nickname });
   } else {
-    console.log('실패시 찍어', users, '실패시 찍어끝');
     res.status(401).send({ error: '이미 등록된 이메일 입니다.' });
   }
 });

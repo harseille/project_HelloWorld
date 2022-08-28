@@ -1,4 +1,4 @@
-let users = [
+const users = [
   {
     userId: 1,
     email: 'test@test123.com',
@@ -21,10 +21,9 @@ const findUser = email => users.find(user => user.email === email);
 const validateSignin = (email, password) => users.find(user => user.email === email && user.password === password);
 
 const setUsers = newUser => {
-  users = [...users, newUser];
-  console.log('[setUsers]' + users);
+  users.push(newUser);
 };
 
 const generateUserId = () => Math.max(...users.map(user => user.userId), 0) + 1;
 
-module.exports = { findUser, validateSignin, setUsers, generateUserId };
+module.exports = { users, findUser, validateSignin, setUsers, generateUserId };

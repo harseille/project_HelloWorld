@@ -6,6 +6,7 @@ const observer = () => {
   const observered = new MutationObserver(mutations => {
     if (window.location.pathname === '/main') {
       (async () => {
+        console.log('동작동작');
         const _tripSchedules = await axios.get('/mainTripSchedules');
         store.state = { ...store.state.tripSchedules, tripSchedules: _tripSchedules.data };
       })();
@@ -19,6 +20,8 @@ const observer = () => {
         };
       })();
       // Todo 리팩토링 필요 로그인 회원가입 input 초기화 시점
+    } else if (window.location.pathname === '/signin' || window.location.pathname === '/signup') {
+      initValue();
     }
   });
   const config = { subtree: true, childList: true };
