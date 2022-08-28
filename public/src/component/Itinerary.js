@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 /* eslint-disable import/extensions */
 import Component from '../core/Component.js';
-import myMap from './myMap.js';
+// import myMap from './myMap.js';
 import store from '../store/store.js';
 import { NewScheduleCellPopup } from './index.js';
 
@@ -608,7 +608,7 @@ class Itinerary extends Component {
 
   addEventListener() {
     return [
-      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
+      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },

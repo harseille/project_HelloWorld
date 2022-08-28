@@ -2,10 +2,20 @@ import Component from '../../core/Component.js';
 
 class MainPost extends Component {
   render() {
-    const { tripScheduleId, author, authorProfilePic, title, summary, coverImg, content, likeCount, commentCount } =
-      this.props;
+    const {
+      tripScheduleId,
+      author,
+      authorProfilePic,
+      title,
+      summary,
+      coverImg,
+      content,
+      likeCount,
+      commentCount,
+      selectedCardId,
+    } = this.props;
     return `
-    <li class="travel-log__item" id="${tripScheduleId}">
+    <li class="travel-log__item ${selectedCardId === tripScheduleId ? 'selected' : ''}" id="${tripScheduleId}">
     <a href="${'/trip-planner-view/' + tripScheduleId}" class="travel-log__link">
       <div class="travel-log__item__top-section" style="background-image: url('${coverImg}')">
         <div class="travel-log__item__user-info">

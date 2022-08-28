@@ -20,7 +20,6 @@ class Calendar extends Component {
     const targetCurrentDate = new Date(currentDate.getFullYear(), month, date);
 
     startDate = startDate || new Date();
-    startDate = endDate || new Date();
 
     let _startDate = startDate;
     let _endDate = endDate;
@@ -197,6 +196,7 @@ class Calendar extends Component {
     let _itinerary = [];
     let _tripDays = 0;
 
+    // 31일치
     if (endDate !== null && _endDate < endDate) {
       // TODO: cells 정보 살리기
 
@@ -206,6 +206,12 @@ class Calendar extends Component {
         date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
         cells: [],
       }));
+
+      const __itinerary = _itinerary.map(dayPlan => {
+        if (dayPlan.date === store.state.tripSchedule.itinerary.date) {
+          dayPlan.cells = store.state.tripSchedule.itinerary.cells;
+        }
+      });
 
       store.state = {
         localDatePicker: {
@@ -217,9 +223,10 @@ class Calendar extends Component {
           [activeCalendar]: selectedDate,
           endDate: _endDate,
           tripDays: 31,
-          itinerary: _itinerary,
+          itinerary: __itinerary,
         },
       };
+      // 시작일로 맞추기
     } else if (endDate !== null && activeCalendar === 'startDate' && selectedDate > endDate) {
       store.state = {
         ...store.state,
@@ -242,6 +249,7 @@ class Calendar extends Component {
           ],
         },
       };
+      // 일반
     } else {
       if (activeCalendar === 'startDate') {
         _tripDays = Math.floor((endDate - selectedDate) / 86400000) + 1;
