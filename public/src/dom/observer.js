@@ -19,10 +19,9 @@ const observer = () => {
         };
       })();
       // Todo 리팩토링 필요 로그인 회원가입 input 초기화 시점
+    } else if (window.location.pathname === '/signin' || window.location.pathname === '/signup') {
+      initValue();
     }
-    //  else if (window.location.pathname === '/signin' || window.location.pathname === '/signup') {
-    //   initValue();
-    // }
     // else if (location.pathname.includes('/trip-planner-edit')) {
     //   // google map init
     //   console.log('google map init');
