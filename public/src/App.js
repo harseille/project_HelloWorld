@@ -25,15 +25,16 @@ class App extends Component {
     // userInfo
     try {
       const userInfo = await axios.post('/userInfo', {});
-      // const mainTripSchedules = await axios.get('/mainTripSchedules');
-      // if (typeof userInfo === 'string') return;
-
       store.state = {
         userInfo: { ...store.state.userInfo, ...userInfo.data },
-        // tripSchedules: mainTripSchedules.data,
       };
     } catch (e) {
-      console.error(e);
+    } finally {
+      // Todo finally 에서 처리시 render가 두 번 됨 리팩토링 필요
+      const mainTripSchedules = await axios.get('/mainTripSchedules');
+      store.state = {
+        tripSchedules: mainTripSchedules.data,
+      };
     }
   }
 

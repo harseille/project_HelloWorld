@@ -6,6 +6,7 @@ const observer = () => {
   const observered = new MutationObserver(mutations => {
     if (window.location.pathname === '/main') {
       (async () => {
+        console.log('동작동작');
         const _tripSchedules = await axios.get('/mainTripSchedules');
         store.state = { ...store.state.tripSchedules, tripSchedules: _tripSchedules.data };
       })();

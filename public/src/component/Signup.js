@@ -100,11 +100,16 @@ class Signup extends Component {
     }
   }
 
+  backHistory() {
+    window.history.back();
+  }
+
   addEventListener() {
     return [
       { type: 'submit', selector: '.signup', handler: this.fetchSignup },
       { type: 'change', selector: '.checkbox__form', handler: isChecked },
       { type: 'keyup', selector: '.signup', handler: _.throttle(vaildate, 400, { leading: false }) },
+      { type: 'click', selector: '.signup__back__btn', handler: this.backHistory },
     ];
   }
 }
