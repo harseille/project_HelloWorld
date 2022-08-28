@@ -54,42 +54,47 @@
         width: 100%;
         height: calc(var(--time--height) * 1px);
 
+        &.first {
+          .itinerary-card {
+            position: relative;
+            z-index: 1;
+            border-radius: 6px 6px 0 0;
+            &-emph {
+              border-radius: 6px 0 0 0;
+            }
+          }
+        }
+
         &.last {
-          padding-bottom: 4px;
+          padding-bottom: 2px;
+
+          .itinerary-card {
+            border-radius: 0 0 6px 6px;
+            &-emph {
+              height: calc(100% - 2px);
+              border-radius: 0 0 0 6px;
+            }
+          }
+        }
+
+        &.first-last {
+          padding-bottom: 2px;
+
+          .itinerary-card {
+            position: relative;
+            z-index: 1;
+            border-radius: 6px;
+            &-emph {
+              height: calc(100% - 2px);
+              border-radius: 6px 0 0 6px;
+            }
+          }
         }
       }
 
       .itinerary-card {
         padding-top: 8px;
         height: 100%;
-
-        &.first {
-          position: relative;
-          z-index: 1;
-          border-radius: 6px 6px 0 0;
-
-          .itinerary-card-emph {
-            border-radius: 6px 0 0 0;
-          }
-        }
-
-        &.last {
-          border-radius: 0 0 6px 6px;
-          .itinerary-card-emph {
-            height: calc(100% - 4px);
-            border-radius: 0 0 0 6px;
-          }
-        }
-
-        &.first-last {
-          position: relative;
-          z-index: 1;
-          border-radius: 6px;
-
-          .itinerary-card-emph {
-            border-radius: 6px 0 0 6px;
-          }
-        }
 
         &--check {
           width: 100%;
