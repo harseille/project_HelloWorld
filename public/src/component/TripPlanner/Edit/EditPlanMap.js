@@ -1,7 +1,8 @@
 /* eslint-disable prefer-const */
 /* eslint-disable import/extensions */
 import Component from '../../../core/Component.js';
-import myMap from '../../myMap.js';
+// import myMap from '../../myMap.js';
+import { initEditMap } from '../../myMap.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
 
@@ -10,28 +11,28 @@ class Itinerary extends Component {
   //   const format = n => (n < 10 ? '0' + n : n + '');
   //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
   // }
-  init() {
-    // const { startDate, endDate, itinerary } = store.state.tripSchedule;
-    // let middleDays = startDate - endDate;
-    // let id = 1;
-    // // 기본 셋
-    // let initSchedule = {
-    //   id,
-    //   country: '',
-    //   date: startDate.getDate(),
-    //   day: startDate.getDay(),
-    //   cells: [],
-    // };
-    // if (itinerary.length === 0) {
-    //   store.state = {
-    //     tripSchedule: {
-    //       ...store.state.tripSchedule,
-    //       itinerary: initSchedule,
-    //     },
-    //   };
-    // }
-    // if (id < middleDays) id += 1;
-  }
+  // init() {
+  // const { startDate, endDate, itinerary } = store.state.tripSchedule;
+  // let middleDays = startDate - endDate;
+  // let id = 1;
+  // // 기본 셋
+  // let initSchedule = {
+  //   id,
+  //   country: '',
+  //   date: startDate.getDate(),
+  //   day: startDate.getDay(),
+  //   cells: [],
+  // };
+  // if (itinerary.length === 0) {
+  //   store.state = {
+  //     tripSchedule: {
+  //       ...store.state.tripSchedule,
+  //       itinerary: initSchedule,
+  //     },
+  //   };
+  // }
+  // if (id < middleDays) id += 1;
+  // }
 
   render() {
     const {
@@ -498,7 +499,8 @@ class Itinerary extends Component {
 
   addEventListener() {
     return [
-      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
+      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
+      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initEditMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },

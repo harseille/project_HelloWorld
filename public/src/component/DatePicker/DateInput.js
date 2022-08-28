@@ -35,8 +35,6 @@ class DateInput extends Component {
     const targetDate =
       e.target?.value.split('-').join(',') === '' ? new Date() : new Date(e.target?.value.split('-').join(','));
 
-    console.log(e.target.nextElementSibling.id);
-    console.log(targetDate);
     store.state = {
       localDatePicker: {
         activeCalendar: e.target.nextElementSibling.id,

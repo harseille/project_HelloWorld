@@ -6,6 +6,13 @@ const store = {
       isShowModal: '',
       selectedTab: 'chart',
     },
+    localMain: {
+      selectedCardId: 0,
+    },
+    localMap: {
+      editTripScheduleMap: null,
+      viewTripScheduleMap: null,
+    },
     localItinerary: {
       currentId: '',
       startId: 0,
@@ -120,6 +127,25 @@ const store = {
           cells: [],
         },
       ],
+    },
+    viewTripSchedule: {
+      tripScheduleId: 0,
+      authorId: '',
+      author: '',
+      authorProfilePic: '',
+      title: '',
+      summary: '', // TODO: 어떻게 보여줄지, 관리 포인트를 줄이기위해 없애는게 맞아보임
+      tripDays: 0,
+      startDate: null, // * Date 객체
+      endDate: null, // * Date 객체
+      createdDate: null,
+      numberOfPeople: 0,
+      coverImg: '',
+      content: '',
+      isLiked: false,
+      likeCount: 0,
+      commentCount: 0,
+      itinerary: [],
     },
     tripSchedules: [],
   },

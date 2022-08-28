@@ -4,20 +4,22 @@ import store from '../store/store.js';
 import MainPost from './Main/MainPost.js';
 
 class Main extends Component {
-  async inittest() {
-    console.log('popstate');
-    try {
-      const mainTripSchedules = await axios.get('/mainTripSchedules');
+  // async inittest() {
+  //   console.log('popstate');
+  //   try {
+  //     const mainTripSchedules = await axios.get('/mainTripSchedules');
 
-      store.state = {
-        tripSchedules: { ...store.state.tripSchedule, ...mainTripSchedules.data },
-      };
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  //     store.state = {
+  //       tripSchedules: { ...store.state.tripSchedule, ...mainTripSchedules.data },
+  //     };
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   render() {
+    const { selectedCardId } = store.state.localMain;
+
     return `
     <div class="main">
     <section class="hot-topic">
@@ -112,7 +114,7 @@ class Main extends Component {
       </form>
       <div class="travel-log__body">
         <ul class="travel-log__list">
-          ${store.state.tripSchedules.map(schedule => new MainPost(schedule).render()).join('')}
+          ${store.state.tripSchedules.map(schedule => new MainPost({ ...schedule, selectedCardId }).render()).join('')}
         </ul>
       </div>
     </section>
@@ -126,6 +128,13 @@ class Main extends Component {
     const path = e.target.closest('.travel-log__link').getAttribute('href');
 
     window.history.pushState({}, path, window.location.origin + path);
+
+    store.state = {
+      localMain: {
+        ...store.state.localMain,
+        selectedCardId: e.target.closest('li').id,
+      },
+    };
     // render();
   }
 

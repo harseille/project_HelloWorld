@@ -1,7 +1,7 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
-import myMap from '../../myMap.js';
+// import myMap from '../../myMap.js';
 
 class ViewPlanMap extends Component {
   // formattedDate(date) {
@@ -163,7 +163,7 @@ class ViewPlanMap extends Component {
 
   addEventListener() {
     return [
-      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
+      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
     ];
