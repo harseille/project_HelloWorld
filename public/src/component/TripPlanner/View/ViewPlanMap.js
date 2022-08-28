@@ -14,25 +14,9 @@ class ViewPlanMap extends Component {
     const {
       localCommon: { isShowModal },
       localItinerary,
-      localNewScheduleCell: {
-        selectedScheduleId,
-        info: { startTime },
-      },
       tripSchedule: { itinerary },
     } = store.state;
-    const { currentId, startId, isShowNewScheuleCellBtn } = localItinerary;
-    const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
-    // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
-    // const setSchedule = {
-    //   id: startId + 1,
-    //   country: '영국',
-    //   date: startDate.getDate(),
-    //   day: startDate.getDay(),
-    //   cells: [],
-    // };
-
-    const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
-
+    const { currentId, startId } = localItinerary;
     const timeList = [
       '00:00',
       '01:00',
@@ -61,22 +45,29 @@ class ViewPlanMap extends Component {
       '24:00',
     ];
 
+    const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
+    const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // prettier-ignore
     return `
     <div class="itinerary__container">
-      <!-- google map -->
       <div id="googleMap" class="map"></div> 
       <!-- carousel -->
       <div class="carousel">
         <div class="carousel__days">
+        ${
+          _schedule.map(sched =>  `
+            <div class="carousel__day-index" data-id=${sched.id}>
+              Day ${sched.id} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
+              <div>${sched.country}</div>
+            </div>`).join('')
+        }
+        </div>
       </div>
       <button class="prev--btn carousel--btn">〈</button>
       <button class="next--btn carousel--btn">〉</button>
     </div>
-
-    <!-- time table -->
     <div class="time-table">
       <ul class="time-table__times">
         ${timeList.map(time => `<li class="time-table__time-item">
@@ -105,8 +96,7 @@ class ViewPlanMap extends Component {
               timeGap *= cellEndTime - cellStartTime
             }
             
-            // timeItem 시간이 cells의 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가 
-            // 세부 일정이 없는 시간이고 mouseover되었으면 button.itinerary-card--add를 추가
+            // timeItem 시간이 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가 
             return `<li data-time="${i}">
               ${isInculdedCell ? 
                 `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true" style="height:${timeGap}px;">
@@ -126,14 +116,7 @@ class ViewPlanMap extends Component {
         </ul>
       `}).join('')}
       </div>
-    </div>
-
-    <!-- private & public button -->
-    <div class="itinerary-btns">
-      <button class="itinerary-btns--private">나만의 일정</button>
-      <button class="itinerary-btns--public">다른 사람들에게도 공유하기</button>
-      </div>
-      
+    </div>  
       </div>${$newScheduleCellPopup}`
   }
 

@@ -41,9 +41,7 @@ class NewScheduleCellPopup extends Component {
   render() {
     const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { type, startTime, endTime, location, memo, todos } = localNewScheduleCell.info;
-    const { newScheduleCellDate } = tripSchedule;
-    const { activeCalendar, currentDate } = localDatePicker;
-    const { startDate, endDate } = tripSchedule;
+    const { newScheduleCellDate, startDate, endDate, itinerary } = tripSchedule;
 
     const typeList = [
       { id: 'type__accomodation', value: 'accomodation', content: '숙박' },
@@ -80,14 +78,36 @@ class NewScheduleCellPopup extends Component {
       '24:00',
     ];
 
+    const [targetItinerary] = itinerary.filter(
+      sch =>
+        sch.date.getFullYear() === newScheduleCellDate.getFullYear() &&
+        sch.date.getMonth() === newScheduleCellDate.getMonth() &&
+        sch.date.getDate() === newScheduleCellDate.getDate()
+    );
+
+    let startUnabledTime = targetItinerary.cells.map(cell => {
+      const st = +cell.startTime.slice(0, 2);
+      const gap = +cell.endTime.slice(0, 2) - st;
+
+      return new Array(gap).fill(1).map((_, i) => st + i);
+    });
+    startUnabledTime = [...new Set(startUnabledTime.flat())].sort((a, b) => a - b);
+
+    let endUnabledTime = targetItinerary.cells.map(cell => {
+      const st = +cell.startTime.slice(0, 2);
+      const gap = +cell.endTime.slice(0, 2) - st - 1;
+
+      return new Array(gap).fill(1).map((_, i) => st + 1 + i);
+    });
+    endUnabledTime = [...new Set(endUnabledTime.flat())].sort((a, b) => a - b);
+
     const $datePicker = new CellDatePicker({
+      ...localDatePicker,
       calendarId: 'newScheduleCellDate',
-      activeCalendar,
       inputPlaceholder: 'yyyy-mm-dd',
       labelContent: 'Select a day',
       unableType: 'term',
       date: newScheduleCellDate,
-      currentDate,
       startDate,
       endDate,
       toggle: this.toggleDatePicker,
@@ -118,16 +138,22 @@ class NewScheduleCellPopup extends Component {
             <div class="time__form__select">
               <label for="newCard__startTime">Start with</label>
               <select name="startTime" id="newCard__startTime" value="${startTime}">
-                ${timeList.map(time => `<option value="${time}" ${startTime === time? 'selected':''}>${time}</option>`)}
+                ${timeList.map(time => {
+                  const isDisabled = startUnabledTime.includes(+time.slice(0,2));
+                  return `<option value="${time}" ${startTime === time? 'selected':''} ${isDisabled? 'disabled': ''}>${time}</option>`
+                }).join('')}
               </select>
             </div>
             <div class="time__form__select">
               <label for="newCard__endTime">End with</label>
               <select name="endTime" id="newCard__endTime" value="${endTime}">
                 ${timeList.map(time => {
-                  const isDisabled = +startTime.slice(0, 2) >= +time.slice(0,2);
+                  const st = +startTime.slice(0, 2)
+                  const ct = +time.slice(0,2) 
+                  const [unableFromStart, ...rest] = endUnabledTime.filter(t => st + 1 < t)
+                  const isDisabled = ct <= st ||  unableFromStart <= ct;
                   return `<option value="${time}" ${endTime === time? 'selected':''} ${isDisabled? 'disabled': ''}>${time}</option>`
-                })}
+                }).join('')}
               </select>
             </div>
           </div>
@@ -170,6 +196,9 @@ class NewScheduleCellPopup extends Component {
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
+    const country = localNewScheduleCell.info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+
+    document.body.style.overflow = 'auto';
 
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
@@ -181,7 +210,7 @@ class NewScheduleCellPopup extends Component {
           const scheDate = sch.date.getDate();
 
           if (scheYear === selectedYear && scheMonth === selectedMonth && scheDate === selectedDate) {
-            return { ...sch, cells: [...sch.cells, { id, ...localNewScheduleCell.info, article: {} }] };
+            return { ...sch, country, cells: [...sch.cells, { id, ...localNewScheduleCell.info, article: {} }] };
           }
 
           return sch;
@@ -196,8 +225,9 @@ class NewScheduleCellPopup extends Component {
 
   closeModal(e) {
     if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
-    console.log('closeModal');
+
     const { localCommon } = store.state;
+    document.body.style.overflow = 'auto';
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
     };
@@ -230,11 +260,21 @@ class NewScheduleCellPopup extends Component {
 
   initAutoComplete(e) {
     // strictBounds: 쿼리가 전송될 때 자동 완성 위젯이 자동 완성 위젯의 경계 내에 있는 장소만 반환해야 함
-    // false(기본값)로 설정하면 결과가 경계 내에 포함된 장소로 편향되지만 이에 국한되지는 않습니다.
-    // types : 반환될 예측 유형
-    // establishment : 비즈니스 결과만 반환하도록 장소 자동 완성 서비스에 지시합니다.
+    /* 
+      field 
+     -false(기본값)로 설정하면 결과가 경계 내에 포함된 장소로 편향되지만 이에 국한되지는 않습니다.
+     -all: 모든 데이터 반환. 
+     -addr_address : autocomplete로 나오는 value값.
+     -geometry : location, viewport와 같은 google map의 정보.
+     -name : 에펠탑과 같은 검색한 장소 결과값.
+    */
+    /* 
+      types
+      -반환될 예측 유형
+      -establishment : 비즈니스 결과만 반환하도록 장소 자동 완성 서비스에 지시합니다.
+    */
     const options = {
-      fields: ['formatted_address', 'geometry', 'name'],
+      fields: ['adr_address', 'formatted_address', 'geometry', 'name'],
       strictBounds: false,
       types: ['establishment'],
     };

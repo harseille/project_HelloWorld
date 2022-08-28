@@ -119,10 +119,15 @@
         }
 
         select {
+          background-color: $white;
           background-image: url(/assets/images/select_time.svg), url(/assets/images/select_arrow.svg);
           background-repeat: no-repeat;
           background-position: left 15px center, right 15px center;
           background-size: 18px, 14px;
+        }
+
+        option:disabled {
+          color: $gray300;
         }
       }
     }
