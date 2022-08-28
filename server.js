@@ -75,7 +75,6 @@ app.get('/mainTripSchedules', (req, res) => {
   try {
     console.log('[server] mainTripSchedules');
     const responseSchedules = tripSchedules.mainTripSchedules();
-    console.log(responseSchedules);
     res.send(responseSchedules);
   } catch (e) {
     console.error(e);
