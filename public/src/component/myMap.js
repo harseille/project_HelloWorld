@@ -102,51 +102,16 @@
 
 import store from '../store/store.js';
 
-// 선택한 일정을 시간 순서에 따라 연결한다.
-const setJourneyLine = (page, journeyCoordinates) => {
-  console.log('setJourneyLine');
-
-  const journeyPath = new google.maps.Polyline({
-    path: journeyCoordinates,
-    geodesic: true,
-    strokeColor: '#9c5eff',
-    strokeOpacity: 1.0,
-    strokeWeight: 5,
-  });
-
-  console.log(journeyCoordinates);
-  console.log(store.state.localMap);
-
-  if (page === 'viewPlanSchedule') {
-    journeyPath.setMap(store.state.localMap.viewTripScheduleMap);
-    journeyCoordinates.forEach(
-      coord =>
-        new google.maps.Marker({
-          position: coord,
-          map: store.state.localMap.viewTripScheduleMap,
-        })
-    );
-  } else if (page === 'editPlanSchedule') {
-    journeyCoordinates.forEach(
-      coord =>
-        new google.maps.Marker({
-          position: coord,
-          map: store.state.localMap.editTripScheduleMap,
-        })
-    );
-    journeyPath.setMap(store.state.localMap.editTripScheduleMap);
-  }
-};
-
 const initMap = page => {
   // 현제위치를 설정한다.
-
   console.log('View google map init');
   (async () => {
     const { geolocation } = navigator;
+    let map = null;
+
     const success = position => {
       const { latitude, longitude } = position.coords;
-      // console.log(latitude, longitude);
+
       const coords = new google.maps.LatLng(latitude, longitude);
       const mapOptions = {
         zoom: 15,
@@ -154,29 +119,48 @@ const initMap = page => {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
       };
 
-      if (page === 'viewPlanSchedule') {
-        store.state.localMap.viewTripScheduleMap = new google.maps.Map(
-          document.getElementById('googleMap'),
-          mapOptions
-        );
-      } else if (page === 'editPlanSchedule') {
-        store.state.localMap.editTripScheduleMap = new google.maps.Map(
-          document.getElementById('googleMap'),
-          mapOptions
-        );
-      }
-    };
+      map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
+      const cellInfoList = store.state.tripSchedule.itinerary
+        .map(dayPlan =>
+          dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
+        )
+        .flat();
+
+      console.log(cellInfoList);
+
+      const journey = cellInfoList.map(cellInfo => cellInfo.latLng);
+      const icon = {
+        accomodation: '/assets/images/map/map-marker-hotel.png',
+        sightseeing: '/assets/images/map/map-marker-footprint.png',
+        transportation: '/assets/images/map/map-marker-traffic.png',
+        etc: '/assets/images/map/map-marker-pin.png',
+      };
+
+      const journeyPath = new google.maps.Polyline({
+        path: journey,
+        geodesic: true,
+        strokeColor: '#9c5eff',
+        strokeOpacity: 1.0,
+        strokeWeight: 5,
+      });
+
+      cellInfoList.forEach(
+        coord =>
+          new google.maps.Marker({
+            position: coord.latLng,
+            icon: icon[coord.type],
+            map,
+          })
+      );
+      journeyPath.setMap(map);
+    };
     const failure = () => {
       console.log('Fail to load Google Map');
     };
-
-    geolocation.getCurrentPosition(success, failure);
-    const journey = store.state.tripSchedule.itinerary
-      .map(dayPlan => dayPlan.cells.map(cell => cell.location.latLng))
-      .flat();
-    setJourneyLine(page, journey);
+    await geolocation.getCurrentPosition(success, failure);
   })();
 };
 
-export { initMap, setJourneyLine };
+export { initMap };
+// export { initMap, setJourneyLine };

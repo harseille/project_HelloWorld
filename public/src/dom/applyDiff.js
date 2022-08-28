@@ -1,8 +1,8 @@
 const updateDOM = (parentNode, realNode, virtualNode) => {
-  if (realNode?.classList?.contains('map')) {
-    console.log(realNode);
-    return;
-  }
+  // if (realNode?.classList?.contains('map')) {
+  //   console.log(realNode);
+  //   return;
+  // }
 
   if (!realNode && virtualNode) {
     parentNode.appendChild(virtualNode);
