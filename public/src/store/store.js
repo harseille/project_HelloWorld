@@ -7,7 +7,6 @@ const store = {
       selectedTab: 'chart',
     },
     localItinerary: {
-      isShowNewScheuleCellBtn: false,
       currentId: '',
       startId: 0,
       dragTarget: '',
@@ -129,7 +128,7 @@ const store = {
   },
   set state(newState) {
     this._store = { ...this._store, ...newState };
-    console.log('store');
+    // console.log('store');
     render();
   },
 

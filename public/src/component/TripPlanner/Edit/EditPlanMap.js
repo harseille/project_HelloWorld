@@ -39,12 +39,11 @@ class Itinerary extends Component {
       localItinerary,
       localNewScheduleCell: {
         selectedScheduleId,
-        info: { startTime },
+        info: { startTime, endTime },
       },
       tripSchedule: { itinerary },
     } = store.state;
     const { currentId, startId, isShowNewScheuleCellBtn } = localItinerary;
-    const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
     // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
     // const setSchedule = {
     //   id: startId + 1,
@@ -53,9 +52,6 @@ class Itinerary extends Component {
     //   day: startDate.getDay(),
     //   cells: [],
     // };
-
-    const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
-    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const timeList = [
       '00:00',
@@ -85,6 +81,9 @@ class Itinerary extends Component {
       '24:00',
     ];
 
+    const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
+    const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     // prettier-ignore
     return `
     <div class="itinerary__container">
@@ -97,7 +96,7 @@ class Itinerary extends Component {
           _schedule.map(sched =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
 
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day${sched.id}<span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${sched.id} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
 
               
               ${currentId === sched.id ? `
@@ -132,41 +131,31 @@ class Itinerary extends Component {
       </ul>
       <div class="time-table__day-index">
       ${_schedule.map(sch => {
-        const { cells, id } = sch
-        const cellStartTimeArr = cells.map(cell => cell.startTime);
+        const { cells, id } = sch;
+        const cellTimeFromToArr = cells.map(cell => [+cell.startTime.slice(0,2), +cell.endTime.slice(0,2)])
 
         return `
         <ul class="time-table__day-index__blank" data-id="${id}">
           ${timeList.map((timeItem, i, self) => {
             if(i === self.length - 1) return '';
-
-            const idx = cellStartTimeArr.indexOf(timeItem)
+            const time = +timeItem.slice(0, 2)
+            const idx = cellTimeFromToArr.findIndex(([startTime, endTime]) => startTime <= time && time < endTime)
             const isInculdedCell = idx !== -1
-            let timeGap = 62;
-
-            // 시간에 따른 item 높이 조절
-            if(isInculdedCell){
-              const cellStartTime = +cells[idx].startTime.slice(0,2)
-              const cellEndTime = +cells[idx].endTime.slice(0,2)
-              timeGap *= cellEndTime - cellStartTime
-            }
             
             // timeItem 시간이 cells의 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가 
             // 세부 일정이 없는 시간이고 mouseover되었으면 button.itinerary-card--add를 추가
             return `<li data-time="${i}">
               ${isInculdedCell ? 
-                `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true" style="height:${timeGap}px;">
+                `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true" ${cells[idx].startTime === timeItem? 'style="position: relative; z-index: 1;"': ''}>
                   <div class="itinerary-card-emph"></div>
-                  <div class="itinerary-card--check__content">
-                    <div class="itinerary-card--check__title">
-                      ${cells[idx].location.name}
-                    </div>
-                    <div class="itinerary-card--check__memo">
-                      ${cells[idx].memo}
-                    </div>
-                  </div>
+                  ${
+                    cells[idx].startTime === timeItem ? `<div class="itinerary-card--check__content">
+                      <div class="itinerary-card--check__title">${cells[idx].location.name}</div>
+                      <div class="itinerary-card--check__memo">${cells[idx].memo}</div>
+                    </div>`: ''
+                  }
                 </div>` :
-                (isShowNewScheuleCellBtn && selectedScheduleId === id && startTime === timeItem ?'<button class="itinerary-card--add">+</button>': '')
+                (selectedScheduleId === id && startTime === timeItem && !isInculdedCell ?'<button class="itinerary-card--add">+</button>': '')
                 }
             </li>`
           }).join('')}
@@ -334,19 +323,17 @@ class Itinerary extends Component {
   }
 
   openNewCellModal() {
-    const { localCommon, localItinerary, localNewScheduleCell, tripSchedule } = store.state;
+    const { localCommon, localNewScheduleCell, tripSchedule } = store.state;
     const { selectedScheduleId, info } = localNewScheduleCell;
     const { itinerary } = tripSchedule;
     const { date } = itinerary.filter(sch => sch.id === selectedScheduleId)[0];
+
+    document.body.style.overflow = 'hidden';
 
     store.state = {
       localCommon: {
         ...localCommon,
         isShowModal: 'newScheduleCellPopup',
-      },
-      localItinerary: {
-        ...localItinerary,
-        isShowNewScheuleCellBtn: false,
       },
       localNewScheduleCell: {
         ...localNewScheduleCell,
@@ -405,31 +392,30 @@ class Itinerary extends Component {
   }
 
   mouseoutTimetable(e) {
-    //   if (
-    //     !(
-    //       e.target.matches('.time-table__day-index') ||
-    //       e.target.matches('.time-table__day-index__blank li') ||
-    //       e.target.matches('.time-table__day-index__blank li button')
-    //     )
-    //   ) {
-    //     console.log('mouseout');
-    //     const { localNewScheduleCell, localItinerary } = store.state;
-    //     store.state = {
-    //       localItinerary: {
-    //         ...localItinerary,
-    //         isShowNewScheuleCellBtn: false,
+    // if (
+    //   !(
+    //     e.target.matches('.time-table__day-index__blank li') ||
+    //     e.target.matches('.time-table__day-index__blank li button')
+    //   )
+    // ) {
+    //   console.log('mouseout');
+    //   const { localNewScheduleCell, localItinerary } = store.state;
+    //   store.state = {
+    //     localItinerary: {
+    //       ...localItinerary,
+    //       isShowNewScheuleCellBtn: false,
+    //     },
+    //     localNewScheduleCell: {
+    //       ...localNewScheduleCell,
+    //       selectedScheduleId: '',
+    //       info: {
+    //         ...localNewScheduleCell.info,
+    //         startTime: '',
+    //         endTime: '',
     //       },
-    //       localNewScheduleCell: {
-    //         ...localNewScheduleCell,
-    //         selectedScheduleId: '',
-    //         info: {
-    //           ...localNewScheduleCell.info,
-    //           startTime: '',
-    //           endTime: '',
-    //         },
-    //       },
-    //     };
-    //   }
+    //     },
+    //   };
+    // }
   }
 
   dragCard(e) {
