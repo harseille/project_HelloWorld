@@ -8,7 +8,7 @@ import CellDatePicker from './DatePicker/CellDatePicker.js';
 //   isShowModal: '',
 // },
 // localNewScheduleCell: {
-//   selectedScheduleId: '',
+//   selectedItineraryId: '',
 //   info: {
 //     type: '',
 //     startTime: '',
@@ -27,17 +27,6 @@ import CellDatePicker from './DatePicker/CellDatePicker.js';
 // };
 
 class NewScheduleCellPopup extends Component {
-  toggleDatePicker(e) {
-    if (!e.target.matches('.datePicker')) return;
-    console.log(store.state.localDatePicker);
-    store.state = {
-      localDatePicker: {
-        ...store.state.localDatePicker,
-        activeCalendar: 'newScheduleCellDate',
-      },
-    };
-  }
-
   render() {
     const { localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { type, startTime, endTime, location, memo, todos } = localNewScheduleCell.info;
@@ -50,31 +39,12 @@ class NewScheduleCellPopup extends Component {
       { id: 'type__etc', value: 'etc', content: '기타' },
     ];
 
+    // prettier-ignore
     const timeList = [
-      '00:00',
-      '01:00',
-      '02:00',
-      '03:00',
-      '04:00',
-      '05:00',
-      '06:00',
-      '07:00',
-      '08:00',
-      '09:00',
-      '10:00',
-      '11:00',
-      '12:00',
-      '13:00',
-      '14:00',
-      '15:00',
-      '16:00',
-      '17:00',
-      '18:00',
-      '19:00',
-      '20:00',
-      '21:00',
-      '22:00',
-      '23:00',
+      '00:00', '01:00', '02:00', '03:00', '04:00', '05:00',
+      '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
+      '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
+      '18:00', '19:00', '20:00', '21:00', '22:00', '23:00',
       '24:00',
     ];
 
@@ -85,22 +55,8 @@ class NewScheduleCellPopup extends Component {
         sch.date.getDate() === newScheduleCellDate.getDate()
     );
 
-    let startUnabledTime = targetItinerary.cells.map(cell => {
-      const st = +cell.startTime.slice(0, 2);
-      const gap = +cell.endTime.slice(0, 2) - st;
-
-      return new Array(gap).fill(1).map((_, i) => st + i);
-    });
-    startUnabledTime = [...new Set(startUnabledTime.flat())].sort((a, b) => a - b);
-
-    let endUnabledTime = targetItinerary.cells.map(cell => {
-      const st = +cell.startTime.slice(0, 2);
-      const gap = +cell.endTime.slice(0, 2) - st - 1;
-
-      return new Array(gap).fill(1).map((_, i) => st + 1 + i);
-    });
-    endUnabledTime = [...new Set(endUnabledTime.flat())].sort((a, b) => a - b);
-
+    const startUnabledTime = this.formatUnableTime(targetItinerary, 0);
+    const endUnabledTime = this.formatUnableTime(targetItinerary, 1);
     const $datePicker = new CellDatePicker({
       ...localDatePicker,
       calendarId: 'newScheduleCellDate',
@@ -151,7 +107,7 @@ class NewScheduleCellPopup extends Component {
                 ${timeList.map(time => {
                   const st = +startTime.slice(0, 2)
                   const ct = +time.slice(0,2) 
-                  const [unableFromStart, ...rest] = endUnabledTime.filter(t => st + 1 < t)
+                  const [unableFromStart] = endUnabledTime.filter(t => st + 1 < t)
                   const isDisabled = ct <= st ||  unableFromStart <= ct;
                   return `<option value="${time}" ${endTime === time? 'selected':''} ${isDisabled? 'disabled': ''}>${time}</option>`
                 }).join('')}
@@ -187,35 +143,62 @@ class NewScheduleCellPopup extends Component {
   </div>`;
   }
 
+  formatUnableTime(itinerary, restNum) {
+    const unableTime = itinerary.cells
+      .map(({ startTime, endTime }) => {
+        const st = +startTime.slice(0, 2);
+        const gap = +endTime.slice(0, 2) - st - restNum;
+
+        return Array.from({ length: gap }, (_, i) => st + i + restNum);
+      })
+      .flat();
+
+    return [...new Set(unableTime)].sort((a, b) => a - b);
+  }
+
+  toggleDatePicker(e) {
+    if (!e.target.matches('.newCard__popup datePicker')) return;
+
+    store.state = {
+      localDatePicker: {
+        ...store.state.localDatePicker,
+        activeCalendar: 'newScheduleCellDate',
+      },
+    };
+  }
+
   addSchedule(e) {
-    console.log('addSchedule');
     e.preventDefault();
-    const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const {
+      localCommon,
+      localNewScheduleCell: { info },
+      localDatePicker,
+      tripSchedule,
+    } = store.state;
     const { itinerary, newScheduleCellDate } = tripSchedule;
-    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
-    // console.log(newScheduleCellDate);
+
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
-    const country = localNewScheduleCell.info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
 
+    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
+    const country = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+
+    // body의 scroll
     document.body.style.overflow = 'auto';
 
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
       tripSchedule: {
         ...tripSchedule,
-        itinerary: itinerary.map(sch => {
-          const scheYear = sch.date.getFullYear();
-          const scheMonth = sch.date.getMonth();
-          const scheDate = sch.date.getDate();
-
-          if (scheYear === selectedYear && scheMonth === selectedMonth && scheDate === selectedDate) {
-            return { ...sch, country, cells: [...sch.cells, { id, ...localNewScheduleCell.info, article: {} }] };
-          }
-
-          return sch;
-        }),
+        itinerary: itinerary.map(iti =>
+          // 선택한 날짜와 iti의 날짜과 같을 경우 객체 추가
+          iti.date.getFullYear() === selectedYear &&
+          iti.date.getMonth() === selectedMonth &&
+          iti.date.getDate() === selectedDate
+            ? { ...iti, country, cells: [...iti.cells, { id, ...info, article: {} }] }
+            : iti
+        ),
       },
       localDatePicker: {
         ...localDatePicker,
@@ -228,7 +211,10 @@ class NewScheduleCellPopup extends Component {
     if (!e.target.matches('.newCard.dimmed__layer') && !e.target.matches('.newCard .modal__header__close__btn')) return;
 
     const { localCommon } = store.state;
+
+    // body의 scroll
     document.body.style.overflow = 'auto';
+
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
     };
@@ -241,12 +227,15 @@ class NewScheduleCellPopup extends Component {
     let { endTime } = info;
 
     if (name === 'startTime') {
-      let newTime = +value.slice(0, 2);
+      const { formattedTime } = this.props;
+      const newTime = +value.slice(0, 2);
+
+      // 새로 선택된 startTime > endTime 면 endTime을 startTime + 1로 설정.
       const isPassed = newTime >= +endTime.slice(0, 2);
-      newTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
-      endTime = isPassed ? newTime : endTime;
+      endTime = isPassed ? formattedTime(newTime + 1) : endTime;
     }
 
+    // [name]이 endTime도 될 수 있으므로 가장 뒤에 [name]: value 작성.
     store.state = {
       localNewScheduleCell: {
         ...localNewScheduleCell,
@@ -280,6 +269,8 @@ class NewScheduleCellPopup extends Component {
       types: ['establishment'],
     };
     const autocomplete = new google.maps.places.Autocomplete(e.target, options);
+
+    // place_changed는 Google Map API의 이벤트
     autocomplete.addListener('place_changed', () => {
       // 사용자가 선택한 장소.
       const place = autocomplete.getPlace();
@@ -305,6 +296,7 @@ class NewScheduleCellPopup extends Component {
           },
         },
       };
+
       document.querySelectorAll('.pac-container').forEach($pac => $pac.remove());
     });
   }
@@ -328,6 +320,7 @@ class NewScheduleCellPopup extends Component {
 
   deleteTodo(e) {
     if (!e.target.matches('.memo__delete__btn')) return;
+
     const { id } = e.target.closest('.memo__todo__item').dataset;
     const { localNewScheduleCell } = store.state;
     const { info } = localNewScheduleCell;
@@ -352,16 +345,16 @@ class NewScheduleCellPopup extends Component {
     const { todos } = info;
     const { id } = e.target.closest('.memo__todo__item').dataset;
     const { value } = e.target;
+
     const changedInfo = todo =>
       e.target.matches('.todo-input') ? { ...todo, todo: value } : { ...todo, completed: !todo.completed };
-    const _todos = todos.map(todo => (todo.id === +id ? changedInfo(todo) : todo));
 
     store.state = {
       localNewScheduleCell: {
         ...localNewScheduleCell,
         info: {
           ...info,
-          todos: _todos,
+          todos: todos.map(todo => (todo.id === +id ? changedInfo(todo) : todo)),
         },
       },
     };
