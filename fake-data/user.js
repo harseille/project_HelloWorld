@@ -15,6 +15,7 @@ let users = [
     nickname: 'wowo',
     profilePic: '',
   },
+  
 ];
 
 const findUser = email => users.find(user => user.email === email);
