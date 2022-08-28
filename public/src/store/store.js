@@ -17,6 +17,7 @@ const store = {
       currentId: '',
       startId: 0,
       dragTarget: '',
+      isShowNewScheuleCellBtn: false,
     },
     localNewTripSchedule: {
       isFilledAllModalInput: false,
@@ -66,7 +67,6 @@ const store = {
           id: 1,
           country: '영국',
           date: new Date('2022-08-14'),
-
           cells: [],
         },
         {

@@ -1,6 +1,6 @@
 export { default as Intro } from './Intro.js';
 export { default as Main } from './Main.js';
-export { default as Login } from './Login.js';
+export { default as Signin } from './Signin.js';
 export { default as Signup } from './Signup.js';
 export { default as Itinerary } from './Itinerary.js';
 export { default as NewScheduleCellPopup } from './NewScheduleCellPopup.js';

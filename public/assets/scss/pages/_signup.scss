@@ -1,11 +1,11 @@
 .signup {
+  div:nth-child(7) {
+    margin-top: 50px;
+  }
+
   .checkbox__form {
     @include flexbox(row, space-between, center);
     margin-top: 15px;
-
-    &:nth-last-child(5) {
-      margin-top: 50px;
-    }
 
     input {
       display: none;
@@ -32,6 +32,10 @@
   & > .error {
     text-align: left;
     bottom: 190px;
+  }
+
+  & .submit__btn {
+    margin-top: 20px;
   }
 
   &__back__btn {

@@ -102,31 +102,43 @@
 
 import store from '../store/store.js';
 
-const initEditMap = () => {
-  // 현제위치를 설정한다.
+// 선택한 일정을 시간 순서에 따라 연결한다.
+const setJourneyLine = (page, journeyCoordinates) => {
+  console.log('setJourneyLine');
 
-  console.log('Edit google map init');
-  (async () => {
-    const { geolocation } = navigator;
-    const success = position => {
-      const { latitude, longitude } = position.coords;
-      // console.log(latitude, longitude);
-      const coords = new google.maps.LatLng(latitude, longitude);
-      const mapOptions = {
-        zoom: 15,
-        center: coords,
-        mapTypeId: google.editTripScheduleMap.MapTypeId.ROADMAP,
-      };
-      store.state.localMap.map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-    };
-    const failure = () => {
-      console.log('Fail to load Google Map');
-    };
-    geolocation.getCurrentPosition(success, failure);
-  })();
+  const journeyPath = new google.maps.Polyline({
+    path: journeyCoordinates,
+    geodesic: true,
+    strokeColor: '#9c5eff',
+    strokeOpacity: 1.0,
+    strokeWeight: 5,
+  });
+
+  console.log(journeyCoordinates);
+  console.log(store.state.localMap);
+
+  if (page === 'viewPlanSchedule') {
+    journeyPath.setMap(store.state.localMap.viewTripScheduleMap);
+    journeyCoordinates.forEach(
+      coord =>
+        new google.maps.Marker({
+          position: coord,
+          map: store.state.localMap.viewTripScheduleMap,
+        })
+    );
+  } else if (page === 'editPlanSchedule') {
+    journeyCoordinates.forEach(
+      coord =>
+        new google.maps.Marker({
+          position: coord,
+          map: store.state.localMap.editTripScheduleMap,
+        })
+    );
+    journeyPath.setMap(store.state.localMap.editTripScheduleMap);
+  }
 };
 
-const initViewMap = () => {
+const initMap = page => {
   // 현제위치를 설정한다.
 
   console.log('View google map init');
@@ -141,26 +153,30 @@ const initViewMap = () => {
         center: coords,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
       };
-      store.state.localMap.viewTripScheduleMap = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+      if (page === 'viewPlanSchedule') {
+        store.state.localMap.viewTripScheduleMap = new google.maps.Map(
+          document.getElementById('googleMap'),
+          mapOptions
+        );
+      } else if (page === 'editPlanSchedule') {
+        store.state.localMap.editTripScheduleMap = new google.maps.Map(
+          document.getElementById('googleMap'),
+          mapOptions
+        );
+      }
     };
+
     const failure = () => {
       console.log('Fail to load Google Map');
     };
+
     geolocation.getCurrentPosition(success, failure);
+    const journey = store.state.tripSchedule.itinerary
+      .map(dayPlan => dayPlan.cells.map(cell => cell.location.latLng))
+      .flat();
+    setJourneyLine(page, journey);
   })();
 };
 
-// 선택한 일정을 시간 순서에 따라 연결한다.
-const setJourneyLine = journeyCoordinates => {
-  const journeyPath = new google.maps.Polyline({
-    path: journeyCoordinates,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-  });
-
-  journeyPath.setMap(map);
-};
-
-export { initEditMap, initViewMap, setJourneyLine };
+export { initMap, setJourneyLine };

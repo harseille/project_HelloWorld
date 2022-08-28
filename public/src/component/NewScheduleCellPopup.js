@@ -108,6 +108,7 @@ class NewScheduleCellPopup extends Component {
       labelContent: 'Select a day',
       unableType: 'term',
       date: newScheduleCellDate,
+      isNot31: true,
       startDate,
       endDate,
       toggle: this.toggleDatePicker,
@@ -241,7 +242,7 @@ class NewScheduleCellPopup extends Component {
 
     if (name === 'startTime') {
       let newTime = +value.slice(0, 2);
-      const isPassed = newTime > +endTime.slice(0, 2);
+      const isPassed = newTime >= +endTime.slice(0, 2);
       newTime = newTime + 1 < 10 ? `0${newTime + 1}:00` : `${newTime + 1}:00`;
       endTime = isPassed ? newTime : endTime;
     }
@@ -299,6 +300,7 @@ class NewScheduleCellPopup extends Component {
             location: {
               ...place,
               name: e.target.value,
+              latLng: { lat: place.geometry.location.lat(), lng: place.geometry.location.lng() },
             },
           },
         },

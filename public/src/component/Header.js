@@ -19,7 +19,7 @@ class Header extends Component {
     const navList = [
       { href: '/main', content: '여행일지', type: 'main' },
       { href: '#', content: '일정 만들기', type: 'newTripScheduleModal' },
-      { href: '/login', content: '로그인', type: 'login' },
+      { href: '/signin', content: '로그인', type: 'signin' },
       {
         href: '#',
         content: `<img class="nav__list__profile-pic" src="${
@@ -40,8 +40,8 @@ class Header extends Component {
           <ul class="nav__list">
             ${navList
               .map(({ href, content, type }, idx) => {
-                if (path === '/intro' && href !== '/login') return '';
-                if (isLogined && href === '/login') return '';
+                if (path === '/intro' && href !== '/signin') return '';
+                if (isLogined && href === '/signin') return '';
                 if (!isLogined && type === 'mypageModal') return '';
                 return `<li id="headerNav${idx}" class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
@@ -138,7 +138,6 @@ class Header extends Component {
       { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
       { type: 'click', selector: '.nav__list', component: 'testtest', handler: this.link },
       { type: 'click', selector: '.nav__list', component: 'logout', handler: this.logout },
-      // { type: 'click', selector: '.nav__list', component: 'test', handler: this.activeNewTripScheduleModal },
     ];
   }
 }

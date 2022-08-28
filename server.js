@@ -16,14 +16,14 @@ const auth = (req, res, next) => {
   try {
     jwt.verify(accessToken, process.env.SECRET_KEY);
 
-    if (req.url === '/login' || req.url === '/signup' || req.url === '/intro') {
+    if (req.url === '/signin' || req.url === '/signup' || req.url === '/intro') {
       return res.redirect('/main');
     }
 
     next();
   } catch (e) {
     if (req.url === '/trip-planner-edit') {
-      return res.redirect('/login');
+      return res.redirect('/signin');
     }
 
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -73,7 +73,7 @@ app.post('/logout', (req, res) => {
 
 app.get('/mainTripSchedules', (req, res) => {
   try {
-    console.log('[server] mainTripSchedules');
+    console.log('[GET] mainTripSchedules');
     const responseSchedules = tripSchedules.mainTripSchedules();
     res.send(responseSchedules);
   } catch (e) {
@@ -97,10 +97,10 @@ app.get('*', auth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/auth/login', (req, res) => {
+app.post('/auth/signin', (req, res) => {
   const { email, password } = req.body;
 
-  const userInfo = users.validateLogin(email, password);
+  const userInfo = users.validateSignin(email, password);
 
   if (userInfo) {
     const { userId, email, name, nickname, profilePic } = userInfo;
@@ -112,7 +112,9 @@ app.post('/auth/login', (req, res) => {
     });
     res.send({ userId, email, name, nickname, profilePic });
   } else {
-    res.status(401).send({ error: '아이디, 비밀번호를 확인해주세요.' });
+    res.status(401).send({
+      error: `아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.<br />입력하신 내용을 다시 확인해주세요.`,
+    });
   }
 });
 
@@ -122,11 +124,14 @@ app.post('/auth/signup', (req, res) => {
   // 중복 id check
   const userInfo = users.findUser(email);
 
+  console.log('무조건 찍어', users, '무조건 찍어 끝');
+
   if (!userInfo) {
     // id 생성
     const newUserId = users.generateUserId();
 
     users.setUsers({ userId: newUserId, email, nickname, name, password });
+    console.log('성공시 찍어', users, '성공시 찍어 끝');
 
     const accessToken = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1d' });
 
@@ -137,6 +142,7 @@ app.post('/auth/signup', (req, res) => {
 
     res.send({ userId: newUserId, email, name, nickname });
   } else {
+    console.log('실패시 찍어', users, '실패시 찍어끝');
     res.status(401).send({ error: '이미 등록된 이메일 입니다.' });
   }
 });

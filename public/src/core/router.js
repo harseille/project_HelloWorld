@@ -1,4 +1,13 @@
-import { Intro, Main, Login, Signup, Itinerary, EditTripPlanner, ViewTripPlanner, Mypage } from '../component/index.js';
+import {
+  Intro,
+  Main,
+  Signin,
+  Signup,
+  Itinerary,
+  EditTripPlanner,
+  ViewTripPlanner,
+  Mypage,
+} from '../component/index.js';
 // import observe from './observe.js';
 
 const router = [
@@ -9,7 +18,7 @@ const router = [
     '/main': Main,
   },
   {
-    '/login': Login,
+    '/signin': Signin,
   },
   {
     '/signup': Signup,

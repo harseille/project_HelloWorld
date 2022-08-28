@@ -1,5 +1,4 @@
 import Component from '../core/Component.js';
-import render from '../dom/render.js';
 import store from '../store/store.js';
 import MainPost from './Main/MainPost.js';
 

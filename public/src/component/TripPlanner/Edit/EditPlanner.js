@@ -78,8 +78,8 @@ class EditPlanner extends Component {
 
   addEventListener() {
     return [
-      { type: 'change', selector: '.trip-planner__title', handler: this.setTitle },
-      { type: 'change', selector: '.trip-planner__content', handler: this.setContent },
+      { type: 'input', selector: '.trip-planner__title', handler: this.setTitle },
+      { type: 'input', selector: '.trip-planner__content', handler: this.setContent },
     ];
   }
 }

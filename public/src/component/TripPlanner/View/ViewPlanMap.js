@@ -1,6 +1,7 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
+import { initMap } from '../../myMap.js';
 // import myMap from '../../myMap.js';
 
 class ViewPlanMap extends Component {
@@ -10,11 +11,10 @@ class ViewPlanMap extends Component {
   // }
 
   render() {
-    console.log('hi');
     const {
       localCommon: { isShowModal },
       localItinerary,
-      tripSchedule: { itinerary },
+      viewTripSchedule: { itinerary },
     } = store.state;
     const { currentId, startId } = localItinerary;
     const timeList = [
@@ -46,8 +46,11 @@ class ViewPlanMap extends Component {
     ];
 
     const $newScheduleCellPopup = isShowModal === 'newScheduleCellPopup' ? new NewScheduleCellPopup().render() : '';
-    const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const _schedule = itinerary
+      .filter((_, i) => i >= startId && i < startId + 3)
+      .map(unit => ({ ...unit, date: new Date(unit.date) }));
+
+    // const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // prettier-ignore
     return `
@@ -163,7 +166,7 @@ class ViewPlanMap extends Component {
 
   addEventListener() {
     return [
-      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: myMap },
+      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap(viewPlanSchedule') },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
     ];

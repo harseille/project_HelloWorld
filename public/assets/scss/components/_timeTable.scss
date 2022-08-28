@@ -53,11 +53,43 @@
         position: relative;
         width: 100%;
         height: calc(var(--time--height) * 1px);
+
+        &.last {
+          padding-bottom: 4px;
+        }
       }
 
       .itinerary-card {
-        padding-top: 10px;
+        padding-top: 8px;
         height: 100%;
+
+        &.first {
+          position: relative;
+          z-index: 1;
+          border-radius: 6px 6px 0 0;
+
+          .itinerary-card-emph {
+            border-radius: 6px 0 0 0;
+          }
+        }
+
+        &.last {
+          border-radius: 0 0 6px 6px;
+          .itinerary-card-emph {
+            height: calc(100% - 4px);
+            border-radius: 0 0 0 6px;
+          }
+        }
+
+        &.first-last {
+          position: relative;
+          z-index: 1;
+          border-radius: 6px;
+
+          .itinerary-card-emph {
+            border-radius: 6px 0 0 6px;
+          }
+        }
 
         &--check {
           width: 100%;
@@ -90,6 +122,19 @@
           background: $mainPurple;
           color: $white;
           cursor: pointer;
+        }
+
+        &--delete {
+          position: absolute;
+          right: -6px;
+          top: -14px;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          border: 0;
+          background: $black url(/assets/images/close.svg) no-repeat;
+          background-position: center;
+          background-size: 10px;
         }
 
         &-emph {

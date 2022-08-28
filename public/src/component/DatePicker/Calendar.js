@@ -15,7 +15,7 @@ class Calendar extends Component {
 
   setDateClass(month, date) {
     let { startDate } = this.props;
-    const { endDate, currentDate, unableType } = this.props;
+    const { endDate, currentDate, unableType, isNot31 } = this.props;
 
     const targetCurrentDate = new Date(currentDate.getFullYear(), month, date);
 
@@ -31,7 +31,9 @@ class Calendar extends Component {
       _endDate = new Date(_endDate);
     }
 
-    const startDateAfter31 = new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + 31);
+    const startDateAfter31 = isNot31
+      ? _endDate
+      : new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + 31);
 
     if (
       _startDate.getFullYear() === targetCurrentDate.getFullYear() &&
@@ -205,13 +207,17 @@ class Calendar extends Component {
         country: '',
         date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
         cells: [],
-      }));
+      })).map((dayPlan, index) =>
+        dayPlan.date === store.state.tripSchedule.itinerary[index].date
+          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary.cells }
+          : dayPlan
+      );
 
-      const __itinerary = _itinerary.map(dayPlan => {
-        if (dayPlan.date === store.state.tripSchedule.itinerary.date) {
-          dayPlan.cells = store.state.tripSchedule.itinerary.cells;
-        }
-      });
+      // const __itinerary = _itinerary.map(dayPlan => {
+      //   if (dayPlan.date === store.state.tripSchedule.itinerary.date) {
+      //     dayPlan.cells = store.state.tripSchedule.itinerary.cells;
+      //   }
+      // });
 
       store.state = {
         localDatePicker: {
@@ -223,7 +229,7 @@ class Calendar extends Component {
           [activeCalendar]: selectedDate,
           endDate: _endDate,
           tripDays: 31,
-          itinerary: __itinerary,
+          itinerary: _itinerary,
         },
       };
       // 시작일로 맞추기
@@ -269,8 +275,11 @@ class Calendar extends Component {
         }));
       }
 
-      console.log(_tripDays);
-      console.log(_itinerary);
+      _itinerary.map((dayPlan, index) =>
+        dayPlan?.date === store.state.tripSchedule?.itinerary[index]?.date
+          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary?.cells }
+          : dayPlan
+      );
 
       store.state = {
         ...store.state,
