@@ -26,7 +26,7 @@ class Login extends Component {
       password.error
     }</p>
     </div>
-    <p class="login__errorMsg error">
+    <p class="login__errorMsg error ">
       아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.<br />
       입력하신 내용을 다시 확인해주세요.
     </p>
@@ -57,7 +57,8 @@ class Login extends Component {
         render();
       }
     } catch (e) {
-      alert(e);
+      document.querySelector('.login__errorMsg').classList.add('show');
+      console.log('일치하는 정보가 없단다.');
     }
   }
 

@@ -6,6 +6,7 @@ import { signupSchema } from '../core/schema.js';
 class Signup extends Component {
   render() {
     const { email, password, nickname, passwordCheck, username } = signupSchema;
+
     return `<form class="login signup" novalidate>
     <h2 class="login__title">sign up</h2>
     <div class="input__form signup__id__form">
