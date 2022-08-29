@@ -120,7 +120,7 @@ class Header extends Component {
   addEventListener() {
     return [
       { type: 'click', selector: '.nav__list', component: 'headerNav3', handler: this.showMyPageModal },
-      { type: 'click', selector: '#root', component: 'headerNav3', handler: this.hideMyPageModal },
+      { type: 'click', selector: 'window', component: 'headerNav3', handler: this.hideMyPageModal },
       { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
       { type: 'click', selector: '.nav__list', component: 'testtest', handler: this.link },
       { type: 'click', selector: '.nav__list', component: 'logout', handler: this.logout },

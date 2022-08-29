@@ -104,12 +104,12 @@ class Main extends Component {
       </div>
       <form action="" class="travel-log__form">
         <select class="travel-log__form__dropdown" name="travel-log__form__dropdown" id="cars">
-          <option value="all">제목</option>
+          <option value="title">제목</option>
           <option value="country">국가</option>
           <option value="city">도시</option>
         </select>
         <input class="travel-log__form__input" type="text" placeholder="검색어를 입력해주세요." />
-        <button class="travel-log__form__button--submit" type="button">검색</button>
+        <button class="travel-log__form__button--submit" type="submit">검색</button>
       </form>
       <div class="travel-log__body">
         <ul class="travel-log__list">
@@ -123,7 +123,6 @@ class Main extends Component {
   changeToTripScheduleView(e) {
     if (!e.target.closest('.travel-log__item')) return;
     e.preventDefault();
-
     const path = e.target.closest('.travel-log__link').getAttribute('href');
 
     window.history.pushState({}, path, window.location.origin + path);
@@ -134,23 +133,27 @@ class Main extends Component {
         selectedCardId: e.target.closest('li').id,
       },
     };
-    // render();
   }
 
-  // async fetchTripScheduleView(e) {
-  //   console.log('fetchTripScheduleView');
-  //   try {
-  //     const _tripSchedules = await axios.get('/mainTripSchedules');
-  //     store.state = { ...store.state.tripSchedules, tripSchedules: _tripSchedule.data };
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  async filterToTripScheduleView(e) {
+    e.preventDefault();
+
+    if (!e.target.classList.contains('travel-log__form')) return;
+
+    const searchCategory = e.target.querySelector('.travel-log__form__dropdown').value;
+    const searchValue = e.target.querySelector('.travel-log__form__input').value;
+
+    const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
+
+    store.state = {
+      tripSchedules: filteredMainTripSchedules.data,
+    };
+  }
 
   addEventListener() {
     return [
       { type: 'click', selector: '.travel-log__item', handler: this.changeToTripScheduleView },
-      // { type: 'hashchange', selector: 'window', handler: this.fetchTripScheduleView },
+      { type: 'submit', selector: '.travel-log__form', handler: this.filterToTripScheduleView },
     ];
   }
 }

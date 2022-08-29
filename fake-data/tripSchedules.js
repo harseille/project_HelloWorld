@@ -249,6 +249,24 @@ const mainTripSchedules = () =>
     })
   );
 
+const filterMainTripSchedules = (searchCategory, searchValue) => {
+  const filterData = tripSchedules.filter(tripSchedule => tripSchedule[searchCategory].includes(searchValue));
+
+  return filterData.map(
+    ({ tripScheduleId, author, authorProfilePic, title, summary, coverImg, content, likeCount, commentCount }) => ({
+      tripScheduleId,
+      author,
+      authorProfilePic,
+      title,
+      summary,
+      coverImg,
+      content,
+      likeCount,
+      commentCount,
+    })
+  );
+};
+
 const findTripSchedule = id => tripSchedules.find(tripSchedule => tripSchedule.tripScheduleId === id);
 const generateTripScheduleId = () => Math.max(...tripSchedules.map(tripSchedule => tripSchedule.tripScheduleId), 0) + 1;
 const setTripSchdule = newTripSchedule => {
@@ -257,4 +275,4 @@ const setTripSchdule = newTripSchedule => {
   return responseTripSchedule;
 };
 
-module.exports = { mainTripSchedules, findTripSchedule, setTripSchdule };
+module.exports = { mainTripSchedules, filterMainTripSchedules, findTripSchedule, setTripSchdule };
