@@ -50,7 +50,7 @@ class ViewPlanMap extends Component {
       .filter((_, i) => i >= startId && i < startId + 3)
       .map(unit => ({ ...unit, date: new Date(unit.date) }));
 
-    // const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     // prettier-ignore
     return `
@@ -62,7 +62,7 @@ class ViewPlanMap extends Component {
         ${
           _schedule.map(sched =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
-              Day ${sched.id} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${sched.day}
+              Day ${sched.id} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${days[sched.date.getDay()]}
               <div>${sched.country}</div>
             </div>`).join('')
         }
