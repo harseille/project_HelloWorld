@@ -3,18 +3,22 @@ import store from '../store/store.js';
 import MainPost from './Main/MainPost.js';
 
 class Main extends Component {
-  // async inittest() {
-  //   console.log('popstate');
-  //   try {
-  //     const mainTripSchedules = await axios.get('/mainTripSchedules');
-
-  //     store.state = {
-  //       tripSchedules: { ...store.state.tripSchedule, ...mainTripSchedules.data },
-  //     };
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  async init() {
+    try {
+      // Todo 새로고침 시 필터된 카드로 랜더되게 쿼리로 바꾸기
+      // const query = window.location.qu
+      const mainTripSchedules = await axios.get('/mainTripSchedules');
+      store.state = {
+        localCommon: {
+          ...store.state.localCommon,
+          path: window.location.pathname,
+        },
+        tripSchedules: [...mainTripSchedules.data],
+      };
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   render() {
     const { selectedCardId } = store.state.localMain;
@@ -144,12 +148,15 @@ class Main extends Component {
     const searchValue = e.target.querySelector('.travel-log__form__input').value;
 
     const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
-    console.log(filteredMainTripSchedules);
+    window.history.pushState(
+      {},
+      'MainFitler',
+      window.location.origin + `/main?category=${searchCategory}&value=${searchValue}`
+    );
 
     store.state = {
       tripSchedules: filteredMainTripSchedules.data,
     };
-    console.log(store.state);
   }
 
   addEventListener() {
