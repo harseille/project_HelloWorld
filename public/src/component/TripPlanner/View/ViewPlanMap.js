@@ -1,20 +1,19 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
-import { initMap } from '../../myMap.js';
+import initMap from '../../myMap.js';
 // import myMap from '../../myMap.js';
 
 class ViewPlanMap extends Component {
-  // formattedDate(date) {
-  //   const format = n => (n < 10 ? '0' + n : n + '');
-  //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
-  // }
+  init() {
+    initMap();
+  }
 
   render() {
     const {
       localCommon: { isShowModal },
       localItinerary,
-      viewTripSchedule: { itinerary },
+      tripSchedule: { itinerary },
     } = store.state;
     // const { itinerary } = viewTripSchedule;
     const { currentId, startId } = localItinerary;
@@ -167,7 +166,7 @@ class ViewPlanMap extends Component {
 
   addEventListener() {
     return [
-      // { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap(viewPlanSchedule') },
+      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
     ];

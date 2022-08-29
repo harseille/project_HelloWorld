@@ -127,7 +127,7 @@ const calculateZoomLevel = (mapSize, coverage, latitude, distance) => {
 };
 // };
 
-const initMap = page => {
+const initMap = () => {
   // 현제위치를 설정한다.
   console.log('View google map init');
   (async () => {
@@ -143,6 +143,8 @@ const initMap = page => {
           dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
         )
         .flat();
+
+      console.log(cellInfoList);
 
       const { sumLatitude, sumLongitude } = cellInfoList.reduce(
         (acc, cur) => ({
@@ -206,5 +208,5 @@ const initMap = page => {
   console.log(store.state);
 };
 
-export { initMap };
+export default initMap;
 // export { initMap, setJourneyLine };
