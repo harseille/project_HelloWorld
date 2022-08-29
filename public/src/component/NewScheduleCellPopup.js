@@ -158,8 +158,7 @@ class NewScheduleCellPopup extends Component {
   }
 
   toggleDatePicker(e) {
-    if (!e.target.matches('.newCard__popup datePicker')) return;
-
+    if (!e.target.matches('.newCard__popup .datePicker')) return;
     store.state = {
       localDatePicker: {
         ...store.state.localDatePicker,
@@ -172,34 +171,54 @@ class NewScheduleCellPopup extends Component {
     e.preventDefault();
     const {
       localCommon,
-      localNewScheduleCell: { info },
+      localNewScheduleCell: { info, editCellId, selectedItineraryId },
       localDatePicker,
       tripSchedule,
     } = store.state;
     const { itinerary, newScheduleCellDate } = tripSchedule;
 
+    // body의 scroll
+    document.body.style.overflow = 'auto';
     const selectedYear = newScheduleCellDate.getFullYear();
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
 
-    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
     const country = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
 
-    // body의 scroll
-    document.body.style.overflow = 'auto';
+    const changeItinerary = iti => {
+      if (!editCellId) {
+        return iti.date.getFullYear() === selectedYear &&
+          iti.date.getMonth() === selectedMonth &&
+          iti.date.getDate() === selectedDate
+          ? { ...iti, country, cells: [...iti.cells, { id, ...info, article: {} }] }
+          : iti;
+      }
 
+      const [{ date, cells }] = tripSchedule.itinerary.filter(iti => iti.id === selectedItineraryId);
+      if (date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDate) {
+        return iti.id === selectedItineraryId
+          ? {
+              ...iti,
+              cells: iti.cells.map(cell => (cell.id === editCellId ? { ...cell, ...info } : cell)),
+            }
+          : iti;
+      }
+      if (iti.id === selectedItineraryId) return { ...iti, cells: cells.filter(cell => cell.id !== editCellId) };
+      if (
+        iti.date.getFullYear() === selectedYear &&
+        iti.date.getMonth() === selectedMonth &&
+        iti.date.getDate() === selectedDate
+      )
+        return { ...iti, cells: [...iti.cells, { id: editCellId, ...info, article: {} }] };
+
+      return iti;
+    };
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
       tripSchedule: {
         ...tripSchedule,
-        itinerary: itinerary.map(iti =>
-          // 선택한 날짜와 iti의 날짜과 같을 경우 객체 추가
-          iti.date.getFullYear() === selectedYear &&
-          iti.date.getMonth() === selectedMonth &&
-          iti.date.getDate() === selectedDate
-            ? { ...iti, country, cells: [...iti.cells, { id, ...info, article: {} }] }
-            : iti
-        ),
+        itinerary: itinerary.map(iti => changeItinerary(iti)),
       },
       localDatePicker: {
         ...localDatePicker,

@@ -24,6 +24,7 @@ const store = {
       isActiveSelfNumberOfPeopleInputForm: false,
     },
     localNewScheduleCell: {
+      editCellId: null,
       selectedItineraryId: '',
       info: {
         type: '',

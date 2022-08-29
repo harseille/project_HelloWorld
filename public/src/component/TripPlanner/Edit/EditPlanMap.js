@@ -318,11 +318,46 @@ class Itinerary extends Component {
     };
   }
 
+  openEditModal(e) {
+    const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
+    const { itinerary } = tripSchedule;
+
+    const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    const editCellId = +e.target.closest('.itinerary-card').dataset.id;
+
+    const { date, cells } = itinerary.filter(sch => sch.id === selectedItineraryId)[0];
+    const [{ id, article, ...info }] = cells.filter(cell => cell.id === editCellId);
+
+    document.body.style.overflow = 'hidden';
+
+    store.state = {
+      localCommon: {
+        ...localCommon,
+        isShowModal: 'newScheduleCellPopup',
+      },
+      localDatePicker: {
+        ...localDatePicker,
+        currentDate: date,
+      },
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
+        editCellId,
+        selectedItineraryId,
+        info,
+      },
+      tripSchedule: {
+        ...tripSchedule,
+        newScheduleCellDate: date,
+      },
+    };
+  }
+
   mouseoverTimetable(e) {
     const { localItinerary, localNewScheduleCell } = store.state;
 
     if (
       localItinerary.dragTarget ||
+      e.target.closest('.time-table__day-index__blank .itinerary-card') ||
       !e.target.closest('.time-table__day-index__blank') ||
       !e.target.closest('.time-table__day-index__blank li')
     )
@@ -406,12 +441,17 @@ class Itinerary extends Component {
 
   dragCard(e) {
     e.dataTransfer.dropEffect = 'move';
-    const { id } = e.target.closest('.itinerary-card').dataset;
+    const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    const dragTarget = +e.target.closest('.itinerary-card').dataset.id;
 
     store.state = {
       localItinerary: {
         ...store.state.localItinerary,
-        dragTarget: +id,
+        dragTarget,
+      },
+      localNewScheduleCell: {
+        ...store.state.localNewScheduleCell,
+        selectedItineraryId,
       },
     };
   }
@@ -519,6 +559,7 @@ class Itinerary extends Component {
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
+      { type: 'click', selector: '.itinerary-card', handler: this.openEditModal },
       { type: 'click', selector: '.itinerary-card--delete', handler: this.deleteCard },
       { type: 'dragstart', selector: '.time-table__day-index__blank li', handler: this.dragCard },
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
