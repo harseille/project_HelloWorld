@@ -11,7 +11,6 @@ const bindEventHandler = $root => {
 };
 
 const render = (RootComponent, $container) => {
-  console.log('render.js');
   if ($container) $root = $container;
   if (RootComponent) rootComponentInstance = new RootComponent();
 

@@ -79,6 +79,18 @@ app.get('/mainTripSchedules', (req, res) => {
   }
 });
 
+app.get('/mainTripSchedules/:searchCategory/:searchValue', (req, res) => {
+  try {
+    console.log('[GET] mainTripSchedules/');
+    const { searchCategory, searchValue } = req.params;
+    const responseSchedules = tripSchedules.filterMainTripSchedules(searchCategory, searchValue);
+    console.log(responseSchedules);
+    res.send(responseSchedules);
+  } catch (e) {
+    console.error(e);
+  }
+});
+
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
     const { tripScheduleId } = req.params;

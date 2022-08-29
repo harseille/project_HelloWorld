@@ -74,11 +74,10 @@ class Signup extends Component {
 
   async fetchSignup(e) {
     if (!e.target.classList.contains('only-signup')) return;
-    console.log(e.target);
-    console.log(e.target, '나는 회원가입');
+
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(Object.fromEntries([...formData.entries()]));
+
     try {
       const response = await axios.post('/auth/signup', Object.fromEntries([...formData.entries()]));
 
@@ -87,9 +86,7 @@ class Signup extends Component {
         ...store.state,
         userInfo: response.data,
       };
-      console.log('리다이렉트 일어나니?');
       window.history.pushState({}, '/main', window.location.origin + '/main');
-      console.log('리다이렉트 일어나니? 222222222222222222');
 
       initValue();
     } catch (e) {
