@@ -82,34 +82,17 @@ class Header extends Component {
 
   showNewTripScheduleModal(e) {
     if (e.target.closest('li')?.id !== 'headerNav1') return;
-
-    console.log('showNewTripScheduleModal');
-
-    store.state = {
-      localCommon: {
-        ...store.state.localCommon,
-        isShowModal: 'newTripScheduleModal',
-      },
-      // tripSchedule: {
-      //   tripScheduleId: '',
-      //   authorId: '',
-      //   author: '',
-      //   authorProfilePic: '',
-      //   title: '',
-      //   summary: '',
-      //   tripDays: 0,
-      //   startDate: null, // * Date 객체
-      //   endDate: null, // * Date 객체
-      //   createdDate: new Date(),
-      //   numberOfPeople: 0,
-      //   coverImg: '',
-      //   content: '',
-      //   isLiked: false,
-      //   likeCount: 0,
-      //   commentCount: 0,
-      //   itinerary: [],
-      // },
-    };
+    if (!store.state.userInfo.userId) {
+      window.history.pushState({}, 'Signin', window.location.origin + '/signin');
+      render();
+    } else {
+      store.state = {
+        localCommon: {
+          ...store.state.localCommon,
+          isShowModal: 'newTripScheduleModal',
+        },
+      };
+    }
   }
 
   link(e) {
