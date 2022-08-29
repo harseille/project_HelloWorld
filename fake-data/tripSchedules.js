@@ -239,7 +239,7 @@ let tripSchedules = [
     numberOfPeople: '4',
     coverImg:
       'https://file.namu.moe/file/2b148a12781c0ce0bbd4e876e8bf5afa0a3fdc00c8e1d6a24c91b6872413f98b5f2fb45f06fcb82bab2a162b8444ddee',
-    content: '기러기 토마토 스위스 장발장 역삼역',
+    content: '기러기 토마토 스위스 인도인 별똥별 우영우 역삼역?!',
     isLiked: false,
     likeCount: 0,
     commentCount: 0,

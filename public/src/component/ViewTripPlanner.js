@@ -23,7 +23,7 @@ class ViewTripPlanner extends Component {
           ...store.state.localCommon,
           path: window.location.pathname,
         },
-        viewTripSchedule: _tripSchedule.data,
+        tripSchedule: _tripSchedule.data,
       };
     } catch (e) {
       console.error(e);
@@ -35,12 +35,13 @@ class ViewTripPlanner extends Component {
       state: {
         userInfo,
         localCommon: { selectedTab },
-        viewTripSchedule,
-        viewTripSchedule: { coverImg, title, summary, itinerary, isLiked, likeCount },
+        tripSchedule,
+        tripSchedule: { coverImg, title, summary, itinerary, isLiked, likeCount },
       },
     } = store;
+
     const $viewPlanCover = new ViewPlanCover({ coverImg, title, summary }).render();
-    const $viewPlanner = new ViewPlanner({ viewTripSchedule }).render();
+    const $viewPlanner = new ViewPlanner({ tripSchedule }).render();
     const $viewTripTab = new ViewTripTab({ selectedTab }).render();
     const $viewPlanMap = new ViewPlanMap().render();
     const $viewTripStory = new ViewTripStory({ userInfo, itinerary }).render();
