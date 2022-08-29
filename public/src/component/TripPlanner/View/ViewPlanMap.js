@@ -16,6 +16,7 @@ class ViewPlanMap extends Component {
       localItinerary,
       viewTripSchedule: { itinerary },
     } = store.state;
+    // const { itinerary } = viewTripSchedule;
     const { currentId, startId } = localItinerary;
     const timeList = [
       '00:00',

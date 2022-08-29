@@ -123,9 +123,7 @@ const calcCrow = (lat1, lon1, lat2, lon2) => {
 const calculateZoomLevel = (mapSize, coverage, latitude, distance) => {
   // const pixels = mapSize.Width >= mapSize.Height ? mapSize.Height : mapSize.Width; // get the shortest dimmension of the map
   const k = mapSize * 156543.03392 * Math.cos((latitude * Math.PI) / 180);
-  console.log(k);
-  console.log(coverage * k);
-  return Math.round(Math.log((coverage * k) / (distance * 100)) / 0.6931471805599453) - 8;
+  return Math.round(Math.log((coverage * k) / (distance * 100)) / 0.6931471805599453) / 2;
 };
 // };
 
@@ -183,10 +181,10 @@ const initMap = page => {
       });
 
       const icon = {
-        accomodation: '/assets/images/map/map-marker-hotel.png',
-        sightseeing: '/assets/images/map/map-marker-footprint.png',
+        accomodation: '/assets/images/map/map-marker-accomodation.png',
+        sightseeing: '/assets/images/map/map-marker-seesight.png',
         transportation: '/assets/images/map/map-marker-traffic.png',
-        etc: '/assets/images/map/map-marker-pin.png',
+        etc: '/assets/images/map/map-marker-etc.png',
       };
 
       cellInfoList.forEach(
@@ -205,6 +203,7 @@ const initMap = page => {
     };
     await geolocation.getCurrentPosition(success, failure);
   })();
+  console.log(store.state);
 };
 
 export { initMap };

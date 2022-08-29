@@ -13,11 +13,21 @@ import {
 import store from '../store/store.js';
 
 class ViewTripPlanner extends Component {
-  // async init() {
-  //   const id = window.location.pathname.split('/').pop();
-  //   const _tripSchedule = await axios.get('/tripSchedule/' + id);
-  // store.state = store.state.tripSchedule = _tripSchedule.data;
-  // }
+  async init() {
+    const id = window.location.pathname.split('/').pop();
+    const _tripSchedule = await axios.get('/tripSchedule/' + id);
+    console.log(_tripSchedule);
+    store.state = {
+      localCommon: {
+        ...store.state.localCommon,
+        path: window.location.pathname,
+      },
+      viewTripSchedule: _tripSchedule.data,
+    };
+
+    console.log(_tripSchedule);
+    console.log(store.state);
+  }
 
   render() {
     const {

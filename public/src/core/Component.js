@@ -1,12 +1,15 @@
 /* eslint-disable no-continue */
 import eventBuffer from '../dom/eventBuffer.js';
 import render from '../dom/render.js';
+import store from '../store/store.js';
 
 class Component {
   constructor(props) {
     this.props = props;
     this.keepEvent();
-    this.init();
+    // this.init();
+    // console.log();
+    store.state.localCommon.path === window.location.pathname || this.init();
   }
 
   init() {}

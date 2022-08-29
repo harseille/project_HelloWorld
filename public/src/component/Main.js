@@ -144,10 +144,12 @@ class Main extends Component {
     const searchValue = e.target.querySelector('.travel-log__form__input').value;
 
     const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
+    console.log(filteredMainTripSchedules);
 
     store.state = {
       tripSchedules: filteredMainTripSchedules.data,
     };
+    console.log(store.state);
   }
 
   addEventListener() {

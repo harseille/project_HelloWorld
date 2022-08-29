@@ -319,6 +319,7 @@ class Itinerary extends Component {
   }
 
   openEditModal(e) {
+    if (e.target.matches('.time-table__day-index__blank .itinerary-card--delete')) return;
     const { localCommon, localNewScheduleCell, localDatePicker, tripSchedule } = store.state;
     const { itinerary } = tripSchedule;
 
@@ -422,12 +423,14 @@ class Itinerary extends Component {
   }
 
   deleteCard(e) {
+    console.log('deleteCard');
     const {
-      localNewScheduleCell: { selectedItineraryId },
       tripSchedule,
       tripSchedule: { itinerary },
     } = store.state;
     const { id } = e.target.closest('.itinerary-card').dataset;
+    const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+    console.log(id, selectedItineraryId);
 
     store.state = {
       tripSchedule: {

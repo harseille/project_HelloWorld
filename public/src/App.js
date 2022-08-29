@@ -14,6 +14,7 @@ class App extends Component {
     const $header = new Header().render();
     const $main = routes();
     const $footer = new Footer().render();
+
     return `
       ${$header}
       ${$main}

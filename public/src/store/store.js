@@ -3,6 +3,7 @@ import render from '../dom/render.js';
 const store = {
   _store: {
     localCommon: {
+      path: '',
       isShowModal: '',
       selectedTab: 'chart',
     },

@@ -223,14 +223,138 @@ let tripSchedules = [
           },
         ],
       },
+    ],
+  },
+  {
+    tripScheduleId: '5',
+    authorId: 1,
+    author: 'blahblah',
+    authorProfilePic: '/assets/images/users/1/thumbnail.png',
+    title: '역삼역',
+    summary: '',
+    tripDays: 2,
+    startDate: '2022-08-31',
+    endDate: '2022-09-01',
+    createdDate: '2022-08-29T06:45:40.961Z',
+    numberOfPeople: '4',
+    coverImg:
+      'https://file.namu.moe/file/2b148a12781c0ce0bbd4e876e8bf5afa0a3fdc00c8e1d6a24c91b6872413f98b5f2fb45f06fcb82bab2a162b8444ddee',
+    content: '기러기 토마토 스위스 장발장 역삼역',
+    isLiked: false,
+    likeCount: 0,
+    commentCount: 0,
+    itinerary: [
+      {
+        id: 1,
+        country: '대한민국서울특별시서초구강남대로',
+        date: '2022-08-30T15:00:00.000Z',
+        cells: [
+          {
+            id: 1,
+            type: 'transportation',
+            startTime: '07:00',
+            endTime: '08:00',
+            location: {
+              adr_address:
+                '<span class="country-name">대한민국</span> <span class="region">서울특별시</span> <span class="locality">강남구</span> <span class="street-address">역삼1동 737</span> <span class="postal-code">135-080</span>',
+              formatted_address: '대한민국 서울특별시 강남구 역삼1동 737',
+              geometry: {
+                location: {
+                  lat: 37.5007694,
+                  lng: 127.0368262,
+                },
+                viewport: {
+                  south: 37.49942041970851,
+                  west: 127.0354772197085,
+                  north: 37.50211838029151,
+                  east: 127.0381751802915,
+                },
+              },
+              name: '대한민국 서울특별시 강남구 역삼1동 역삼역(2호선)',
+              html_attributions: [],
+              latLng: {
+                lat: 37.5007694,
+                lng: 127.0368262,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 2,
+            type: 'sightseeing',
+            startTime: '08:00',
+            endTime: '09:00',
+            location: {
+              adr_address:
+                '<span class="country-name">대한민국</span> <span class="region">서울특별시</span> <span class="locality">서초구</span> <span class="street-address">서초동 서초대로 335 지하</span> <span class="postal-code">137-070</span>',
+              formatted_address: '대한민국 서울특별시 서초구 서초동 서초대로 335 지하',
+              geometry: {
+                location: {
+                  lat: 37.49366320000001,
+                  lng: 127.0136771,
+                },
+                viewport: {
+                  south: 37.49231421970851,
+                  west: 127.0123281197085,
+                  north: 37.49501218029151,
+                  east: 127.0150260802915,
+                },
+              },
+              name: '대한민국 서울특별시 서초구 서초동 서초대로 교대역(3호선)',
+              html_attributions: [],
+              latLng: {
+                lat: 37.49366320000001,
+                lng: 127.0136771,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 3,
+            type: 'etc',
+            startTime: '09:00',
+            endTime: '10:00',
+            location: {
+              adr_address:
+                '<span class="country-name">대한민국</span> <span class="region">서울특별시</span> <span class="locality">서초구</span> <span class="street-address">강남대로</span> <span class="postal-code">137-130</span>',
+              formatted_address: '대한민국 서울특별시 서초구 강남대로',
+              geometry: {
+                location: {
+                  lat: 37.4828196,
+                  lng: 127.0360477,
+                },
+                viewport: {
+                  south: 37.4814706197085,
+                  west: 127.0346987197085,
+                  north: 37.4841685802915,
+                  east: 127.0373966802915,
+                },
+              },
+              name: '대한민국 서울특별시 서초구 강남대로 신분당선 양재역 8번출구',
+              html_attributions: [],
+              latLng: {
+                lat: 37.4828196,
+                lng: 127.0360477,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
       {
         id: 2,
-        country: '한국',
-        date: new Date('2022-01-02'),
-        day: 'Sun',
+        country: '',
+        date: '2022-08-31T15:00:00.000Z',
         cells: [],
       },
     ],
+    newScheduleCellDate: '2022-08-30T15:00:00.000Z',
   },
 ];
 
