@@ -59,10 +59,6 @@ class Header extends Component {
 
   showMyPageModal(e) {
     if (e.target.closest('li')?.id !== 'headerNav3' || e.target.classList.contains('nav__list')) return;
-    console.log(e.target);
-
-    console.log('showMyPageModal');
-    // console.log(store.state);
 
     store.state = {
       localCommon: {
@@ -70,12 +66,18 @@ class Header extends Component {
         isShowModal: store.state.localCommon.isShowModal === 'myPageModal' ? '' : 'myPageModal',
       },
     };
-    console.log(store.state);
+    console.log('동시 실행 11111111');
   }
 
   hideMyPageModal(e) {
-    if (store.state.isShowModal !== 'myPageModal') return;
-    console.log('hideMyPageModal');
+    if (store.state.localCommon.isShowModal !== 'myPageModal' || e.target.closest('#headerNav3')) return;
+
+    store.state = {
+      localCommon: {
+        ...store.state.localCommon,
+        isShowModal: '',
+      },
+    };
   }
 
   showNewTripScheduleModal(e) {
@@ -135,7 +137,7 @@ class Header extends Component {
   addEventListener() {
     return [
       { type: 'click', selector: '.nav__list', component: 'headerNav3', handler: this.showMyPageModal },
-      { type: 'mouseleave', selector: '.nav__list', component: 'headerNav3', handler: this.MyPageModal },
+      { type: 'click', selector: '#root', component: 'headerNav3', handler: this.hideMyPageModal },
       { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
       { type: 'click', selector: '.nav__list', component: 'testtest', handler: this.link },
       { type: 'click', selector: '.nav__list', component: 'logout', handler: this.logout },
