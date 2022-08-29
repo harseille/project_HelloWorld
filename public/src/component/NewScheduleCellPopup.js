@@ -57,6 +57,7 @@ class NewScheduleCellPopup extends Component {
 
     const startUnabledTime = this.formatUnableTime(targetItinerary, 0);
     const endUnabledTime = this.formatUnableTime(targetItinerary, 1);
+    console.log(startUnabledTime, endUnabledTime);
     const $datePicker = new CellDatePicker({
       ...localDatePicker,
       calendarId: 'newScheduleCellDate',
@@ -229,7 +230,6 @@ class NewScheduleCellPopup extends Component {
     if (name === 'startTime') {
       const { formattedTime } = this.props;
       const newTime = +value.slice(0, 2);
-
       // 새로 선택된 startTime > endTime 면 endTime을 startTime + 1로 설정.
       const isPassed = newTime >= +endTime.slice(0, 2);
       endTime = isPassed ? formattedTime(newTime + 1) : endTime;
@@ -370,15 +370,15 @@ class NewScheduleCellPopup extends Component {
       { type: 'keydown', selector: '.newCard__popup__form input', handler: this.preventEnterKey },
       { type: 'click', selector: '.dimmed__layer.newCard', handler: this.closeModal },
       { type: 'click', selector: '.newCard .modal__header__close__btn', handler: this.closeModal },
-      { type: 'change', selector: '.type__list', handler: this.changeTypeNTimeNMemo },
+      { type: 'change', selector: '.type__list', handler: this.changeTypeNTimeNMemo.bind(this) },
       {
         type: 'change',
         selector: '.newCard__popup__form__container .time__form__select',
-        handler: this.changeTypeNTimeNMemo,
+        handler: this.changeTypeNTimeNMemo.bind(this),
       },
       { type: 'click', selector: '.memo__title__add__todo__btn', handler: this.addTodo },
       { type: 'click', selector: '.location', handler: this.initAutoComplete },
-      { type: 'change', selector: '.memo-input', handler: this.changeTypeNTimeNMemo },
+      { type: 'change', selector: '.memo-input', handler: this.changeTypeNTimeNMemo.bind(this) },
       { type: 'change', selector: '.memo__todo__list', handler: this.changeTodo },
       { type: 'click', selector: '.memo__todo__list', handler: this.deleteTodo },
     ];

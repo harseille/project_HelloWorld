@@ -13,7 +13,7 @@ class Itinerary extends Component {
   // }
 
   formattedTime(time) {
-    return time < 10 ? `0${time}:00` : `0${time}:00`;
+    return time < 10 ? `0${time}:00` : `${time}:00`;
   }
 
   render() {
@@ -75,13 +75,6 @@ class Itinerary extends Component {
       </div>
       <button class="prev--btn carousel--btn">〈</button>
       <button class="next--btn carousel--btn">〉</button>
-
-      <!--<ul class="carousel__days__add--list" style="display:none">
-        <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
-        <li class="carousel__days__add--item next--add--item">뒤에 추가</li>
-        <li class="carousel__days__add--item delete--item">일정 삭제</li>
-      </ul> -->
-
     </div>
 
     <!-- time table -->
@@ -244,11 +237,7 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
-        itinerary: [
-          ...beforeArr,
-          { id: 5, country: '스페인', date: new Date('2022-08-14'), day: 'Sat', cells: [] },
-          ...afterArr,
-        ],
+        itinerary: [...beforeArr, { id: 5, country: '', date: new Date('2022-08-14'), cells: [] }, ...afterArr],
       },
     };
   }
@@ -342,8 +331,8 @@ class Itinerary extends Component {
     const { id } = e.target.closest('.time-table__day-index__blank').dataset;
     const { time } = e.target.closest('.time-table__day-index__blank li').dataset;
 
-    const newStartTime = this.formattedTime(time);
-    const newEndTime = this.formattedTime(time + 1);
+    const newStartTime = this.formattedTime(+time);
+    const newEndTime = this.formattedTime(+time + 1);
     const {
       selectedItineraryId,
       info: { startTime },
@@ -434,12 +423,21 @@ class Itinerary extends Component {
 
   dropCard(e) {
     const {
+      localItinerary,
       localItinerary: { dragTarget },
     } = store.state;
-    if (e.target === dragTarget || !e.target.closest('.time-table__day-index__blank li')) return;
+
+    if (e.target === dragTarget || !e.target.closest('.time-table__day-index__blank li')) {
+      store.state = {
+        localItinerary: {
+          ...localItinerary,
+          dragTarget: '',
+        },
+      };
+      return;
+    }
 
     const {
-      localItinerary,
       tripSchedule,
       localNewScheduleCell: { selectedItineraryId },
     } = store.state;
