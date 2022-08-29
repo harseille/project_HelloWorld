@@ -102,6 +102,33 @@
 
 import store from '../store/store.js';
 
+// Converts numeric degrees to radians
+const toRad = Value => (Value * Math.PI) / 180;
+
+const calcCrow = (lat1, lon1, lat2, lon2) => {
+  const R = 6371; // km
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const _lat1 = toRad(lat1);
+  const _lat2 = toRad(lat2);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(_lat1) * Math.cos(_lat2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c;
+  return d;
+};
+
+const calculateZoomLevel = (mapSize, coverage, latitude, distance) => {
+  // const pixels = mapSize.Width >= mapSize.Height ? mapSize.Height : mapSize.Width; // get the shortest dimmension of the map
+  const k = mapSize * 156543.03392 * Math.cos((latitude * Math.PI) / 180);
+  console.log(k);
+  console.log(coverage * k);
+  return Math.round(Math.log((coverage * k) / (distance * 100)) / 0.6931471805599453) - 8;
+};
+// };
+
 const initMap = page => {
   // 현제위치를 설정한다.
   console.log('View google map init');
@@ -111,15 +138,7 @@ const initMap = page => {
 
     const success = position => {
       const { latitude, longitude } = position.coords;
-
-      const coords = new google.maps.LatLng(latitude, longitude);
-      const mapOptions = {
-        zoom: 15,
-        center: coords,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-      };
-
-      map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+      const coord = new google.maps.LatLng(latitude, longitude);
 
       const cellInfoList = store.state.tripSchedule.itinerary
         .map(dayPlan =>
@@ -127,15 +146,33 @@ const initMap = page => {
         )
         .flat();
 
-      console.log(cellInfoList);
+      const { sumLatitude, sumLongitude } = cellInfoList.reduce(
+        (acc, cur) => ({
+          sumLatitude: acc.sumLatitude + cur.latLng.lat,
+          sumLongitude: acc.sumLongitude + cur.latLng.lng,
+        }),
+        { sumLatitude: 0, sumLongitude: 0 }
+      );
+
+      const _coord = new google.maps.LatLng(sumLatitude / cellInfoList.length, sumLongitude / cellInfoList.length);
+
+      const latList = cellInfoList.map(cellInfo => cellInfo.latLng.lat);
+      const lngList = cellInfoList.map(cellInfo => cellInfo.latLng.lng);
+
+      const distance = calcCrow(Math.max(...latList), Math.max(...lngList), Math.min(...latList), Math.min(...lngList));
+
+      const zoomLevel = calculateZoomLevel(1280, 80, sumLatitude / cellInfoList.length, distance, 15, 0);
+      console.log(zoomLevel);
+
+      const mapOptions = {
+        zoom: cellInfoList.length ? zoomLevel : 13,
+        center: cellInfoList.length ? _coord : coord,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+
+      map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
       const journey = cellInfoList.map(cellInfo => cellInfo.latLng);
-      const icon = {
-        accomodation: '/assets/images/map/map-marker-hotel.png',
-        sightseeing: '/assets/images/map/map-marker-footprint.png',
-        transportation: '/assets/images/map/map-marker-traffic.png',
-        etc: '/assets/images/map/map-marker-pin.png',
-      };
 
       const journeyPath = new google.maps.Polyline({
         path: journey,
@@ -145,6 +182,13 @@ const initMap = page => {
         strokeWeight: 5,
       });
 
+      const icon = {
+        accomodation: '/assets/images/map/map-marker-hotel.png',
+        sightseeing: '/assets/images/map/map-marker-footprint.png',
+        transportation: '/assets/images/map/map-marker-traffic.png',
+        etc: '/assets/images/map/map-marker-pin.png',
+      };
+
       cellInfoList.forEach(
         coord =>
           new google.maps.Marker({
@@ -153,6 +197,7 @@ const initMap = page => {
             map,
           })
       );
+
       journeyPath.setMap(map);
     };
     const failure = () => {
