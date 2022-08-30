@@ -209,19 +209,12 @@ class Itinerary extends Component {
   addScheduleBefore(e) {
     if (!e.target.classList.contains('prev--add--item')) return;
 
-    // store.state = {
-    //   itinerary: {
-    //     schedule: [],
-    //     currentId: ''
-    //   }
-    // }
     const { tripSchedule } = store.state;
     const { itinerary } = tripSchedule;
     const id = +e.target.closest('.carousel__day-index').dataset.id;
 
     const idx = itinerary.findIndex(sched => sched.id === id);
 
-    // 앞에 추가 로직
     const beforeArr = itinerary.filter((_, i) => i < idx); // id = 0
     const afterArr = itinerary.filter((_, i) => i >= idx);
     // const beforeArr = itinerary.slice(0, idx); // id = 0
@@ -237,7 +230,7 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
-        itinerary: [...beforeArr, { id: 5, country: '', date: new Date('2022-08-14'), cells: [] }, ...afterArr],
+        itinerary: [...beforeArr, { id, country: '', date: new Date('2022-08-14'), cells: [] }, ...afterArr],
       },
     };
   }
