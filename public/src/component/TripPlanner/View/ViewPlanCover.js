@@ -1,5 +1,6 @@
 import Component from '../../../core/Component.js';
 import render from '../../../dom/render.js';
+import store from '../../../store/store.js';
 
 class ViewPlanCover extends Component {
   render() {
@@ -31,7 +32,10 @@ class ViewPlanCover extends Component {
       // window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit/' + tripScheduleId);
       window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit');
 
-      render();
+      const { viewTripSchedule } = store.state;
+      store.state = {
+        tripSchedule: viewTripSchedule,
+      };
     }
   }
 

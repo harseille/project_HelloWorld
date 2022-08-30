@@ -60,10 +60,10 @@ class NewTravelLogModal extends Component {
           <div class="modal__header__title">새 일정 만들기</div>
           <button class="modal__header__close__btn" aria-label="닫기"></button>
         </div>
-        <form class="newTrip__popup__form" novalidate>
+        <form class="newTrip__popup__form">
           <div class="newTrip__popup__form__input">
             <label for="newTripTitle" class="a11yHidden">새 일정 제목</label>
-            <input class="newTripTitle" type="text" name="newTripTitle" placeholder="예 : 5박 6일 하와이 여행" value="${title}" pattern=".{3,50}" required/>
+            <input class="newTripTitle" type="text" name="title" placeholder="예 : 5박 6일 하와이 여행" value="${title}" minLength="3" maxLength="50" required/>
           </div>
           ${_datePickerStartDate}
           ${_datePickerEndDate}
@@ -85,7 +85,7 @@ class NewTravelLogModal extends Component {
             isActiveSelfNumberOfPeopleInputForm ? '' : 'hide'
           }">
             <label for="inputPeople" class="a11yHidden">인원 수 입력</label>
-            <input class="inputPeople" id="inputPeople" type="number" name="inputPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
+            <input class="inputPeople" id="inputPeople" type="number" name="numberOfPeople" placeholder="6명 이상은 직접 입력해주세요." value="${numberOfPeople}"/>
           </div>
           <button class="newTrip__popup__form__submit ${isFilledAllModalInput ? 'active' : ''}" ${
       isFilledAllModalInput ? '' : 'disabled'
@@ -103,7 +103,6 @@ class NewTravelLogModal extends Component {
       e.target.matches('.newTravelLogModal .dimmed__layer')
     )
       store.state = {
-        ...store.state,
         localCommon: {
           ...store.state.localCommon,
           isShowModal: '',
@@ -126,32 +125,25 @@ class NewTravelLogModal extends Component {
       };
   }
 
-  inputTitle(e) {
-    store.state = {
-      ...store.state,
-      tripSchedule: {
-        ...store.state.tripSchedule,
-        title: e.target.value,
-      },
-    };
-  }
+  inputNewTripScheduleModalValue(e) {
+    const { name, value } = e.target;
 
-  inputNumberOfPeople(e) {
+    console.log(e.target);
+    console.log(name);
+    console.log(value);
+
     store.state = {
-      ...store.state,
       tripSchedule: {
         ...store.state.tripSchedule,
-        numberOfPeople: +e.target.value,
+        [name]: value,
       },
     };
   }
 
   changeSelfInputForm(e) {
-    console.log('changeSelfInputForm');
     const isActive = +e.target.value >= 6;
 
     store.state = {
-      ...store.state,
       localNewTripSchedule: {
         ...store.state.localNewTripSchedule,
         isActiveSelfNumberOfPeopleInputForm: isActive,
@@ -170,7 +162,6 @@ class NewTravelLogModal extends Component {
 
     const isAllFilled = !!(title && startDate && endDate);
     store.state = {
-      ...store.state,
       localNewTripSchedule: {
         ...store.state.localNewTripSchedule,
         isFilledAllModalInput: isAllFilled,
@@ -184,9 +175,7 @@ class NewTravelLogModal extends Component {
 
     const inputValues = new FormData(document.querySelector('.newTrip__popup__form'));
 
-    const { newTripTitle, newTripStartDate, newTripEndDate, inputPeople } = Object.fromEntries([
-      ...inputValues.entries(),
-    ]);
+    const { title, newTripStartDate, newTripEndDate, numberOfPeople } = Object.fromEntries([...inputValues.entries()]);
 
     const {
       userInfo: { userId, profilePic, nickname },
@@ -212,13 +201,13 @@ class NewTravelLogModal extends Component {
         authorId: userId,
         author: nickname,
         authorProfilePic: profilePic,
-        title: newTripTitle,
+        title,
         summary: '',
         tripDays: _tripDays,
         startDate: new Date(newTripStartDate), // * Date 객체
         endDate: new Date(newTripEndDate), // * Date 객체
         createdDate: new Date(),
-        numberOfPeople: inputPeople,
+        numberOfPeople,
         coverImg: '',
         content: '',
         isLiked: false,
@@ -236,11 +225,11 @@ class NewTravelLogModal extends Component {
   addEventListener() {
     return [
       { type: 'click', selector: '.dimmed__layer', handler: this.closeNewTripScheduleModal },
-      { type: 'change', selector: '.newTripTitle', handler: this.inputTitle },
-      { type: 'change', selector: '.inputPeople', handler: this.inputNumberOfPeople },
+      { type: 'change', selector: '.newTripTitle', handler: this.inputNewTripScheduleModalValue },
+      { type: 'change', selector: '.inputPeople', handler: this.inputNewTripScheduleModalValue },
       { type: 'change', selector: '.newTrip__popup__form__select', handler: this.changeSelfInputForm },
       { type: 'change', selector: '.newTrip__popup__form', handler: this.validateInputFill },
-      { type: 'click', selector: '.newTrip__popup__form__submit', handler: this.submitTripSchedule },
+      { type: 'submit', selector: '.newTrip__popup__form', handler: this.submitTripSchedule },
     ];
   }
 }
