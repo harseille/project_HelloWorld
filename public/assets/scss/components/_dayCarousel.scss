@@ -27,7 +27,7 @@
       position: absolute;
       top: 40px;
       left: 80px;
-      width: 108px;
+      width: 130px;
       height: auto;
       border: 1px solid $gray500;
       border-radius: 3px;
@@ -36,17 +36,17 @@
       z-index: 99;
       text-align: center;
       .first-item {
-        background: $lightPurple;
         border-radius: 3px 3px 0 0;
       }
     }
     &__add--item {
-      height: 30px;
-      padding-top: 7px;
+      padding: 15px;
       font-size: 14px;
+      color: $gray600;
     }
     &__add--item:hover {
       background: $lightPurple;
+      color: $black;
     }
   }
   &--btn {
