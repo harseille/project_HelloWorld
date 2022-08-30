@@ -57,7 +57,7 @@ class NewScheduleCellPopup extends Component {
 
     const startUnabledTime = this.formatUnableTime(targetItinerary, 0);
     const endUnabledTime = this.formatUnableTime(targetItinerary, 1);
-    console.log(startUnabledTime, endUnabledTime);
+
     const $datePicker = new CellDatePicker({
       ...localDatePicker,
       calendarId: 'newScheduleCellDate',
@@ -145,8 +145,14 @@ class NewScheduleCellPopup extends Component {
   }
 
   formatUnableTime(itinerary, restNum) {
+    const {
+      localNewScheduleCell: { editCellId },
+    } = store.state;
+
     const unableTime = itinerary.cells
-      .map(({ startTime, endTime }) => {
+      .map(({ id, startTime, endTime }) => {
+        if (editCellId === id) return '';
+
         const st = +startTime.slice(0, 2);
         const gap = +endTime.slice(0, 2) - st - restNum;
 
@@ -171,6 +177,7 @@ class NewScheduleCellPopup extends Component {
     e.preventDefault();
     const {
       localCommon,
+      localNewScheduleCell,
       localNewScheduleCell: { info, editCellId, selectedItineraryId },
       localDatePicker,
       tripSchedule,
@@ -189,6 +196,7 @@ class NewScheduleCellPopup extends Component {
     const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
 
     const changeItinerary = iti => {
+      // new 일정
       if (!editCellId) {
         return iti.date.getFullYear() === selectedYear &&
           iti.date.getMonth() === selectedMonth &&
@@ -197,8 +205,13 @@ class NewScheduleCellPopup extends Component {
           : iti;
       }
 
-      const [{ date, cells }] = tripSchedule.itinerary.filter(iti => iti.id === selectedItineraryId);
-      if (date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDate) {
+      // edit할 경우
+      // 같은 날짜에서 정보를 바꾸는 경우
+      if (
+        iti.date.getFullYear() === selectedYear &&
+        iti.date.getMonth() === selectedMonth &&
+        iti.date.getDate() === selectedDate
+      ) {
         return iti.id === selectedItineraryId
           ? {
               ...iti,
@@ -206,7 +219,11 @@ class NewScheduleCellPopup extends Component {
             }
           : iti;
       }
-      if (iti.id === selectedItineraryId) return { ...iti, cells: cells.filter(cell => cell.id !== editCellId) };
+
+      // 날짜가 달라지는 경우
+      // 기존 배열에서 filter
+      // 새로운 날짜가 일치하는 곳에 배열 추가
+      if (iti.id === selectedItineraryId) return { ...iti, cells: iti.cells.filter(cell => cell.id !== editCellId) };
       if (
         iti.date.getFullYear() === selectedYear &&
         iti.date.getMonth() === selectedMonth &&
@@ -216,11 +233,16 @@ class NewScheduleCellPopup extends Component {
 
       return iti;
     };
+
     store.state = {
       localCommon: { ...localCommon, isShowModal: '' },
       tripSchedule: {
         ...tripSchedule,
         itinerary: itinerary.map(iti => changeItinerary(iti)),
+      },
+      localNewScheduleCell: {
+        ...localNewScheduleCell,
+        editCellId: '',
       },
       localDatePicker: {
         ...localDatePicker,
