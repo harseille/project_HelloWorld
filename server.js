@@ -32,6 +32,7 @@ const auth = (req, res, next) => {
 
 app.use(express.static('public'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.post('/tripSchedule', (req, res) => {
@@ -71,25 +72,33 @@ app.post('/logout', (req, res) => {
 
 app.get('/mainTripSchedules', (req, res) => {
   try {
-    console.log('[GET] mainTripSchedules');
-    const responseSchedules = tripSchedules.mainTripSchedules();
-    res.send(responseSchedules);
+    console.log(req.query);
+    const query = req.query.hasOwnProperty('category');
+    console.log(query);
+    if (!query) {
+      const responseSchedules = tripSchedules.mainTripSchedules();
+      res.send(responseSchedules);
+    } else {
+      const { category, value } = req.query;
+      const responseSchedules = tripSchedules.filterMainTripSchedules(category, value);
+      res.send(responseSchedules);
+    }
   } catch (e) {
     console.error(e);
   }
 });
 
-app.get('/mainTripSchedules/:searchCategory/:searchValue', (req, res) => {
-  try {
-    console.log('[GET] mainTripSchedules/');
-    const { searchCategory, searchValue } = req.params;
-    const responseSchedules = tripSchedules.filterMainTripSchedules(searchCategory, searchValue);
-    console.log(responseSchedules);
-    res.send(responseSchedules);
-  } catch (e) {
-    console.error(e);
-  }
-});
+// app.get('/mainTripSchedules', (req, res) => {
+//   console.log('[GET] mainTripSchedules/params');
+//   try {
+//     // console.log(req.query);
+//     const { category, value } = req.query;
+//     const responseSchedules = tripSchedules.filterMainTripSchedules(category, value);
+//     res.send(responseSchedules);
+//   } catch (e) {
+//     console.error(e);
+//   }
+// });
 
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
