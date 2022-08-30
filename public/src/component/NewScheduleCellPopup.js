@@ -2,6 +2,7 @@
 import Component from '../core/Component.js';
 import store from '../store/store.js';
 import CellDatePicker from './DatePicker/CellDatePicker.js';
+import { convertDateStringToDate } from './DatePicker/dateUtils.js';
 
 // store.state = {
 //  localCommon: {
@@ -48,12 +49,16 @@ class NewScheduleCellPopup extends Component {
       '24:00',
     ];
 
-    const [targetItinerary] = itinerary.filter(
-      sch =>
-        sch.date.getFullYear() === newScheduleCellDate.getFullYear() &&
-        sch.date.getMonth() === newScheduleCellDate.getMonth() &&
-        sch.date.getDate() === newScheduleCellDate.getDate()
-    );
+    const [targetItinerary] = itinerary.filter(sch => {
+      const _date = convertDateStringToDate(sch.date);
+      const _newScheduleCellDate = convertDateStringToDate(newScheduleCellDate);
+
+      return (
+        _date.getFullYear() === _newScheduleCellDate.getFullYear() &&
+        _date.getMonth() === _newScheduleCellDate.getMonth() &&
+        _date.getDate() === _newScheduleCellDate.getDate()
+      );
+    });
 
     const startUnabledTime = this.formatUnableTime(targetItinerary, 0);
     const endUnabledTime = this.formatUnableTime(targetItinerary, 1);

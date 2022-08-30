@@ -84,9 +84,9 @@ app.get('/trip-log', (req, res) => {
 
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
-    const { tripScheduleId } = req.params;
+    const { tripScheduleId } = req.params; // type String
     console.log('[server] /tripSchedule/' + tripScheduleId);
-    const responseSchedule = tripSchedules.findTripSchedule(tripScheduleId);
+    const responseSchedule = tripSchedules.findTripSchedule(+tripScheduleId);
     console.log(responseSchedule);
     res.send(responseSchedule);
   } catch (e) {

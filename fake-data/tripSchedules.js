@@ -1,6 +1,6 @@
 let tripSchedules = [
   {
-    tripScheduleId: '1',
+    tripScheduleId: 1,
     author: '민홍손',
     authorProfilePic: '/assets/images/users/1/thumbnail.png',
     title: '런던 시내 한 구석에서 손흥민을 만났습니다',
@@ -84,7 +84,7 @@ let tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '2',
+    tripScheduleId: 2,
     author: '오똑똑',
     authorProfilePic: '/assets/images/profile6.png',
     title: '제주 핵심 명소 78곳 1분 요약',
@@ -133,7 +133,7 @@ let tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '3',
+    tripScheduleId: 3,
     author: '백종원',
     authorProfilePic:
       'https://yt3.ggpht.com/ytc/AMLnZu98MEQvuszPd3pPRdkn47wibmrW81BeDYy3lj15pQ=s900-c-k-c0x00ffffff-no-rj',
@@ -183,7 +183,7 @@ let tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '4',
+    tripScheduleId: 4,
     author: '크라이',
     authorProfilePic: '/assets/images/profile3.png',
     title: '룩 룩 룩셈부르크 ',
@@ -226,7 +226,7 @@ let tripSchedules = [
     ],
   },
   {
-    tripScheduleId: '5',
+    tripScheduleId: 5,
     authorId: 1,
     author: 'blahblah',
     authorProfilePic: '/assets/images/users/1/thumbnail.png',
@@ -357,7 +357,7 @@ let tripSchedules = [
     newScheduleCellDate: '2022-08-30T15:00:00.000Z',
   },
   {
-    tripScheduleId: '6',
+    tripScheduleId: 6,
     authorId: 3,
     author: 'Benja',
     authorProfilePic: '/assets/images/users/3/thumbnail.png',
@@ -368,7 +368,8 @@ let tripSchedules = [
     endDate: '2022-09-04T00:00:00.000Z',
     createdDate: '2022-08-30T01:17:00.067Z',
     numberOfPeople: '2',
-    coverImg: '',
+    coverImg:
+      'https://www.visitfinland.com/.imaging/mte/visit-finland-theme/xlUpW/dam/Helsinki/Lo-yly_Helsinki_credit-Ulla-Ma-kela-.jpg/jcr:content/L%C3%B6yly_Helsinki_credit%20Ulla%20M%C3%A4kel%C3%A4.jpg',
     content: '',
     isLiked: false,
     likeCount: 0,
@@ -588,12 +589,11 @@ const processMainTripSchedules = (searchCategory, searchValue) => {
 
 const findTripSchedule = id => tripSchedules.find(tripSchedule => tripSchedule.tripScheduleId === id);
 
-const generateTripScheduleId = () =>
-  Math.max(...tripSchedules.map(tripSchedule => +tripSchedule.tripScheduleId), 0) + 1;
+const generateTripScheduleId = () => Math.max(...tripSchedules.map(tripSchedule => tripSchedule.tripScheduleId), 0) + 1;
 
 const setTripSchdule = newTripSchedule => {
   console.log(newTripSchedule);
-  const responseTripSchedule = { ...newTripSchedule, tripScheduleId: generateTripScheduleId().toString() };
+  const responseTripSchedule = { ...newTripSchedule, tripScheduleId: generateTripScheduleId() };
   tripSchedules = [...tripSchedules, responseTripSchedule];
   return responseTripSchedule;
 };
