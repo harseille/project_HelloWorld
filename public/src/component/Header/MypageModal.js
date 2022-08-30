@@ -17,6 +17,7 @@ class MypageModal extends Component {
       },
     ];
 
+    console.log(isShowModal);
     return `
     <div class="my-page-modal ${isShowModal === 'myPageModal' ? '' : 'hide'}">
       <ul class="my-page-modal__list">

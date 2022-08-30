@@ -4,7 +4,7 @@ import { getFormattedDate } from '../../DatePicker/dateUtils.js';
 class ViewPlanner extends Component {
   render() {
     const {
-      tripSchedule: {
+      viewTripSchedule: {
         author,
         authorProfilePic,
         content,

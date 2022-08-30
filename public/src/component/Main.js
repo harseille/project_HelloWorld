@@ -5,7 +5,6 @@ import MainPost from './Main/MainPost.js';
 class Main extends Component {
   async init() {
     try {
-      // Todo 새로고침 시 필터된 카드로 랜더되게 쿼리로 바꾸기
       const query = window.location.search;
 
       const mainTripSchedules = await axios.get(`/trip-log${query}`);
@@ -22,7 +21,10 @@ class Main extends Component {
   }
 
   render() {
-    const { selectedCardId } = store.state.localMain;
+    const {
+      localMain: { selectedCardId },
+      tripSchedules,
+    } = store.state;
 
     return `
     <div class="main">
@@ -108,21 +110,32 @@ class Main extends Component {
         <h2 class="travel-log__title">여행 일지</h2>
       </div>
       <form action="" class="travel-log__form">
-        <select class="travel-log__form__dropdown" name="travel-log__form__dropdown" id="cars">
+        <select class="travel-log__form__dropdown" name="category" id="cars">
           <option value="title">제목</option>
           <option value="country">국가</option>
           <option value="city">도시</option>
         </select>
-        <input class="travel-log__form__input" type="text" placeholder="검색어를 입력해주세요." />
+        <input class="travel-log__form__input" name="keyword" type="text" placeholder="검색어를 입력해주세요." />
         <button class="travel-log__form__button--submit" type="submit">검색</button>
       </form>
       <div class="travel-log__body">
         <ul class="travel-log__list">
-          ${store.state.tripSchedules.map(schedule => new MainPost({ ...schedule, selectedCardId }).render()).join('')}
+          ${tripSchedules.map(schedule => new MainPost({ ...schedule, selectedCardId }).render()).join('')}
         </ul>
       </div>
     </section>
   </div>`;
+  }
+
+  chageSearchValue(e) {
+    const { name, value } = e.target;
+
+    store.state = {
+      localMain: {
+        ...store.state.localMain,
+        [name]: value,
+      },
+    };
   }
 
   changeToTripScheduleView(e) {
@@ -145,20 +158,21 @@ class Main extends Component {
 
     if (!e.target.classList.contains('travel-log__form')) return;
 
-    const searchCategory = e.target.querySelector('.travel-log__form__dropdown').value;
-    const searchValue = e.target.querySelector('.travel-log__form__input').value;
+    const {
+      localMain: { category, keyword },
+    } = store.state;
 
     const filteredMainTripSchedules = await axios.get('/trip-log', {
       params: {
-        category: searchCategory,
-        keyword: searchValue,
+        category,
+        keyword,
       },
     });
 
     window.history.pushState(
       {},
       'MainFitler',
-      window.location.origin + `/main?category=${searchCategory}&keyword=${searchValue}`
+      window.location.origin + `/main?category=${category}&keyword=${keyword}`
     );
 
     store.state = {
@@ -168,6 +182,8 @@ class Main extends Component {
 
   addEventListener() {
     return [
+      { type: 'change', selector: '.travel-log__form__input', handler: this.chageSearchValue },
+      { type: 'change', selector: '.travel-log__form__dropdown', handler: this.chageSearchValue },
       { type: 'click', selector: '.travel-log__item', handler: this.changeToTripScheduleView },
       { type: 'submit', selector: '.travel-log__form', handler: this.filterToTripScheduleView },
     ];

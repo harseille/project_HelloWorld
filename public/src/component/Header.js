@@ -5,15 +5,21 @@ import render from '../dom/render.js';
 
 class Header extends Component {
   render() {
-    const isLogined = store.state?.userInfo.userId;
     const path = window.location.pathname;
-    const profilePic = store.state?.userInfo.profilePic;
-    const nickname = store.state?.userInfo.nickname;
+
     const {
+      localCommon,
+      localNewTripSchedule,
+      localDatePicker,
+      tripSchedule,
       localCommon: { isShowModal },
+      userInfo: { userId: isLogined, nickname, profilePic },
     } = store.state;
 
-    const newTravelLogModal = isShowModal === 'newTripScheduleModal' ? new NewTravelLogModal(store.state).render() : '';
+    const newTravelLogModal =
+      isShowModal === 'newTripScheduleModal'
+        ? new NewTravelLogModal({ localCommon, localNewTripSchedule, localDatePicker, tripSchedule }).render()
+        : '';
     const mypageModal = new MypageModal({ isShowModal, nickname }).render();
 
     const navList = [
@@ -25,7 +31,7 @@ class Header extends Component {
         content: `<img class="nav__list__profile-pic" src="${
           profilePic || '/assets/images/users/profileDefault.png'
         }" alt="${nickname}">${mypageModal}`,
-        type: 'mypageModal',
+        type: 'myPageModal',
       },
     ];
 
@@ -39,11 +45,11 @@ class Header extends Component {
           </h1>
           <ul class="nav__list">
             ${navList
-              .map(({ href, content, type }, idx) => {
+              .map(({ href, content, type }) => {
                 if (path === '/intro' && href !== '/signin') return '';
                 if (isLogined && href === '/signin') return '';
-                if (!isLogined && type === 'mypageModal') return '';
-                return `<li id="headerNav${idx}" class="nav__item ${path === href ? 'active' : ''}">
+                if (!isLogined && type === 'myPageModal') return '';
+                return `<li id="${type}" class="nav__item ${path === href ? 'active' : ''}">
             <a href="${href}" class="nav__item__link">${content}</a>
             </li>`;
               })
@@ -57,20 +63,8 @@ class Header extends Component {
     `;
   }
 
-  showMyPageModal(e) {
-    if (e.target.closest('li')?.id !== 'headerNav3' || e.target.classList.contains('nav__list')) return;
-
-    store.state = {
-      localCommon: {
-        ...store.state.localCommon,
-        isShowModal: store.state.localCommon.isShowModal === 'myPageModal' ? '' : 'myPageModal',
-      },
-    };
-    console.log('동시 실행 11111111');
-  }
-
   hideMyPageModal(e) {
-    if (store.state.localCommon.isShowModal !== 'myPageModal' || e.target.closest('#headerNav3')) return;
+    if (store.state.localCommon.isShowModal !== 'myPageModal' || e.target.closest('#myPageModal')) return;
 
     store.state = {
       localCommon: {
@@ -80,37 +74,40 @@ class Header extends Component {
     };
   }
 
-  showNewTripScheduleModal(e) {
-    if (e.target.closest('li')?.id !== 'headerNav1') return;
-    if (!store.state.userInfo.userId) {
-      window.history.pushState({}, 'Signin', window.location.origin + '/signin');
-      render();
-    } else {
+  clickNavItem(e) {
+    e.preventDefault();
+
+    if (e.target.classList.contains('nav__list')) return;
+
+    const path = e.target.closest('a').getAttribute('href');
+    const { id } = e.target.closest('li');
+
+    if (path === '#') {
+      if (id === 'newTripScheduleModal' && window.location.pathname === '/trip-planner-edit') return;
+      if (id === 'newTripScheduleModal' && !store.state.userInfo.userId) {
+        window.history.pushState({}, 'Signin', window.location.origin + '/signin');
+        render();
+      }
+
       store.state = {
         localCommon: {
           ...store.state.localCommon,
-          isShowModal: 'newTripScheduleModal',
+          isShowModal: id,
         },
       };
+    } else {
+      window.history.pushState({}, path, window.location.origin + path);
+      render();
     }
   }
 
-  link(e) {
-    e.preventDefault();
-    const path = e.target.getAttribute('href');
-
-    if (!path || path === '#') return;
-
-    window.history.pushState({}, path, window.location.origin + path);
-    render();
-  }
-
   async logout(e) {
-    if (e.target.textContent !== '로그아웃') return;
     try {
       const response = await axios.post('/logout', {});
       if (response.status === 200) {
         store.clearState();
+        window.history.pushState({}, 'main', window.location.origin + '/main');
+        render();
       }
     } catch (e) {
       console.error(e);
@@ -119,11 +116,9 @@ class Header extends Component {
 
   addEventListener() {
     return [
-      { type: 'click', selector: '.nav__list', component: 'headerNav3', handler: this.showMyPageModal },
-      { type: 'click', selector: 'window', component: 'headerNav3', handler: this.hideMyPageModal },
-      { type: 'click', selector: '.nav__list', component: 'headerNav1', handler: this.showNewTripScheduleModal },
-      { type: 'click', selector: '.nav__list', component: 'testtest', handler: this.link },
-      { type: 'click', selector: '.nav__list', component: 'logout', handler: this.logout },
+      { type: 'click', selector: 'window', component: 'header', handler: this.hideMyPageModal },
+      { type: 'click', selector: '.nav__list', handler: this.clickNavItem },
+      { type: 'click', selector: '.logout', handler: this.logout },
     ];
   }
 }
