@@ -61,10 +61,12 @@ class Itinerary extends Component {
       <div class="carousel">
         <div class="carousel__days">
         ${
-          _schedule.map(sched =>  `
+          _schedule.map((sched,i) =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
 
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${sched.id} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}}      
+
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}}      
+
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
@@ -231,7 +233,17 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
-        itinerary: [...beforeArr, { id, country: '', date: new Date('2022-08-14'), cells: [] }, ...afterArr],
+        itinerary: [
+          ...beforeArr,
+          {
+            id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
+            country: '',
+            date: new Date(),
+            // date: ...itinerary.filter(iti => iti.date.getDate()),
+            cells: [],
+          },
+          ...afterArr,
+        ],
       },
     };
   }
@@ -241,10 +253,6 @@ class Itinerary extends Component {
     if (!e.target.classList.contains('next--add--item')) return;
     const { itinerary } = store.state.tripSchedule;
     const id = +e.target.closest('.carousel__day-index').dataset.id;
-
-    // 뒤에 추가 로직
-    // const beforeArr = itinerary.filter((_, i) => i <= id); // id = 0
-    // const afterArr = itinerary.filter((_, i) => i > id);
 
     // index 찾기
     let idx;
@@ -263,7 +271,12 @@ class Itinerary extends Component {
         ...store.state.tripSchedule,
         itinerary: [
           ...beforeArr,
-          { id: 5, country: '스페인', date: new Date('2022-08-14'), day: 'Sat', cells: [] },
+          {
+            id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
+            country: '',
+            date: new Date('2022-08-14'),
+            cells: [],
+          },
           ...afterArr,
         ],
       },
