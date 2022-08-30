@@ -8,7 +8,7 @@ class Main extends Component {
       // Todo 새로고침 시 필터된 카드로 랜더되게 쿼리로 바꾸기
       const query = window.location.search;
 
-      const mainTripSchedules = await axios.get(`/mainTripSchedules${query}`);
+      const mainTripSchedules = await axios.get(`/trip-log${query}`);
       store.state = {
         localCommon: {
           ...store.state.localCommon,
@@ -148,17 +148,17 @@ class Main extends Component {
     const searchCategory = e.target.querySelector('.travel-log__form__dropdown').value;
     const searchValue = e.target.querySelector('.travel-log__form__input').value;
 
-    // const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
-    const filteredMainTripSchedules = await axios.get('/mainTripSchedules', {
+    const filteredMainTripSchedules = await axios.get('/trip-log', {
       params: {
         category: searchCategory,
-        value: searchValue,
+        keyword: searchValue,
       },
     });
+
     window.history.pushState(
       {},
       'MainFitler',
-      window.location.origin + `/main?category=${searchCategory}&value=${searchValue}`
+      window.location.origin + `/main?category=${searchCategory}&keyword=${searchValue}`
     );
 
     store.state = {
