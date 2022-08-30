@@ -15,6 +15,14 @@ const users = [
     nickname: 'wowo',
     profilePic: '',
   },
+  {
+    userId: 3,
+    email: 'naver@naver.com',
+    password: '123123',
+    name: '하준박',
+    nickname: 'Benja',
+    profilePic: '/assets/images/users/3/thumbnail.png',
+  },
 ];
 
 const findUser = email => users.find(user => user.email === email);

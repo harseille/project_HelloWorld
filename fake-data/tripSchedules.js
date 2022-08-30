@@ -356,6 +356,212 @@ let tripSchedules = [
     ],
     newScheduleCellDate: '2022-08-30T15:00:00.000Z',
   },
+  {
+    tripScheduleId: '6',
+    authorId: 3,
+    author: 'Benja',
+    authorProfilePic: '/assets/images/users/3/thumbnail.png',
+    title: '[헬싱키 비교체험] 초호화 사우나 VS 무료 사우나',
+    summary: '',
+    tripDays: 2,
+    startDate: '2022-09-03T00:00:00.000Z',
+    endDate: '2022-09-04T00:00:00.000Z',
+    createdDate: '2022-08-30T01:17:00.067Z',
+    numberOfPeople: '2',
+    coverImg: '',
+    content: '',
+    isLiked: false,
+    likeCount: 0,
+    commentCount: 0,
+    itinerary: [
+      {
+        id: 1,
+        country: '핀란드',
+        date: '2022-09-02T15:00:00.000Z',
+        cells: [
+          {
+            id: 1,
+            type: 'transportation',
+            startTime: '09:00',
+            endTime: '13:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Lootsi 13</span>, <span class="postal-code">15051</span> <span class="locality">Tallinn</span>, <span class="country-name">에스토니아</span>',
+              formatted_address: 'Lootsi 13, 15051 Tallinn, 에스토니아',
+              geometry: {
+                location: {
+                  lat: 59.4433148,
+                  lng: 24.7671951,
+                },
+                viewport: {
+                  south: 59.44196581970849,
+                  west: 24.7658461197085,
+                  north: 59.44466378029151,
+                  east: 24.76854408029151,
+                },
+              },
+              name: 'SIXT Autorent Tallinn | Tallinn Ferry Terminal D (Meet&Greet), Lootsi, 탈린 에스토니아',
+              html_attributions: [],
+              latLng: {
+                lat: 59.4433148,
+                lng: 24.7671951,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 2,
+            type: 'sightseeing',
+            startTime: '14:00',
+            endTime: '15:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Unioninkatu 29</span>, <span class="postal-code">00170</span> <span class="locality">Helsinki</span>, <span class="country-name">핀란드</span>',
+              formatted_address: 'Unioninkatu 29, 00170 Helsinki, 핀란드',
+              geometry: {
+                location: {
+                  lat: 60.1704191,
+                  lng: 24.9521651,
+                },
+                viewport: {
+                  south: 60.16896321970849,
+                  west: 24.95005955,
+                  north: 60.1716611802915,
+                  east: 24.95314775,
+                },
+              },
+              name: '핀란드 헬싱키 Unioninkatu, 헬싱키 대성당',
+              html_attributions: [],
+              latLng: {
+                lat: 60.1704191,
+                lng: 24.9521651,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 3,
+            type: 'accomodation',
+            startTime: '17:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Kalevankatu 3 B</span>, <span class="postal-code">00100</span> <span class="locality">Helsinki</span>, <span class="country-name">핀란드</span>',
+              formatted_address: 'Kalevankatu 3 B, 00100 Helsinki, 핀란드',
+              geometry: {
+                location: {
+                  lat: 60.16799569999999,
+                  lng: 24.9394641,
+                },
+                viewport: {
+                  south: 60.16651756970849,
+                  west: 24.9380655197085,
+                  north: 60.1692155302915,
+                  east: 24.94076348029151,
+                },
+              },
+              name: '핀란드 헬싱키 Kalevankatu, 호텔 핀',
+              html_attributions: [],
+              latLng: {
+                lat: 60.16799569999999,
+                lng: 24.9394641,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '핀란드',
+        date: '2022-09-03T15:00:00.000Z',
+        cells: [
+          {
+            id: 4,
+            type: 'etc',
+            startTime: '10:00',
+            endTime: '13:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Katajanokanlaituri 2</span>, <span class="postal-code">00160</span> <span class="locality">Helsinki</span>, <span class="country-name">핀란드</span>',
+              formatted_address: 'Katajanokanlaituri 2, 00160 Helsinki, 핀란드',
+              geometry: {
+                location: {
+                  lat: 60.166788,
+                  lng: 24.959462,
+                },
+                viewport: {
+                  south: 60.1655575197085,
+                  west: 24.9582836197085,
+                  north: 60.16825548029151,
+                  east: 24.9609815802915,
+                },
+              },
+              name: '핀란드 헬싱키 Katajanokanlaituri, 스카이휠 헬싱키',
+              html_attributions: [],
+              latLng: {
+                lat: 60.166788,
+                lng: 24.959462,
+              },
+            },
+            memo: '헬싱키 vip 사우나',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 5,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '09:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Kalevankatu 3 B</span>, <span class="postal-code">00100</span> <span class="locality">Helsinki</span>, <span class="country-name">핀란드</span>',
+              formatted_address: 'Kalevankatu 3 B, 00100 Helsinki, 핀란드',
+              geometry: {
+                location: {
+                  lat: 60.16799569999999,
+                  lng: 24.9394641,
+                },
+                viewport: {
+                  south: 60.16651756970849,
+                  west: 24.9380655197085,
+                  north: 60.1692155302915,
+                  east: 24.94076348029151,
+                },
+              },
+              name: '핀란드 헬싱키 Kalevankatu, 호텔 핀',
+              html_attributions: [],
+              latLng: {
+                lat: 60.16799569999999,
+                lng: 24.9394641,
+              },
+            },
+            memo: '호텔에서 할일',
+            todos: [
+              {
+                id: 1,
+                todo: '호텔 체크아웃',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '짐 보내기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+        ],
+      },
+    ],
+    newScheduleCellDate: '2022-09-03T15:00:00.000Z',
+  },
 ];
 
 const mainTripSchedules = () =>
@@ -392,9 +598,11 @@ const filterMainTripSchedules = (searchCategory, searchValue) => {
 };
 
 const findTripSchedule = id => tripSchedules.find(tripSchedule => tripSchedule.tripScheduleId === id);
-const generateTripScheduleId = () => Math.max(...tripSchedules.map(tripSchedule => tripSchedule.tripScheduleId), 0) + 1;
+const generateTripScheduleId = () =>
+  Math.max(...tripSchedules.map(tripSchedule => +tripSchedule.tripScheduleId), 0) + 1;
 const setTripSchdule = newTripSchedule => {
-  const responseTripSchedule = { ...newTripSchedule, tripScheduleId: generateTripScheduleId() };
+  console.log(newTripSchedule);
+  const responseTripSchedule = { ...newTripSchedule, tripScheduleId: generateTripScheduleId().toString() };
   tripSchedules = [...tripSchedules, responseTripSchedule];
   return responseTripSchedule;
 };

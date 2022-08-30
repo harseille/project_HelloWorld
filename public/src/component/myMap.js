@@ -102,6 +102,9 @@
 
 import store from '../store/store.js';
 
+let map = null;
+let selectedCellCoord = null;
+
 // Converts numeric degrees to radians
 const toRad = Value => (Value * Math.PI) / 180;
 
@@ -129,16 +132,19 @@ const calculateZoomLevel = (mapSize, coverage, latitude, distance) => {
 
 const initMap = () => {
   // 현제위치를 설정한다.
+  // if (!store.state.localMap.isMapInitial) return;
   console.log('View google map init');
   (async () => {
     const { geolocation } = navigator;
-    let map = null;
 
     const success = position => {
       const { latitude, longitude } = position.coords;
       const coord = new google.maps.LatLng(latitude, longitude);
 
+      // const { lat, lng } = selectedCellCoord;
+      // const _coord = new google.maps.LatLng(selectedCellCoord?.lat, selectedCellCoord?.lng);
       const cellInfoList = store.state.tripSchedule.itinerary
+
         .map(dayPlan =>
           dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
         )
@@ -146,27 +152,39 @@ const initMap = () => {
 
       console.log(cellInfoList);
 
-      const { sumLatitude, sumLongitude } = cellInfoList.reduce(
-        (acc, cur) => ({
-          sumLatitude: acc.sumLatitude + cur.latLng.lat,
-          sumLongitude: acc.sumLongitude + cur.latLng.lng,
-        }),
-        { sumLatitude: 0, sumLongitude: 0 }
-      );
+      // const { sumLatitude, sumLongitude } = cellInfoList.reduce(
+      //   (acc, cur) => ({
+      //     sumLatitude: acc.sumLatitude + cur.latLng.lat,
+      //     sumLongitude: acc.sumLongitude + cur.latLng.lng,
+      //   }),
+      //   { sumLatitude: 0, sumLongitude: 0 }
+      // );
 
-      const _coord = new google.maps.LatLng(sumLatitude / cellInfoList.length, sumLongitude / cellInfoList.length);
+      // const _coord = new google.maps.LatLng(sumLatitude / cellInfoList.length, sumLongitude / cellInfoList.length);
 
-      const latList = cellInfoList.map(cellInfo => cellInfo.latLng.lat);
-      const lngList = cellInfoList.map(cellInfo => cellInfo.latLng.lng);
+      // const latList = cellInfoList.map(cellInfo => cellInfo.latLng.lat);
+      // const lngList = cellInfoList.map(cellInfo => cellInfo.latLng.lng);
 
-      const distance = calcCrow(Math.max(...latList), Math.max(...lngList), Math.min(...latList), Math.min(...lngList));
+      // const distance = calcCrow(Math.max(...latList), Math.max(...lngList), Math.min(...latList), Math.min(...lngList));
 
-      const zoomLevel = calculateZoomLevel(1280, 80, sumLatitude / cellInfoList.length, distance, 15, 0);
-      console.log(zoomLevel);
+      // const zoomLevel = calculateZoomLevel(1280, 80, sumLatitude / cellInfoList.length, distance, 15, 0);
 
+      console.log(selectedCellCoord?.lat, selectedCellCoord?.lng);
+      console.log(selectedCellCoord);
+      console.log(cellInfoList[cellInfoList.length - 1]);
+
+      console.log(cellInfoList.length);
       const mapOptions = {
-        zoom: cellInfoList.length ? zoomLevel : 13,
-        center: cellInfoList.length ? _coord : coord,
+        // zoom: cellInfoList.length ? zoomLevel : 13,
+        zoom: 13,
+        center: cellInfoList.length
+          ? selectedCellCoord
+            ? new google.maps.LatLng(selectedCellCoord?.lat, selectedCellCoord?.lng)
+            : new google.maps.LatLng(
+                cellInfoList[cellInfoList.length - 1].latLng.lat,
+                cellInfoList[cellInfoList.length - 1].latLng.lng
+              )
+          : coord,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
       };
 
@@ -199,14 +217,42 @@ const initMap = () => {
       );
 
       journeyPath.setMap(map);
+      // 초기화
+      // selectedCellCoord = null;
+      // store.state.localMap.isMapInitial = false;
     };
     const failure = () => {
       console.log('Fail to load Google Map');
     };
     await geolocation.getCurrentPosition(success, failure);
   })();
-  console.log(store.state);
 };
 
-export default initMap;
-// export { initMap, setJourneyLine };
+const moveMapCenter = e => {
+  if (e.target.matches('.time-table__day-index__blank .itinerary-card--delete')) return;
+
+  const {
+    tripSchedule: { itinerary },
+  } = store.state;
+
+  const { id } = e.target.closest('.itinerary-card').dataset;
+  const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
+  selectedCellCoord = itinerary[selectedItineraryId - 1].cells[id - 1].location.latLng;
+
+  initMap();
+  // map.addListener('center_changed', () => {
+  //   // 3 seconds after the center of the map has changed, pan back to the
+  //   // marker.
+  //   window.setTimeout(() => {
+  //     map.panTo(marker.getPosition());
+  //   }, 3000);
+  // });
+  // console.log(map);
+  // console.log(lat, lng);
+  // map.setCenter(latLng);
+};
+
+// document.querySelector('.itinerary-card').addEventListener('click', moveMapCenter);
+
+// export default initMap;
+export { initMap, moveMapCenter };
