@@ -2,7 +2,7 @@
 /* eslint-disable import/extensions */
 import Component from '../../../core/Component.js';
 // import myMap from '../../myMap.js';
-import initMap from '../../myMap.js';
+import { initMap, moveMapCenter } from '../../myMap.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
 
@@ -566,7 +566,8 @@ class Itinerary extends Component {
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
       { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
-      { type: 'click', selector: '.itinerary-card', handler: this.openEditModal },
+      { type: 'click', selector: '.itinerary-card', handler: moveMapCenter },
+      { type: 'dblclick', selector: '.itinerary-card', handler: this.openEditModal },
       { type: 'click', selector: '.itinerary-card--delete', handler: this.deleteCard },
       { type: 'dragstart', selector: '.time-table__day-index__blank li', handler: this.dragCard },
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },

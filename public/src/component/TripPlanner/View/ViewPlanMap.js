@@ -1,7 +1,7 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
-import initMap from '../../myMap.js';
+import { initMap, moveMapCenter } from '../../myMap.js';
 // import myMap from '../../myMap.js';
 
 class ViewPlanMap extends Component {
@@ -167,6 +167,7 @@ class ViewPlanMap extends Component {
   addEventListener() {
     return [
       { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap },
+      { type: 'click', selector: '.itinerary-card', handler: moveMapCenter },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
     ];

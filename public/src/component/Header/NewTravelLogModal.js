@@ -215,8 +215,8 @@ class NewTravelLogModal extends Component {
         title: newTripTitle,
         summary: '',
         tripDays: _tripDays,
-        startDate: newTripStartDate, // * Date 객체
-        endDate: newTripEndDate, // * Date 객체
+        startDate: new Date(newTripStartDate), // * Date 객체
+        endDate: new Date(newTripEndDate), // * Date 객체
         createdDate: new Date(),
         numberOfPeople: inputPeople,
         coverImg: '',
