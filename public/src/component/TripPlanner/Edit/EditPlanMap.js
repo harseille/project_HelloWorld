@@ -5,6 +5,7 @@ import Component from '../../../core/Component.js';
 import { initMap, moveMapCenter } from '../../myMap.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
+import { getFormattedDateMMDDDAY } from '../../DatePicker/dateUtils.js';
 
 class Itinerary extends Component {
   // formattedDate(date) {
@@ -63,7 +64,9 @@ class Itinerary extends Component {
           _schedule.map((sched,i) =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
 
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${days[sched.date.getDay()]}      
+
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}}      
+
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
@@ -399,8 +402,10 @@ class Itinerary extends Component {
 
   mouseoutTimetable(e) {
     const { localNewScheduleCell, localItinerary } = store.state;
+    if (!localItinerary.isShowNewScheuleCellBtn) return;
+
+    // if (!e.target.matches('.time-table') || e.target.matches('.itinerary-btns') || e.target.matches('.trip-container')) {
     if (
-      localItinerary.isShowNewScheuleCellBtn &&
       !(
         e.target.matches('.time-table__day-index__blank li') ||
         e.target.matches('.time-table__day-index__blank li button')
@@ -573,7 +578,7 @@ class Itinerary extends Component {
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
       { type: 'drop', selector: '.time-table__day-index__blank li', handler: this.dropCard.bind(this) },
       { type: 'mouseover', selector: '.time-table', handler: this.mouseoverTimetable.bind(this) },
-      { type: 'mouseout', selector: '.time-table', handler: this.mouseoutTimetable },
+      { type: 'mouseout', selector: 'window', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',

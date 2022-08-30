@@ -3,9 +3,11 @@ import ViewTripStoryItem from './ViewTripStoryItem.js';
 
 class ViewTripStory extends Component {
   render() {
-    const { userInfo, itinerary } = this.props;
+    const { author, authorProfilePic, itinerary } = this.props;
 
-    const $viewTripStoryItem = itinerary.map(item => new ViewTripStoryItem({ userInfo, item }).render()).join('');
+    const $viewTripStoryItem = itinerary
+      .map(item => new ViewTripStoryItem({ author, authorProfilePic, item }).render())
+      .join('');
 
     return `
     <div class="trip-story">
