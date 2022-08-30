@@ -70,35 +70,17 @@ app.post('/logout', (req, res) => {
   }
 });
 
-app.get('/mainTripSchedules', (req, res) => {
+app.get('/trip-log', (req, res) => {
   try {
-    console.log(req.query);
-    const query = req.query.hasOwnProperty('category');
-    console.log(query);
-    if (!query) {
-      const responseSchedules = tripSchedules.mainTripSchedules();
-      res.send(responseSchedules);
-    } else {
-      const { category, value } = req.query;
-      const responseSchedules = tripSchedules.filterMainTripSchedules(category, value);
-      res.send(responseSchedules);
-    }
+    const { category, keyword } = req.query;
+
+    const responseSchedules = tripSchedules.processMainTripSchedules(category, keyword);
+
+    res.send(responseSchedules);
   } catch (e) {
     console.error(e);
   }
 });
-
-// app.get('/mainTripSchedules', (req, res) => {
-//   console.log('[GET] mainTripSchedules/params');
-//   try {
-//     // console.log(req.query);
-//     const { category, value } = req.query;
-//     const responseSchedules = tripSchedules.filterMainTripSchedules(category, value);
-//     res.send(responseSchedules);
-//   } catch (e) {
-//     console.error(e);
-//   }
-// });
 
 app.get('/tripSchedule/:tripScheduleId', (req, res) => {
   try {
