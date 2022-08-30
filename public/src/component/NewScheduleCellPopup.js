@@ -183,7 +183,9 @@ class NewScheduleCellPopup extends Component {
     const selectedMonth = newScheduleCellDate.getMonth();
     const selectedDate = newScheduleCellDate.getDate();
 
-    const country = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+    const countryName = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
+    const isKorea = /대한민국/.test(countryName);
+    const country = isKorea ? '대한민국' : countryName;
     const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
 
     const changeItinerary = iti => {
