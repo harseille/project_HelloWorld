@@ -56,7 +56,6 @@ class Itinerary extends Component {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     // prettier-ignore
     return `
-    <div class="itinerary__container">
       <div id="googleMap" class="map"></div>
       <div class="carousel">
         <div class="carousel__days">
@@ -127,10 +126,8 @@ class Itinerary extends Component {
         </ul>
       `}).join('')}
       </div>
-    </div>
-
-      
-      </div>${$newScheduleCellPopup}`
+    </div>  
+    ${$newScheduleCellPopup}`
   }
 
   nextBtnsController() {
@@ -391,7 +388,6 @@ class Itinerary extends Component {
 
   mouseoutTimetable(e) {
     const { localNewScheduleCell, localItinerary } = store.state;
-
     if (
       localItinerary.isShowNewScheuleCellBtn &&
       !(
@@ -566,7 +562,7 @@ class Itinerary extends Component {
       { type: 'dragover', selector: '.time-table__day-index__blank li', handler: this.dragoverCard },
       { type: 'drop', selector: '.time-table__day-index__blank li', handler: this.dropCard.bind(this) },
       { type: 'mouseover', selector: '.time-table', handler: this.mouseoverTimetable.bind(this) },
-      { type: 'mouseout', selector: 'window', component: 'editPlanMap', handler: this.mouseoutTimetable },
+      { type: 'mouseout', selector: '.time-table', handler: this.mouseoutTimetable },
       {
         type: 'click',
         selector: '.carousel__days__add--list',
