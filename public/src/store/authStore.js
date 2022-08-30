@@ -23,39 +23,26 @@ const signinSchema = {
 
 const signupSchema = {
   ...signinSchema,
-  // username : value가 ''일 때, 두 글자 이하일 때,숫자가 아닐 때,특수문자가 아닐 때,한글만
   username: {
     value: '',
     get isValid() {
       return /^[가-힣]{2,}$/.test(this.value);
     },
-    error: '이름 형식에 맞게 입력해주세요.',
+    error: '한글 2글자 이상 입력해주세요.',
   },
   nickname: {
     value: '',
     get isValid() {
-      return !!this.value;
+      return /^[A-Za-z0-9가-힣]{2,}$/.test(this.value);
     },
-    error: '닉네임 형식에 맞게 입력해주세요.',
+    error: '한글, 영문, 숫자 2글자 이상 입력해주세요.',
   },
   passwordCheck: {
     value: '',
     get isValid() {
       return signupSchema.password.value === this.value;
     },
-    error: '비밀번호 형식에 맞게 입력해주세요.',
-  },
-
-  get isValid() {
-    return (
-      this.email.isValid &&
-      this.password.isValid &&
-      this.passwordCheck.isValid &&
-      this.nickname.isValid &&
-      this.username.isValid &&
-      this.checked.isValid
-    );
-    // 체크박스 클릭 조건에 따라  => change 이벤트가 발생하는 시점에서 state 관리,
+    error: '비밀번호가 일치하지 않습니다.',
   },
   checked: {
     privacy: false,
@@ -66,6 +53,17 @@ const signupSchema = {
     },
   },
   serverError: '',
+
+  get isValid() {
+    return (
+      this.email.isValid &&
+      this.password.isValid &&
+      this.passwordCheck.isValid &&
+      this.nickname.isValid &&
+      this.username.isValid &&
+      this.checked.isValid
+    );
+  },
 };
 
 const isChecked = e => {
@@ -75,7 +73,7 @@ const isChecked = e => {
   render();
 };
 
-const vaildate = e => {
+const validate = e => {
   const { name } = e.target;
 
   signupSchema[name].value = e.target.value;
@@ -98,4 +96,4 @@ const initValue = () => {
   signupSchema.serverError = '';
 };
 
-export { signinSchema, signupSchema, vaildate, initValue, isChecked };
+export { signinSchema, signupSchema, isChecked, validate, initValue };

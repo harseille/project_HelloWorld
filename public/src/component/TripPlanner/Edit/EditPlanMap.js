@@ -1,17 +1,12 @@
 /* eslint-disable prefer-const */
 /* eslint-disable import/extensions */
 import Component from '../../../core/Component.js';
-// import myMap from '../../myMap.js';
-import { initMap, moveMapCenter } from '../../myMap.js';
 import store from '../../../store/store.js';
+import { initMap, moveMapCenter } from '../../myMap.js';
 import { NewScheduleCellPopup } from '../../index.js';
 import { getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate } from '../../DatePicker/dateUtils.js';
 
 class Itinerary extends Component {
-  // formattedDate(date) {
-  //   const format = n => (n < 10 ? '0' + n : n + '');
-  //   return `${format(date?.getMonth() + 1)}.${format(date?.getDate())}.${format(date?.getDay())}`;
-  // }
   init() {
     initMap();
   }
@@ -30,15 +25,8 @@ class Itinerary extends Component {
       },
       tripSchedule: { itinerary },
     } = store.state;
+
     const { currentId, startId, isShowNewScheuleCellBtn } = localItinerary;
-    // const _schedule = schedule.filter(sched => sched.id > startId && sched.id <= startId + 3); // 이게 있으면 앞뒤 삭제 버튼이 안 됨..
-    // const setSchedule = {
-    //   id: startId + 1,
-    //   country: '영국',
-    //   date: startDate.getDate(),
-    //   day: startDate.getDay(),
-    //   cells: [],
-    // };
 
     // prettier-ignore
     const timeList = [
@@ -54,8 +42,7 @@ class Itinerary extends Component {
         ? new NewScheduleCellPopup({ formattedTime: this.formattedTime.bind(this) }).render()
         : '';
     const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    console.log(_schedule);
+
     // prettier-ignore
     return `
       <div id="googleMap" class="map"></div>
@@ -80,7 +67,6 @@ class Itinerary extends Component {
       <button class="next--btn carousel--btn">〉</button>
     </div>
 
-    <!-- time table -->
     <div class="time-table">
       <ul class="time-table__times">
         ${timeList.map(time => `<li class="time-table__time-item">
@@ -89,12 +75,14 @@ class Itinerary extends Component {
         </li>`).join('')}
       </ul>
       <div class="time-table__day-index">
-      ${_schedule.map(sch => {
-        const { cells, id } = sch;
+      ${_schedule.map(sched => {
+        const { cells, id } = sched;
         const cellTimeFromToArr = cells.map(cell => [+cell.startTime.slice(0,2), +cell.endTime.slice(0,2)])
-
+      console.log(store.state.localItinerary
+        )
+      console.log(id)
         return `
-        <ul class="time-table__day-index__blank" data-id="${id}">
+        <ul class="time-table__day-index__blank" data-id="${id}" style="${store.state.localItinerary.newBgColor === id ? "background: rgba(200, 200, 200, 0.5);" : '' }">
           ${timeList.map((timeItem, i, self) => {
             if(i === self.length - 1) return '';
 
@@ -196,7 +184,7 @@ class Itinerary extends Component {
     const idx = itinerary.findIndex(sched => sched.id === pointId);
     const { date } = itinerary.find(sched => sched.id === pointId);
 
-    const beforeArr = itinerary.filter((_, i) => i < idx); // id = 0
+    const beforeArr = itinerary.filter((_, i) => i < idx);
     const afterArr = itinerary.filter((_, i) => i > idx);
 
     store.state = {
@@ -214,7 +202,7 @@ class Itinerary extends Component {
   addScheduleBefore(e) {
     if (!e.target.classList.contains('prev--add--item')) return;
 
-    const { tripSchedule } = store.state;
+    const { tripSchedule, localItinerary } = store.state;
     const { itinerary } = tripSchedule;
     const pointId = +e.target.closest('.carousel__day-index').dataset.id;
 
@@ -222,18 +210,16 @@ class Itinerary extends Component {
     const endDate = convertDateStringToDate(tripSchedule.endDate);
     const date = convertDateStringToDate(itinerary.find(sched => sched.id === pointId).date);
 
-    const beforeArr = itinerary.filter((_, i) => i < idx); // id = 0
+    const beforeArr = itinerary.filter((_, i) => i < idx);
     const afterArr = itinerary.filter((_, i) => i >= idx);
-    // const beforeArr = itinerary.slice(0, idx); // id = 0
-    // const afterArr = itinerary.slice(idx);
 
-    console.log(pointId);
-    console.log(beforeArr);
-    console.log(afterArr);
+    const newId = Math.max(...itinerary.map(iti => iti.id), 0) + 1;
+
     store.state = {
       localItinerary: {
-        ...store.state.localItinerary,
+        ...localItinerary,
         currentId: '',
+        newBgColor: newId,
       },
       tripSchedule: {
         ...store.state.tripSchedule,
@@ -244,7 +230,6 @@ class Itinerary extends Component {
             id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
             country: '',
             date,
-            // date: ...itinerary.filter(iti => iti.date.getDate()),
             cells: [],
           },
           ...afterArr.map((arr, i) => ({
@@ -259,34 +244,33 @@ class Itinerary extends Component {
   addScheduleAfter(e) {
     console.log('addScheduleAfter');
     if (!e.target.classList.contains('next--add--item')) return;
-    const { tripSchedule } = store.state;
+    const { tripSchedule, localItinerary } = store.state;
     const { itinerary } = tripSchedule;
-    // const { date } = itinerary;
     const pointId = +e.target.closest('.carousel__day-index').dataset.id;
 
-    // index 찾기
-    let idx;
-    itinerary.forEach((sched, i) => {
-      if (sched.id === pointId) idx = i;
-    });
-
+    const idx = itinerary.findIndex(sched => sched.id === pointId);
     const endDate = convertDateStringToDate(tripSchedule.endDate);
     const date = convertDateStringToDate(itinerary.find(sched => sched.id === pointId).date);
 
-    const beforeArr = itinerary.filter((_, i) => i <= idx); // id = 0
+    const beforeArr = itinerary.filter((_, i) => i <= idx);
     const afterArr = itinerary.filter((_, i) => i > idx);
-    // console.log(e.target.closest('.carousel__day-index'));
-    // console.log(id);
-    // console.log(beforeArr);
-    // console.log(afterArr);
+
+    const newId = Math.max(...itinerary.map(iti => iti.id), 0) + 1;
+    console.log(newId);
+
     store.state = {
+      localItinerary: {
+        ...localItinerary,
+        currentId: '',
+        newBgColor: newId,
+      },
       tripSchedule: {
         ...store.state.tripSchedule,
         endDate: getMoveDate(endDate, 1),
         itinerary: [
           ...beforeArr,
           {
-            id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
+            id: newId,
             country: '',
             date: getMoveDate(date, 1),
             cells: [],
@@ -297,10 +281,6 @@ class Itinerary extends Component {
           })),
         ],
       },
-      localItinerary: {
-        ...store.state.localItinerary,
-        currentId: '',
-      },
     };
   }
 
@@ -308,7 +288,7 @@ class Itinerary extends Component {
     const { localCommon, localNewScheduleCell, localDatePicker, localItinerary, tripSchedule } = store.state;
     const { selectedItineraryId, info } = localNewScheduleCell;
     const { itinerary } = tripSchedule;
-    const { date } = itinerary.filter(sch => sch.id === selectedItineraryId)[0];
+    const { date } = itinerary.filter(sched => sched.id === selectedItineraryId)[0];
 
     document.body.style.overflow = 'hidden';
 
@@ -350,7 +330,7 @@ class Itinerary extends Component {
     const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
     const editCellId = +e.target.closest('.itinerary-card').dataset.id;
 
-    const { date, cells } = itinerary.filter(sch => sch.id === selectedItineraryId)[0];
+    const { date, cells } = itinerary.filter(sched => sched.id === selectedItineraryId)[0];
     const [{ id, article, ...info }] = cells.filter(cell => cell.id === editCellId);
 
     document.body.style.overflow = 'hidden';
@@ -460,8 +440,8 @@ class Itinerary extends Component {
     store.state = {
       tripSchedule: {
         ...tripSchedule,
-        itinerary: itinerary.map(sch =>
-          sch.id === selectedItineraryId ? { ...sch, cells: sch.cells.filter(cell => cell.id !== +id) } : sch
+        itinerary: itinerary.map(sched =>
+          sched.id === selectedItineraryId ? { ...sched, cells: sched.cells.filter(cell => cell.id !== +id) } : sched
         ),
       },
     };
@@ -514,7 +494,7 @@ class Itinerary extends Component {
     const dropScheduleId = +e.target.closest('.time-table__day-index__blank').dataset.id;
     const dropTime = +e.target.closest('.time-table__day-index__blank li').dataset.time;
 
-    const [{ cells }] = itinerary.filter(sch => sch.id === selectedItineraryId);
+    const [{ cells }] = itinerary.filter(sched => sched.id === selectedItineraryId);
     const restItinerary = cells.filter(cell => cell.id !== dragTarget);
     let [targetItinerary] = cells.filter(cell => cell.id === dragTarget);
     let { startTime, endTime } = targetItinerary;
@@ -549,22 +529,22 @@ class Itinerary extends Component {
     };
 
     // 스케쥴 체인지
-    const changeShedule = sch => {
-      if (sch.id === selectedItineraryId) {
+    const changeShedule = sched => {
+      if (sched.id === selectedItineraryId) {
         return {
-          ...sch,
+          ...sched,
           cells:
             selectedItineraryId === dropScheduleId
-              ? sch.cells.map(cell => (cell.id === dragTarget ? targetItinerary : cell))
+              ? sched.cells.map(cell => (cell.id === dragTarget ? targetItinerary : cell))
               : restItinerary,
         };
       }
 
-      if (sch.id === dropScheduleId) {
-        return { ...sch, cells: [...sch.cells, targetItinerary] };
+      if (sched.id === dropScheduleId) {
+        return { ...sched, cells: [...sched.cells, targetItinerary] };
       }
 
-      return sch;
+      return sched;
     };
     // console.log(dragTarget, selectedItineraryId, dropScheduleId);
     store.state = {
@@ -574,7 +554,7 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...tripSchedule,
-        itinerary: itinerary.map(sch => changeShedule(sch)),
+        itinerary: itinerary.map(sched => changeShedule(sched)),
       },
     };
   }

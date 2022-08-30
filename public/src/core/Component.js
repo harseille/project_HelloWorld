@@ -7,8 +7,6 @@ class Component {
   constructor(props) {
     this.props = props;
     this.keepEvent();
-    // this.init();
-    // console.log();
     store.state.localCommon.path === window.location.pathname || this.init();
   }
 
