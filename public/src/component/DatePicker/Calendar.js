@@ -5,19 +5,22 @@ import store from '../../store/store.js';
 class Calendar extends Component {
   get currentYear() {
     const { currentDate } = this.props;
-    return currentDate.getFullYear();
+    const _currentDate = typeof currentDate === 'string' ? new Date(currentDate) : currentDate;
+    return _currentDate.getFullYear();
   }
 
   get currentMonth() {
     const { currentDate } = this.props;
-    return currentDate.getMonth();
+    const _currentDate = typeof currentDate === 'string' ? new Date(currentDate) : currentDate;
+    return _currentDate.getMonth();
   }
 
   setDateClass(month, date) {
     let { startDate } = this.props;
     const { endDate, currentDate, unableType, isNot31 } = this.props;
 
-    const targetCurrentDate = new Date(currentDate.getFullYear(), month, date);
+    const _currentDate = typeof currentDate === 'string' ? new Date(currentDate) : currentDate;
+    const targetCurrentDate = new Date(_currentDate.getFullYear(), month, date);
 
     startDate = startDate || new Date();
 

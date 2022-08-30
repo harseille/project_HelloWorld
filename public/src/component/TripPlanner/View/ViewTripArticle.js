@@ -3,7 +3,8 @@ import Component from '../../../core/Component.js';
 class ViewTripArticle extends Component {
   render() {
     const {
-      userInfo: { profilePic, nickname },
+      author,
+      authorProfilePic,
       cell: {
         location,
         startTime,
@@ -11,14 +12,16 @@ class ViewTripArticle extends Component {
       },
     } = this.props;
 
+    console.log(this.props);
+
     return `
     <article class="trip-article">
     <div class="trip-article__header">
       <div class="trip-article__header__profile">
-        <img src="${profilePic}" alt="${nickname} 님의 프로필사진" class="profile-img" />
+        <img src="${authorProfilePic}" alt="${author} 님의 프로필사진" class="profile-img" />
       </div>
       <div class="trip-article__header__content">
-        <p class="trip-article__header__content__place">${location}</p>
+        <p class="trip-article__header__content__place">${location.name}</p>
         <p class="trip-article__header__content__time">${startTime}</p>
       </div>
       <div class="trip-article__header__badge">
@@ -28,10 +31,11 @@ class ViewTripArticle extends Component {
     </div>
     <div class="trip-article__main">
       <div class="trip-article__main__img-container">
-        <img src="${picture}" alt="${location} 사진" />
+        ${picture ? `<img src="${picture}" alt="${location} 사진" /> ` : ''}
       </div>
       <div class="trip-article__main__content">
-        ${content}
+        ${content?.memo ? content.memo : ''}
+        ${content?.todo ? content.todo : ''}
       </div>
     </div>
   </article>

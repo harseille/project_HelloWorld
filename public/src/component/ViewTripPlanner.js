@@ -33,18 +33,18 @@ class ViewTripPlanner extends Component {
   render() {
     const {
       state: {
-        userInfo,
+        userInfo: { userId },
         localCommon: { selectedTab },
         tripSchedule,
-        tripSchedule: { coverImg, title, summary, itinerary, isLiked, likeCount },
+        tripSchedule: { authorId, author, authorProfilePic, coverImg, title, summary, itinerary, isLiked, likeCount },
       },
     } = store;
 
-    const $viewPlanCover = new ViewPlanCover({ coverImg, title, summary }).render();
+    const $viewPlanCover = new ViewPlanCover({ userId, authorId, coverImg, title, summary }).render();
     const $viewPlanner = new ViewPlanner({ tripSchedule }).render();
     const $viewTripTab = new ViewTripTab({ selectedTab }).render();
     const $viewPlanMap = new ViewPlanMap().render();
-    const $viewTripStory = new ViewTripStory({ userInfo, itinerary }).render();
+    const $viewTripStory = new ViewTripStory({ author, authorProfilePic, itinerary }).render();
     const $viewPlanComment = new ViewPlanComment().render();
     const $viewLikeShareBtnBox = new ViewLikeShareBtnBox({ isLiked, likeCount }).render();
     const $viewNavDay = new ViewNavDay({ itinerary }).render();

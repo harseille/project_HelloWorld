@@ -5,6 +5,7 @@ import Component from '../../../core/Component.js';
 import { initMap, moveMapCenter } from '../../myMap.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
+import { getFormattedDateMMDDDAY } from '../../DatePicker/dateUtils.js';
 
 class Itinerary extends Component {
   // formattedDate(date) {
@@ -63,7 +64,7 @@ class Itinerary extends Component {
           _schedule.map(sched =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
 
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${sched.id} <span>/</span> ${sched.date.getMonth()+1<10 ? '0'+(sched.date.getMonth()+1) : sched.date.getMonth()+1}.${sched.date.getDate()<10 ? '0'+sched.date.getDate() : (sched.date.getDate())} ${days[sched.date.getDay()]}      
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${sched.id} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}}      
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
