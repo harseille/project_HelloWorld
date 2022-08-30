@@ -9,9 +9,22 @@ const getFormattedDate = date => {
 };
 
 const getFormattedDateMMDDDAY = date => {
+  console.log(date);
   const _date = convertDateStringToDate(date);
+  console.log(_date);
   const format = n => (n < 10 ? '0' + n : n + '');
   return `${format(_date.getMonth() + 1)}.${format(_date.getDate())} ${days[_date.getDay()]}`;
 };
 
-export { getFormattedDate, getFormattedDateMMDDDAY, convertDateStringToDate };
+const getMoveDate = (date, digit) => {
+  const _date = convertDateStringToDate(date);
+  console.log(date, digit);
+  return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate() + digit);
+};
+
+// const getNextDate = (date, ) => {
+//   const _date = convertDateStringToDate(date);
+//   return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate() + 1);
+// };
+
+export { getFormattedDate, getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate };

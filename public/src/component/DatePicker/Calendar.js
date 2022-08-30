@@ -269,8 +269,10 @@ class Calendar extends Component {
           cells: [],
         }));
       } else if (activeCalendar === 'endDate') {
+        console.log('activeCalendar');
+        console.log(startDate.getFullYear());
         _tripDays = Math.floor((selectedDate - startDate) / 86400000) + 1;
-        _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
+        _itinerary = Array.from({ length: _tripDays + 1 }, (_, i) => ({
           id: i + 1,
           country: '',
           date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),

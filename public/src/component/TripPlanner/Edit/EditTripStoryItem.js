@@ -5,7 +5,8 @@ class EditTripStoryItem extends Component {
   render() {
     const {
       userInfo,
-      item: { id, date, country, cells },
+      item: { date, country, cells },
+      idx,
     } = this.props;
 
     const $editTripArticle = cells.map(cell => new EditTripArticle({ userInfo, cell }).render()).join('');
@@ -13,7 +14,7 @@ class EditTripStoryItem extends Component {
     return `
       <li class="trip-story__day-item">
         <div class="trip-story__day-content">
-          <h3 class="trip-story__day-content__title">Day ${id}</h3>
+          <h3 class="trip-story__day-content__title">Day ${idx + 1}</h3>
           <p class="trip-story__day-content__summary">${date} | ${country}</p>
         </div>
         ${$editTripArticle}

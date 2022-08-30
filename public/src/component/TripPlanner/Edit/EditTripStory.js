@@ -5,7 +5,9 @@ class EditTripStroy extends Component {
   render() {
     const { userInfo, itinerary } = this.props;
 
-    const $editTripStoryItem = itinerary.map(item => new EditTripStoryItem({ userInfo, item }).render()).join('');
+    const $editTripStoryItem = itinerary
+      .map((item, idx) => new EditTripStoryItem({ userInfo, item, idx }).render())
+      .join('');
 
     return `
     <div class="trip-story">

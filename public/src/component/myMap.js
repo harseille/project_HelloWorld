@@ -133,7 +133,6 @@ const calculateZoomLevel = (mapSize, coverage, latitude, distance) => {
 const initMap = () => {
   // 현제위치를 설정한다.
   // if (!store.state.localMap.isMapInitial) return;
-  console.log('View google map init');
   (async () => {
     const { geolocation } = navigator;
 
@@ -149,8 +148,6 @@ const initMap = () => {
           dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
         )
         .flat();
-
-      console.log(cellInfoList);
 
       // const { sumLatitude, sumLongitude } = cellInfoList.reduce(
       //   (acc, cur) => ({
@@ -169,11 +166,6 @@ const initMap = () => {
 
       // const zoomLevel = calculateZoomLevel(1280, 80, sumLatitude / cellInfoList.length, distance, 15, 0);
 
-      console.log(selectedCellCoord?.lat, selectedCellCoord?.lng);
-      console.log(selectedCellCoord);
-      console.log(cellInfoList[cellInfoList.length - 1]);
-
-      console.log(cellInfoList.length);
       const mapOptions = {
         // zoom: cellInfoList.length ? zoomLevel : 13,
         zoom: 13,
@@ -222,7 +214,7 @@ const initMap = () => {
       // store.state.localMap.isMapInitial = false;
     };
     const failure = () => {
-      console.log('Fail to load Google Map');
+      // console.log('Fail to load Google Map');
     };
     await geolocation.getCurrentPosition(success, failure);
   })();

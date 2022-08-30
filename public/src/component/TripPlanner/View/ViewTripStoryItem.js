@@ -4,10 +4,12 @@ import { getFormattedDate } from '../../DatePicker/dateUtils.js';
 
 class ViewTripStoryItem extends Component {
   render() {
+    console.log(this.props);
     const {
       author,
       authorProfilePic,
-      item: { id, date, country, cells },
+      item: { date, country, cells },
+      idx,
     } = this.props;
 
     const $viewTripArticle = cells
@@ -15,9 +17,9 @@ class ViewTripStoryItem extends Component {
       .join('');
 
     return `
-      <li class="trip-story__day-item" id="day${id}">
+      <li class="trip-story__day-item" id="day${idx + 1}">
         <div class="trip-story__day-content">
-          <h3 class="trip-story__day-content__title">Day ${id}</h3>
+          <h3 class="trip-story__day-content__title">Day ${idx + 1}</h3>
           <p class="trip-story__day-content__summary">${getFormattedDate(date)} | ${country}</p>
         </div>
         ${$viewTripArticle}

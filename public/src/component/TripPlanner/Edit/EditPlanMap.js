@@ -5,7 +5,7 @@ import Component from '../../../core/Component.js';
 import { initMap, moveMapCenter } from '../../myMap.js';
 import store from '../../../store/store.js';
 import { NewScheduleCellPopup } from '../../index.js';
-import { getFormattedDateMMDDDAY } from '../../DatePicker/dateUtils.js';
+import { getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate } from '../../DatePicker/dateUtils.js';
 
 class Itinerary extends Component {
   // formattedDate(date) {
@@ -55,6 +55,7 @@ class Itinerary extends Component {
         : '';
     const _schedule = itinerary.filter((_, i) => i >= startId && i < startId + 3);
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    console.log(_schedule);
     // prettier-ignore
     return `
       <div id="googleMap" class="map"></div>
@@ -63,10 +64,7 @@ class Itinerary extends Component {
         ${
           _schedule.map((sched,i) =>  `
             <div class="carousel__day-index" data-id=${sched.id}>
-
-
               <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}  
-
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
@@ -194,9 +192,13 @@ class Itinerary extends Component {
 
     if (!e.target.classList.contains('delete--item')) return;
 
-    const restItems = itinerary.filter(sched => sched.id !== +e.target.closest('.carousel__day-index').dataset.id);
+    const pointId = +e.target.closest('.carousel__day-index').dataset.id;
+    const idx = itinerary.findIndex(sched => sched.id === pointId);
+    const { date } = itinerary.find(sched => sched.id === pointId);
 
-    console.log(restItems);
+    const beforeArr = itinerary.filter((_, i) => i < idx); // id = 0
+    const afterArr = itinerary.filter((_, i) => i > idx);
+
     store.state = {
       localItinerary: {
         ...localItinerary,
@@ -204,7 +206,7 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
-        itinerary: restItems,
+        itinerary: [...beforeArr, ...afterArr.map((arr, i) => ({ ...arr, date: getMoveDate(date, i) }))],
       },
     };
   }
@@ -214,16 +216,18 @@ class Itinerary extends Component {
 
     const { tripSchedule } = store.state;
     const { itinerary } = tripSchedule;
-    const id = +e.target.closest('.carousel__day-index').dataset.id;
+    const pointId = +e.target.closest('.carousel__day-index').dataset.id;
 
-    const idx = itinerary.findIndex(sched => sched.id === id);
+    const idx = itinerary.findIndex(sched => sched.id === pointId);
+    const endDate = convertDateStringToDate(tripSchedule.endDate);
+    const date = convertDateStringToDate(itinerary.find(sched => sched.id === pointId).date);
 
     const beforeArr = itinerary.filter((_, i) => i < idx); // id = 0
     const afterArr = itinerary.filter((_, i) => i >= idx);
     // const beforeArr = itinerary.slice(0, idx); // id = 0
     // const afterArr = itinerary.slice(idx);
 
-    console.log(id);
+    console.log(pointId);
     console.log(beforeArr);
     console.log(afterArr);
     store.state = {
@@ -233,16 +237,20 @@ class Itinerary extends Component {
       },
       tripSchedule: {
         ...store.state.tripSchedule,
+        endDate: getMoveDate(endDate, 1),
         itinerary: [
           ...beforeArr,
           {
             id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
             country: '',
-            date: new Date(),
+            date,
             // date: ...itinerary.filter(iti => iti.date.getDate()),
             cells: [],
           },
-          ...afterArr,
+          ...afterArr.map((arr, i) => ({
+            ...arr,
+            date: getMoveDate(date, i + 1),
+          })),
         ],
       },
     };
@@ -251,17 +259,22 @@ class Itinerary extends Component {
   addScheduleAfter(e) {
     console.log('addScheduleAfter');
     if (!e.target.classList.contains('next--add--item')) return;
-    const { itinerary } = store.state.tripSchedule;
-    const id = +e.target.closest('.carousel__day-index').dataset.id;
+    const { tripSchedule } = store.state;
+    const { itinerary } = tripSchedule;
+    // const { date } = itinerary;
+    const pointId = +e.target.closest('.carousel__day-index').dataset.id;
 
     // index 찾기
     let idx;
     itinerary.forEach((sched, i) => {
-      if (sched.id === id) idx = i;
+      if (sched.id === pointId) idx = i;
     });
+
+    const endDate = convertDateStringToDate(tripSchedule.endDate);
+    const date = convertDateStringToDate(itinerary.find(sched => sched.id === pointId).date);
+
     const beforeArr = itinerary.filter((_, i) => i <= idx); // id = 0
     const afterArr = itinerary.filter((_, i) => i > idx);
-
     // console.log(e.target.closest('.carousel__day-index'));
     // console.log(id);
     // console.log(beforeArr);
@@ -269,15 +282,19 @@ class Itinerary extends Component {
     store.state = {
       tripSchedule: {
         ...store.state.tripSchedule,
+        endDate: getMoveDate(endDate, 1),
         itinerary: [
           ...beforeArr,
           {
             id: Math.max(...itinerary.map(iti => iti.id), 0) + 1,
             country: '',
-            date: new Date('2022-08-14'),
+            date: getMoveDate(date, 1),
             cells: [],
           },
-          ...afterArr,
+          ...afterArr.map((arr, i) => ({
+            ...arr,
+            date: getMoveDate(date, i + 2),
+          })),
         ],
       },
       localItinerary: {

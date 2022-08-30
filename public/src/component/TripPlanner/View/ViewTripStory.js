@@ -6,7 +6,7 @@ class ViewTripStory extends Component {
     const { author, authorProfilePic, itinerary } = this.props;
 
     const $viewTripStoryItem = itinerary
-      .map(item => new ViewTripStoryItem({ author, authorProfilePic, item }).render())
+      .map((item, idx) => new ViewTripStoryItem({ author, authorProfilePic, item, idx }).render())
       .join('');
 
     return `
