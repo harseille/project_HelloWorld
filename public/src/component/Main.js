@@ -6,8 +6,9 @@ class Main extends Component {
   async init() {
     try {
       // Todo 새로고침 시 필터된 카드로 랜더되게 쿼리로 바꾸기
-      // const query = window.location.qu
-      const mainTripSchedules = await axios.get('/mainTripSchedules');
+      const query = window.location.search;
+
+      const mainTripSchedules = await axios.get(`/mainTripSchedules${query}`);
       store.state = {
         localCommon: {
           ...store.state.localCommon,
@@ -147,7 +148,13 @@ class Main extends Component {
     const searchCategory = e.target.querySelector('.travel-log__form__dropdown').value;
     const searchValue = e.target.querySelector('.travel-log__form__input').value;
 
-    const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
+    // const filteredMainTripSchedules = await axios.get(`/mainTripSchedules/${searchCategory}/${searchValue}`);
+    const filteredMainTripSchedules = await axios.get('/mainTripSchedules', {
+      params: {
+        category: searchCategory,
+        value: searchValue,
+      },
+    });
     window.history.pushState(
       {},
       'MainFitler',

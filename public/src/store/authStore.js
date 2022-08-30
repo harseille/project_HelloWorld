@@ -96,7 +96,6 @@ const initValue = () => {
   signupSchema.checked.privacy = false;
   signupSchema.checked.term = false;
   signupSchema.serverError = '';
-  render();
 };
 
 export { signinSchema, signupSchema, vaildate, initValue, isChecked };

@@ -4,6 +4,16 @@ import store from '../store/store.js';
 import { signinSchema, vaildate, initValue } from '../store/authStore.js';
 
 class Signin extends Component {
+  init() {
+    initValue();
+    store.state = {
+      localCommon: {
+        ...store.state.localCommon,
+        path: window.location.pathname,
+      },
+    };
+  }
+
   render() {
     const { email, password, isValid, serverError } = signinSchema;
 
