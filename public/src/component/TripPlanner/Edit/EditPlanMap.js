@@ -65,7 +65,7 @@ class Itinerary extends Component {
             <div class="carousel__day-index" data-id=${sched.id}>
 
 
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}}      
+              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}  
 
               ${currentId === sched.id ? `
                 <ul class="carousel__days__add--list">
