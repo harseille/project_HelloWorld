@@ -97,7 +97,7 @@ class NewTravelLogModal extends Component {
   }
 
   closeNewTripScheduleModal(e) {
-    console.log('closeNewTripScheduleModal');
+    // console.log('closeNewTripScheduleModal');
     if (
       e.target.matches('.newTravelLogModal .modal__header__close__btn') ||
       e.target.matches('.newTravelLogModal .dimmed__layer')
@@ -128,9 +128,9 @@ class NewTravelLogModal extends Component {
   inputNewTripScheduleModalValue(e) {
     const { name, value } = e.target;
 
-    console.log(e.target);
-    console.log(name);
-    console.log(value);
+    // console.log(e.target);
+    // console.log(name);
+    // console.log(value);
 
     store.state = {
       tripSchedule: {
@@ -171,7 +171,7 @@ class NewTravelLogModal extends Component {
 
   submitTripSchedule(e) {
     e.preventDefault();
-    console.log('submitTripSchedule');
+    // console.log('submitTripSchedule');
 
     const inputValues = new FormData(document.querySelector('.newTrip__popup__form'));
 

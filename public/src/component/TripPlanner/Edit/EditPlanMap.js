@@ -18,15 +18,13 @@ class Itinerary extends Component {
   render() {
     const {
       localCommon: { isShowModal },
-      localItinerary,
+      localItinerary: { currentId, startId, isShowNewScheuleCellBtn },
       localNewScheduleCell: {
         selectedItineraryId,
         info: { startTime },
       },
       tripSchedule: { itinerary },
     } = store.state;
-
-    const { currentId, startId, isShowNewScheuleCellBtn } = localItinerary;
 
     // prettier-ignore
     const timeList = [
@@ -48,96 +46,93 @@ class Itinerary extends Component {
       <div id="googleMap" class="map"></div>
       <div class="carousel">
         <div class="carousel__days">
-        ${
-          _schedule.map((sched,i) =>  `
-            <div class="carousel__day-index" data-id=${sched.id}>
-              <button class="carousel__day-index--add" data-id=${sched.id}></button>Day ${i+1} <span>/</span> ${getFormattedDateMMDDDAY(sched.date)}  
-              ${currentId === sched.id ? `
+        ${_schedule
+          .map(
+            sched => `
+              <div class="carousel__day-index" data-id=${sched.id}>
+                <button class="carousel__day-index--add" data-id=${sched.id}></button>
+                Day ${(sched.date - itinerary[0].date) / 86400000 + 1}
+                <span>/</span> 
+                ${getFormattedDateMMDDDAY(sched.date)}  
+                ${currentId === sched.id
+                ? `
                 <ul class="carousel__days__add--list">
                   <li class="carousel__days__add--item first-item prev--add--item">앞에 추가</li>
                   <li class="carousel__days__add--item next--add--item">뒤에 추가</li>
                   <li class="carousel__days__add--item delete--item">일정 삭제</li>
                 </ul>
-              `: ''}
+                `
+                : ''
+                }
               <div>${sched.country}</div>
-            </div>`).join('')
-        }
+            </div>`).join('')}
+        </div>
+        <button class="prev--btn carousel--btn">〈</button>
+        <button class="next--btn carousel--btn">〉</button>
       </div>
-      <button class="prev--btn carousel--btn">〈</button>
-      <button class="next--btn carousel--btn">〉</button>
-    </div>
+      <div class="time-table">
+        <ul class="time-table__times">
+          ${timeList.map(time => `
+          <li class="time-table__time-item">
+            <span class="time-table__time">${time}</span>
+            <span class="line"></span>
+          </li>`).join('')}
+        </ul>
+        <div class="time-table__day-index">
+        ${_schedule.map(sched => {
+            const { cells, id } = sched;
+            const cellTimeFromToArr = cells.map(cell => [+cell.startTime.slice(0, 2), +cell.endTime.slice(0, 2)]);
+            // console.log(store.state.localItinerary);
+            // console.log(id);
+            return `
+          <ul class="time-table__day-index__blank" data-id="${id}" 
+            style="${store.state.localItinerary.newBgColor === id 
+              ? 'background: rgba(200, 200, 200, 0.5);' 
+              : ''}">
+            ${timeList.map((timeItem, i, self) => {
+              if (i === self.length - 1) return '';
 
-    <div class="time-table">
-      <ul class="time-table__times">
-        ${timeList.map(time => `<li class="time-table__time-item">
-          <span class="time-table__time">${time}</span>
-          <span class="line"></span>
-        </li>`).join('')}
-      </ul>
-      <div class="time-table__day-index">
-      ${_schedule.map(sched => {
-        const { cells, id } = sched;
-        const cellTimeFromToArr = cells.map(cell => [+cell.startTime.slice(0,2), +cell.endTime.slice(0,2)])
-
-        return `
-        <ul class="time-table__day-index__blank" data-id="${id}" style="${store.state.localItinerary.newBgColor === id ? "background: rgba(200, 200, 200, 0.5);" : '' }">
-          ${timeList.map((timeItem, i, self) => {
-            if(i === self.length - 1) return '';
-
-            const time = +timeItem.slice(0, 2)
-            const idx = cellTimeFromToArr.findIndex(([startTime, endTime]) => startTime <= time && time < endTime)
-            const isInculdedCell = idx !== -1
-            const isFirstChildTime = isInculdedCell? (cells[idx].startTime === timeItem) : null;
-            const isLastChildTime = isInculdedCell? 
-              (this.formattedTime(+cells[idx].endTime.slice(0,2) - 1) === timeItem) : null;
-            const liClass = isFirstChildTime && isLastChildTime? 'first-last': isFirstChildTime? 'first': isLastChildTime? 'last': ''
-            
-            // timeItem 시간이 cells의 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가 
-            // 세부 일정이 없는 시간이고 mouseover되었으면 button.itinerary-card--add를 추가
-            return `<li data-time="${i}" class="${liClass}">
-              ${isInculdedCell ? 
-                `<div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true">
+              const time = +timeItem.slice(0, 2);
+              const idx = cellTimeFromToArr.findIndex(([startTime, endTime]) => startTime <= time && time < endTime);
+              const isInculdedCell = idx !== -1;
+              const isFirstChildTime = isInculdedCell ? cells[idx].startTime === timeItem : null;
+              const isLastChildTime = isInculdedCell
+                ? this.formattedTime(+cells[idx].endTime.slice(0, 2) - 1) === timeItem : null;
+              const liClass = isFirstChildTime && isLastChildTime
+                  ? 'first-last' : isFirstChildTime
+                  ? 'first' : isLastChildTime
+                  ? 'last' : '';
+              // timeItem 시간이 cells의 세부 일정 시작 시간과 같으면 div.itinerary-card를 추가
+              // 세부 일정이 없는 시간이고 mouseover되었으면 button.itinerary-card--add를 추가
+            return `
+            <li data-time="${i}" class="${liClass}">
+              ${isInculdedCell
+                ? `
+                <div class="itinerary-card itinerary-card--check ${cells[idx].type}" data-id="${cells[idx].id}" draggable="true">
                   <div class="itinerary-card-emph"></div>
-                  ${isFirstChildTime ? `<div class="itinerary-card--check__content">
+                  ${isFirstChildTime
+                    ? `
+                    <div class="itinerary-card--check__content">
                       <div class="itinerary-card--check__title">${cells[idx].location.name}</div>
                       <div class="itinerary-card--check__memo">${cells[idx].memo}</div>
-                    </div>`: ''
+                    </div>`
+                    : ''
                   }
-                  ${isFirstChildTime? `<button class="itinerary-card--delete" aria-label="일정 삭제"></button>` : ''}
-                </div>` :
-                (isShowNewScheuleCellBtn && selectedItineraryId === id && startTime === timeItem && !isInculdedCell ?
-                  '<button class="itinerary-card--add">+</button>': '')
-                }
-            </li>`
-          }).join('')}
-        </ul>
-      `}).join('')}
-      </div>
-    </div>  
-    ${$newScheduleCellPopup}`
-  }
-
-  nextBtnsController() {
-    const { localItinerary, tripSchedule } = store.state;
-    const { itinerary } = tripSchedule;
-    let { startId } = localItinerary;
-
-    if (itinerary.length > 31) {
-      alert('더이상 생성하지 맙시다');
-      return;
-    }
-    if (itinerary.length === startId + 3) {
-      alert('마지막 입니다.');
-      return;
-    }
-    startId += 1;
-
-    store.state = {
-      localItinerary: {
-        ...localItinerary,
-        startId,
-      },
-    };
+                  ${isFirstChildTime 
+                    ? `<button class="itinerary-card--delete" aria-label="일정 삭제"></button>` 
+                    : ''
+                  }
+                </div>`
+                : isShowNewScheuleCellBtn && selectedItineraryId === id && startTime === timeItem && !isInculdedCell
+                  ? '<button class="itinerary-card--add">+</button>'
+                  : ''
+              }
+            </li>`;}).join('')}
+          </ul>
+        `;}).join('')}
+        </div>
+      </div>  
+      ${$newScheduleCellPopup}`;
   }
 
   prevBtnsController() {
@@ -145,7 +140,7 @@ class Itinerary extends Component {
     let { startId } = localItinerary;
 
     if (startId === 0) {
-      alert('첫번째 여행일 입니다');
+      alert('이전 여행 일정이 없습니다.');
       return;
     }
     startId -= 1;
@@ -158,43 +153,38 @@ class Itinerary extends Component {
     };
   }
 
+  nextBtnsController() {
+    const {
+      localItinerary,
+      tripSchedule: { itinerary },
+    } = store.state;
+    let { startId } = localItinerary;
+
+    if (itinerary.length === startId + 3) {
+      alert('이후 여행 일정이 없습니다.');
+      return;
+    }
+
+    startId += 1;
+
+    store.state = {
+      localItinerary: {
+        ...localItinerary,
+        startId,
+      },
+    };
+  }
+
   buttonHandler(e) {
     const { localItinerary } = store.state;
+    console.log(e.target);
     if (e.target.matches('.carousel__day-index--add')) {
       store.state = { localItinerary: { ...localItinerary, currentId: +e.target.dataset.id } };
-      console.log(store.state.localItinerary);
       return;
     }
     if (!e.target.closest('.carousel__days__add--list')) {
       store.state = { localItinerary: { ...localItinerary, currentId: '' } };
     }
-  }
-
-  deleteSchedule(e) {
-    const {
-      localItinerary,
-      tripSchedule: { itinerary },
-    } = store.state;
-
-    if (!e.target.classList.contains('delete--item')) return;
-
-    const pointId = +e.target.closest('.carousel__day-index').dataset.id;
-    const idx = itinerary.findIndex(sched => sched.id === pointId);
-    const { date } = itinerary.find(sched => sched.id === pointId);
-
-    const beforeArr = itinerary.filter((_, i) => i < idx);
-    const afterArr = itinerary.filter((_, i) => i > idx);
-
-    store.state = {
-      localItinerary: {
-        ...localItinerary,
-        currentId: '',
-      },
-      tripSchedule: {
-        ...store.state.tripSchedule,
-        itinerary: [...beforeArr, ...afterArr.map((arr, i) => ({ ...arr, date: getMoveDate(date, i) }))],
-      },
-    };
   }
 
   addScheduleBefore(e) {
@@ -240,8 +230,8 @@ class Itinerary extends Component {
   }
 
   addScheduleAfter(e) {
-    console.log('addScheduleAfter');
     if (!e.target.classList.contains('next--add--item')) return;
+
     const { tripSchedule, localItinerary } = store.state;
     const { itinerary } = tripSchedule;
     const pointId = +e.target.closest('.carousel__day-index').dataset.id;
@@ -254,7 +244,6 @@ class Itinerary extends Component {
     const afterArr = itinerary.filter((_, i) => i > idx);
 
     const newId = Math.max(...itinerary.map(iti => iti.id), 0) + 1;
-    console.log(newId);
 
     store.state = {
       localItinerary: {
@@ -282,14 +271,40 @@ class Itinerary extends Component {
     };
   }
 
+  deleteSchedule(e) {
+    const {
+      localItinerary,
+      tripSchedule: { itinerary },
+    } = store.state;
+
+    if (!e.target.classList.contains('delete--item')) return;
+
+    const pointId = +e.target.closest('.carousel__day-index').dataset.id;
+    const idx = itinerary.findIndex(sched => sched.id === pointId);
+    const { date } = itinerary.find(sched => sched.id === pointId);
+
+    const beforeArr = itinerary.filter((_, i) => i < idx);
+    const afterArr = itinerary.filter((_, i) => i > idx);
+
+    store.state = {
+      localItinerary: {
+        ...localItinerary,
+        currentId: '',
+        newBgColor: '',
+      },
+      tripSchedule: {
+        ...store.state.tripSchedule,
+        itinerary: [...beforeArr, ...afterArr.map((arr, i) => ({ ...arr, date: getMoveDate(date, i) }))],
+      },
+    };
+  }
+
   openNewCellModal() {
     const { localCommon, localNewScheduleCell, localDatePicker, localItinerary, tripSchedule } = store.state;
     const { selectedItineraryId, info } = localNewScheduleCell;
     const { itinerary } = tripSchedule;
     const { date } = itinerary.filter(sched => sched.id === selectedItineraryId)[0];
 
-    console.log(store.state.localNewScheduleCell);
-    console.log(store.state.tripSchedule.itinerary);
     document.body.style.overflow = 'hidden';
 
     store.state = {
@@ -566,7 +581,7 @@ class Itinerary extends Component {
       { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
-      { type: 'click', selector: '.carousel__day-index--add', handler: this.buttonHandler },
+      { type: 'click', selector: 'window', handler: this.buttonHandler },
       { type: 'click', selector: '.itinerary-card--add', handler: this.openNewCellModal },
       { type: 'click', selector: '.itinerary-card', handler: moveMapCenter },
       { type: 'dblclick', selector: '.itinerary-card', handler: this.openEditModal },

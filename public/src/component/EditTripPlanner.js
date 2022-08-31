@@ -21,8 +21,6 @@ class EditTripPlanner extends Component {
       },
     } = store;
 
-    console.log(tripSchedule);
-
     const $editPlanCover = new EditPlanCover({ coverImg }).render();
     const $editPlanner = new EditPlanner({ tripSchedule, localDatePicker }).render();
     const $editTripTab = new EditTripTab({ selectedTab }).render();
