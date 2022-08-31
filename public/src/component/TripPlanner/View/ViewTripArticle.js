@@ -12,8 +12,6 @@ class ViewTripArticle extends Component {
       },
     } = this.props;
 
-    console.log(this.props);
-
     return `
     <article class="trip-article">
     <div class="trip-article__header">

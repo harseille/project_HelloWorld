@@ -26,11 +26,11 @@ class ViewPlanCover extends Component {
   }
 
   goEditMode(e) {
-    // const tripScheduleId = window.location.pathname.split('/').pop();
+    const tripScheduleId = window.location.pathname.split('/').pop();
     const goConfirm = confirm('일정을 수정하시겠습니까?');
     if (goConfirm) {
-      // window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit/' + tripScheduleId);
-      window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit');
+      window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit/' + tripScheduleId);
+      // window.history.pushState({}, 'EditTripSchedule', window.location.origin + '/trip-planner-edit');
 
       const { viewTripSchedule } = store.state;
       store.state = {

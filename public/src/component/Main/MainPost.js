@@ -19,7 +19,9 @@ class MainPost extends Component {
     <a href="${'/trip-planner-view/' + tripScheduleId}" class="travel-log__link">
       <div class="travel-log__item__top-section" style="background-image: url('${coverImg}')">
         <div class="travel-log__item__user-info">
-          <img class="travel-log__item__user-info__profile-pic" src="${authorProfilePic}" alt="${author} 님의 프로필 사진" />
+          <img class="travel-log__item__user-info__profile-pic" src="${
+            authorProfilePic || '/assets/images/users/profileDefault.png'
+          }" alt="${author} 님의 프로필 사진" />
           <span class="travel-log__item__user-info__nickname">${author}</span>
         </div>
         <div class="travel-log__item__main">

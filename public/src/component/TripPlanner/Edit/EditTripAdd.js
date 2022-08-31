@@ -28,7 +28,8 @@ class EditPlanAdd extends Component {
         // console.log(store.state);
         console.log(response.data);
         console.log('성공');
-        console.log(store.state);
+
+        console.log('[store]:' + store.state);
 
         // TODO: store.state.tripSchedule 초기화
         const { tripScheduleId } = response.data;

@@ -4,7 +4,7 @@ import { initMap, moveMapCenter } from '../../myMap.js';
 
 class ViewPlanMap extends Component {
   init() {
-    initMap();
+    initMap('viewTripSchedule');
   }
 
   formattedTime(time) {
@@ -14,7 +14,7 @@ class ViewPlanMap extends Component {
   render() {
     const {
       localItinerary,
-      tripSchedule: { itinerary },
+      viewTripSchedule: { itinerary },
     } = store.state;
     const { currentId, startId } = localItinerary;
 

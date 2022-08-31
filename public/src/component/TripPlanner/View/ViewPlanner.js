@@ -16,11 +16,15 @@ class ViewPlanner extends Component {
       },
     } = this.props;
 
+    console.log(this.props);
+
     return `
     <div class="trip-planner">
       <div class="trip-planner__author">
         <div class="trip-planner__author__profile">
-          <img src='${authorProfilePic}' alt="프로필사진" class="profile-img" />
+          <img src='${
+            authorProfilePic || '/assets/images/users/profileDefault.png'
+          }' alt="프로필사진" class="profile-img" />
         </div>
         <span class="trip-planner__author__nickname">${author}</span>
       </div>

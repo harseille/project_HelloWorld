@@ -189,11 +189,13 @@ class NewScheduleCellPopup extends Component {
     } = store.state;
     const { itinerary, newScheduleCellDate } = tripSchedule;
 
+    const _newScheduleCellDate = convertDateStringToDate(newScheduleCellDate);
+
     // body의 scroll
     document.body.style.overflow = 'auto';
-    const selectedYear = newScheduleCellDate.getFullYear();
-    const selectedMonth = newScheduleCellDate.getMonth();
-    const selectedDate = newScheduleCellDate.getDate();
+    const selectedYear = _newScheduleCellDate.getFullYear();
+    const selectedMonth = _newScheduleCellDate.getMonth();
+    const selectedDate = _newScheduleCellDate.getDate();
 
     const countryName = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
     const isKorea = /대한민국/.test(countryName);
@@ -202,21 +204,18 @@ class NewScheduleCellPopup extends Component {
 
     const changeItinerary = iti => {
       // new 일정
+      const date = convertDateStringToDate(iti.date);
       if (!editCellId) {
-        return iti.date.getFullYear() === selectedYear &&
-          iti.date.getMonth() === selectedMonth &&
-          iti.date.getDate() === selectedDate
+        return date.getFullYear() === selectedYear &&
+          date.getMonth() === selectedMonth &&
+          date.getDate() === selectedDate
           ? { ...iti, country, cells: [...iti.cells, { id, ...info, article: {} }] }
           : iti;
       }
 
       // edit할 경우
       // 같은 날짜에서 정보를 바꾸는 경우
-      if (
-        iti.date.getFullYear() === selectedYear &&
-        iti.date.getMonth() === selectedMonth &&
-        iti.date.getDate() === selectedDate
-      ) {
+      if (date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDate) {
         return iti.id === selectedItineraryId
           ? {
               ...iti,
@@ -229,11 +228,7 @@ class NewScheduleCellPopup extends Component {
       // 기존 배열에서 filter
       // 새로운 날짜가 일치하는 곳에 배열 추가
       if (iti.id === selectedItineraryId) return { ...iti, cells: iti.cells.filter(cell => cell.id !== editCellId) };
-      if (
-        iti.date.getFullYear() === selectedYear &&
-        iti.date.getMonth() === selectedMonth &&
-        iti.date.getDate() === selectedDate
-      )
+      if (date.getFullYear() === selectedYear && date.getMonth() === selectedMonth && date.getDate() === selectedDate)
         return { ...iti, cells: [...iti.cells, { id: editCellId, ...info, article: {} }] };
 
       return iti;

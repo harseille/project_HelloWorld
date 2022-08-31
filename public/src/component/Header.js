@@ -87,6 +87,7 @@ class Header extends Component {
       if (id === 'newTripScheduleModal' && !store.state.userInfo.userId) {
         window.history.pushState({}, 'Signin', window.location.origin + '/signin');
         render();
+        return;
       }
 
       store.state = {

@@ -65,6 +65,11 @@
         margin-top: 16px;
         font-size: 16px;
         line-height: 22px;
+        height: 130px;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
 

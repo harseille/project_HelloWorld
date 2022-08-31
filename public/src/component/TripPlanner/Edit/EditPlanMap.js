@@ -8,7 +8,7 @@ import { getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate } from '.
 
 class Itinerary extends Component {
   init() {
-    initMap();
+    initMap('tripSchedule');
   }
 
   formattedTime(time) {
@@ -290,6 +290,8 @@ class Itinerary extends Component {
     const { itinerary } = tripSchedule;
     const { date } = itinerary.filter(sched => sched.id === selectedItineraryId)[0];
 
+    console.log(store.state.localNewScheduleCell);
+    console.log(store.state.tripSchedule.itinerary);
     document.body.style.overflow = 'hidden';
 
     store.state = {

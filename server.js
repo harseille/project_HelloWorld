@@ -39,9 +39,8 @@ app.post('/tripSchedule', (req, res) => {
   try {
     console.log('[POST] /tripSchedule');
     const tripSchedule = req.body;
-    // console.log(tripSchedule);
     const newTripSchedule = tripSchedules.setTripSchdule(tripSchedule);
-    // console.log(tripSchedule.tripSchedules);
+    console.log(tripSchedule);
     res.send(newTripSchedule);
   } catch (e) {
     console.error(e);

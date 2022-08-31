@@ -21,7 +21,23 @@ const users = [
     password: '123123',
     name: '하준박',
     nickname: 'Benja',
-    profilePic: '/assets/images/users/3/thumbnail.png',
+    profilePic: '',
+  },
+  {
+    userId: 4,
+    email: 'cwo1401@gmail.com',
+    password: '123123',
+    name: '최원오',
+    nickname: '오원최',
+    profilePic: 'https://cdn.golfissue.com/news/photo/202010/10124_10271_657.jpg',
+  },
+  {
+    userId: 5,
+    email: 'abc@abc.com',
+    password: '123123',
+    username: '송송파',
+    nickname: '송송파',
+    profilePic: '',
   },
 ];
 

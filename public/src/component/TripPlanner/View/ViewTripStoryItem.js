@@ -4,7 +4,6 @@ import { getFormattedDate } from '../../DatePicker/dateUtils.js';
 
 class ViewTripStoryItem extends Component {
   render() {
-    console.log(this.props);
     const {
       author,
       authorProfilePic,
