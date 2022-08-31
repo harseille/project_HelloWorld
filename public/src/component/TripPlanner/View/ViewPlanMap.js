@@ -11,7 +11,7 @@ class ViewPlanMap extends Component {
       localItinerary,
       viewTripSchedule: { itinerary },
     } = store.state;
-    const { currentId, startId } = localItinerary;
+    const { startId } = localItinerary;
 
     // prettier-ignore
     const timeList = [
@@ -42,10 +42,9 @@ class ViewPlanMap extends Component {
             </div>`).join('')
         }
         </div>
+        <button class="prev--btn carousel--btn">〈</button>
+        <button class="next--btn carousel--btn">〉</button>
       </div>
-      <button class="prev--btn carousel--btn">〈</button>
-      <button class="next--btn carousel--btn">〉</button>
-    </div>
     <div class="time-table">
     <ul class="time-table__times">
       ${timeList.map(time => `<li class="time-table__time-item">

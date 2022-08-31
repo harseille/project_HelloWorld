@@ -129,7 +129,7 @@ class NewScheduleCellPopup extends Component {
           <h3 class="newCard__popup__form__title">메모</h3>
           <div class="memo__container">
             <div class="memo__title">
-              <input type="text" class="memo-input" placeholder="메모를 입력해주세요." name="memo" value="${memo}" minLength="3" maxLength="100"/>
+              <input type="text" class="memo-input" placeholder="메모를 입력해주세요." name="memo" value="${memo}" maxLength="100"/>
               <button class="memo__title__add__todo__btn" type="button" aria-label="todo 추가"></button>
             </div>
             <ul class="memo__todo__list">
@@ -149,7 +149,7 @@ class NewScheduleCellPopup extends Component {
   </div>`;
   }
 
-  formatUnableTime(itinerary, restNum) {
+  formatUnableTime(itinerary, condition) {
     const {
       localNewScheduleCell: { editCellId },
     } = store.state;
@@ -159,9 +159,9 @@ class NewScheduleCellPopup extends Component {
         if (editCellId === id) return '';
 
         const st = +startTime.slice(0, 2);
-        const gap = +endTime.slice(0, 2) - st - restNum;
+        const gap = +endTime.slice(0, 2) - st - condition;
 
-        return Array.from({ length: gap }, (_, i) => st + i + restNum);
+        return Array.from({ length: gap }, (_, i) => st + i + condition);
       })
       .flat();
 
@@ -200,7 +200,7 @@ class NewScheduleCellPopup extends Component {
     const countryName = info.location.formatted_address.replace(/[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, '');
     const isKorea = /대한민국/.test(countryName);
     const country = isKorea ? '대한민국' : countryName;
-    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(s => s.id), 0, 0))) + 1;
+    const id = Math.max(...itinerary.map(sche => Math.max(...sche.cells.map(cell => cell.id), 0)), 0) + 1;
 
     const changeItinerary = iti => {
       // new 일정
@@ -319,7 +319,7 @@ class NewScheduleCellPopup extends Component {
       const place = autocomplete.getPlace();
 
       if (!place.geometry || !place.geometry.location) {
-        window.alert("No details available for input: '" + place.name + "'");
+        window.alert('검색 된 장소가 없습니다.');
         return;
       }
 

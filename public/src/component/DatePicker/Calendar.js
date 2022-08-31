@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Component from '../../core/Component.js';
 import store from '../../store/store.js';
+import { getMoveDate } from './dateUtils.js';
 
 class Calendar extends Component {
   get currentYear() {
@@ -36,7 +37,8 @@ class Calendar extends Component {
 
     const startDateAfter31 = isNot31
       ? _endDate
-      : new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + 31);
+      : // : new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + 31);
+        getMoveDate(_startDate, 31);
 
     if (
       _startDate.getFullYear() === targetCurrentDate.getFullYear() &&
@@ -178,8 +180,8 @@ class Calendar extends Component {
   }
 
   updateSelectedDate(e) {
-    console.log('updateSelectedDate');
     if (!e.target.classList.contains('calendar__dates__item') || e.target.classList.contains('unable')) return;
+    console.log('updateSelectedDate');
 
     const {
       localDatePicker: { currentDate, activeCalendar },
@@ -196,7 +198,8 @@ class Calendar extends Component {
       e.target.textContent
     );
 
-    const _endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 31);
+    // const _endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 31);
+    const _endDate = getMoveDate(selectedDate, 31);
 
     let _itinerary = [];
     let _tripDays = 0;
@@ -208,19 +211,14 @@ class Calendar extends Component {
       _itinerary = Array.from({ length: 31 }, (_, i) => ({
         id: i + 1,
         country: '',
-        date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+        date: getMoveDate(selectedDate, i),
         cells: [],
-      })).map((dayPlan, index) =>
-        dayPlan.date === store.state.tripSchedule.itinerary[index].date
-          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary.cells }
-          : dayPlan
-      );
-
-      // const __itinerary = _itinerary.map(dayPlan => {
-      //   if (dayPlan.date === store.state.tripSchedule.itinerary.date) {
-      //     dayPlan.cells = store.state.tripSchedule.itinerary.cells;
-      //   }
-      // });
+      })).map(dayPlan => {
+        const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(({ date }) => date === dayPlan.date);
+        return itineraryIndex !== -1
+          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
+          : dayPlan;
+      });
 
       store.state = {
         localDatePicker: {
@@ -269,8 +267,6 @@ class Calendar extends Component {
           cells: [],
         }));
       } else if (activeCalendar === 'endDate') {
-        console.log('activeCalendar');
-        console.log(startDate.getFullYear());
         _tripDays = Math.floor((selectedDate - startDate) / 86400000) + 1;
         _itinerary = Array.from({ length: _tripDays + 1 }, (_, i) => ({
           id: i + 1,
@@ -280,11 +276,12 @@ class Calendar extends Component {
         }));
       }
 
-      _itinerary.map((dayPlan, index) =>
-        dayPlan?.date === store.state.tripSchedule?.itinerary[index]?.date
-          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary?.cells }
-          : dayPlan
-      );
+      _itinerary.map(dayPlan => {
+        const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(({ date }) => date === dayPlan.date);
+        return itineraryIndex !== -1
+          ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
+          : dayPlan;
+      });
 
       store.state = {
         ...store.state,
@@ -300,6 +297,7 @@ class Calendar extends Component {
         },
       };
     }
+    console.log(store.state);
   }
 
   updateMonth(e) {

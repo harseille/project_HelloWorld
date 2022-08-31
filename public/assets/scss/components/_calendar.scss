@@ -110,9 +110,13 @@
     }
 
     &.today {
-      color: $black;
+      color: $lightPurple;
       font-weight: 700;
       border-radius: 50%;
+      &:hover {
+        color: $lightPurple;
+        background: transparent;
+      }
     }
 
     &:hover {

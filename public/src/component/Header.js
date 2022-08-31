@@ -20,7 +20,7 @@ class Header extends Component {
       isShowModal === 'newTripScheduleModal'
         ? new NewTravelLogModal({ localCommon, localNewTripSchedule, localDatePicker, tripSchedule }).render()
         : '';
-    const mypageModal = new MypageModal({ isShowModal, nickname }).render();
+    const mypageModal = isShowModal === 'myPageModal' ? new MypageModal({ isShowModal, nickname }).render() : '';
 
     const navList = [
       { href: '/main', content: '여행일지', type: 'main' },

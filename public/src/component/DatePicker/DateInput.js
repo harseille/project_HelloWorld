@@ -1,37 +1,28 @@
 /* eslint-disable class-methods-use-this */
 import Component from '../../core/Component.js';
 import store from '../../store/store.js';
+import { getFormattedDate } from './dateUtils.js';
 
 class DateInput extends Component {
-  formattedDate(date) {
-    let _date = date;
-    if (typeof _date === 'string') {
-      _date = new Date(_date);
-    }
-
-    const format = n => (n < 10 ? '0' + n : n + '');
-
-    return `${_date.getFullYear()}-${format(_date.getMonth() + 1)}-${format(_date.getDate())}`;
-  }
-
   render() {
     const { inputPlaceholder, inputId, date } = this.props;
 
     return `
     <input class="newTripDate datePicker" id="${inputId}" type="text" name="${inputId}" placeholder="${inputPlaceholder}" 
-    ${date ? `value="${this.formattedDate(date)}"` : ''}" readonly />
+    ${date ? `value="${getFormattedDate(date)}"` : ''}" readonly />
     `;
   }
 
   toggleDatePicker(e) {
-    // console.log('toggleDatePicker');
     if (!e.target.matches('.datePicker')) return;
+    console.log('toggleDatePicker');
 
     const { id } = e.target;
 
     // 출발일이 설정 되었을 때에만 도착일 설정
     if (id === 'newTripEndDate' && store.state.tripSchedule.startDate === null) return;
 
+    // Date 객체로 변환
     const targetDate =
       e.target?.value.split('-').join(',') === '' ? new Date() : new Date(e.target?.value.split('-').join(','));
 

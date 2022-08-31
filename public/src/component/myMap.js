@@ -101,7 +101,6 @@
  */
 
 import store from '../store/store.js';
-import render from '../dom/render.js';
 
 let map = null;
 let selectedCellCoord = null;
@@ -134,10 +133,8 @@ let selectedCellCoord = null;
 const initMap = type => {
   // 현제위치를 설정한다.
   // if (!store.state.localMap.isMapInitial) return;
-  // console.log('[init map]');
   (async () => {
     const { geolocation } = navigator;
-    // console.log('[init map]' + type);
 
     const success = position => {
       const { latitude, longitude } = position.coords;
@@ -150,8 +147,6 @@ const initMap = type => {
           dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
         )
         .flat();
-      console.log('[init map]' + cellInfoList);
-      console.log(cellInfoList);
 
       // const { sumLatitude, sumLongitude } = cellInfoList.reduce(
       //   (acc, cur) => ({
@@ -216,7 +211,7 @@ const initMap = type => {
       // 초기화
       // selectedCellCoord = null;
       // store.state.localMap.isMapInitial = false;
-      render();
+      // render();
     };
     const failure = () => {
       // console.log('Fail to load Google Map');
@@ -228,31 +223,21 @@ const initMap = type => {
 const moveMapCenter = e => {
   if (e.target.matches('.time-table__day-index__blank .itinerary-card--delete')) return;
 
-  console.log(window.location.pathname);
   const type = window.location.pathname.includes('trip-planner-edit') ? 'tripSchedule' : 'viewTripSchedule';
 
   const {
     [type]: { itinerary },
   } = store.state;
 
-  const { id } = e.target.closest('.itinerary-card').dataset;
   const selectedItineraryId = +e.target.closest('.time-table__day-index__blank').dataset.id;
-  selectedCellCoord = itinerary[selectedItineraryId - 1].cells[id - 1].location.latLng;
+  const { id } = e.target.closest('.itinerary-card').dataset;
 
+  const [{ cells }] = itinerary.filter(iti => iti.id === +selectedItineraryId);
+  // prettier-ignore
+  const [{ location: { latLng }, },] = cells.filter(cell => cell.id === +id);
+
+  selectedCellCoord = latLng;
   initMap(type);
-  // map.addListener('center_changed', () => {
-  //   // 3 seconds after the center of the map has changed, pan back to the
-  //   // marker.
-  //   window.setTimeout(() => {
-  //     map.panTo(marker.getPosition());
-  //   }, 3000);
-  // });
-  // console.log(map);
-  // console.log(lat, lng);
-  // map.setCenter(latLng);
 };
 
-// document.querySelector('.itinerary-card').addEventListener('click', moveMapCenter);
-
-// export default initMap;
 export { initMap, moveMapCenter };

@@ -1,4 +1,4 @@
-.itinerary__container {
+.carousel__itinerary__container {
   width: 1280px;
   margin: 0 auto;
 }
@@ -52,22 +52,21 @@
   &--btn {
     position: absolute;
     top: 50%;
+    z-index: 99;
+    border: none;
     font-size: 20px;
     font-weight: 700;
-    border: none;
     background: none;
     color: $white;
     cursor: pointer;
-    z-index: 99;
+    transform: translate3d(0, -50%, 0);
   }
   .prev--btn {
     left: 65px;
-    top: 21px;
   }
 
   .next--btn {
-    right: 65px;
-    top: 21px;
+    right: 25px;
   }
 
   &__day-index {

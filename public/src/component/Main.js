@@ -76,7 +76,7 @@ class Main extends Component {
                       fill="#EEEEEE" />
                   </svg>
                 </span>
-                <video class="hot-topic__item__thumbnail__video" src="/assets/videos/MainMovie1.mp4"></video>
+                <video class="hot-topic__item__thumbnail__video" src="/assets/videos/MainMovie1.mp4" autoplay="true" loop="true" muted="true"></video>
               </div>
               <div class="hot-topic__item__detail">
                 <h3 class="hot-topic__item__detail__title">인기여행지 1위</h3>
@@ -94,7 +94,7 @@ class Main extends Component {
                       fill="#EEEEEE" />
                   </svg>
                 </span>
-                <video class="hot-topic__item__thumbnail__video" src="/assets/videos/MainMovie2.mp4"></video>
+                <video class="hot-topic__item__thumbnail__video" src="/assets/videos/MainMovie5.mp4" autoplay="true" loop="true" muted="true"></video>
               </div>
               <div class="hot-topic__item__detail">
                 <h3 class="hot-topic__item__detail__title">인기여행지 1위</h3>
