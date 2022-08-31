@@ -1086,6 +1086,417 @@ let tripSchedules = [
     ],
     newScheduleCellDate: '2022-09-03T15:00:00.000Z',
   },
+  {
+    tripScheduleId: 9,
+    authorId: 13,
+    author: '다다',
+    authorProfilePic: '/assets/images/users/13/profile1.jpeg',
+    title: '뉴욕에서 \b3일간 캐리 브래드쇼로 살기',
+    summary: '',
+    tripDays: 3,
+    startDate: '2023-01-01T00:00:00.000Z',
+    endDate: '2023-01-03T15:00:00.000Z',
+    createdDate: '2022-08-30T12:23:27.623Z',
+    numberOfPeople: '1',
+    coverImg: '/assets/images/tripSchedules/13/a.jpeg',
+    content: '글 쓰고 그림그리고 커피마시고 맛집가고 재밌게 놀아보렵니다',
+    isLiked: false,
+    likeCount: 0,
+    commentCount: 0,
+    itinerary: [
+      {
+        id: 1,
+        country: '',
+        date: '2022-12-31T15:00:00.000Z',
+        cells: [
+          {
+            id: 1,
+            type: 'accomodation',
+            startTime: '14:00',
+            endTime: '15:00',
+            location: {
+              adr_address:
+                '<span class="street-address">400 5th Ave</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10018</span>, <span class="country-name">USA</span>',
+              formatted_address: '400 5th Ave, New York, NY 10018, USA',
+              geometry: {
+                location: {
+                  lat: 40.75014379999999,
+                  lng: -73.9835325,
+                },
+                viewport: {
+                  south: 40.74866211970849,
+                  west: -73.98501938029149,
+                  north: 40.75136008029149,
+                  east: -73.98232141970848,
+                },
+              },
+              name: 'The Langham, New York, Fifth Avenue, 5th Avenue, New York, NY, USA',
+              html_attributions: [],
+              latLng: {
+                lat: 40.75014379999999,
+                lng: -73.9835325,
+              },
+            },
+            memo: '호텔 체크인',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 2,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="locality">Manhattan</span>, <span class="region">NY</span> <span class="postal-code">10036</span>, <span class="country-name">USA</span>',
+              formatted_address: 'Manhattan, NY 10036, USA',
+              geometry: {
+                location: {
+                  lat: 40.7579747,
+                  lng: -73.9855426,
+                },
+                viewport: {
+                  south: 40.7550401,
+                  west: -73.98768855000003,
+                  north: 40.7609901,
+                  east: -73.98341435,
+                },
+              },
+              name: 'United States, New York, Manhattan, 타임즈 스퀘어',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7579747,
+                lng: -73.9855426,
+              },
+            },
+            memo: '타임스퀘어 가야지',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 3,
+            type: 'etc',
+            startTime: '19:00',
+            endTime: '22:00',
+            location: {
+              adr_address:
+                '<span class="street-address">166 W 42nd St</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10036</span>, <span class="country-name">USA</span>',
+              formatted_address: '166 W 42nd St, New York, NY 10036, USA',
+              geometry: {
+                location: {
+                  lat: 40.7557333,
+                  lng: -73.9866136,
+                },
+                viewport: {
+                  south: 40.7544350697085,
+                  west: -73.98798893029152,
+                  north: 40.7571330302915,
+                  east: -73.9852909697085,
+                },
+              },
+              name: 'United States, New York, West 42nd Street, 브로드 웨이 42번가',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7557333,
+                lng: -73.9866136,
+              },
+            },
+            memo: '공연 보기',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '',
+        date: '2023-01-01T15:00:00.000Z',
+        cells: [
+          {
+            id: 5,
+            type: 'etc',
+            startTime: '10:00',
+            endTime: '13:00',
+            location: {
+              adr_address:
+                '<span class="street-address">56 Church St</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10007</span>, <span class="country-name">USA</span>',
+              formatted_address: '56 Church St, New York, NY 10007, USA',
+              geometry: {
+                location: {
+                  lat: 40.7108515,
+                  lng: -74.010708,
+                },
+                viewport: {
+                  south: 40.7094294197085,
+                  west: -74.01213093029149,
+                  north: 40.71212738029149,
+                  east: -74.00943296970848,
+                },
+              },
+              name: 'century 21, Church Street, New York, NY, USA',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7108515,
+                lng: -74.010708,
+              },
+            },
+            memo: '쇼핑 하기',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 8,
+            type: 'sightseeing',
+            startTime: '20:00',
+            endTime: '22:00',
+            location: {
+              adr_address:
+                '<span class="street-address">20 W 34th St.</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10001</span>, <span class="country-name">USA</span>',
+              formatted_address: '20 W 34th St., New York, NY 10001, USA',
+              geometry: {
+                location: {
+                  lat: 40.7484405,
+                  lng: -73.98566439999999,
+                },
+                viewport: {
+                  south: 40.7470135197085,
+                  west: -73.98662333029151,
+                  north: 40.7497114802915,
+                  east: -73.98392536970849,
+                },
+              },
+              name: 'United States, New York, West 34th Street, 엠파이어 스테이트 빌딩',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7484405,
+                lng: -73.98566439999999,
+              },
+            },
+            memo: '엠파이어스테이트 빌딩은 한 번 가줘야지',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 9,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="locality">New York</span>, <span class="region">NY</span>, <span class="country-name">USA</span>',
+              formatted_address: 'New York, NY, USA',
+              geometry: {
+                location: {
+                  lat: 40.7812199,
+                  lng: -73.9665138,
+                },
+                viewport: {
+                  south: 40.74051505,
+                  west: -73.9986532,
+                  north: 40.83420684999999,
+                  east: -73.93318399999998,
+                },
+              },
+              name: 'United States, New York, 센트럴 파크',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7812199,
+                lng: -73.9665138,
+              },
+            },
+            memo: '센트럴파크에서',
+            todos: [
+              {
+                id: 1,
+                todo: '그림 그리고 글 쓰기',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '산책',
+                completed: false,
+              },
+              {
+                id: 3,
+                todo: '근처에서 밥 먹기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 13,
+            type: 'etc',
+            startTime: '22:00',
+            endTime: '23:00',
+            location: {
+              adr_address:
+                '<span class="street-address">290 5th Ave</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10001</span>, <span class="country-name">USA</span>',
+              formatted_address: '290 5th Ave, New York, NY 10001, USA',
+              geometry: {
+                location: {
+                  lat: 40.7463071,
+                  lng: -73.9864693,
+                },
+                viewport: {
+                  south: 40.7449057197085,
+                  west: -73.9876882302915,
+                  north: 40.7476036802915,
+                  east: -73.98499026970848,
+                },
+              },
+              name: 'Turntable Chicken Rock, 5th Avenue, New York, NY, USA',
+              html_attributions: [],
+              latLng: {
+                lat: 40.7463071,
+                lng: -73.9864693,
+              },
+            },
+            memo: '재즈바 가기',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 3,
+        country: '',
+        date: '2023-01-02T15:00:00.000Z',
+        cells: [
+          {
+            id: 10,
+            type: 'sightseeing',
+            startTime: '10:00',
+            endTime: '15:00',
+            location: {
+              adr_address:
+                '<span class="street-address">200 Central Park West</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10024</span>, <span class="country-name">USA</span>',
+              formatted_address: '200 Central Park West, New York, NY 10024, USA',
+              geometry: {
+                location: {
+                  lat: 40.78132409999999,
+                  lng: -73.9739882,
+                },
+                viewport: {
+                  south: 40.7799797,
+                  west: -73.97468378029151,
+                  north: 40.78294769999999,
+                  east: -73.9719858197085,
+                },
+              },
+              name: 'United States, New York, Central Park West, 아메리칸 뮤지엄 오브 네츄럴 히스토리',
+              html_attributions: [],
+              latLng: {
+                lat: 40.78132409999999,
+                lng: -73.9739882,
+              },
+            },
+            memo: '자연사 박물관',
+            todos: [
+              {
+                id: 1,
+                todo: '근처에서 점심',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 11,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="street-address">334 Furman St</span>, <span class="locality">Brooklyn</span>, <span class="region">NY</span> <span class="postal-code">11201</span>, <span class="country-name">USA</span>',
+              formatted_address: '334 Furman St, Brooklyn, NY 11201, USA',
+              geometry: {
+                location: {
+                  lat: 40.69914959999999,
+                  lng: -73.9976004,
+                },
+                viewport: {
+                  south: 40.6976932697085,
+                  west: -73.9985617302915,
+                  north: 40.70039123029149,
+                  east: -73.99586376970849,
+                },
+              },
+              name: 'United States, New York, Brooklyn, Furman Street, 브루클린 브리지 공원',
+              html_attributions: [],
+              latLng: {
+                lat: 40.69914959999999,
+                lng: -73.9976004,
+              },
+            },
+            memo: '브루클린 브릿지',
+            todos: [
+              {
+                id: 1,
+                todo: '그림 그리고',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '글 쓰고',
+                completed: false,
+              },
+              {
+                id: 3,
+                todo: '산책하고',
+                completed: false,
+              },
+              {
+                id: 4,
+                todo: '근처에서 밥 먹기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 12,
+            type: 'etc',
+            startTime: '18:00',
+            endTime: '20:00',
+            location: {
+              adr_address:
+                '<span class="street-address">99 Park Ave</span>, <span class="locality">New York</span>, <span class="region">NY</span> <span class="postal-code">10016</span>, <span class="country-name">USA</span>',
+              formatted_address: '99 Park Ave, New York, NY 10016, USA',
+              geometry: {
+                location: {
+                  lat: 40.75021580000001,
+                  lng: -73.97868989999999,
+                },
+                viewport: {
+                  south: 40.7488773697085,
+                  west: -73.9799811802915,
+                  north: 40.75157533029149,
+                  east: -73.9772832197085,
+                },
+              },
+              name: 'Park Avenue Tavern, Park Avenue, New York, NY, USA',
+              html_attributions: [],
+              latLng: {
+                lat: 40.75021580000001,
+                lng: -73.97868989999999,
+              },
+            },
+            memo: '저녁먹기',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 4,
+        country: '',
+        date: '2023-01-03T15:00:00.000Z',
+        cells: [],
+      },
+    ],
+    newScheduleCellDate: '2023-01-01T15:00:00.000Z',
+  },
 ];
 
 const processMainTripSchedules = (searchCategory, searchValue) => {
