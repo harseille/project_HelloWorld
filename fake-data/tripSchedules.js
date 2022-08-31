@@ -2243,6 +2243,1072 @@ let tripSchedules = [
     ],
     newScheduleCellDate: '2022-09-02T15:00:00.000Z',
   },
+  {
+    tripScheduleId: 12,
+    authorId: 15,
+    author: 'dee',
+    title: '이탈리아 5박 6일 여행기',
+    summary: '',
+    tripDays: 6,
+    startDate: '2022-09-05T00:00:00.000Z',
+    endDate: '2022-09-10T00:00:00.000Z',
+    createdDate: '2022-08-31T00:52:39.201Z',
+    numberOfPeople: '1',
+    coverImg: '/assets/images/tripSchedules/italy.jpg',
+    content: '붉은 지붕으로 가득한 피렌체 여행기.\n미켈란젤로 광장에서 노을과 버스킹 무대는 필수!',
+    isLiked: false,
+    likeCount: 0,
+    commentCount: 0,
+    itinerary: [
+      {
+        id: 1,
+        country: '이탈리아',
+        date: '2022-09-04T15:00:00.000Z',
+        cells: [
+          {
+            id: 1,
+            type: 'transportation',
+            startTime: '05:00',
+            endTime: '17:00',
+            location: {
+              adr_address:
+                '<span class="country-name">대한민국</span> <span class="region">인천광역시</span> <span class="locality">중구</span> <span class="street-address">공항로 272</span>',
+              formatted_address: '대한민국 인천광역시 중구 공항로 272',
+              geometry: {
+                location: {
+                  lat: 37.4601908,
+                  lng: 126.4406957,
+                },
+                viewport: {
+                  south: 37.4398949,
+                  west: 126.4300404,
+                  north: 37.4669561,
+                  east: 126.4726616,
+                },
+              },
+              name: '대한민국 인천광역시 중구 공항로 인천국제공항 (ICN)',
+              html_attributions: [],
+              latLng: {
+                lat: 37.4601908,
+                lng: 126.4406957,
+              },
+            },
+            memo: '공항에 일찍 도착해서 준비하기',
+            todos: [
+              {
+                id: 1,
+                todo: '환전하기',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '면세점 들리기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 2,
+            type: 'sightseeing',
+            startTime: '18:00',
+            endTime: '19:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazzale Michelangelo</span>, <span class="postal-code">50125</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazzale Michelangelo, 50125 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7629314,
+                  lng: 11.2650561,
+                },
+                viewport: {
+                  south: 43.7614267197085,
+                  west: 11.2632222197085,
+                  north: 43.7641246802915,
+                  east: 11.2659201802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 미켈란젤로 광장 미켈란젤로 광장',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7629314,
+                lng: 11.2650561,
+              },
+            },
+            memo: '노을 보면서 피렌체 야경 구경하기',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 3,
+            type: 'etc',
+            startTime: '19:00',
+            endTime: '20:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazzale Michelangelo, 1</span>, <span class="postal-code">50125</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazzale Michelangelo, 1, 50125 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7620429,
+                  lng: 11.2647275,
+                },
+                viewport: {
+                  south: 43.7607186197085,
+                  west: 11.2635389197085,
+                  north: 43.7634165802915,
+                  east: 11.2662368802915,
+                },
+              },
+              name: 'La Loggia del Piazzale Michelangelo, Piazzale Michelangelo, 플로렌스 피렌체 이탈리아',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7620429,
+                lng: 11.2647275,
+              },
+            },
+            memo: '이탈리아 맛집 1 : 피자',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 4,
+            type: 'accomodation',
+            startTime: '20:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '피렌체 성당 앞 숙소 ',
+            todos: [
+              {
+                id: 1,
+                todo: '내일 갈 장소 길 미리 알아두기',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '필요한 물품들 챙겨놓기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 2,
+        country: '이탈리아',
+        date: '2022-09-05T15:00:00.000Z',
+        cells: [
+          {
+            id: 5,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '06:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '일찍 일어나서 아침먹기',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 6,
+            type: 'etc',
+            startTime: '12:00',
+            endTime: '14:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Borgo Pinti, 10</span>/18R, <span class="postal-code">50121</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Borgo Pinti, 10/18R, 50121 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.772102,
+                  lng: 11.26222,
+                },
+                viewport: {
+                  south: 43.77075461970851,
+                  west: 11.2608106197085,
+                  north: 43.7734525802915,
+                  east: 11.2635085802915,
+                },
+              },
+              name: 'La Giostra, Borgo Pinti, 플로렌스 피렌체 이탈리아',
+              html_attributions: [],
+              latLng: {
+                lat: 43.772102,
+                lng: 11.26222,
+              },
+            },
+            memo: '티본 스테이크 먹기!!!',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 7,
+            type: 'sightseeing',
+            startTime: '08:00',
+            endTime: '12:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazza del Duomo</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazza del Duomo, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.77314499999999,
+                  lng: 11.2559602,
+                },
+                viewport: {
+                  south: 43.77174374999999,
+                  west: 11.25256315,
+                  north: 43.77488434999999,
+                  east: 11.25972295,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza del Duomo, 피렌체 대성당',
+              html_attributions: [],
+              latLng: {
+                lat: 43.77314499999999,
+                lng: 11.2559602,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 8,
+            type: 'etc',
+            startTime: '07:00',
+            endTime: '08:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazza della Repubblica, 4</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazza della Repubblica, 4, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7713405,
+                  lng: 11.2546231,
+                },
+                viewport: {
+                  south: 43.77000881970851,
+                  west: 11.2531721197085,
+                  north: 43.77270678029151,
+                  east: 11.2558700802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza della Repubblica, 두오모가 보이는 테라스 카페',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7713405,
+                lng: 11.2546231,
+              },
+            },
+            memo: '두오모 성당보면서 브런치 먹기',
+            todos: [
+              {
+                id: 1,
+                todo: '티라미수 디저트로 꼭 먹기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 9,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '19:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazzale degli Uffizi, 6</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazzale degli Uffizi, 6, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7677856,
+                  lng: 11.2553108,
+                },
+                viewport: {
+                  south: 43.76706566970849,
+                  west: 11.2542824697085,
+                  north: 43.76976363029149,
+                  east: 11.2569804302915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazzale degli Uffizi, 우피치 미술관',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7677856,
+                lng: 11.2553108,
+              },
+            },
+            memo: '유명한 미술관 천천히 돌아다니면서 구경하기',
+            todos: [
+              {
+                id: 1,
+                todo: '꼭 보고 싶은 미술품 적어놓기',
+                completed: false,
+              },
+              {
+                id: 2,
+                todo: '오디오 빌리기',
+                completed: false,
+              },
+              {
+                id: 3,
+                todo: '예약 티켓 발권하기',
+                completed: false,
+              },
+            ],
+            article: {},
+          },
+          {
+            id: 10,
+            type: 'etc',
+            startTime: '19:00',
+            endTime: '21:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dei Tavolini, 12</span>/R, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Via dei Tavolini, 12/R, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7708915,
+                  lng: 11.2557616,
+                },
+                viewport: {
+                  south: 43.76982006970849,
+                  west: 11.2544786197085,
+                  north: 43.77251803029149,
+                  east: 11.2571765802915,
+                },
+              },
+              name: 'Ristorante Paoli, Via dei Tavolini, 플로렌스 피렌체 이탈리아',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7708915,
+                lng: 11.2557616,
+              },
+            },
+            memo: '와인 한잔',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 11,
+            type: 'accomodation',
+            startTime: '21:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '푹 쉬기',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 3,
+        country: '이탈리아',
+        date: '2022-09-06T15:00:00.000Z',
+        cells: [
+          {
+            id: 12,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '08:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 13,
+            type: 'etc',
+            startTime: '08:00',
+            endTime: '10:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via Roma, 9</span>/1, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Via Roma, 9/1, 50123 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7719614,
+                  lng: 11.2543342,
+                },
+                viewport: {
+                  south: 43.7706190197085,
+                  west: 11.2530328197085,
+                  north: 43.7733169802915,
+                  east: 11.2557307802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Via Roma, 카페질리',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7719614,
+                lng: 11.2543342,
+              },
+            },
+            memo: '브런치',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 14,
+            type: 'sightseeing',
+            startTime: '10:00',
+            endTime: '14:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via Ricasoli, 58</span>/60, <span class="postal-code">50129</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Via Ricasoli, 58/60, 50129 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.77681450000001,
+                  lng: 11.2586424,
+                },
+                viewport: {
+                  south: 43.7754930197085,
+                  west: 11.2572938197085,
+                  north: 43.7781909802915,
+                  east: 11.2599917802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Via Ricasoli, 아카데미아 미술관',
+              html_attributions: [],
+              latLng: {
+                lat: 43.77681450000001,
+                lng: 11.2586424,
+              },
+            },
+            memo: '다비드상 구경',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 15,
+            type: 'etc',
+            startTime: '14:00',
+            endTime: '15:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Borgo Pinti, 10</span>/18R, <span class="postal-code">50121</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Borgo Pinti, 10/18R, 50121 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.772102,
+                  lng: 11.26222,
+                },
+                viewport: {
+                  south: 43.77075461970851,
+                  west: 11.2608106197085,
+                  north: 43.7734525802915,
+                  east: 11.2635085802915,
+                },
+              },
+              name: 'La Giostra, Borgo Pinti, 플로렌스 피렌체 이탈리아',
+              html_attributions: [],
+              latLng: {
+                lat: 43.772102,
+                lng: 11.26222,
+              },
+            },
+            memo: '티본 스테이크 2차 ',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 16,
+            type: 'sightseeing',
+            startTime: '16:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Ponte Vecchio</span>, <span class="postal-code">50125</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Ponte Vecchio, 50125 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.76792500000001,
+                  lng: 11.2531435,
+                },
+                viewport: {
+                  south: 43.7666200697085,
+                  west: 11.2517530697085,
+                  north: 43.7693180302915,
+                  east: 11.2544510302915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Ponte Vecchio, 베키오 다리',
+              html_attributions: [],
+              latLng: {
+                lat: 43.76792500000001,
+                lng: 11.2531435,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 17,
+            type: 'sightseeing',
+            startTime: '18:00',
+            endTime: '20:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazzale Michelangelo</span>, <span class="postal-code">50125</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazzale Michelangelo, 50125 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7629314,
+                  lng: 11.2650561,
+                },
+                viewport: {
+                  south: 43.7614267197085,
+                  west: 11.2632222197085,
+                  north: 43.7641246802915,
+                  east: 11.2659201802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 미켈란젤로 광장 미켈란젤로 광장',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7629314,
+                lng: 11.2650561,
+              },
+            },
+            memo: '오늘도 노을과 버스킹 구경',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 18,
+            type: 'accomodation',
+            startTime: '21:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 4,
+        country: '이탈리아',
+        date: '2022-09-07T15:00:00.000Z',
+        cells: [
+          {
+            id: 19,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '08:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 20,
+            type: 'sightseeing',
+            startTime: '09:00',
+            endTime: '14:00',
+            location: {
+              adr_address:
+                'Piazza del Mercato Centrale, <span class="street-address">Via dell&#39;Ariento</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Piazza del Mercato Centrale, Via dell'Ariento, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7765171,
+                  lng: 11.2530512,
+                },
+                viewport: {
+                  south: 43.77533931970851,
+                  west: 11.2518397697085,
+                  north: 43.77803728029151,
+                  east: 11.2545377302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 피렌체 중앙시장",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7765171,
+                lng: 11.2530512,
+              },
+            },
+            memo: '과일사기',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 21,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazza dei Cavalleggeri, 1</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazza dei Cavalleggeri, 1, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.76708129999999,
+                  lng: 11.2623479,
+                },
+                viewport: {
+                  south: 43.76561441970849,
+                  west: 11.2609038697085,
+                  north: 43.76831238029149,
+                  east: 11.2636018302915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza dei Cavalleggeri, 피렌체 국립도서관',
+              html_attributions: [],
+              latLng: {
+                lat: 43.76708129999999,
+                lng: 11.2623479,
+              },
+            },
+            memo: '책 빌리기',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 22,
+            type: 'etc',
+            startTime: '18:00',
+            endTime: '20:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Borgo Pinti, 10</span>/18R, <span class="postal-code">50121</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Borgo Pinti, 10/18R, 50121 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.772102,
+                  lng: 11.26222,
+                },
+                viewport: {
+                  south: 43.77075461970851,
+                  west: 11.2608106197085,
+                  north: 43.7734525802915,
+                  east: 11.2635085802915,
+                },
+              },
+              name: 'La Giostra, Borgo Pinti, 플로렌스 피렌체 이탈리아',
+              html_attributions: [],
+              latLng: {
+                lat: 43.772102,
+                lng: 11.26222,
+              },
+            },
+            memo: '티본 스테이크 3차',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 23,
+            type: 'accomodation',
+            startTime: '20:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 5,
+        country: '이탈리아',
+        date: '2022-09-08T15:00:00.000Z',
+        cells: [
+          {
+            id: 26,
+            type: 'etc',
+            startTime: '11:00',
+            endTime: '14:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazza della Repubblica, 4</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazza della Repubblica, 4, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.7713405,
+                  lng: 11.2546231,
+                },
+                viewport: {
+                  south: 43.77000881970851,
+                  west: 11.2531721197085,
+                  north: 43.77270678029151,
+                  east: 11.2558700802915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza della Repubblica, 두오모가 보이는 테라스 카페',
+              html_attributions: [],
+              latLng: {
+                lat: 43.7713405,
+                lng: 11.2546231,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 27,
+            type: 'accomodation',
+            startTime: '19:00',
+            endTime: '24:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 28,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '06:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 29,
+            type: 'sightseeing',
+            startTime: '07:00',
+            endTime: '11:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Piazza del Duomo</span>, <span class="postal-code">50122</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'Piazza del Duomo, 50122 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.77314499999999,
+                  lng: 11.2559602,
+                },
+                viewport: {
+                  south: 43.77174374999999,
+                  west: 11.25256315,
+                  north: 43.77488434999999,
+                  east: 11.25972295,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza del Duomo, 피렌체 대성당',
+              html_attributions: [],
+              latLng: {
+                lat: 43.77314499999999,
+                lng: 11.2559602,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 30,
+            type: 'sightseeing',
+            startTime: '15:00',
+            endTime: '19:00',
+            location: {
+              adr_address:
+                '<span class="street-address">P.za di Santa Maria Novella, 18</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: 'P.za di Santa Maria Novella, 18, 50123 Firenze FI, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 43.77463460000001,
+                  lng: 11.2493859,
+                },
+                viewport: {
+                  south: 43.77332946970849,
+                  west: 11.24785176970849,
+                  north: 43.77602743029149,
+                  east: 11.2505497302915,
+                },
+              },
+              name: '이탈리아 피렌체 플로렌스 Piazza di Santa Maria Novella, 산타 마리아 노벨라 성당',
+              html_attributions: [],
+              latLng: {
+                lat: 43.77463460000001,
+                lng: 11.2493859,
+              },
+            },
+            memo: '',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+      {
+        id: 6,
+        country: '이탈리아',
+        date: '2022-09-09T15:00:00.000Z',
+        cells: [
+          {
+            id: 24,
+            type: 'transportation',
+            startTime: '05:00',
+            endTime: '18:00',
+            location: {
+              adr_address:
+                '<span class="postal-code">21010</span> <span class="locality">Ferno</span>, <span class="region">VA</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: '21010 Ferno, VA, 이탈리아',
+              geometry: {
+                location: {
+                  lat: 45.6300625,
+                  lng: 8.7255307,
+                },
+                viewport: {
+                  south: 45.62253009999999,
+                  west: 8.699633200000001,
+                  north: 45.6325733,
+                  east: 8.734163200000001,
+                },
+              },
+              name: '이탈리아 바레세 Ferno, 밀라노 말펜사 국제공항',
+              html_attributions: [],
+              latLng: {
+                lat: 45.6300625,
+                lng: 8.7255307,
+              },
+            },
+            memo: '한국으로 이동',
+            todos: [],
+            article: {},
+          },
+          {
+            id: 25,
+            type: 'accomodation',
+            startTime: '00:00',
+            endTime: '04:00',
+            location: {
+              adr_address:
+                '<span class="street-address">Via dell&#39;Ariento, 2</span>, <span class="postal-code">50123</span> <span class="locality">Firenze</span> <span class="region">FI</span>, <span class="country-name">이탈리아</span>',
+              formatted_address: "Via dell'Ariento, 2, 50123 Firenze FI, 이탈리아",
+              geometry: {
+                location: {
+                  lat: 43.7755584,
+                  lng: 11.2536356,
+                },
+                viewport: {
+                  south: 43.7742002197085,
+                  west: 11.2522878697085,
+                  north: 43.7768981802915,
+                  east: 11.2549858302915,
+                },
+              },
+              name: "이탈리아 피렌체 플로렌스 Via dell'Ariento, 에메랄드 팰리스",
+              html_attributions: [],
+              latLng: {
+                lat: 43.7755584,
+                lng: 11.2536356,
+              },
+            },
+            memo: '공항 갈 준비',
+            todos: [],
+            article: {},
+          },
+        ],
+      },
+    ],
+    newScheduleCellDate: '2022-09-08T15:00:00.000Z',
+  },
 ];
 
 const processMainTripSchedules = (searchCategory, searchValue) => {

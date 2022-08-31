@@ -39,6 +39,14 @@ const users = [
     nickname: '송송파',
     profilePic: '',
   },
+  {
+    userId: 15,
+    email: 'dee@world.com',
+    assword: '123456',
+    nickname: 'dee',
+    name: '황도은',
+    profilePic: '',
+  },
 ];
 
 const findUser = email => users.find(user => user.email === email);
