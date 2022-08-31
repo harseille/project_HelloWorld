@@ -14,7 +14,7 @@ class ViewPlanMap extends Component {
   render() {
     const {
       localItinerary,
-      tripSchedule: { itinerary },
+      viewTripSchedule: { itinerary },
     } = store.state;
     const { currentId, startId } = localItinerary;
 
