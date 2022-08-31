@@ -134,10 +134,10 @@ let selectedCellCoord = null;
 const initMap = type => {
   // 현제위치를 설정한다.
   // if (!store.state.localMap.isMapInitial) return;
-  console.log('[init map]');
+  // console.log('[init map]');
   (async () => {
     const { geolocation } = navigator;
-    console.log('[init map]' + type);
+    // console.log('[init map]' + type);
 
     const success = position => {
       const { latitude, longitude } = position.coords;

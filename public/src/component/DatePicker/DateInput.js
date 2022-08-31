@@ -24,7 +24,7 @@ class DateInput extends Component {
   }
 
   toggleDatePicker(e) {
-    console.log('toggleDatePicker');
+    // console.log('toggleDatePicker');
     if (!e.target.matches('.datePicker')) return;
 
     const { id } = e.target;
