@@ -78,9 +78,7 @@ class Itinerary extends Component {
       ${_schedule.map(sched => {
         const { cells, id } = sched;
         const cellTimeFromToArr = cells.map(cell => [+cell.startTime.slice(0,2), +cell.endTime.slice(0,2)])
-      console.log(store.state.localItinerary
-        )
-      console.log(id)
+
         return `
         <ul class="time-table__day-index__blank" data-id="${id}" style="${store.state.localItinerary.newBgColor === id ? "background: rgba(200, 200, 200, 0.5);" : '' }">
           ${timeList.map((timeItem, i, self) => {

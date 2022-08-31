@@ -18,6 +18,7 @@ const getFormattedDateMMDDDAY = date => {
 
 const getMoveDate = (date, digit) => {
   const _date = convertDateStringToDate(date);
+  console.log(_date);
   return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate() + digit);
 };
 
