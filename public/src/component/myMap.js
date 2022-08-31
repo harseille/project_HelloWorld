@@ -134,6 +134,7 @@ let selectedCellCoord = null;
 const initMap = type => {
   // 현제위치를 설정한다.
   // if (!store.state.localMap.isMapInitial) return;
+  console.log('[init map]');
   (async () => {
     const { geolocation } = navigator;
     console.log('[init map]' + type);
@@ -145,11 +146,12 @@ const initMap = type => {
       // const { lat, lng } = selectedCellCoord;
       // const _coord = new google.maps.LatLng(selectedCellCoord?.lat, selectedCellCoord?.lng);
       const cellInfoList = store.state[type].itinerary
-
         .map(dayPlan =>
           dayPlan.cells.map(cell => ({ type: cell.type, latLng: cell.location.latLng, name: cell.location.name }))
         )
         .flat();
+      console.log('[init map]' + cellInfoList);
+      console.log(cellInfoList);
 
       // const { sumLatitude, sumLongitude } = cellInfoList.reduce(
       //   (acc, cur) => ({
