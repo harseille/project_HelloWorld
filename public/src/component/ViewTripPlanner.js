@@ -9,7 +9,7 @@ import {
   ViewLikeShareBtnBox,
   ViewNavDay,
 } from './TripPlanner/View/index.js';
-
+import { initMap, moveMapCenter } from './myMap.js';
 import store from '../store/store.js';
 
 class ViewTripPlanner extends Component {
@@ -17,7 +17,7 @@ class ViewTripPlanner extends Component {
     const id = window.location.pathname.split('/').pop();
     try {
       const _tripSchedule = await axios.get('/tripSchedule/' + id);
-      console.log(_tripSchedule);
+      initMap('viewTripSchedule');
       store.state = {
         localCommon: {
           ...store.state.localCommon,
@@ -90,6 +90,9 @@ class ViewTripPlanner extends Component {
   // addEventListener() {
   //   return [{ type: '', selector: 'window', handler: this.fetchSelectedTripSchedule }];
   // }
+  addEventListener() {
+    return [{ type: 'click', selector: '.itinerary-card', handler: moveMapCenter }];
+  }
 }
 
 export default ViewTripPlanner;

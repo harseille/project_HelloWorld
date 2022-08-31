@@ -1,12 +1,7 @@
 import Component from '../../../core/Component.js';
 import store from '../../../store/store.js';
-import { initMap, moveMapCenter } from '../../myMap.js';
 
 class ViewPlanMap extends Component {
-  init() {
-    initMap('viewTripSchedule');
-  }
-
   formattedTime(time) {
     return time < 10 ? `0${time}:00` : `${time}:00`;
   }
@@ -139,8 +134,6 @@ class ViewPlanMap extends Component {
 
   addEventListener() {
     return [
-      { type: 'DOMContentLoaded', selector: 'window', component: 'myMap', handler: initMap },
-      { type: 'click', selector: '.itinerary-card', handler: moveMapCenter },
       { type: 'click', selector: '.next--btn', component: 'next--btn', handler: this.nextBtnsController },
       { type: 'click', selector: '.prev--btn', component: 'prev--btn', handler: this.prevBtnsController },
     ];
