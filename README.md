@@ -2,6 +2,8 @@
 
 <h1><img src="/public/assets/images/favicon.ico" width="28px"> Hello World: 당신의 여행을 공유해보세요</h1>
 
+자세한 프로젝트 정보는 [여기](https://absorbed-leek-405.notion.site/21636fac3f9b4c009e5bba33c8c8867b)에서 확인 가능합니다.
+
 <!-- <video src="/assets/videos/intro.mov" autoplay="true" loop="true" muted="true"> -->
 
 ## 목차
@@ -31,7 +33,7 @@
 
 ## 🎯 프로젝트 목표
 
-기간: 2022-08-12 ~ 2022-09-01 ( 21 일 )
+기간: 2022-08-12 ~ 2022-09-01 (21일)
 목적:
 
 1. 약 한 달 반 진행되었던 JavaScript 수업 내용을 복습하고 적용하는 프로젝트.
@@ -96,12 +98,9 @@
 :--:
 |![회원가입](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4e954fac-d470-445f-a326-80193d97ac15/2%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T131202Z&X-Amz-Expires=86400&X-Amz-Signature=0be1b1723179b37a594d1f2172e1fd52caa319c87fc463b8b682948b78463f23&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%222%25ED%259A%258C%25EC%259B%2590%25EA%25B0%2580%25EC%259E%2585.gif%22&x-id=GetObject)|
 
-| 메인페이지                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 검색                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ![메인페이지](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/bcafca03-bb33-4b67-8511-3da2521ab60a/14%EA%B2%80%EC%83%89.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T131951Z&X-Amz-Expires=86400&X-Amz-Signature=79d55bd4fd7d3bff316295a5b294b7c3e7ded4082fcc3c4f613295b98e1a2ed4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%2214%25EA%25B2%2580%25EC%2583%2589.gif%22&x-id=GetObject)                                                                                                 |
-| 카드선택                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ![메인페이지](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d0aca225-f3e1-457c-905b-5454339b5d07/5.%EB%A9%94%EC%9D%B8%EC%9D%BC%EC%A0%95%EC%84%A0%ED%83%9D.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T132133Z&X-Amz-Expires=86400&X-Amz-Signature=e78f8d3ffd37bc6fae7ca1cc133091c076b1ca980914b21f56c476a4341555bd&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%225.%25EB%25A9%2594%25EC%259D%25B8%25EC%259D%25BC%25EC%25A0%2595%25EC%2584%25A0%25ED%2583%259D.gif%22&x-id=GetObject) |
+| 메인페이지 - 검색                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 메인페이지 - 여행 일정 카드 클릭                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![메인페이지](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/bcafca03-bb33-4b67-8511-3da2521ab60a/14%EA%B2%80%EC%83%89.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T131951Z&X-Amz-Expires=86400&X-Amz-Signature=79d55bd4fd7d3bff316295a5b294b7c3e7ded4082fcc3c4f613295b98e1a2ed4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%2214%25EA%25B2%2580%25EC%2583%2589.gif%22&x-id=GetObject) | ![메인페이지](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d0aca225-f3e1-457c-905b-5454339b5d07/5.%EB%A9%94%EC%9D%B8%EC%9D%BC%EC%A0%95%EC%84%A0%ED%83%9D.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T132133Z&X-Amz-Expires=86400&X-Amz-Signature=e78f8d3ffd37bc6fae7ca1cc133091c076b1ca980914b21f56c476a4341555bd&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%225.%25EB%25A9%2594%25EC%259D%25B8%25EC%259D%25BC%25EC%25A0%2595%25EC%2584%25A0%25ED%2583%259D.gif%22&x-id=GetObject) |
 
 |새 여행 일정 만들기 모달|
 :--:
@@ -222,10 +221,10 @@
   </tr>
   <tr>
     <td >e-mail</td>
-    <td ><a href=">dehya0518@naver.com">dehya0518@naver.com</a></td>
-    <td ><a href=">kdbj12003@gmail.com">kdbj12003@gmail.com</a></td>
-    <td ><a href=">cwo1401@gmail.com">cwo1401@gmail.com</a></td>
-    <td ><a href=">joonhabaak@gmail.com">joonhabaak@gmail.com</a></td>
+    <td ><a href="mailto:dehya0518@naver.com">dehya0518@naver.com</a></td>
+    <td ><a href="mailto:kdbj12003@gmail.com">kdbj12003@gmail.com</a></td>
+    <td ><a href="mailto:cwo1401@gmail.com">cwo1401@gmail.com</a></td>
+    <td ><a href="mailto:joonhabaak@gmail.com">joonhabaak@gmail.com</a></td>
   </tr>
   <tr>
     <td>Github</td>
