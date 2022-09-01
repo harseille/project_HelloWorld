@@ -50,7 +50,8 @@ class ViewTripPlanner extends Component {
         },
       },
     } = store;
-
+    console.log('상위 ', store.state.viewTripSchedule);
+    console.log('상위 ', isLiked, likeCount);
     const $viewPlanCover = new ViewPlanCover({ userId, authorId, coverImg, title, summary }).render();
     const $viewPlanner = new ViewPlanner({ viewTripSchedule }).render();
     const $viewTripTab = new ViewTripTab({ selectedTab }).render();

@@ -1,5 +1,9 @@
 .detail-main {
   position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 68px;
 }
 // * cover 사진 및 post 수정 삭제

@@ -18,15 +18,17 @@ class ViewLikeShareBtnBox extends Component {
     `;
   }
 
-  clickLikeBtn() {
+  clickLikeBtn(e) {
+    // e.preventDefault();
+
     const {
-      tripSchedule,
-      tripSchedule: { isLiked, likeCount },
+      viewTripSchedule,
+      viewTripSchedule: { isLiked, likeCount },
     } = store.state;
 
     store.state = {
-      tripSchedule: {
-        ...tripSchedule,
+      viewTripSchedule: {
+        ...viewTripSchedule,
         isLiked: !isLiked,
         likeCount: isLiked ? likeCount - 1 : likeCount + 1,
       },
