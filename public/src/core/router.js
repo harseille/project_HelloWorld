@@ -49,11 +49,11 @@ const routes = () => {
 
   if (same) {
     const Component = same;
-    // window.scrollTo({
-    //   top: 0,
-    //   left: 0,
-    //   behavior: 'instant',
-    // });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
     return new Component().render();
   }
 };
