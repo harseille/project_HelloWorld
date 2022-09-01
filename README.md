@@ -41,9 +41,9 @@
 3. React 프레임워크를 심도 있게 이해하기 위해 SPA 및 CBD 개발 방법론으로 프로젝트 수행.
    <br>
 
-## 🛠 기술 스택
-
 <div id="3"></div>
+
+## 🛠 기술 스택
 
 <div> 
   <h4>Front-end</h4> 
@@ -68,11 +68,9 @@
 </div>
 <br>
 
-## ✨ 주요 기능
-
 <div id="4"></div>
 
-<br>
+## ✨ 주요 기능
 
 1. 로그인, 회원가입, 로그아웃 (jwt토큰)
 2. 검색으로 여행일정 필터링
@@ -97,10 +95,11 @@
 - Date Picker
 - 게시글 댓글 및 좋아요 기능
 
+<br>
+<div id="5"></div>
+
 ## 🎥 데모 영상
 
-<div id="5"></div>
- 
 |로그인|
 :--:
 |![로그인](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/444d8423-5375-4a40-a7ad-e0cc082da844/1login.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220901%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220901T130802Z&X-Amz-Expires=86400&X-Amz-Signature=0e9602f6eb197c29327538baf8c3be0f27226f68835420f8fde41ae776c85df4&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%221login.gif%22&x-id=GetObject)|
@@ -134,9 +133,9 @@
   <img src="/public/assets/images/architecture.png">
 <br> -->
 
-## 📑 프로젝트 산출물
+<div id="6"></div>
 
-<div id="7"></div>
+## 📑 프로젝트 산출물
 
 <table>
   <thead>
@@ -208,9 +207,9 @@
   </tbody>
 </table>
 
-## 👋 Credit roll
+<div id="7"></div>
 
-<div id="8"></div>
+## 👋 Credit roll
 
 <img src="/public/assets/images/busLogo2.png">
 
@@ -255,17 +254,18 @@
 </table>
 <br>
 
-## 💭 회고
+<div id="8"></div>
 
-<div id="9"></div>
+## 💭 회고
 
 [회고록](https://absorbed-leek-405.notion.site/59117ff28507471db35192d64b7a532c)
 
 <br>
 
+<div id="9"></div>
+
 ## 💻 실행방법
 
-<div id="9"></div>
 </br>
 
 ```
