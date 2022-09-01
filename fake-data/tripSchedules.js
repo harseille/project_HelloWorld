@@ -144,7 +144,7 @@ let tripSchedules = [
     numberOfPeople: '2',
     coverImg:
       'https://www.visitfinland.com/.imaging/mte/visit-finland-theme/xlUpW/dam/Helsinki/Lo-yly_Helsinki_credit-Ulla-Ma-kela-.jpg/jcr:content/L%C3%B6yly_Helsinki_credit%20Ulla%20M%C3%A4kel%C3%A4.jpg',
-    content: '',
+    content: '하루에 사우나 2탕, 초호화 사우나와 무료 사우나를 비교 체험 해봤습니다.',
     isLiked: false,
     likeCount: 35,
     commentCount: 6,

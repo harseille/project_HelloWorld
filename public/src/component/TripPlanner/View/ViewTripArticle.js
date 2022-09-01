@@ -19,7 +19,7 @@ class ViewTripArticle extends Component {
     <article class="trip-article">
     <div class="trip-article__header">
       <div class="trip-article__header__profile">
-        <img src="${authorProfilePic} || '/assets/images/users/profileDefault.png'" alt="${author} 님의 프로필사진" class="profile-img" />
+        <img src="${authorProfilePic || '/assets/images/users/profileDefault.png'}" alt="${author} 님의 프로필사진" class="profile-img" />
       </div>
       <div class="trip-article__header__content">
         <p class="trip-article__header__content__place">${location.name}</p>

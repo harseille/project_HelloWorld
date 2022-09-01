@@ -24,7 +24,7 @@ class ViewPlanComment extends Component {
               </div>
               <div class="comment__box__contentbox__content">
                 <p class="comment__box__contentbox__content__username">
-                  이름
+                  굿굿
                   <span class="comment__box__contentbox__content__add-time">작성시간</span>
                 </p>
                 <p class="comment__box__contentbox__content__main">멋져요!</p>
@@ -35,16 +35,6 @@ class ViewPlanComment extends Component {
               <button class="remove-btn"></button>
             </div>
           </div>
-          <div class="comment__inputbox recomment">
-            <div class="comment__inputbox__profile">
-              <img src="/assets/images/users/profileDefault.png" alt="프로필사진" class="profile-img" />
-            </div>
-            <div class="comment__inputbox__inputform">
-              <label for="comment-input" class="a11yHidden">댓글입력창</label>
-              <input type="text" name="comment-input" id="comment-input" placeholder="댓글을 입력해주세요." />
-            </div>
-            <button class="comment__inputbox__button"></button>
-          </div>
           <div class="comment__box">
             <div class="comment__box__contentbox recomment">
               <div class="comment__box__contentbox__profile">
@@ -52,7 +42,7 @@ class ViewPlanComment extends Component {
               </div>
               <div class="comment__box__contentbox__content">
                 <p class="comment__box__contentbox__content__username">
-                  이름
+                  세후니
                   <span class="comment__box__contentbox__content__add-time">작성시간</span>
                 </p>
                 <p class="comment__box__contentbox__content__main">나도 여행 가고 싶다.</p>
