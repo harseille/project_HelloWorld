@@ -46,6 +46,7 @@ class ViewTripPlanner extends Component {
           itinerary,
           isLiked,
           likeCount,
+          commentCount,
         },
       },
     } = store;
@@ -54,8 +55,8 @@ class ViewTripPlanner extends Component {
     const $viewPlanner = new ViewPlanner({ viewTripSchedule }).render();
     const $viewTripTab = new ViewTripTab({ selectedTab }).render();
     const $viewPlanMap = new ViewPlanMap().render();
-    const $viewTripStory = new ViewTripStory({ author, authorProfilePic, itinerary }).render();
-    const $viewPlanComment = new ViewPlanComment().render();
+    const $viewTripStory = new ViewTripStory({ userId, authorId, author, authorProfilePic, itinerary }).render();
+    const $viewPlanComment = new ViewPlanComment({ commentCount }).render();
     const $viewLikeShareBtnBox = new ViewLikeShareBtnBox({ isLiked, likeCount }).render();
     const $viewNavDay = new ViewNavDay({ itinerary }).render();
 

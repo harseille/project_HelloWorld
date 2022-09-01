@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Component from '../../core/Component.js';
 import store from '../../store/store.js';
-import { getMoveDate } from './dateUtils.js';
+import { getMoveDate, convertDateStringToDate } from './dateUtils.js';
 
 class Calendar extends Component {
   get currentYear() {
@@ -199,13 +199,15 @@ class Calendar extends Component {
     );
 
     // const _endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 31);
-    const _endDate = getMoveDate(selectedDate, 31);
+    const endDatePlus31 = getMoveDate(selectedDate, 31);
+    const _startDate = convertDateStringToDate(startDate);
+    const _endDate = convertDateStringToDate(endDate);
 
     let _itinerary = [];
     let _tripDays = 0;
 
     // 31일치
-    if (endDate !== null && _endDate < endDate) {
+    if (_endDate !== null && endDatePlus31 < _endDate) {
       // TODO: cells 정보 살리기
 
       _itinerary = Array.from({ length: 31 }, (_, i) => ({
@@ -214,11 +216,17 @@ class Calendar extends Component {
         date: getMoveDate(selectedDate, i),
         cells: [],
       })).map(dayPlan => {
-        const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(({ date }) => date === dayPlan.date);
+        const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(
+          ({ date }) => convertDateStringToDate(date).toDateString() === dayPlan.date.toDateString()
+        );
+        console.log(itineraryIndex);
         return itineraryIndex !== -1
           ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
           : dayPlan;
       });
+
+      console.log(selectedDate);
+      console.log(_itinerary);
 
       store.state = {
         localDatePicker: {
@@ -228,13 +236,13 @@ class Calendar extends Component {
         tripSchedule: {
           ...store.state.tripSchedule,
           [activeCalendar]: selectedDate,
-          endDate: _endDate,
+          endDate: endDatePlus31,
           tripDays: 31,
           itinerary: _itinerary,
         },
       };
       // 시작일로 맞추기
-    } else if (endDate !== null && activeCalendar === 'startDate' && selectedDate > endDate) {
+    } else if (_endDate !== null && activeCalendar === 'startDate' && selectedDate > _endDate) {
       store.state = {
         ...store.state,
         localDatePicker: {
@@ -259,25 +267,43 @@ class Calendar extends Component {
       // 일반
     } else {
       if (activeCalendar === 'startDate') {
-        _tripDays = Math.floor((endDate - selectedDate) / 86400000) + 1;
+        _tripDays = Math.floor((_endDate - selectedDate) / 86400000) + 1;
         _itinerary = Array.from({ length: _tripDays }, (_, i) => ({
           id: i + 1,
           country: '',
           date: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + i),
           cells: [],
-        }));
+        })).map(dayPlan => {
+          const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(
+            ({ date }) => convertDateStringToDate(date).toDateString() === dayPlan.date.toDateString()
+          );
+
+          return itineraryIndex !== -1
+            ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
+            : dayPlan;
+        });
       } else if (activeCalendar === 'endDate') {
-        _tripDays = Math.floor((selectedDate - startDate) / 86400000) + 1;
+        _tripDays = Math.floor((selectedDate - _startDate) / 86400000) + 1;
         _itinerary = Array.from({ length: _tripDays + 1 }, (_, i) => ({
           id: i + 1,
           country: '',
-          date: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + i),
+          date: new Date(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate() + i),
           cells: [],
-        }));
+        })).map(dayPlan => {
+          console.log(dayPlan);
+          const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(
+            ({ date }) => convertDateStringToDate(date).toDateString() === dayPlan.date.toDateString()
+          );
+          console.log(itineraryIndex);
+          return itineraryIndex !== -1
+            ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
+            : dayPlan;
+        });
       }
 
       _itinerary.map(dayPlan => {
         const itineraryIndex = store.state.tripSchedule.itinerary.findIndex(({ date }) => date === dayPlan.date);
+        console.log(itineraryIndex);
         return itineraryIndex !== -1
           ? { ...dayPlan, cells: store.state.tripSchedule.itinerary[itineraryIndex].cells }
           : dayPlan;

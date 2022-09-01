@@ -16,8 +16,7 @@ class ViewPlanner extends Component {
       },
     } = this.props;
 
-    console.log(this.props);
-
+    if (startDate === null) return '';
     return `
     <div class="trip-planner">
       <div class="trip-planner__author">

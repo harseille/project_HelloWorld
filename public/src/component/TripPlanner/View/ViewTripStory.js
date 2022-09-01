@@ -3,10 +3,10 @@ import ViewTripStoryItem from './ViewTripStoryItem.js';
 
 class ViewTripStory extends Component {
   render() {
-    const { author, authorProfilePic, itinerary } = this.props;
+    const { userId, authorId, author, authorProfilePic, itinerary } = this.props;
 
     const $viewTripStoryItem = itinerary
-      .map((item, idx) => new ViewTripStoryItem({ author, authorProfilePic, item, idx }).render())
+      .map((item, idx) => new ViewTripStoryItem({ userId, authorId, author, authorProfilePic, item, idx }).render())
       .join('');
 
     return `

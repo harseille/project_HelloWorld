@@ -15,8 +15,8 @@ let tripSchedules = [
       'https://file.namu.moe/file/2b148a12781c0ce0bbd4e876e8bf5afa0a3fdc00c8e1d6a24c91b6872413f98b5f2fb45f06fcb82bab2a162b8444ddee',
     content: '기러기 토마토 스위스 인도인 별똥별 우영우 역삼역?!',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 12,
+    commentCount: 1,
     itinerary: [
       {
         id: 1,
@@ -146,8 +146,8 @@ let tripSchedules = [
       'https://www.visitfinland.com/.imaging/mte/visit-finland-theme/xlUpW/dam/Helsinki/Lo-yly_Helsinki_credit-Ulla-Ma-kela-.jpg/jcr:content/L%C3%B6yly_Helsinki_credit%20Ulla%20M%C3%A4kel%C3%A4.jpg',
     content: '',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 35,
+    commentCount: 6,
     itinerary: [
       {
         id: 1,
@@ -353,8 +353,8 @@ let tripSchedules = [
     content:
       '즐길거리가 풍부한 바르셀로나의 이색 체험 모음!\n가볍게 즐기는 분수 쇼부터, 리세우 극장과 음악당의 높은 클래식 공연을 즐길 수 있다.\n늦은 저녁 타블라오에서 즐기는 카리스마 넘치는 플라멩고 공연도 있다.\n유럽 명문 축구팀 FC 바르셀로나의 홈 경기장인 캄프 노우 스타디움 견학도 있다.',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 103,
+    commentCount: 32,
     itinerary: [
       {
         id: 1,
@@ -644,8 +644,8 @@ let tripSchedules = [
     content:
       '우리나라와 가깝고 항공비도 저렴해 직장인도 짧은 일정으로 부담 없이 다녀오기 좋다. 이번에는 도쿄 여행을 준비하는 여행객을 위해 2박 3일 추천 일정을 준비했다. 수많은 볼거리를 한 번에 다 둘러보긴 힘들지만, 여행 일정만 잘 세우면 충분히 알찬 여행을 즐길 수 있다. 놀라운 명소들로 가득한 전 세계 인기 여행지, 도쿄로 함께 떠나보자!',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 72,
+    commentCount: 29,
     itinerary: [
       {
         id: 1,
@@ -1306,8 +1306,8 @@ let tripSchedules = [
     content:
       '세월이 변하고 사람이 바뀌고 집의 형태가 달라졌어도, 골목은 그대로 남아 추억을 환기하는 곳이 있다. 서울 도심 한복판의 오래된 동네, 서촌이 그렇다. 서촌은 경복궁 서쪽을 일컫는다. 경복궁 서문인 영추문을 끼고 청와대까지 곧장 이어지는 효자로 왼편, 즉 경복궁과 인왕산 사이를 말한다.',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 304,
+    commentCount: 99,
     itinerary: [
       {
         id: 1,
@@ -1558,8 +1558,8 @@ let tripSchedules = [
     coverImg: '/assets/images/golfcc.jpeg',
     content: '한 겨울 따뜻하게 태국가서 골프 치자~',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 76,
+    commentCount: 13,
     itinerary: [
       {
         id: 1,
@@ -2006,8 +2006,8 @@ let tripSchedules = [
     content:
       "올여름 휴가 시즌에는\n유난히 비가 많이 와서\n주춤하신 분들 많으시죠~\n\n아쉬운 마음이 남아\n늦캉스 계획하시는 분들\n많으신데요~🩱🥽\n\n양양은 서울에서 2시간 반\n거리로 접근하기 쉽고\n서핑과 스쿠버다이빙 등의\n레저를 즐길 수 있는 곳이죠!\n\n요즘 신상 핫플이 많이 생겨서\n더욱더 인기가 뜨거운데요~\n힙스터들의 천국 '양양'에서\n늦캉스 즐기는 거 어떠세요~?🌊",
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 84,
+    commentCount: 5,
     itinerary: [
       {
         id: 1,
@@ -2257,8 +2257,8 @@ let tripSchedules = [
     coverImg: '/assets/images/tripSchedules/italy.jpg',
     content: '붉은 지붕으로 가득한 피렌체 여행기.\n미켈란젤로 광장에서 노을과 버스킹 무대는 필수!',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 529,
+    commentCount: 193,
     itinerary: [
       {
         id: 1,
@@ -3324,8 +3324,8 @@ let tripSchedules = [
     coverImg: '/assets/images/tripSchedules/13/a.jpeg',
     content: '글 쓰고 그림그리고 커피마시고 맛집가고 재밌게 놀아보렵니다',
     isLiked: false,
-    likeCount: 0,
-    commentCount: 0,
+    likeCount: 101,
+    commentCount: 21,
     itinerary: [
       {
         id: 1,

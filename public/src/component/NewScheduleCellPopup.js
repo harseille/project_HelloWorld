@@ -205,7 +205,8 @@ class NewScheduleCellPopup extends Component {
     const changeItinerary = iti => {
       // new 일정
       const date = convertDateStringToDate(iti.date);
-      if (!editCellId) {
+      console.log(editCellId);
+      if (editCellId === -1) {
         return date.getFullYear() === selectedYear &&
           date.getMonth() === selectedMonth &&
           date.getDate() === selectedDate
@@ -249,6 +250,8 @@ class NewScheduleCellPopup extends Component {
         newScheduleCellDate: null,
       },
     };
+
+    console.log(store.state);
   }
 
   closeModal(e) {

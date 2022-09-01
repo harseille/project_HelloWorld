@@ -42,9 +42,17 @@ const users = [
   {
     userId: 15,
     email: 'dee@world.com',
-    assword: '123456',
+    password: '123456',
     nickname: 'dee',
     name: '황도은',
+    profilePic: '',
+  },
+  {
+    userId: 13,
+    email: 'dadak@world.com',
+    password: '123456',
+    nickname: 'dada',
+    name: '김다빈',
     profilePic: '',
   },
 ];

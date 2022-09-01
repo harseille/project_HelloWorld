@@ -5,6 +5,8 @@ import { getFormattedDate } from '../../DatePicker/dateUtils.js';
 class ViewTripStoryItem extends Component {
   render() {
     const {
+      userId,
+      authorId,
       author,
       authorProfilePic,
       item: { date, country, cells },
@@ -12,7 +14,7 @@ class ViewTripStoryItem extends Component {
     } = this.props;
 
     const $viewTripArticle = cells
-      .map(cell => new ViewTripArticle({ author, authorProfilePic, cell }).render())
+      .map(cell => new ViewTripArticle({ userId, authorId, author, authorProfilePic, cell }).render())
       .join('');
 
     return `

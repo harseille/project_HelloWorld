@@ -4,6 +4,8 @@ const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const convertDateStringToDate = date => (typeof date === 'string' ? new Date(date) : date);
 
+const getFormattedTime = time => (time < 10 ? `0${time}:00` : `${time}:00`);
+
 const getFormattedDate = date => {
   const _date = convertDateStringToDate(date);
   const format = n => (n < 10 ? '0' + n : n + '');
@@ -18,7 +20,6 @@ const getFormattedDateMMDDDAY = date => {
 
 const getMoveDate = (date, digit) => {
   const _date = convertDateStringToDate(date);
-  console.log(_date);
   return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate() + digit);
 };
 
@@ -27,4 +28,4 @@ const getMoveDate = (date, digit) => {
 //   return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate() + 1);
 // };
 
-export { getFormattedDate, getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate };
+export { getFormattedTime, getFormattedDate, getFormattedDateMMDDDAY, convertDateStringToDate, getMoveDate };

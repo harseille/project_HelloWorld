@@ -112,7 +112,8 @@
       background-color: $accommodationBlue100;
       width: 30px;
       height: 30px;
-      border-radius: 15px;
+      border-radius: 50%;
+      overflow: hidden;
       margin-right: 15px;
     }
   }
@@ -471,8 +472,9 @@
         background-color: $accommodationBlue100;
         width: 30px;
         height: 30px;
-        border-radius: 15px;
+        border-radius: 50%;
         margin-right: 10px;
+        overflow: hidden;
       }
 
       &__content {
@@ -489,9 +491,7 @@
 
     &__main {
       &__img-container {
-        height: 240px;
         margin: 30px 28px;
-        background-color: $etcYellow100;
 
         img {
           width: 100%;
