@@ -1,10 +1,10 @@
 .header {
   position: absolute;
-  top: 0%;
-  left: 0%;
-  right: 0%;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1;
-
+  min-width: 1280px;
   background: $white;
   box-shadow: 0px 4px 30px $shadow;
   padding: 16px 0px;

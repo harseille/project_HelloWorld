@@ -453,7 +453,11 @@ class Itinerary extends Component {
     endTime = endTime > 24 ? 24 : getFormattedTime(endTime);
 
     const changeTime = new Array(targetTimeGap).fill(1).map((_, i) => dropTime + i);
-    const unableTime = restItinerary.map(cell => [+cell.startTime.slice(0, 2), +cell.endTime.slice(0, 2)]);
+    const dropTimes =
+      dropScheduleId === selectedItineraryId
+        ? restItinerary
+        : itinerary.filter(iti => iti.id === dropScheduleId)[0].cells;
+    const unableTime = dropTimes.map(cell => [+cell.startTime.slice(0, 2), +cell.endTime.slice(0, 2)]);
     const isAvailable = changeTime
       .map(time => unableTime.findIndex(([start, end]) => start <= time && time < end))
       .filter(val => val !== -1).length;
