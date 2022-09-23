@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const users = require('./fake-data/user');
-const tripSchedules = require('./fake-data/tripSchedules');
+const users = require('../fake-data/user');
+const tripSchedules = require('../fake-data/tripSchedules');
 
 require('dotenv').config();
 
@@ -26,11 +26,11 @@ const auth = (req, res, next) => {
       return res.redirect('/signin');
     }
 
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
   }
 };
 
-app.use(express.static('public'));
+app.use(express.static('client'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -94,7 +94,7 @@ app.get('/tripSchedule/:tripScheduleId', (req, res) => {
 });
 
 app.get('*', auth, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
 });
 
 app.post('/auth/signin', (req, res) => {
