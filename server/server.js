@@ -2,8 +2,13 @@ const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
 const users = require('../fake-data/user');
 const tripSchedules = require('../fake-data/tripSchedules');
+const webpackConfig = require('../client/webpack.config');
+
+const compiler = webpack(webpackConfig);
 
 require('dotenv').config();
 
@@ -26,14 +31,19 @@ const auth = (req, res, next) => {
       return res.redirect('/signin');
     }
 
-    res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
   }
 };
 
-app.use(express.static('client'));
+// app.use(express.static('client'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+  })
+);
 
 app.post('/tripSchedule', (req, res) => {
   try {
@@ -94,7 +104,7 @@ app.get('/tripSchedule/:tripScheduleId', (req, res) => {
 });
 
 app.get('*', auth, (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 app.post('/auth/signin', (req, res) => {
