@@ -2,6 +2,7 @@ import Component from '../core/Component.js';
 import store from '../store/store.js';
 import { NewTravelLogModal, MypageModal } from './Header/index.js';
 import render from '../dom/render.js';
+import logo from '../../assets/images/HelloWorldLogo.svg';
 
 class Header extends Component {
   render() {
@@ -40,7 +41,7 @@ class Header extends Component {
         <nav class="nav">
           <h1 class="logo">
             <a class="logo__link" href="/intro">
-              <img src="/assets/images/HelloWorldLogo.svg" alt="HelloWorld" />
+              <img src="${logo}" alt="HelloWorld" />
             </a>
           </h1>
           <ul class="nav__list">

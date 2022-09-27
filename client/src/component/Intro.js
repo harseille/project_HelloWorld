@@ -1,6 +1,7 @@
 import Component from '../core/Component.js';
 import render from '../dom/render.js';
 import { Footer } from './index.js';
+import video from '../../assets/videos/MainMovie3.mp4';
 
 class Intro extends Component {
   render() {
@@ -27,7 +28,7 @@ class Intro extends Component {
         </dl>
       </div>
       <video autoplay loop muted title="여행 비디오">
-        <source src="/assets/videos/MainMovie3.mp4" />
+        <source src="${video}" />
       </video>
     </section>
   </div>`;

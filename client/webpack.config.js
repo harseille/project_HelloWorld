@@ -4,17 +4,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: 'dist/',
+    publicPath: '/',
+    assetModuleFilename: 'assets/[hash][ext]',
     filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.(svg|png|jpg|gif)$/,
+        test: /\.(svg|png|jpg|gif|mp4)$/,
         loader: 'file-loader',
         options: {
           name: 'assets/[contenthash].[ext]',
@@ -23,6 +24,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
       {
         test: /\.js$/,
