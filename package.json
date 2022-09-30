@@ -1,13 +1,17 @@
 {
   "name": "project_helloworld",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.17.1"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js", 
+    "heroku-postbuild": "webpack --config ./client/webpack.config.js",
     "sass": "sass client/assets/scss:client/css",
     "watch": "npm run sass -- --watch",
-    "build": "webpack --config ./client/webpack.config.js node server/server.js",
+    "build": "webpack --config ./client/webpack.config.js",
     "dev": "webpack-dev-server --open"
   },
   "repository": {
