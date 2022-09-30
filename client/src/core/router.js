@@ -12,7 +12,7 @@ import {
 
 const router = [
   {
-    '/intro': Intro,
+    '/': Intro,
   },
   {
     '/main': Main,
