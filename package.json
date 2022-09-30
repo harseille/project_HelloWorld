@@ -7,7 +7,7 @@
     "start": "nodemon server/server.js",
     "sass": "sass client/assets/scss:client/css",
     "watch": "npm run sass -- --watch",
-    "build": "webpack --config ./client/webpack.config.js",
+    "build": "webpack --config ./client/webpack.config.js node server/server.js",
     "dev": "webpack-dev-server --open"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "file-loader": "^6.2.0",
+    "heroku": "^7.63.4",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.19",
     "sass": "^1.52.1",
