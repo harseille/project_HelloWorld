@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js", 
+    "start": "node server/server.js",
     "heroku-postbuild": "webpack --config ./client/webpack.config.js",
     "sass": "sass client/assets/scss:client/css",
     "watch": "npm run sass -- --watch",
@@ -39,7 +39,8 @@
     "sass": "^1.52.1",
     "sass-math": "^1.0.0",
     "save": "^2.9.0",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "webpack-dev-middleware": "^5.3.3"
   },
   "devDependencies": {
     "babel-loader": "^8.2.5",
@@ -57,7 +58,6 @@
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-middleware": "^5.3.3",
     "webpack-dev-server": "^4.11.1"
   }
 }
