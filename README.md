@@ -1,6 +1,6 @@
-<!-- ![로고](/public/assets/images/BusLogo.png) -->
+<!-- ![로고](./client/assets/images/BusLogo.png) -->
 
-<h1><img src="/public/assets/images/favicon.ico" width="28px"> Hello World: 당신의 여행을 공유해보세요</h1>
+<h1><img src="./client/public/favicon.ico" width="28px"> Hello World: 당신의 여행을 공유해보세요</h1>
 
 기간: 2022-08-12 ~ 2022-09-01 (21일)
 
@@ -92,7 +92,7 @@
 <!-- ## 📐 프로젝트 구성도
 
 <div id="6"></div>
-  <img src="/public/assets/images/architecture.png">
+  <img src="/client/assets/images/architecture.png">
 <br> -->
 
 <div id="5"></div>
@@ -117,17 +117,17 @@
   <tr>
       <td align="center">
         <a href="https://absorbed-leek-405.notion.site/b0a9acc7214e4303a0628db065e947cc">
-          <img width="789" alt="image" src="/public/assets/images/doc/projectstart.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/projectstart.png">
         </a>
       </td>
       <td align="center">
         <a href="https://absorbed-leek-405.notion.site/01f981c31884406cab23f7d4f0d892b3">
-          <img width="789" alt="image" src="/public/assets/images/doc/demend.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/demend.png">
         </a>
       </td>
       <td align="center">
         <a href="https://www.figma.com/file/Y2i7FagaFVoJ1WMsU7B3g1/Hello-world?node-id=0%3A1">
-          <img width="789" alt="image" src="/public/assets/images/doc/figma.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/figma.png">
         </a>
       </td>
     </tr>
@@ -152,17 +152,17 @@
     <tr>
       <td align="center">
         <a href="https://absorbed-leek-405.notion.site/e6840df2aa624595910e8876f70769d1?v=0883c70f19c247e3b430dea1d53264ab">
-          <img width="789" alt="image" src="/public/assets/images/doc/meetingLog.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/meetingLog.png">
         </a>
       </td>
       <td align="center">
         <a href="https://absorbed-leek-405.notion.site/96ee8f7bd04544579c8cc18b48deb9a9?v=54d782f70b2c4008a355c2fe93b6bf68">
-          <img width="789" alt="image" src="/public/assets/images/doc/canban.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/canban.png">
         </a>
       </td>
       <td align="center">
         <a href="https://absorbed-leek-405.notion.site/Git-convention-389d22f88111471db595f58892001b38">
-          <img width="789" alt="image" src="/public/assets/images/doc/gitconvention.png">
+          <img width="789" alt="image" src="/client/assets/images/doc/gitconvention.png">
         </a>
       </td>
     </tr>
@@ -173,7 +173,7 @@
 
 ## 👋 Credit roll
 
-<img src="/public/assets/images/busLogo2.png">
+<img src="/client/assets/images/busLogo2.png">
 
 <table class="tg">
 <tbody>
