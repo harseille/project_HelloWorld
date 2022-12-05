@@ -8,7 +8,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const users = require('../fake-data/user');
 const tripSchedules = require('../fake-data/tripSchedules');
 const webpackConfig = require('../client/webpack.config');
-// test comment
+
 const compiler = webpack(webpackConfig);
 
 require('dotenv').config();
@@ -36,7 +36,7 @@ const auth = (req, res, next) => {
   }
 };
 
-// app.use(express.static('client'));
+app.use(express.static('client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
