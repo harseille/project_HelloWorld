@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const CopyPlugin = require('copy-webpack-plugin');
 const users = require('../fake-data/user');
 const tripSchedules = require('../fake-data/tripSchedules');
 const webpackConfig = require('../client/webpack.config');
@@ -21,7 +22,7 @@ const auth = (req, res, next) => {
   try {
     jwt.verify(accessToken, process.env.SECRET_KEY);
 
-    if (req.url === '/signin' || req.url === '/signup' || req.url === '/intro') {
+    if (req.url === '/signin' || req.url === '/signup' || req.url === '/') {
       return res.redirect('/main');
     }
 

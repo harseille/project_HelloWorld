@@ -767,17 +767,17 @@ class Header extends _core_Component_js__WEBPACK_IMPORTED_MODULE_0__["default"] 
     ];
 
     return `
-      <header id="top"  class="header ${path === '/intro' ? 'intro__header' : ''}">
+      <header id="top"  class="header ${path === '/' ? 'intro__header' : ''}">
         <nav class="nav">
           <h1 class="logo">
-            <a class="logo__link" href="/intro">
+            <a class="logo__link" href="/">
               <img src="${_assets_images_HelloWorldLogo_svg__WEBPACK_IMPORTED_MODULE_4__["default"]}" alt="HelloWorld" />
             </a>
           </h1>
           <ul class="nav__list">
             ${navList
               .map(({ href, content, type }) => {
-                if (path === '/intro' && href !== '/signin') return '';
+                if (path === '/' && href !== '/signin') return '';
                 if (isLogined && href === '/signin') return '';
                 if (!isLogined && type === 'myPageModal') return '';
                 return `<li id="${type}" class="nav__item ${path === href ? 'active' : ''}">
@@ -5989,7 +5989,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const router = [
   {
-    '/intro': _component_index_js__WEBPACK_IMPORTED_MODULE_0__.Intro,
+    '/': _component_index_js__WEBPACK_IMPORTED_MODULE_0__.Intro,
   },
   {
     '/main': _component_index_js__WEBPACK_IMPORTED_MODULE_0__.Main,
@@ -6525,23 +6525,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/plus-solid.svg */ "./client/assets/images/plus-solid.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/close.svg */ "./client/assets/images/close.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/angle-left-solid.svg */ "./client/assets/images/angle-left-solid.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/iconCamera.svg */ "./client/assets/images/iconCamera.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/calendar-dark.svg */ "./client/assets/images/calendar-dark.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/select_arrow.svg */ "./client/assets/images/select_arrow.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/calendar.svg */ "./client/assets/images/calendar.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/select_time.svg */ "./client/assets/images/select_time.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/add_todo.svg */ "./client/assets/images/add_todo.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/checkbox_on.svg */ "./client/assets/images/checkbox_on.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/checkbox_off.svg */ "./client/assets/images/checkbox_off.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/newPost_camera.svg */ "./client/assets/images/newPost_camera.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/post-edit.svg */ "./client/assets/images/post-edit.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/cancel.svg */ "./client/assets/images/cancel.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/comment-add.svg */ "./client/assets/images/comment-add.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/recomment-add.svg */ "./client/assets/images/recomment-add.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_16___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../client/assets/images/recomment-arrow.svg */ "./client/assets/images/recomment-arrow.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/plus-solid.svg */ "./client/assets/images/plus-solid.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/close.svg */ "./client/assets/images/close.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/angle-left-solid.svg */ "./client/assets/images/angle-left-solid.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/iconCamera.svg */ "./client/assets/images/iconCamera.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/calendar-dark.svg */ "./client/assets/images/calendar-dark.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/select_arrow.svg */ "./client/assets/images/select_arrow.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/calendar.svg */ "./client/assets/images/calendar.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/select_time.svg */ "./client/assets/images/select_time.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/add_todo.svg */ "./client/assets/images/add_todo.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/checkbox_on.svg */ "./client/assets/images/checkbox_on.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_10___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/checkbox_off.svg */ "./client/assets/images/checkbox_off.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_11___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/newPost_camera.svg */ "./client/assets/images/newPost_camera.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_12___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/post-edit.svg */ "./client/assets/images/post-edit.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_13___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/cancel.svg */ "./client/assets/images/cancel.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_14___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/comment-add.svg */ "./client/assets/images/comment-add.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_15___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/recomment-add.svg */ "./client/assets/images/recomment-add.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_16___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../client/assets/images/recomment-arrow.svg */ "./client/assets/images/recomment-arrow.svg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);

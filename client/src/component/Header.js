@@ -37,17 +37,17 @@ class Header extends Component {
     ];
 
     return `
-      <header id="top"  class="header ${path === '/intro' ? 'intro__header' : ''}">
+      <header id="top"  class="header ${path === '/' ? 'intro__header' : ''}">
         <nav class="nav">
           <h1 class="logo">
-            <a class="logo__link" href="/intro">
+            <a class="logo__link" href="/">
               <img src="${logo}" alt="HelloWorld" />
             </a>
           </h1>
           <ul class="nav__list">
             ${navList
               .map(({ href, content, type }) => {
-                if (path === '/intro' && href !== '/signin') return '';
+                if (path === '/' && href !== '/signin') return '';
                 if (isLogined && href === '/signin') return '';
                 if (!isLogined && type === 'myPageModal') return '';
                 return `<li id="${type}" class="nav__item ${path === href ? 'active' : ''}">
