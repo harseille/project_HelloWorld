@@ -156,7 +156,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _core_Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Component.js */ \"./client/src/core/Component.js\");\n/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store.js */ \"./client/src/store/store.js\");\n/* harmony import */ var _Main_MainPost_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Main/MainPost.js */ \"./client/src/component/Main/MainPost.js\");\n\n\n\n\nclass Main extends _core_Component_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  async init() {\n    try {\n      const query = window.location.search;\n\n      const mainTripSchedules = await axios.get(`/trip-log${query}`);\n      _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n        localCommon: {\n          ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localCommon,\n          path: window.location.pathname,\n        },\n        tripSchedules: [...mainTripSchedules.data],\n      };\n    } catch (e) {\n      console.error(e);\n    }\n  }\n\n  render() {\n    const {\n      localMain: { selectedCardId },\n      tripSchedules,\n    } = _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state;\n\n    return `\n    <div class=\"main\">\n    <section class=\"hot-topic\">\n      <div class=\"hot-topic__header\">\n        <h2 class=\"hot-topic__title\">핫 토픽</h2>\n        <ul class=\"hot-topic__hashtag__list\">\n          <li class=\"hot-topic__hashtag__item\">#눈</li>\n          <li class=\"hot-topic__hashtag__item\">#축제</li>\n        </ul>\n        <ul class=\"hot-topic__nav\">\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle checked\"></div></li>\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle\"></div></li>\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle\"></div></li>\n        </ul>\n      </div>\n      <div class=\"hot-topic__body\">\n        <ul class=\"hot-topic__list\">\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video\n                  class=\"hot-topic__item__thumbnail__video\"\n                  src=\"/assets/videos/videothumbnail2.mp4\"\n                  autoplay=\"true\"\n                  loop=\"true\"\n                  muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video class=\"hot-topic__item__thumbnail__video\" src=\"/assets/videos/MainMovie1.mp4\" autoplay=\"true\" loop=\"true\" muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video class=\"hot-topic__item__thumbnail__video\" src=\"/assets/videos/MainMovie5.mp4\" autoplay=\"true\" loop=\"true\" muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </section>\n    <section class=\"travel-log\">\n      <div class=\"travel-log__header\">\n        <h2 class=\"travel-log__title\">여행 일지</h2>\n      </div>\n      <form action=\"\" class=\"travel-log__form\">\n        <select class=\"travel-log__form__dropdown\" name=\"category\" id=\"cars\">\n          <option value=\"title\">제목</option>\n          <option value=\"country\">국가</option>\n          <option value=\"city\">도시</option>\n        </select>\n        <input class=\"travel-log__form__input\" name=\"keyword\" type=\"text\" placeholder=\"검색어를 입력해주세요.\" />\n        <button class=\"travel-log__form__button--submit\" type=\"submit\">검색</button>\n      </form>\n      <div class=\"travel-log__body\">\n        <ul class=\"travel-log__list\">\n          ${tripSchedules.map(schedule => new _Main_MainPost_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]({ ...schedule, selectedCardId }).render()).join('')}\n        </ul>\n      </div>\n    </section>\n  </div>`;\n  }\n\n  chageSearchValue(e) {\n    const { name, value } = e.target;\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      localMain: {\n        ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localMain,\n        [name]: value,\n      },\n    };\n  }\n\n  changeToTripScheduleView(e) {\n    if (!e.target.closest('.travel-log__item')) return;\n    e.preventDefault();\n    const path = e.target.closest('.travel-log__link').getAttribute('href');\n\n    window.history.pushState({}, path, window.location.origin + path);\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      localMain: {\n        ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localMain,\n        selectedCardId: e.target.closest('li').id,\n      },\n    };\n  }\n\n  async filterToTripScheduleView(e) {\n    e.preventDefault();\n\n    if (!e.target.classList.contains('travel-log__form')) return;\n\n    const {\n      localMain: { category, keyword },\n    } = _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state;\n\n    const filteredMainTripSchedules = await axios.get('/trip-log', {\n      params: {\n        category,\n        keyword,\n      },\n    });\n\n    window.history.pushState(\n      {},\n      'MainFitler',\n      window.location.origin + `/main?category=${category}&keyword=${keyword}`\n    );\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      tripSchedules: filteredMainTripSchedules.data,\n    };\n  }\n\n  addEventListener() {\n    return [\n      { type: 'change', selector: '.travel-log__form__input', handler: this.chageSearchValue },\n      { type: 'change', selector: '.travel-log__form__dropdown', handler: this.chageSearchValue },\n      { type: 'click', selector: '.travel-log__item', handler: this.changeToTripScheduleView },\n      { type: 'submit', selector: '.travel-log__form', handler: this.filterToTripScheduleView },\n    ];\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main);\n\n\n//# sourceURL=webpack://project_helloworld/./client/src/component/Main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _core_Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Component.js */ \"./client/src/core/Component.js\");\n/* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/store.js */ \"./client/src/store/store.js\");\n/* harmony import */ var _Main_MainPost_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Main/MainPost.js */ \"./client/src/component/Main/MainPost.js\");\n\n\n\n\nclass Main extends _core_Component_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  async init() {\n    try {\n      const query = window.location.search;\n\n      const mainTripSchedules = await axios.get(`/trip-log${query}`);\n      _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n        localCommon: {\n          ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localCommon,\n          path: window.location.pathname,\n        },\n        tripSchedules: [...mainTripSchedules.data],\n      };\n    } catch (e) {\n      console.error(e);\n    }\n  }\n\n  render() {\n    const {\n      localMain: { selectedCardId },\n      tripSchedules,\n    } = _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state;\n\n    return `\n    <div class=\"main\">\n    <section class=\"hot-topic\">\n      <div class=\"hot-topic__header\">\n        <h2 class=\"hot-topic__title\">핫 토픽</h2>\n        <ul class=\"hot-topic__hashtag__list\">\n          <li class=\"hot-topic__hashtag__item\">#눈</li>\n          <li class=\"hot-topic__hashtag__item\">#축제</li>\n        </ul>\n        <ul class=\"hot-topic__nav\">\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle checked\"></div></li>\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle\"></div></li>\n          <li class=\"hot-topic__nav__item\"><div class=\"hot-topic__nav__item__circle\"></div></li>\n        </ul>\n      </div>\n      <div class=\"hot-topic__body\">\n        <ul class=\"hot-topic__list\">\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video\n                  class=\"hot-topic__item__thumbnail__video\"\n                  src=\"/client/assets/videos/videothumbnail2.mp4\"\n                  autoplay=\"true\"\n                  loop=\"true\"\n                  muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video class=\"hot-topic__item__thumbnail__video\" src=\"/assets/videos/MainMovie1.mp4\" autoplay=\"true\" loop=\"true\" muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n          <li class=\"hot-topic__item\">\n            <a href=\"\" class=\"hot-topic__link\">\n              <div class=\"hot-topic__item__thumbnail\">\n                <span class=\"hot-topic__item__thumbnail__icon\">\n                  <svg width=\"29\" height=\"40\" viewBox=\"0 0 29 40\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n                    <path\n                      d=\"M26.8805 17.5405C28.4518 18.7412 28.4518 21.1072 26.8805 22.3079L4.8215 39.1641C2.84732 40.6726 -1.84746e-06 39.2649 -1.73885e-06 36.7803L-2.65242e-07 3.06802C-1.56637e-07 0.583446 2.84732 -0.824252 4.8215 0.684298L26.8805 17.5405Z\"\n                      fill=\"#EEEEEE\" />\n                  </svg>\n                </span>\n                <video class=\"hot-topic__item__thumbnail__video\" src=\"/assets/videos/MainMovie5.mp4\" autoplay=\"true\" loop=\"true\" muted=\"true\"></video>\n              </div>\n              <div class=\"hot-topic__item__detail\">\n                <h3 class=\"hot-topic__item__detail__title\">인기여행지 1위</h3>\n                <p class=\"hot-topic__item__detail__desc\">인기여행지 1위 설명 들어가면 된다아아아아아아아아아</p>\n              </div>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </section>\n    <section class=\"travel-log\">\n      <div class=\"travel-log__header\">\n        <h2 class=\"travel-log__title\">여행 일지</h2>\n      </div>\n      <form action=\"\" class=\"travel-log__form\">\n        <select class=\"travel-log__form__dropdown\" name=\"category\" id=\"cars\">\n          <option value=\"title\">제목</option>\n          <option value=\"country\">국가</option>\n          <option value=\"city\">도시</option>\n        </select>\n        <input class=\"travel-log__form__input\" name=\"keyword\" type=\"text\" placeholder=\"검색어를 입력해주세요.\" />\n        <button class=\"travel-log__form__button--submit\" type=\"submit\">검색</button>\n      </form>\n      <div class=\"travel-log__body\">\n        <ul class=\"travel-log__list\">\n          ${tripSchedules.map(schedule => new _Main_MainPost_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"]({ ...schedule, selectedCardId }).render()).join('')}\n        </ul>\n      </div>\n    </section>\n  </div>`;\n  }\n\n  chageSearchValue(e) {\n    const { name, value } = e.target;\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      localMain: {\n        ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localMain,\n        [name]: value,\n      },\n    };\n  }\n\n  changeToTripScheduleView(e) {\n    if (!e.target.closest('.travel-log__item')) return;\n    e.preventDefault();\n    const path = e.target.closest('.travel-log__link').getAttribute('href');\n\n    window.history.pushState({}, path, window.location.origin + path);\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      localMain: {\n        ..._store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state.localMain,\n        selectedCardId: e.target.closest('li').id,\n      },\n    };\n  }\n\n  async filterToTripScheduleView(e) {\n    e.preventDefault();\n\n    if (!e.target.classList.contains('travel-log__form')) return;\n\n    const {\n      localMain: { category, keyword },\n    } = _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state;\n\n    const filteredMainTripSchedules = await axios.get('/trip-log', {\n      params: {\n        category,\n        keyword,\n      },\n    });\n\n    window.history.pushState(\n      {},\n      'MainFitler',\n      window.location.origin + `/main?category=${category}&keyword=${keyword}`\n    );\n\n    _store_store_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].state = {\n      tripSchedules: filteredMainTripSchedules.data,\n    };\n  }\n\n  addEventListener() {\n    return [\n      { type: 'change', selector: '.travel-log__form__input', handler: this.chageSearchValue },\n      { type: 'change', selector: '.travel-log__form__dropdown', handler: this.chageSearchValue },\n      { type: 'click', selector: '.travel-log__item', handler: this.changeToTripScheduleView },\n      { type: 'submit', selector: '.travel-log__form', handler: this.filterToTripScheduleView },\n    ];\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main);\n\n\n//# sourceURL=webpack://project_helloworld/./client/src/component/Main.js?");
 
 /***/ }),
 
@@ -576,7 +576,7 @@ eval("\n\nmodule.exports = function (i) {\n  return i[1];\n};\n\n//# sourceURL=w
   \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"assets/client/assets/images/HelloWorldLogo.svg\");\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/HelloWorldLogo.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"client/assets/images/HelloWorldLogo.svg\");\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/HelloWorldLogo.svg?");
 
 /***/ }),
 
@@ -586,7 +586,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"assets/client/assets/videos/MainMovie3.mp4\");\n\n//# sourceURL=webpack://project_helloworld/./client/assets/videos/MainMovie3.mp4?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"client/assets/videos/MainMovie3.mp4\");\n\n//# sourceURL=webpack://project_helloworld/./client/assets/videos/MainMovie3.mp4?");
 
 /***/ }),
 
@@ -666,7 +666,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/35c6ec7b4f1ba1a84d29.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/add_todo.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/eb803a9bf2f8823acbec.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/add_todo.svg?");
 
 /***/ }),
 
@@ -676,7 +676,7 @@ eval("module.exports = __webpack_require__.p + \"assets/35c6ec7b4f1ba1a84d29.svg
   \***************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/07ca98eadbf58a93d55b.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/angle-left-solid.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/337ef39a5dee9177a13e.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/angle-left-solid.svg?");
 
 /***/ }),
 
@@ -686,7 +686,7 @@ eval("module.exports = __webpack_require__.p + \"assets/07ca98eadbf58a93d55b.svg
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/d63d4b3a8479a9774864.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/calendar-dark.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/43411949f16aa6723275.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/calendar-dark.svg?");
 
 /***/ }),
 
@@ -696,7 +696,7 @@ eval("module.exports = __webpack_require__.p + \"assets/d63d4b3a8479a9774864.svg
   \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/839214e2edbd76fe81cc.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/calendar.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/0fb4e7c900d3c77c42fd.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/calendar.svg?");
 
 /***/ }),
 
@@ -706,7 +706,7 @@ eval("module.exports = __webpack_require__.p + \"assets/839214e2edbd76fe81cc.svg
   \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/a97b87f3f7e0040d5795.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/cancel.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/8c8ae3635551bf7af9b5.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/cancel.svg?");
 
 /***/ }),
 
@@ -716,7 +716,7 @@ eval("module.exports = __webpack_require__.p + \"assets/a97b87f3f7e0040d5795.svg
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/5c62cdb03a0e4bb7d3f4.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/checkbox_off.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/19ab11d93cbe10af5783.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/checkbox_off.svg?");
 
 /***/ }),
 
@@ -726,7 +726,7 @@ eval("module.exports = __webpack_require__.p + \"assets/5c62cdb03a0e4bb7d3f4.svg
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/db333cb0e60aefa6de6a.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/checkbox_on.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/dad5bd8d0425f8f53765.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/checkbox_on.svg?");
 
 /***/ }),
 
@@ -736,7 +736,7 @@ eval("module.exports = __webpack_require__.p + \"assets/db333cb0e60aefa6de6a.svg
   \****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/9152c5f8ebcb28403655.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/close.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/242c93dfcba039246d34.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/close.svg?");
 
 /***/ }),
 
@@ -746,7 +746,7 @@ eval("module.exports = __webpack_require__.p + \"assets/9152c5f8ebcb28403655.svg
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/e1636d26b1b5192015e5.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/comment-add.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/b0a6ca9686e4a512bd97.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/comment-add.svg?");
 
 /***/ }),
 
@@ -756,7 +756,7 @@ eval("module.exports = __webpack_require__.p + \"assets/e1636d26b1b5192015e5.svg
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/2be4c2be2756145e577c.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/iconCamera.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/0a39e15d2ee932272a79.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/iconCamera.svg?");
 
 /***/ }),
 
@@ -766,7 +766,7 @@ eval("module.exports = __webpack_require__.p + \"assets/2be4c2be2756145e577c.svg
   \*************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/695a2735cc0608f6f5db.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/newPost_camera.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/43ee3300be30c1bd9620.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/newPost_camera.svg?");
 
 /***/ }),
 
@@ -776,7 +776,7 @@ eval("module.exports = __webpack_require__.p + \"assets/695a2735cc0608f6f5db.svg
   \*********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/ee37b313e750633d9663.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/plus-solid.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/c5a0298305018dd2511e.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/plus-solid.svg?");
 
 /***/ }),
 
@@ -786,7 +786,7 @@ eval("module.exports = __webpack_require__.p + \"assets/ee37b313e750633d9663.svg
   \********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/c7cee002db5bc0782870.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/post-edit.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/11f7c40414eed4b8540e.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/post-edit.svg?");
 
 /***/ }),
 
@@ -796,7 +796,7 @@ eval("module.exports = __webpack_require__.p + \"assets/c7cee002db5bc0782870.svg
   \************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/bcc0e37a27171a0fac44.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/recomment-add.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/d200183abba0b2fe69cc.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/recomment-add.svg?");
 
 /***/ }),
 
@@ -806,7 +806,7 @@ eval("module.exports = __webpack_require__.p + \"assets/bcc0e37a27171a0fac44.svg
   \**************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/3d26086fbfebaf0790fb.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/recomment-arrow.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/9706de1f0bda1d33fc6e.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/recomment-arrow.svg?");
 
 /***/ }),
 
@@ -816,7 +816,7 @@ eval("module.exports = __webpack_require__.p + \"assets/3d26086fbfebaf0790fb.svg
   \***********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/bf22dabc684ab05fe593.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/select_arrow.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/8a9441554ba1f6e77311.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/select_arrow.svg?");
 
 /***/ }),
 
@@ -826,7 +826,7 @@ eval("module.exports = __webpack_require__.p + \"assets/bf22dabc684ab05fe593.svg
   \**********************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("module.exports = __webpack_require__.p + \"assets/241783d20c5775220640.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/select_time.svg?");
+eval("module.exports = __webpack_require__.p + \"assets/635888fab9fa2d8969de.svg\";\n\n//# sourceURL=webpack://project_helloworld/./client/assets/images/select_time.svg?");
 
 /***/ })
 

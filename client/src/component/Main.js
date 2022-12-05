@@ -55,7 +55,7 @@ class Main extends Component {
                 </span>
                 <video
                   class="hot-topic__item__thumbnail__video"
-                  src="/assets/videos/videothumbnail2.mp4"
+                  src="/client/assets/videos/videothumbnail2.mp4"
                   autoplay="true"
                   loop="true"
                   muted="true"></video>
