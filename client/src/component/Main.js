@@ -12,6 +12,7 @@ class Main extends Component {
 
       console.log(axios);
       const mainTripSchedules = await axios.get(`/trip-log${query}`);
+      console.log(mainTripSchedules);
       store.state = {
         localCommon: {
           ...store.state.localCommon,
