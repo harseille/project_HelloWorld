@@ -8,7 +8,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const users = require('../fake-data/user');
 const tripSchedules = require('../fake-data/tripSchedules');
 const webpackConfig = require('../client/webpack.config');
-
+// test comment
 const compiler = webpack(webpackConfig);
 
 require('dotenv').config();
